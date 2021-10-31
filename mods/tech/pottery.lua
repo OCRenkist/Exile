@@ -325,6 +325,7 @@ minetest.register_node("tech:clay_oil_lamp_unfired", {
 	stack_max = minimal.stack_max_medium,
 	paramtype = "light",
 	paramtype2 = "facedir",
+	use_texture_alpha = "clip",
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -366,6 +367,7 @@ minetest.register_node("tech:clay_oil_lamp_unlit", {
 	stack_max = minimal.stack_max_medium,
 	paramtype = "light",
 	paramtype2 = "facedir",
+	use_texture_alpha = "clip",
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -446,6 +448,7 @@ minetest.register_node("tech:clay_oil_lamp", {
 	stack_max = minimal.stack_max_medium,
 	sunlight_propagates = true,
 	light_source = 7,
+	use_texture_alpha = "clip",
 	paramtype = "light",
 	paramtype2 = "facedir",
 	node_box = {

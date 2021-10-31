@@ -17,7 +17,7 @@ for i in ipairs(list) do
 	local name = list[i][1]
 	local desc = list[i][2]
 	local water_g = list[i][3]
-	local alpha = list[i][4]
+	local alpha = true -- list[i][4]
 	local post_alpha = list[i][5]
 	local renew = list[i][6]
 
@@ -50,7 +50,7 @@ for i in ipairs(list) do
   			},
   		},
   	},
-  	alpha = alpha,
+	use_texture_alpha = alpha,
   	paramtype = "light",
   	walkable = false,
   	pointable = false,
@@ -97,7 +97,7 @@ for i in ipairs(list) do
   			},
   		},
   	},
-  	alpha = alpha,
+	use_texture_alpha = alpha,
   	paramtype = "light",
   	paramtype2 = "flowingliquid",
   	walkable = false,

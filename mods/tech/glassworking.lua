@@ -156,6 +156,8 @@ minetest.register_node("tech:potash", {
 	sounds = nodes_nature.node_sound_dirt_defaults(),
 })
 
+local post_alpha = 140
+
 -- Potash solution (More like lye in this case)
 minetest.register_node("tech:potash_source", {
   	description = "Potash Solution Source",

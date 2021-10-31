@@ -1,7 +1,8 @@
 # Exile
+
 Created by Dokimi
 
-For Minetest 5.3
+For Minetest 5.4
 
 ### Installation
 Installation from the ContentDB is preferred, just add it from the in-game menu.
@@ -28,6 +29,7 @@ lan server can probably handle 0.2 seconds.
 Wield3d is recommended: https://github.com/stujones11/wield3d
 Alternode was used to add the "infotext" popups in the spawn shelter on the
 Land of Catastrophe server: https://github.com/AntumMT/mod-alternode
+
 
 ### Gameplay
 Challenging, at times brutal, wilderness survival with simple technology.
@@ -98,4 +100,8 @@ https://github.com/jeremyshannon/Exile/ for known bugs, and to report new ones.
 
 ### Credit
 Thanks is due to all those whose mods have been adapted for use in Exile (see mod folders for details).
+
+Thanks also to all who have given feedback, fixes etc. A full, up-to-date list of contributors can be
+found on the github repository, under the Insights tab.
+
 

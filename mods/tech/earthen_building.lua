@@ -126,6 +126,7 @@ minetest.register_node('tech:wattle', {
 		'tech:thatch'
 	},
 	paramtype = "light",
+	use_texture_alpha = "clip",
 	tiles = {"tech_wattle_top.png",
 	 				"tech_wattle_top.png",
 					"tech_wattle.png",
@@ -166,6 +167,7 @@ minetest.register_node('tech:wattle_loose', {
 		'tech:thatch'
 	},
 	paramtype = "light",
+	use_texture_alpha = "clip",
 	tiles = {"tech_wattle_top.png",
 	 				"tech_wattle_top.png",
 					"tech_wattle_loose.png",
