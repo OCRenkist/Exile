@@ -8,16 +8,23 @@ liquid_store.stored_liquids = {}
 
 --Liquids that it is possible to put in a bucket
 function liquid_store.register_liquid(source, flowing, force_renew)
-
 	liquid_store.liquids[source] = {
 		source = source,
 		flowing = flowing,
 		force_renew = force_renew,
 	}
-
 end
 
-
+function liquid_store.contents(nodename)
+   --To be called when you need to know if something's a valid liquid
+   --Stores will return their source name; regular nodes will pass through
+   local liquiddef = liquid_store.stored_liquids[nodename]
+   if liquiddef ~= nil then
+      return liquiddef.source
+   else
+      return nodename
+   end
+end
 
 local function check_protection(pos, name, text)
 	if minetest.is_protected(pos, name) then
@@ -32,7 +39,43 @@ local function check_protection(pos, name, text)
 	return false
 end
 
+local function handle_stacks(player, stack_items, new_item)
+   local inv = player:get_inventory()
+   if stack_items:get_count() > 1 then
+      if inv:room_for_item("main", new_item) then
+	 inv:add_item("main", new_item)
+      else
+	 local pos = player:get_pos()
+	 minetest.add_item(pos, new_item)
+      end
+      return(stack_items:get_name().." "..(stack_items:get_count() - 1))
+   else
+      return ItemStack(new_item)
+   end
+end
 
+local function find_stored(empty, sourcename)
+   local stored_name
+   for k, v in pairs(liquid_store.stored_liquids) do
+      local m = v.nodename_empty
+      local s = v.source
+      if  m == empty and s == sourcename then
+	 stored_name = v.nodename
+	 break
+      end
+   end
+   return stored_name
+end
+
+function liquid_store.drain_store(player, itemstack)
+   local itemname = itemstack:get_name()
+   local sdef = liquid_store.stored_liquids[itemname]
+   if sdef then
+      return handle_stacks(player, itemstack, sdef.nodename_empty)
+   else
+      return itemstack
+   end
+end
 
 --Function for empty buckets to call on_use... as return (so gives item)
 function liquid_store.on_use_empty_bucket(itemstack, user, pointed_thing)
@@ -50,6 +93,7 @@ function liquid_store.on_use_empty_bucket(itemstack, user, pointed_thing)
 	local node = minetest.get_node(pointed_thing.under)
 	local liquiddef = liquid_store.liquids[node.name]
 	local item_count = user:get_wielded_item():get_count()
+	local storeddef = liquid_store.stored_liquids[node.name]
 
 	if liquiddef ~= nil
 	and node.name == liquiddef.source then
@@ -59,54 +103,43 @@ function liquid_store.on_use_empty_bucket(itemstack, user, pointed_thing)
 
 		--find a registered stored liquid who has an empty that matches what we are using
 		--and a source that matches our liquid
-		local giving_back
-		local empty = itemstack:get_name()
-
-
-		for k, v in pairs(liquid_store.stored_liquids) do
-			local m = v.nodename_empty
-			local s = v.source
-			if  m == empty and s == node.name then
-				giving_back = v.nodename
-				break
-			end
-		end
-
+		local giving_back = find_stored(itemstack:get_name(), node.name)
 
 		if not giving_back then
 			--nothing matches
 			return nil
 		end
 
-		-- check if holding more than 1 empty bucket
-		if item_count > 1 then
-
-			-- if space in inventory add filled bucked, otherwise drop as item
-			local inv = user:get_inventory()
-			if inv:room_for_item("main", {name = giving_back}) then
-				inv:add_item("main", giving_back)
-			else
-				local pos = user:get_pos()
-				pos.y = math.floor(pos.y + 0.5)
-				minetest.add_item(pos, giving_back)
-			end
-
-			-- set to return empty buckets minus 1
-			giving_back = empty.." ".. tostring(item_count-1)
-		end
+		local new_wield = handle_stacks(user, user:get_wielded_item(),
+						giving_back)
 
 		-- force_renew requires a source neighbour
 		local source_neighbor = false
 		if liquiddef.force_renew then
-			source_neighbor =	minetest.find_node_near(pointed_thing.under, 1, liquiddef.source)
+			source_neighbor = minetest.find_node_near(pointed_thing.under, 1, liquiddef.source)
 		end
 
 		if not (source_neighbor and liquiddef.force_renew) then
 			minetest.add_node(pointed_thing.under, {name = "air"})
 		end
 
-		return ItemStack(giving_back)
+		return new_wield
 
+	elseif storeddef ~= nil then
+	   if check_protection(pointed_thing.under, user:get_player_name(),"take ".. node.name) then
+	      return nil
+	   end
+	   local giving_back = find_stored(itemstack:get_name(),
+					   storeddef.source)
+	   if not giving_back then
+			--nothing matches
+	      return nil
+	   end
+	   local new_wield = handle_stacks(user, user:get_wielded_item(),
+					   giving_back)
+	   minetest.swap_node(pointed_thing.under,
+			      {name = storeddef.nodename_empty})
+	   return new_wield
 	else
 		-- non-liquid nodes will have their on_punch triggered
 		local node_def = minetest.registered_nodes[node.name]
@@ -174,10 +207,10 @@ function liquid_store.register_stored_liquid(source, nodename, nodename_empty, t
 				end
 
 				local lpos
-
+				local stored = find_stored(node.name, source)
 				-- Check if pointing to a buildable node
-				if ndef and ndef.buildable_to then
-					-- buildable; replace the node
+				if ( ndef and ndef.buildable_to ) or stored then
+					-- buildable; replace or fill the node
 					lpos = pointed_thing.under
 				else
 					-- not buildable to; place the liquid above
@@ -192,30 +225,18 @@ function liquid_store.register_stored_liquid(source, nodename, nodename_empty, t
 						return itemstack
 					end
 				end
-
 				if check_protection(lpos, user
 						and user:get_player_name()
 						or "", "place "..source) then
 					return
 				end
+				if stored then -- Dump contents into liquid store
+				   minetest.swap_node(lpos, {name = stored})
+				   return handle_stacks(user, itemstack, nodename_empty)
+				end
 
 				minetest.set_node(lpos, {name = source})
-
-				-- More sophisticated inventory management.
-				-- If original stack has more than one item, return the others to the player instead of destroying them
-				if itemstack:get_count() > 1 then
-					player_inv = user:get_inventory()
-					if player_inv:room_for_item("main", nodename_empty) then
-						player_inv:add_item("main", nodename_empty)
-					else
-						local player_pos = user:get_pos()
-	   					minetest.add_item(pos, nodename_empty)
-					end
-
-					return ItemStack(itemstack:get_name().." "..(itemstack:get_count() - 1))
-				else
-					return ItemStack(nodename_empty)
-				end
+				return handle_stacks(user, itemstack, nodename_empty)
 			end,
 		})
 

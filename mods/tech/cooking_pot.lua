@@ -24,7 +24,7 @@ Save to inv meta
 
 local cook_time = 1
 local cook_temp = { [""] = 101, ["Soup"] = 100 }
-local portions = 10
+local portions = 10 -- TODO: is this sane? Can we adjust it based on contents?
 
 ---------------------
 local pot_box = {
@@ -76,14 +76,18 @@ local function pot_rightclick(pos, node, clicker, itemstack, pointed_thing)
    local meta = minetest.get_meta(pos)
    local itemname = itemstack:get_name()
    if meta:get_string("type") == "" then
-      if itemname == "nodes_nature:freshwater_source" then
-	 --TODO: add liquid stores
+      local liquid = liquid_store.contents(itemname)
+      if liquid == "nodes_nature:freshwater_source" then
 	 meta:set_string("type", "Soup")
 	 meta:set_string("infotext", "Soup pot")
 	 meta:set_string("formspec", pot_formspec)
 	 meta:set_int("baking", cook_time)
 	 minetest.get_node_timer(pos):start(6)
-	 --itemstack:take_item() --don't take water while testing; saves time
+	 if itemname ~= liquid then -- it's stored in a container
+	    return liquid_store.drain_store(clicker, itemstack)
+	 else
+	    itemstack:take_item()
+	 end
       end
       return itemstack
    end
@@ -120,6 +124,7 @@ local function pot_receive_fields(pos, formname, fields, sender)
    local length = meta:get_int("baking")
    if length <= (cook_time - 4) then
       length = length + 4 -- don't open a cooking pot, you'll let the heat out
+      --TODO: Can we drain current temp while the formspec's open? Groups?
       meta:set_int("baking", length)
    end
    minetest.chat_send_player(sender:get_player_name(),debug)
@@ -173,7 +178,7 @@ local function pot_cook(pos, elapsed)
 end
 
 minetest.register_node("tech:cooking_pot", {
-	description = "Cooking Pot (WIP!)",
+	description = "Cooking Pot",
 	tiles = {"tech_pottery.png",
 	"tech_pottery.png",
 	"tech_pottery.png",
@@ -212,8 +217,10 @@ minetest.register_node("tech:cooking_pot", {
 	end,
 	allow_metadata_inventory_put = function(
 	      pos, listname, index, stack, player)
-	   --TODO: only allow cookable items in. maybe cooked ones too?
-	   --needs a table of cookable foods in addition to edible ones
+	   local fname = stack:get_name()
+	   if not food_table[fname] and not bake_table[fname] then
+	      return 0
+	   end
 	   local meta = minetest.get_meta(pos)
 	   local inv = meta:get_inventory():get_list(listname)
 	   local count = stack:get_count()
@@ -224,6 +231,7 @@ minetest.register_node("tech:cooking_pot", {
 	      end
 	   end
 	   --if we put new items in during cook, extend "baking" time further
+	   --TODO: Increase baking time based on food cook times?
 	   meta:set_int("baking", meta:get_int("baking") + count)
 	   return count
 	end,
@@ -236,4 +244,40 @@ minetest.register_node("tech:cooking_pot", {
 	   end
 	   return stack:get_count()
 	end,
+})
+
+minetest.register_node("tech:cooking_pot_unfired", {
+	description = "Cooking Pot",
+	tiles = {"nodes_nature_clay.png",
+		 "nodes_nature_clay.png",
+		 "nodes_nature_clay.png",
+		 "nodes_nature_clay.png",
+		 "nodes_nature_clay.png",
+		 "nodes_nature_clay.png"},
+	drawtype = "nodebox",
+	stack_max = minimal.stack_max_bulky,
+	paramtype = "light",
+	paramtype2 = "facedir",
+	node_box = {
+		type = "fixed",
+		fixed = pot_box,
+	},
+	groups = {dig_immediate=3, temp_pass = 1, falling_node = 1, heatable = 20},
+	sounds = nodes_nature.node_sound_stone_defaults(),
+	on_construct = function(pos)
+	   ncrafting.set_firing(pos, ncrafting.base_firing, ncrafting.firing_int)
+	end,
+	on_timer = function(pos, elapsed)
+		--finished product, length
+		return ncrafting.fire_pottery(pos, "tech:cooking_pot_unfired", "tech:cooking_pot", ncrafting.base_firing)
+	end,
+
+})
+
+crafting.register_recipe({
+	type = "crafting_spot",
+	output = "tech:cooking_pot_unfired 1",
+	items = {"nodes_nature:clay_wet 4"},
+	level = 1,
+	always_known = true,
 })
