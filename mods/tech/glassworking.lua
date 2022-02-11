@@ -65,17 +65,17 @@ local function roast(pos, selfname, name, heat)
 
 	if roast <= 0 then
 		--finished firing
-    minetest.set_node(pos, {name = name})
-    minetest.check_for_falling(pos)
-    return false
-  elseif temp < fire_temp then
-    --not lit yet
-    return true
+		minetest.set_node(pos, {name = name})
+		minetest.check_for_falling(pos)
+		return false
+	elseif temp < fire_temp then
+		--not lit yet
+		return true
 	elseif temp >= fire_temp then
-    --do firing
-    meta:set_int("roast", roast - 1)
-    return true
-  end
+		--do firing
+		meta:set_int("roast", roast - 1)
+		return true
+	end
 
 end
 
@@ -277,10 +277,10 @@ local function potash_soak_check(pos, node)
 		local p_name = minetest.get_node(p_water).name
 		--check water type. Salt wouldn't work probably
 		local water_type = minetest.get_item_group(p_name, "water")
-  		if water_type == 1 then
-  			minetest.set_node(pos, {name = "tech:potash_source"})
-        		minetest.set_node(p_water, {name = "air"})
-        		minetest.sound_play("tech_boil", {pos = pos, max_hear_distance = 8, gain = 1})
+		if water_type == 1 then
+			minetest.set_node(pos, {name = "tech:potash_source"})
+				minetest.set_node(p_water, {name = "air"})
+				minetest.sound_play("tech_boil", {pos = pos, max_hear_distance = 8, gain = 1})
   		elseif water_type == 2 then
   			return false
   		end
@@ -393,14 +393,14 @@ minetest.register_node("tech:clear_glass_ingot", {
 	use_texture_alpha = "blend",
 	sunlight_propagates = true,
 	on_construct = function(pos)
-	   minetest.get_node_timer(pos):start(20)
+		minetest.get_node_timer(pos):start(20)
 	end,
 	on_timer = function(pos)
-	   if pane_cast_check(pos) then
-	      return false -- end the timer
-	   else
-	      return true
-	   end
+		if pane_cast_check(pos) then
+			return false -- end the timer
+		else
+			return true
+		end
 	end,
 })
 

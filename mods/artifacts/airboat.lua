@@ -103,7 +103,7 @@ function airboat.on_punch(self, puncher)
 	end
 
 	local name = puncher:get_player_name()
-        local pos = puncher:get_pos()
+		local pos = puncher:get_pos()
 	if self.driver and name == self.driver then
 		-- Detach
 		--only use on_rightclick

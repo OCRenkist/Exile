@@ -1011,9 +1011,9 @@ minetest.register_node('artifacts:transporter_regulator', {
 
 
 minetest.register_tool('artifacts:transporter_key', {
-    description = 'Transporter Key',
-    inventory_image = 'artifacts_transporter_key.png',
-    --groups = {},
+		description = 'Transporter Key',
+		inventory_image = 'artifacts_transporter_key.png',
+		--groups = {},
 		on_use = save_to_key,
 		on_place = set_from_key,
 })

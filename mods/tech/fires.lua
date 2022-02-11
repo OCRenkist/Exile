@@ -29,18 +29,18 @@ local char_air_c = 0.45
 
 --converts smoldering fire into full fire if air is present
 local function can_smolder(pos, meta, fire_name, ash_name)
-        local f = meta:get_int("fuel")
+	local f = meta:get_int("fuel")
 	--extinguish in water
 	if climate.get_rain(pos) or minetest.find_node_near(pos, 1, {"group:puts_out_fire"}) then
-	        f = f - wet_loss
+			f = f - wet_loss
 		if f <= 0 then
-		   minetest.set_node(pos, {name = ash_name})
+			minetest.set_node(pos, {name = ash_name})
 		else
-		   local ext_name = minetest.get_node(pos).name:gsub(
-		      "_smoldering",
-		      "_ext")
-		   minetest.swap_node(pos, {name = ext_name})
-		   meta:set_int("fuel", f)
+			local ext_name = minetest.get_node(pos).name:gsub(
+				"_smoldering",
+				"_ext")
+			minetest.swap_node(pos, {name = ext_name})
+			meta:set_int("fuel", f)
 		end
 		minetest.sound_play("nodes_nature_cool_lava",	{pos = pos, max_hear_distance = 16, gain = 0.25})
 		return false
@@ -59,16 +59,16 @@ end
 
 --converts fire into smoldering fire if air not present
 local function can_burn_air(pos, meta, smolder_name, ash_name)
-        local f = meta:get_int("fuel")
+	local f = meta:get_int("fuel")
 	--extinguish
 	if climate.get_rain(pos) or minetest.find_node_near(pos, 1, {"group:puts_out_fire"}) then
-	        f = f - wet_loss
+		f = f - wet_loss
 		if f <= 0 then
-		   minetest.set_node(pos, {name = ash_name})
+			minetest.set_node(pos, {name = ash_name})
 		else
-		   local ext_name = minetest.get_node(pos).name.."_ext"
-		   minetest.swap_node(pos, {name = ext_name})
-		   meta:set_int("fuel", f)
+			local ext_name = minetest.get_node(pos).name.."_ext"
+			minetest.swap_node(pos, {name = ext_name})
+			meta:set_int("fuel", f)
 		end
 		minetest.sound_play("nodes_nature_cool_lava",	{pos = pos, max_hear_distance = 16, gain = 0.25})
 		return false
@@ -158,15 +158,15 @@ end
 --players will be using wood ash to punch depleted agricultural soil
 --make sure they can't accidentally right click and crush their crops
 local function on_place_fert(itemstack, placer, pointed_thing)
-   local onnode = minetest.get_node(pointed_thing.under)
-   local innode = minetest.get_node(pointed_thing.above)
-   if minetest.get_item_group(onnode.name, "attached_node") > 0
-   or minetest.get_item_group(innode.name,  "attached_node") > 0 then
-      return itemstack
-   else
-      minetest.item_place(itemstack, placer, pointed_thing)
-      return itemstack
-   end
+	local onnode = minetest.get_node(pointed_thing.under)
+	local innode = minetest.get_node(pointed_thing.above)
+	if minetest.get_item_group(onnode.name, "attached_node") > 0
+	or minetest.get_item_group(innode.name,  "attached_node") > 0 then
+		return itemstack
+	else
+		minetest.item_place(itemstack, placer, pointed_thing)
+		return itemstack
+	end
 end
 
 
@@ -178,8 +178,8 @@ minetest.register_node("tech:wood_ash_block", {
 	groups = {crumbly = 3, falling_node = 1, fertilizer = 1},
 	sounds = nodes_nature.node_sound_dirt_defaults(),
 	on_place = function (itemstack, placer, pointed_thing)
-	   on_place_fert(itemstack, placer, pointed_thing)
-	   return itemstack
+		on_place_fert(itemstack, placer, pointed_thing)
+		return itemstack
 	end,
 })
 
@@ -196,8 +196,8 @@ minetest.register_node("tech:wood_ash", {
 	groups = {crumbly = 3, falling_node = 1, fertilizer = 1},
 	sounds = nodes_nature.node_sound_dirt_defaults(),
 	on_place = function (itemstack, placer, pointed_thing)
-	   on_place_fert(itemstack, placer, pointed_thing)
-	   return itemstack
+		on_place_fert(itemstack, placer, pointed_thing)
+		return itemstack
 	end,
 })
 

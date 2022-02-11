@@ -51,7 +51,7 @@ player_api.register_model("character-f.b3d", {
 
 -- Update appearance when the player joins
 minetest.register_on_joinplayer(function(player)
-        local player_name = player:get_player_name()
+		local player_name = player:get_player_name()
 	player_api.player_attached[player_name] = false
 	local gender = player_api.get_gender(player)
 	if gender == "" then

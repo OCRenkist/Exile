@@ -282,19 +282,19 @@ function crafting.perform_craft(name, inv, listname, outlistname, recipe)
 
 	-- Add output
 	if inv:room_for_item("main", recipe.output) then
-	   inv:add_item(outlistname, recipe.output)
+	inv:add_item(outlistname, recipe.output)
 	else
-	   local pos = minetest.get_player_by_name(name):get_pos()
-	   minetest.chat_send_player(name, "No room in inventory!")
-	   minetest.add_item(pos, recipe.output)
+	local pos = minetest.get_player_by_name(name):get_pos()
+	minetest.chat_send_player(name, "No room in inventory!")
+	minetest.add_item(pos, recipe.output)
 	end
 	return true
 end
 
 local function to_hex(str)
-    return (str:gsub('.', function (c)
-        return string.format('%02X', string.byte(c))
-    end))
+	return (str:gsub('.', function (c)
+		return string.format('%02X', string.byte(c))
+	end))
 end
 
 function crafting.calc_inventory_list_hash(inv, listname)

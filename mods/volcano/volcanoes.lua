@@ -337,10 +337,10 @@ minetest.register_privilege("findvolcano", { description = "Allows players to us
 
 function round(val, decimal)
   if (decimal) then
-    return math.floor( (val * 10^decimal) + 0.5) / (10^decimal)
-  else
-    return math.floor(val+0.5)
-  end
+		return math.floor( (val * 10^decimal) + 0.5) / (10^decimal)
+	else
+		return math.floor(val+0.5)
+	end
 end
 
 local send_volcano_state = function(pos, name)
@@ -380,9 +380,9 @@ local send_nearby_states = function(pos, name)
 end
 
 minetest.register_chatcommand("findvolcano", {
-    params = "pos", -- Short parameter description
-    description = "find the volcanoes near the player's map region, or in the map region containing pos if provided",
-    func = function(name, param)
+	params = "pos", -- Short parameter description
+	description = "find the volcanoes near the player's map region, or in the map region containing pos if provided",
+	func = function(name, param)
 		if minetest.check_player_privs(name, {findvolcano = true}) then
 			local pos = {}
 			pos.x, pos.y, pos.z = string.match(param, "^([%d.-]+)[, ] *([%d.-]+)[, ] *([%d.-]+)$")

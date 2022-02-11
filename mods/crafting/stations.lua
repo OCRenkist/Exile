@@ -21,17 +21,17 @@ crafting.register_type("furnace")
 local player_inv_hashes = {}
 
 local function check_for_changes()
-   for _, player in pairs(minetest.get_connected_players() or {}) do
-      if sfinv.get_or_create_context(player).page == "sfinv:crafting" then
-	 local hash = crafting.calc_inventory_list_hash(player:get_inventory(), "main")
-	 local old_hash = player_inv_hashes[player:get_player_name()]
-	 if hash ~= old_hash then
-	    sfinv.set_page(player, "sfinv:crafting")
-	 end
-      end
-   end
+	for _, player in pairs(minetest.get_connected_players() or {}) do
+		if sfinv.get_or_create_context(player).page == "sfinv:crafting" then
+			local hash = crafting.calc_inventory_list_hash(player:get_inventory(), "main")
+			local old_hash = player_inv_hashes[player:get_player_name()]
+			if hash ~= old_hash then
+				sfinv.set_page(player, "sfinv:crafting")
+			end
+		end
+	end
 
-   minetest.after(1, check_for_changes)
+	minetest.after(1, check_for_changes)
 end
 
 

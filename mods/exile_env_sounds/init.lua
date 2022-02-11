@@ -39,55 +39,55 @@ local function update_sound(player)
 	local areamin = vector.subtract(ppos, radius)
 	local areamax = vector.add(ppos, radius)
 
-  --flowing water
-  if ran()<0.7 then
-  	local water_nodes = {"nodes_nature:freshwater_flowing", "nodes_nature:salt_water_flowing"}
-  	local wpos, _ = minetest.find_nodes_in_area(areamin, areamax, water_nodes)
-  	local waters = #wpos
-  	if waters <= 2 then
-  		return
-  	end
+	--flowing water
+	if ran()<0.7 then
+		local water_nodes = {"nodes_nature:freshwater_flowing", "nodes_nature:salt_water_flowing"}
+		local wpos, _ = minetest.find_nodes_in_area(areamin, areamax, water_nodes)
+		local waters = #wpos
+		if waters <= 2 then
+			return
+		end
 
-  	-- Find average position of water positions
-  	minetest.sound_play(
-  		"env_sounds_water",
-  		{
-  			pos = posav(wpos, waters),
-  			to_player = player_name,
-  			gain = min(0.04 + waters * 0.004, 0.4),
-  		}
-  	)
-  end
+		-- Find average position of water positions
+		minetest.sound_play(
+			"env_sounds_water",
+			{
+				pos = posav(wpos, waters),
+				to_player = player_name,
+				gain = min(0.04 + waters * 0.004, 0.4),
+			}
+		)
+	end
 
-  --beach sounds
-  if ran()<0.7 then
-    if ppos.y > radius or ppos.y < -radius then
-  		return
-  	end
+	--beach sounds
+	if ran()<0.7 then
+		if ppos.y > radius or ppos.y < -radius then
+			return
+		end
 
-    local water_nodes = {"nodes_nature:salt_water_flowing", "nodes_nature:salt_water_source"}
-    local wpos, _ = minetest.find_nodes_in_area(areamin, areamax, water_nodes)
-    local waters = #wpos
-    if waters <= 9 then
-      return
-    end
+		local water_nodes = {"nodes_nature:salt_water_flowing", "nodes_nature:salt_water_source"}
+		local wpos, _ = minetest.find_nodes_in_area(areamin, areamax, water_nodes)
+		local waters = #wpos
+		if waters <= 9 then
+		return
+		end
 
-    local ground_nodes = {"group:crumbly", "group:cracky"}
-    local gpos = minetest.find_node_near(ppos, 2, ground_nodes)
-    if not gpos then
-      return
-    end
+		local ground_nodes = {"group:crumbly", "group:cracky"}
+		local gpos = minetest.find_node_near(ppos, 2, ground_nodes)
+		if not gpos then
+		return
+		end
 
-    -- Find average position of water positions
-    minetest.sound_play(
-      "env_sounds_waves",
-      {
-        pos = posav(wpos, waters),
-        to_player = player_name,
-        gain = min(0.06 + waters * 0.006, 1),
-      }
-    )
-  end
+		-- Find average position of water positions
+		minetest.sound_play(
+		"env_sounds_waves",
+		{
+			pos = posav(wpos, waters),
+			to_player = player_name,
+			gain = min(0.06 + waters * 0.006, 1),
+		}
+		)
+	end
 
 
 end

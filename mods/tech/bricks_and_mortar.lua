@@ -60,16 +60,16 @@ local function roast(pos, selfname, name, length, heat)
 
 	if roast <= 0 then
 		--finished firing
-    minetest.set_node(pos, {name = name})
-    minetest.check_for_falling(pos)
-    return false
+	minetest.set_node(pos, {name = name})
+	minetest.check_for_falling(pos)
+	return false
   elseif temp < fire_temp then
-    --not lit yet
-    return true
+	--not lit yet
+	return true
 	elseif temp >= fire_temp then
-    --do firing
-    meta:set_int("roast", roast - 1)
-    return true
+	--do firing
+	meta:set_int("roast", roast - 1)
+	return true
   end
 
 end
@@ -91,9 +91,9 @@ minetest.register_node("tech:crushed_lime", {
 		set_roast(pos, 3, 10)
 	end,
 	on_timer = function(pos, elapsed)
-    --finished product, length, heat
-    --(realisticallty should be 900, but too hard for fires)
-    return roast(pos, "tech:crushed_lime", "tech:quicklime", 3, 850)
+	--finished product, length, heat
+	--(realisticallty should be 900, but too hard for fires)
+	return roast(pos, "tech:crushed_lime", "tech:quicklime", 3, 850)
 	end,
 })
 
@@ -113,39 +113,39 @@ minetest.register_node("tech:quicklime", {
 
 	on_timer = function(pos, elapsed)
 
-    --slake
-    local p_water = minetest.find_node_near(pos, 1, {"group:water"})
-    if p_water then
-      local p_name = minetest.get_node(p_water).name
-      --check water type. Salt would ruin it.
-      local water_type = minetest.get_item_group(p_name, "water")
-  		if water_type == 1 then
-  			minetest.set_node(pos, {name = "tech:slaked_lime"})
-        minetest.set_node(p_water, {name = "air"})
-        minetest.sound_play("tech_boil",	{pos = pos, max_hear_distance = 8, gain = 1})
-  		elseif water_type == 2 then
-  			minetest.set_node(pos, {name = "tech:slaked_lime_ruined"})
-        minetest.set_node(p_water, {name = "air"})
-        minetest.sound_play("tech_boil",	{pos = pos, max_hear_distance = 8, gain = 1})
-  		end
-      return false
-    end
+	--slake
+	local p_water = minetest.find_node_near(pos, 1, {"group:water"})
+	if p_water then
+		local p_name = minetest.get_node(p_water).name
+		--check water type. Salt would ruin it.
+		local water_type = minetest.get_item_group(p_name, "water")
+		if water_type == 1 then
+			minetest.set_node(pos, {name = "tech:slaked_lime"})
+		minetest.set_node(p_water, {name = "air"})
+		minetest.sound_play("tech_boil",	{pos = pos, max_hear_distance = 8, gain = 1})
+		elseif water_type == 2 then
+			minetest.set_node(pos, {name = "tech:slaked_lime_ruined"})
+		minetest.set_node(p_water, {name = "air"})
+		minetest.sound_play("tech_boil",	{pos = pos, max_hear_distance = 8, gain = 1})
+		end
+	return false
+	end
 
-    --slowly revert to lime by reacting with the air, or slake by rain
-    if minetest.find_node_near(pos, 1, {"air"}) then
-      if random() > 0.99 then
-        if climate.get_rain(pos) then
-          minetest.set_node(pos, {name = "tech:slaked_lime"})
-          minetest.sound_play("tech_boil",	{pos = pos, max_hear_distance = 8, gain = 1})
-        else
-          minetest.set_node(pos, {name = "tech:crushed_lime"})
-          return false
-        end
-      end
-    end
+	--slowly revert to lime by reacting with the air, or slake by rain
+	if minetest.find_node_near(pos, 1, {"air"}) then
+	if random() > 0.99 then
+		if climate.get_rain(pos) then
+		minetest.set_node(pos, {name = "tech:slaked_lime"})
+		minetest.sound_play("tech_boil",	{pos = pos, max_hear_distance = 8, gain = 1})
+		else
+		minetest.set_node(pos, {name = "tech:crushed_lime"})
+		return false
+		end
+	end
+	end
 
-    --it's still here...
-    return true
+	--it's still here...
+	return true
 	end,
 })
 
@@ -165,22 +165,22 @@ minetest.register_node("tech:slaked_lime", {
 	end,
 
 	on_timer = function(pos, elapsed)
-    if random() > 0.9 then
-      --wash it away
-      if minetest.find_node_near(pos, 1, {"group:water"}) or climate.get_rain(pos) then
-        minetest.set_node(pos, {name = "air"})
-        return false
-      end
+	if random() > 0.9 then
+	--wash it away
+	if minetest.find_node_near(pos, 1, {"group:water"}) or climate.get_rain(pos) then
+		minetest.set_node(pos, {name = "air"})
+		return false
+	end
 
-      --slowly revert to lime by reacting with the air
-      if minetest.find_node_near(pos, 1, {"air"}) then
-        minetest.set_node(pos, {name = "tech:crushed_lime"})
-        return false
-      end
-    end
+	--slowly revert to lime by reacting with the air
+	if minetest.find_node_near(pos, 1, {"air"}) then
+		minetest.set_node(pos, {name = "tech:crushed_lime"})
+		return false
+	end
+	end
 
-    --it's still here...
-    return true
+	--it's still here...
+	return true
 	end,
 })
 
@@ -197,27 +197,27 @@ minetest.register_node("tech:slaked_lime_ruined", {
 	sounds = nodes_nature.node_sound_sand_defaults({
 		footstep = {name = "nodes_nature_mud", gain = 0.4},
 		dug = {name = "nodes_nature_mud", gain = 0.4}}),
-  on_construct = function(pos)
+	on_construct = function(pos)
 		minetest.get_node_timer(pos):start(60)
 	end,
 
 	on_timer = function(pos, elapsed)
-    --wash it away
-    if minetest.find_node_near(pos, 1, {"group:water"}) or climate.get_rain(pos) then
-      minetest.set_node(pos, {name = "air"})
-      return false
-    end
+		--wash it away
+		if minetest.find_node_near(pos, 1, {"group:water"}) or climate.get_rain(pos) then
+			minetest.set_node(pos, {name = "air"})
+			return false
+		end
 
-    --slowly revert to lime by reacting with the air
-    if minetest.find_node_near(pos, 1, {"air"}) then
-      if random() > 0.9 then
-        minetest.set_node(pos, {name = "tech:crushed_lime"})
-        return false
-      end
-    end
+		--slowly revert to lime by reacting with the air
+		if minetest.find_node_near(pos, 1, {"air"}) then
+		if random() > 0.9 then
+			minetest.set_node(pos, {name = "tech:crushed_lime"})
+			return false
+		end
+	end
 
-    --it's still here...
-    return true
+	--it's still here...
+	return true
 	end,
 })
 
@@ -235,27 +235,27 @@ minetest.register_node("tech:lime_mortar", {
 		footstep = {name = "nodes_nature_mud", gain = 0.4},
 		dug = {name = "nodes_nature_mud", gain = 0.4}}),
 		--[[
-  on_construct = function(pos)
+	on_construct = function(pos)
 		minetest.get_node_timer(pos):start(60)
 	end,
 
 	on_timer = function(pos, elapsed)
-    --wash it away
-    if minetest.find_node_near(pos, 1, {"group:water"}) or climate.get_rain(pos) then
-      minetest.set_node(pos, {name = "air"})
-      return false
-    end
+		--wash it away
+		if minetest.find_node_near(pos, 1, {"group:water"}) or climate.get_rain(pos) then
+			minetest.set_node(pos, {name = "air"})
+			return false
+		end
 
-    --slowly revert to limestone by reacting with the air, or slake by rain
-    if minetest.find_node_near(pos, 1, {"air"}) then
-      if random() > 0.9 then
-        minetest.set_node(pos, {name = "nodes_nature:limestone"})
-        return false
-      end
-    end
+		--slowly revert to limestone by reacting with the air, or slake by rain
+		if minetest.find_node_near(pos, 1, {"air"}) then
+			if random() > 0.9 then
+				minetest.set_node(pos, {name = "nodes_nature:limestone"})
+				return false
+			end
+		end
 
-    --it's still here...
-    return true
+		--it's still here...
+		return true
 	end,
 	]]
 })

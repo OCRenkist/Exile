@@ -11,8 +11,8 @@ local lightPoint = {
 	buildable_to = true,
 	light_source = 4,
 	selection_box = {
-        type = "fixed",
-        fixed = {0, 0, 0, 0, 0, 0}},
+		type = "fixed",
+		fixed = {0, 0, 0, 0, 0, 0}},
 }
 
 minetest.register_node("illumination:light_faint", lightPoint)
@@ -24,10 +24,10 @@ lightPoint.light_source = 14
 minetest.register_node("illumination:light_full", lightPoint)
 
 minetest.register_lbm({ --This should clean up nodes that don't get deleted for some reason
-      nodenames={"illumination:light_faint","illumination:light_dim","illumination:light_mid","illumination:light_full"},
-      label="Remove invalid illumination points",
-      name="illumination:lightpoint_cleanup",
-      run_at_every_load = true,
+	nodenames={"illumination:light_faint","illumination:light_dim","illumination:light_mid","illumination:light_full"},
+	label="Remove invalid illumination points",
+	name="illumination:lightpoint_cleanup",
+	run_at_every_load = true,
 	action = function(pos)
 		local canExist = false
 		for _, player in ipairs(minetest.get_connected_players()) do
@@ -74,10 +74,10 @@ local lightstep = 0.2
 if minetest.is_singleplayer() then lightstep = 0.1 end
 
 minetest.register_globalstep(function(dtime)
-      timer = timer + dtime
-      if timer < lightstep then
-	 return
-      end
+	timer = timer + dtime
+	if timer < lightstep then
+		return
+	end
 	for _, player in ipairs(minetest.get_connected_players()) do
 		if illumination.playerLights[player:get_player_name()] then
 			local light = 0

@@ -8,8 +8,8 @@ local store = minetest.get_mod_storage()
 
 
 function load_bedrest()
-   local loaded = minetest.deserialize(store:get_string("bedrest"), true)
-   return loaded
+	local loaded = minetest.deserialize(store:get_string("bedrest"), true)
+	return loaded
 end
 
 ----------------------------------------------------
@@ -115,7 +115,7 @@ local function break_taker(name)
 	local tn = os.time()
 
 	if minetest.settings:get('exile_nobreaktaker') then
-	   return
+		return
 	end
 
 	if os.difftime(tn, ts) > sess_l then
@@ -139,47 +139,47 @@ end
 --grab_blanket(inv = clothing_inv, list = "clothing") for removal
 -----------------------------------------------------------------
 local function wear_blanket(player, donning)
-   local name = player:get_player_name()
-   local plyrinv = player:get_inventory()
-   local frominvl = "cloths"  local toinvl = "main"
-   if donning then
-      frominvl = "main"
-      toinvl = "cloths"
-   end
-   local cinv = plyrinv:get_list(frominvl)
-   local newstack = ItemStack("")
-   for i = 1, #cinv do
-      local stack = ItemStack(cinv[i])
-      if stack:get_count() > 0 then
-	 local def = stack:get_definition()
-	 if def.groups.blanket and def.groups.blanket > 0 then
-	    newstack = ItemStack(def.name)
-	    plyrinv:remove_item(frominvl, newstack)
-	    break
-	 end
-      end
-   end
-   if plyrinv:room_for_item(toinvl, newstack) then
-      local tinv = plyrinv:get_list(toinvl)
-      local pointer = 0 -- find the last empty slot, put it there, not first
-      for i = 1, #tinv do
-	 if ItemStack(tinv[i]):item_fits(newstack) then
-	    pointer = i
-	 end
-      end
-      newstack:add_item(ItemStack(tinv[pointer]))
-      plyrinv:set_stack(toinvl, pointer, newstack)
-   elseif donning then -- can't put it on, return it to main inv
-      plyrinv:add_item(frominvl, newstack)
-   else -- or drop it at our feet if there's no room when taking it off
-      local ppos = player:get_pos()
-      minetest.item_drop(newstack, player, ppos)
-      minetest.chat_send_player(name, "You have no room to hold your blanket, so you drop it.")
-      minetest.sound_play("nodes_nature_dig_snappy",
-			  {pos = ppos, gain = .8, max_hear_distance = 2})
-   end
-   clothing:update_temp(player)
-   player_api.set_texture(player)
+	local name = player:get_player_name()
+	local plyrinv = player:get_inventory()
+	local frominvl = "cloths"  local toinvl = "main"
+	if donning then
+		frominvl = "main"
+		toinvl = "cloths"
+	end
+	local cinv = plyrinv:get_list(frominvl)
+	local newstack = ItemStack("")
+	for i = 1, #cinv do
+		local stack = ItemStack(cinv[i])
+		if stack:get_count() > 0 then
+			local def = stack:get_definition()
+			if def.groups.blanket and def.groups.blanket > 0 then
+				newstack = ItemStack(def.name)
+				plyrinv:remove_item(frominvl, newstack)
+				break
+			end
+		end
+	end
+	if plyrinv:room_for_item(toinvl, newstack) then
+		local tinv = plyrinv:get_list(toinvl)
+		local pointer = 0 -- find the last empty slot, put it there, not first
+		for i = 1, #tinv do
+			if ItemStack(tinv[i]):item_fits(newstack) then
+				pointer = i
+			end
+		end
+		newstack:add_item(ItemStack(tinv[pointer]))
+		plyrinv:set_stack(toinvl, pointer, newstack)
+	elseif donning then -- can't put it on, return it to main inv
+		plyrinv:add_item(frominvl, newstack)
+	else -- or drop it at our feet if there's no room when taking it off
+		local ppos = player:get_pos()
+		minetest.item_drop(newstack, player, ppos)
+		minetest.chat_send_player(name, "You have no room to hold your blanket, so you drop it.")
+		minetest.sound_play("nodes_nature_dig_snappy",
+			{pos = ppos, gain = .8, max_hear_distance = 2})
+	end
+	clothing:update_temp(player)
+	player_api.set_texture(player)
 end
 
 -----------------------------------------------------------------
@@ -213,14 +213,14 @@ local function lay_down(player, level, pos, bed_pos, state, skip)
 
 	-- stand up
 	if state ~= nil and not state then
-	   local p = bed_rest.pos[name] or nil
-	   local bedp = bed_rest.bed_position[name] or nil
-	   if bedp ~= nil then
-	      minetest.get_meta(bedp):set_string("infotext", "")
-	   end
-	   bed_rest.player[name] = nil
-	   bed_rest.bed_position[name] = nil
-	   bed_rest.level[name] = nil
+		local p = bed_rest.pos[name] or nil
+		local bedp = bed_rest.bed_position[name] or nil
+		if bedp ~= nil then
+			minetest.get_meta(bedp):set_string("infotext", "")
+		end
+		bed_rest.player[name] = nil
+		bed_rest.bed_position[name] = nil
+		bed_rest.level[name] = nil
 
 		-- skip here to prevent sending player specific changes (used for leaving players)
 		if skip then
@@ -248,19 +248,19 @@ local function lay_down(player, level, pos, bed_pos, state, skip)
 
 	-- lay down
 	else
-	   local velo = player:get_velocity()
-	   if velo.x ~= 0 then return end
-	   if velo.z ~= 0 then return end
+		local velo = player:get_velocity()
+		if velo.x ~= 0 then return end
+		if velo.z ~= 0 then return end
 		-- Check if bed is occupied
 		for nm, other_pos in pairs(bed_rest.bed_position) do
 			if vector.distance(bed_pos, other_pos) < 0.1 then
-			   minetest.chat_send_player(name, ("This bed is already occupied!"))
-			   local meta = minetest.get_meta(bed_pos)
-			   if meta:get_string("infotext") == "" then
-			      meta:set_string("infotext",
-					      nm.."'s bed")
-			   end
-			   return false
+				minetest.chat_send_player(name, ("This bed is already occupied!"))
+				local meta = minetest.get_meta(bed_pos)
+				if meta:get_string("infotext") == "" then
+					meta:set_string("infotext",
+						nm.."'s bed")
+				end
+				return false
 			end
 		end
 		bed_rest.pos[name] = pos
@@ -268,8 +268,8 @@ local function lay_down(player, level, pos, bed_pos, state, skip)
 		bed_rest.player[name] = 1
 		bed_rest.level[name] = level
 		if not minetest.is_singleplayer() then
-		   minetest.get_meta(bed_pos):set_string("infotext",
-							 name.."'s bed")
+			minetest.get_meta(bed_pos):set_string("infotext",
+				name.."'s bed")
 		end
 
 		--check with break taker
@@ -314,10 +314,10 @@ function bed_rest.on_rightclick(pos, player, level)
 
   --
 	if bed_rest.player[name] then
-	   lay_down(player, nil, nil, nil, false)
+		lay_down(player, nil, nil, nil, false)
 	else
-	   -- move to bed
-	   lay_down(player, level, ppos, pos)
+		-- move to bed
+		lay_down(player, level, ppos, pos)
 	end
 end
 
@@ -326,9 +326,9 @@ end
 --------------------------------------------
 
 function bed_rest.can_dig(bed_pos, player)
-   if minetest.check_player_privs(player, "protection_bypass") then
-      return true
-   end
+	if minetest.check_player_privs(player, "protection_bypass") then
+		return true
+	end
 	-- Check all players in bed which one is at the expected position
 	for _, player_bed_pos in pairs(bed_rest.bed_position) do
 		if vector.equals(bed_pos, player_bed_pos) then
@@ -343,18 +343,18 @@ jtimer = 0
 --Jump out of bed
 
 minetest.register_globalstep(function(dtime)
-      jtimer = jtimer + dtime
-      if jtimer > 0.2 then
-	 for _, player in ipairs(minetest.get_connected_players()) do
-	    local name = player:get_player_name()
-	    if bed_rest.player[name] then
-	       if math.floor(player:get_player_control_bits() / 16) % 2 == 1 then
-		  lay_down(player, nil, nil, nil, false)
-	       end
-	    end
-	 end
-	 jtimer = 0
-      end
+	jtimer = jtimer + dtime
+	if jtimer > 0.2 then
+		for _, player in ipairs(minetest.get_connected_players()) do
+			local name = player:get_player_name()
+			if bed_rest.player[name] then
+				if math.floor(player:get_player_control_bits() / 16) % 2 == 1 then
+					lay_down(player, nil, nil, nil, false)
+				end
+			end
+		end
+		jtimer = 0
+	end
 end)
 
 
@@ -388,13 +388,13 @@ end)
 
 --get start time of session
 minetest.register_on_joinplayer(function(player)
-      local name = player:get_player_name()
-        if bed_rest.player[name] then
-	 lay_down(player, nil, nil, nil, false)
-      end
-  bed_rest.session_start[name] = os.time()
-  -- 30 minutes is 1800 ticks, so multiply by 60
-  bed_rest.session_limit[name] = minetest.settings:get('exile_breaktime') * 60
+		local name = player:get_player_name()
+		if bed_rest.player[name] then
+			lay_down(player, nil, nil, nil, false)
+		end
+	bed_rest.session_start[name] = os.time()
+	-- 30 minutes is 1800 ticks, so multiply by 60
+	bed_rest.session_limit[name] = minetest.settings:get('exile_breaktime') * 60
 
 end
 )

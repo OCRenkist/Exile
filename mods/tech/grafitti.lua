@@ -78,10 +78,10 @@ grafitti.register_grafitti("tech:lw_chrysalis", {image = "tech_paint_lw_chrysali
 grafitti.palette_build("tech:lime_white")
 
 grafitti.register_brush("tech:paint_lime_white", {
-    description = "Painting Kit (lime white)",
-    inventory_image = "tech_paint_brush_white.png",
-    wield_image = "tech_paint_brush_white.png^[transformR270",
-    palette = "tech:lime_white"
+	description = "Painting Kit (lime white)",
+	inventory_image = "tech_paint_brush_white.png",
+	wield_image = "tech_paint_brush_white.png^[transformR270",
+	palette = "tech:lime_white"
 })
 
 
@@ -110,10 +110,10 @@ grafitti.register_grafitti("tech:gp_sq", {image = "tech_paint_gp_sq.png", light 
 grafitti.palette_build("tech:glow_paint")
 
 grafitti.register_brush("tech:paint_glow_paint", {
-    description = "Painting Kit (glow paint)",
-    inventory_image = "tech_paint_brush_glow.png",
-    wield_image = "tech_paint_brush_glow.png^[transformR270",
-    palette = "tech:glow_paint"
+	description = "Painting Kit (glow paint)",
+	inventory_image = "tech_paint_brush_glow.png",
+	wield_image = "tech_paint_brush_glow.png^[transformR270",
+	palette = "tech:glow_paint"
 })
 
 

@@ -104,61 +104,61 @@ end
 --handles dropping the torch
 
 local function on_throw(itemstack, dropper, pos)
--- newpos = {x = pos.x, y = pos.y+1.5, z=pos.z} -- Add vector to put it forward
-   local obj = minetest.add_entity({x = pos.x, y = pos.y+1.5, z = pos.z},
-      "tech:torch_entity")
-   local fuel = itemstack:get_meta():get_int("fuel")
-   if fuel then
-      obj:get_luaentity(obj):set_fuel(fuel)
-   end
-   local props = obj:get_luaentity(obj):get_fuel()
-   local vectors = dropper:get_look_dir()
-   local velocity = 10
-   obj:set_velocity({x = vectors.x * velocity,
-		     y = vectors.y * velocity,
-		     z = vectors.z * velocity})
-   obj:set_acceleration({ x = vectors.x * -5, y = -10, z = vectors.z * -5})
+	-- newpos = {x = pos.x, y = pos.y+1.5, z=pos.z} -- Add vector to put it forward
+	local obj = minetest.add_entity({x = pos.x, y = pos.y+1.5, z = pos.z},
+		"tech:torch_entity")
+	local fuel = itemstack:get_meta():get_int("fuel")
+	if fuel then
+		obj:get_luaentity(obj):set_fuel(fuel)
+	end
+	local props = obj:get_luaentity(obj):get_fuel()
+	local vectors = dropper:get_look_dir()
+	local velocity = 10
+	obj:set_velocity({
+		x = vectors.x * velocity,
+		y = vectors.y * velocity,
+		z = vectors.z * velocity})
+	obj:set_acceleration({ x = vectors.x * -5, y = -10, z = vectors.z * -5})
 end
 
 
 local torch_entity = {
-   initial_properties = {
-      visual = "sprite",
-      textures = {"tech_torch_on_floor.png"},
-      physical = true,
-      collisionbox = {-0.125, 0.0, -0.125, 0.125, .25, 0.125}
-   },
-   fuel = 60 -- default to a new torch
+	initial_properties = {
+		visual = "sprite",
+		textures = {"tech_torch_on_floor.png"},
+		physical = true,
+		collisionbox = {-0.125, 0.0, -0.125, 0.125, .25, 0.125}
+	},
+	fuel = 60 -- default to a new torch
 }
 function torch_entity:on_step(dtime, moveresult)
-      local vel = self.object:get_velocity()
-      if vel.y == 0 then
-
-	 local pos = self.object:get_pos()
-	 local here = minetest.get_node(pos)
-	 local def = minetest.registered_nodes[here.name]
-	 if not here.name then -- we're in an unloaded spot, just forget it
-	    self.remove()
-	    return
-	 end
-	 if def.groups.water and def.groups.water > 0 then
-	    minetest.sound_play("nodes_nature_cool_lava",
+	local vel = self.object:get_velocity()
+	if vel.y == 0 then
+		local pos = self.object:get_pos()
+		local here = minetest.get_node(pos)
+		local def = minetest.registered_nodes[here.name]
+		if not here.name then -- we're in an unloaded spot, just forget it
+			self.remove()
+			return
+		end
+		if def.groups.water and def.groups.water > 0 then
+			minetest.sound_play("nodes_nature_cool_lava",
 				{pos = pos, max_hear_distance = 16, gain = 0.1})
-	 elseif def.groups.igniter and def.groups.igniter > 0 then
-	    minetest.sound_play("inferno_extinguish_flame.2",
+		elseif def.groups.igniter and def.groups.igniter > 0 then
+			minetest.sound_play("inferno_extinguish_flame.2",
 				{pos = pos, max_hear_distance = 16, gain = 0.1})
-	 elseif not def.buildable_to then
-	    local torchent = ItemStack("tech:torch")
-	    torchent:get_meta():set_int("fuel", self.fuel)
-	    minetest.item_drop(torchent, nil, pos)
-	 else
-	    minetest.place_node(pos, {name = "tech:torch"})
-	    local heremeta = minetest.get_meta(pos)
-	    heremeta:set_int("fuel", self.fuel)
-	 end
-	 self.object:remove()
-      end
-   end
+		elseif not def.buildable_to then
+			local torchent = ItemStack("tech:torch")
+			torchent:get_meta():set_int("fuel", self.fuel)
+			minetest.item_drop(torchent, nil, pos)
+		else
+			minetest.place_node(pos, {name = "tech:torch"})
+			local heremeta = minetest.get_meta(pos)
+			heremeta:set_int("fuel", self.fuel)
+		end
+		self.object:remove()
+	end
+end
 function torch_entity:get_fuel()
    return self.fuel
 end

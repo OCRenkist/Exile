@@ -69,29 +69,29 @@ local function roast(pos, selfname, name, length, heat, smelt)
 			minetest.check_for_falling(pos)
 			return false
 		end
-  elseif temp < fire_temp then
-    --not lit yet
-    return true
+	elseif temp < fire_temp then
+		--not lit yet
+		return true
 	elseif temp >= fire_temp then
-    if smelt then
-      --smelting requires release of slag
-      --position below
-      local posb = {
-        {x = pos.x, y = pos.y - 1, z = pos.z},
-        {x = pos.x +1, y = pos.y - 1, z = pos.z},
-        {x = pos.x -1, y = pos.y - 1, z = pos.z},
-        {x = pos.x, y = pos.y - 1, z = pos.z +1},
-        {x = pos.x +1, y = pos.y - 1, z = pos.z +1},
-        {x = pos.x -1, y = pos.y - 1, z = pos.z +1},
-        {x = pos.x, y = pos.y - 1, z = pos.z -1},
-        {x = pos.x +1, y = pos.y - 1, z = pos.z -1},
-        {x = pos.x -1, y = pos.y - 1, z = pos.z -1}
-      }
-      local cn = 0
-      for _, p in pairs(posb) do
-        local n = minetest.get_node(p).name
+		if smelt then
+			--smelting requires release of slag
+			--position below
+			local posb = {
+				{x = pos.x,    y = pos.y - 1, z = pos.z},
+				{x = pos.x +1, y = pos.y - 1, z = pos.z},
+				{x = pos.x -1, y = pos.y - 1, z = pos.z},
+				{x = pos.x,    y = pos.y - 1, z = pos.z +1},
+				{x = pos.x +1, y = pos.y - 1, z = pos.z +1},
+				{x = pos.x -1, y = pos.y - 1, z = pos.z +1},
+				{x = pos.x,    y = pos.y - 1, z = pos.z -1},
+				{x = pos.x +1, y = pos.y - 1, z = pos.z -1},
+				{x = pos.x -1, y = pos.y - 1, z = pos.z -1}
+			}
+			local cn = 0
+			for _, p in pairs(posb) do
+				local n = minetest.get_node(p).name
 				--must drain into air or other slag mix
-        if n == 'air' or n == 'climate:air_temp' or n == 'tech:iron_and_slag' then
+				if n == 'air' or n == 'climate:air_temp' or n == 'tech:iron_and_slag' then
 					minetest.sound_play("nodes_nature_cool_lava",	{pos = pos, max_hear_distance = 8, gain = 0.1})
 					if n ~= 'tech:iron_and_slag' then
 						minetest.set_node(p, {name = 'tech:molten_slag_flowing'})
@@ -110,24 +110,24 @@ local function roast(pos, selfname, name, length, heat, smelt)
 							break
 						end
 					end
-        end
-      end
-      --only makes smelt progress if able to drain
-      if cn > 0 then
-        --do firing
-        meta:set_int("roast", roast - 1)
-        return true
-      else
+				end
+			end
+			--only makes smelt progress if able to drain
+			if cn > 0 then
+				--do firing
+				meta:set_int("roast", roast - 1)
+				return true
+			else
 				--try again later
-        return true
-      end
+				return true
+			end
 
-    else
-      --do non-smelting firing
-      meta:set_int("roast", roast - 1)
-      return true
-    end
-  end
+		else
+			--do non-smelting firing
+			meta:set_int("roast", roast - 1)
+			return true
+		end
+	end
 
 end
 
@@ -147,13 +147,13 @@ minetest.register_node("tech:crushed_iron_ore", {
 	paramtype = "light",
 	groups = {crumbly = 3, falling_node = 1, heatable =10},
 	sounds = nodes_nature.node_sound_gravel_defaults(),
-  on_construct = function(pos)
+	on_construct = function(pos)
 		--length(i.e. difficulty of firing), interval for checks (speed)
 		set_roast(pos, 10, 10)
 	end,
 	on_timer = function(pos, elapsed)
-    --selfname, finished product, length, heat, smelt
-    return roast(pos, "tech:crushed_iron_ore", "tech:roasted_iron_ore", 10, 300, false)
+		--selfname, finished product, length, heat, smelt
+		return roast(pos, "tech:crushed_iron_ore", "tech:roasted_iron_ore", 10, 300, false)
 	end,
 })
 
@@ -208,14 +208,14 @@ minetest.register_node("tech:iron_smelting_mix", {
 	paramtype = "light",
 	groups = {crumbly = 3, falling_node = 1, heatable = 20},
 	sounds = nodes_nature.node_sound_gravel_defaults(),
-  on_construct = function(pos)
-    --length(i.e. difficulty of firing), interval for checks (speed)
-    set_roast(pos, 2, 10)
-  end,
-  on_timer = function(pos, elapsed)
-    --finished product, length, heat, smelt
-    return roast(pos, "tech:iron_smelting_mix", "tech:iron_and_slag", 2, 1350, false)
-  end,
+	on_construct = function(pos)
+		--length(i.e. difficulty of firing), interval for checks (speed)
+		set_roast(pos, 2, 10)
+	end,
+	on_timer = function(pos, elapsed)
+		--finished product, length, heat, smelt
+		return roast(pos, "tech:iron_smelting_mix", "tech:iron_and_slag", 2, 1350, false)
+	end,
 })
 
 --recipe
@@ -270,14 +270,14 @@ minetest.register_node("tech:iron_and_slag", {
 	paramtype = "light",
 	groups = {cracky = 3, crumbly = 1, falling_node = 1, heatable = 20},
 	sounds = nodes_nature.node_sound_stone_defaults(),
-  on_construct = function(pos)
-    --length(i.e. difficulty of firing), interval for checks (speed)
-    set_roast(pos, 50, 10)
-  end,
-  on_timer = function(pos, elapsed)
-    --finished product, length, heat, smelt
-    return roast(pos, "tech:iron_and_slag", "tech:iron_bloom", 50, 1350, true)
-  end,
+	on_construct = function(pos)
+		--length(i.e. difficulty of firing), interval for checks (speed)
+		set_roast(pos, 50, 10)
+	end,
+	on_timer = function(pos, elapsed)
+		--finished product, length, heat, smelt
+		return roast(pos, "tech:iron_and_slag", "tech:iron_bloom", 50, 1350, true)
+	end,
 
 	on_dig = function(pos, node, digger)
 		on_dig_iron_and_slag(pos, node, digger)
@@ -294,11 +294,11 @@ minetest.register_node("tech:iron_and_slag", {
 minetest.register_node("tech:iron_bloom", {
 	description = "Iron Bloom",
 	tiles = {"tech_iron_and_slag.png"},
-  drawtype = "nodebox",
-  node_box = {
-    type = "fixed",
-    fixed = {-0.3, -0.5, -0.3, 0.3, -0.1, 0.3},
-  },
+	drawtype = "nodebox",
+	node_box = {
+		type = "fixed",
+		fixed = {-0.3, -0.5, -0.3, 0.3, -0.1, 0.3},
+	},
 	stack_max = minimal.stack_max_bulky * 4,
 	paramtype = "light",
 	groups = {cracky = 3, falling_node = 1, oddly_breakable_by_hand = 2, temp_pass = 1},
@@ -312,14 +312,14 @@ minetest.register_node("tech:iron_bloom", {
 minetest.register_node("tech:iron_ingot", {
 	description = "Iron Ingot",
 	tiles = {"tech_iron.png"},
-  drawtype = "nodebox",
+	drawtype = "nodebox",
 	node_box = {
 		type = "fixed",
 		fixed = {-0.1, -0.5, -0.2, 0.1, -0.3, 0.2},
 	},
 	stack_max = minimal.stack_max_bulky * 8,
 	paramtype = "light",
-  paramtype2 = "facedir",
+	paramtype2 = "facedir",
 	groups = {falling_node = 1, dig_immediate=3, temp_pass = 1},
 	sounds = nodes_nature.node_sound_stone_defaults(),
 })
@@ -402,20 +402,20 @@ minetest.register_node("tech:molten_slag_source", {
 	damage_per_second = 4 * 2,
 	post_effect_color = {a = 191, r = 255, g = 64, b = 0},
 	groups = {igniter = 1, temp_effect = 1},
-  --cooling
-  on_construct = function(pos)
-    minetest.get_node_timer(pos):start(10)
-  end,
-  on_timer = function(pos, elapsed)
-    if math.random()>0.87 then
+	--cooling
+	on_construct = function(pos)
+		minetest.get_node_timer(pos):start(10)
+	end,
+	on_timer = function(pos, elapsed)
+		if math.random()>0.87 then
 			minetest.sound_play("nodes_nature_cool_lava",	{pos = pos, max_hear_distance = 8, gain = 0.1})
-      minetest.set_node(pos, {name = 'tech:slag'})
+			minetest.set_node(pos, {name = 'tech:slag'})
 			minetest.check_for_falling(pos)
-      return false
-    else
-      return true
-    end
-  end,
+			return false
+		else
+			return true
+		end
+	end,
 })
 
 minetest.register_node("tech:molten_slag_flowing", {
@@ -464,20 +464,20 @@ minetest.register_node("tech:molten_slag_flowing", {
 	damage_per_second = 4 * 2,
 	post_effect_color = {a = 191, r = 255, g = 64, b = 0},
 	groups = {igniter = 1,	not_in_creative_inventory = 1, temp_effect = 1, temp_pass = 1},
-  --cooling
-  on_construct = function(pos)
-    minetest.get_node_timer(pos):start(1)
-  end,
-  on_timer = function(pos, elapsed)
-    if math.random()>0.95 then
+	--cooling
+	on_construct = function(pos)
+		minetest.get_node_timer(pos):start(1)
+	end,
+	on_timer = function(pos, elapsed)
+		if math.random()>0.95 then
 			minetest.sound_play("nodes_nature_cool_lava",	{pos = pos, max_hear_distance = 8, gain = 0.1})
-      minetest.set_node(pos, {name = 'tech:slag'})
+			minetest.set_node(pos, {name = 'tech:slag'})
 			minetest.check_for_falling(pos)
-      return false
-    else
-      return true
-    end
-  end,
+			return false
+		else
+			return true
+		end
+	end,
 })
 
 

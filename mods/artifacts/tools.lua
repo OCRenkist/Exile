@@ -14,15 +14,15 @@
 
 local light_meter = function(user, pointed_thing)
 
-  local name =user:get_player_name()
-  local pos = user:get_pos()
+	local name =user:get_player_name()
+	local pos = user:get_pos()
 
 	minetest.chat_send_player(name, minetest.colorize("#00ff00", "LIGHT MEASUREMENT:"))
 
-  local measure = ((minetest.get_node_light({x = pos.x, y = pos.y, z = pos.z})) or 0)
+	local measure = ((minetest.get_node_light({x = pos.x, y = pos.y, z = pos.z})) or 0)
 
-  minetest.chat_send_player(name, minetest.colorize("#cc6600","LIGHT LEVEL = "..measure))
-  --minetest.sound_play("ecobots2_tool_good", {gain = 0.2, pos = pos, max_hear_distance = 5})
+	minetest.chat_send_player(name, minetest.colorize("#cc6600","LIGHT LEVEL = "..measure))
+	--minetest.sound_play("ecobots2_tool_good", {gain = 0.2, pos = pos, max_hear_distance = 5})
 
 end
 
@@ -77,28 +77,28 @@ minetest.register_craftitem("artifacts:thermometer", {
 
 local temp_probe = function(user, pointed_thing)
 
-  if pointed_thing.type ~= "node" then
-    return
-  end
+	if pointed_thing.type ~= "node" then
+		return
+	end
 
-  local under = minetest.get_node(pointed_thing.under)
+	local under = minetest.get_node(pointed_thing.under)
 
-  local node_name = under.name
-  local nodedef = minetest.registered_nodes[node_name]
-  if not nodedef then
-    return
-  end
+	local node_name = under.name
+	local nodedef = minetest.registered_nodes[node_name]
+	if not nodedef then
+		return
+	end
 
 
-  local name =user:get_player_name()
-  local pos = user:get_pos()
+	local name =user:get_player_name()
+	local pos = user:get_pos()
 
 	minetest.chat_send_player(name, minetest.colorize("#00ff00", "OBJECT TEMPERATURE MEASUREMENT:"))
 
-  local measure = climate.get_point_temp(pointed_thing.under)
+	local measure = climate.get_point_temp(pointed_thing.under)
 
-  minetest.chat_send_player(name, minetest.colorize("#cc6600","TEMPERATURE = "..measure))
-  --minetest.sound_play("ecobots2_tool_good", {gain = 0.2, pos = pos, max_hear_distance = 5})
+	minetest.chat_send_player(name, minetest.colorize("#cc6600","TEMPERATURE = "..measure))
+	--minetest.sound_play("ecobots2_tool_good", {gain = 0.2, pos = pos, max_hear_distance = 5})
 
 end
 
@@ -106,7 +106,7 @@ end
 minetest.register_craftitem("artifacts:temp_probe", {
 	description = "Temperature Probe",
 	inventory_image = "artifacts_temp_probe.png",
-  wield_image = "artifacts_temp_probe.png^[transformR90",
+	wield_image = "artifacts_temp_probe.png^[transformR90",
 	stack_max = 1,
 
 	on_use = function(itemstack, user, pointed_thing)
@@ -124,32 +124,32 @@ minetest.register_craftitem("artifacts:temp_probe", {
 
 local fuel_probe = function(user, pointed_thing)
 
-  if pointed_thing.type ~= "node" then
-    return
-  end
+	if pointed_thing.type ~= "node" then
+		return
+	end
 
-  local under = minetest.get_node(pointed_thing.under)
+	local under = minetest.get_node(pointed_thing.under)
 
-  local node_name = under.name
-  local nodedef = minetest.registered_nodes[node_name]
-  if not nodedef then
-    return
-  end
-
-
-  local name =user:get_player_name()
-  local pos = user:get_pos()
+	local node_name = under.name
+	local nodedef = minetest.registered_nodes[node_name]
+	if not nodedef then
+		return
+	end
 
 
-  local meta = minetest.get_meta(pointed_thing.under)
-  local measure = meta:get_int("fuel")
+	local name =user:get_player_name()
+	local pos = user:get_pos()
 
-  if measure <= 0 then
-    minetest.chat_send_player(name, minetest.colorize("#cc6600","NOT MEASURABLE!"))
-  else
-    minetest.chat_send_player(name, minetest.colorize("#00ff00", "BURN UNITS REMAINING:"))
-    minetest.chat_send_player(name, minetest.colorize("#cc6600", measure))
-  end
+
+	local meta = minetest.get_meta(pointed_thing.under)
+	local measure = meta:get_int("fuel")
+
+	if measure <= 0 then
+		minetest.chat_send_player(name, minetest.colorize("#cc6600","NOT MEASURABLE!"))
+	else
+		minetest.chat_send_player(name, minetest.colorize("#00ff00", "BURN UNITS REMAINING:"))
+		minetest.chat_send_player(name, minetest.colorize("#cc6600", measure))
+	end
 
 end
 
@@ -157,7 +157,7 @@ end
 minetest.register_craftitem("artifacts:fuel_probe", {
 	description = "Fuel Probe",
 	inventory_image = "artifacts_fuel_probe.png",
-  wield_image = "artifacts_fuel_probe.png^[transformR90",
+	wield_image = "artifacts_fuel_probe.png^[transformR90",
 	stack_max = 1,
 
 	on_use = function(itemstack, user, pointed_thing)
@@ -172,32 +172,32 @@ minetest.register_craftitem("artifacts:fuel_probe", {
 
 local smelter_probe = function(user, pointed_thing)
 
-  if pointed_thing.type ~= "node" then
-    return
-  end
+	if pointed_thing.type ~= "node" then
+		return
+	end
 
-  local under = minetest.get_node(pointed_thing.under)
+	local under = minetest.get_node(pointed_thing.under)
 
-  local node_name = under.name
-  local nodedef = minetest.registered_nodes[node_name]
-  if not nodedef then
-    return
-  end
-
-
-  local name =user:get_player_name()
-  local pos = user:get_pos()
+	local node_name = under.name
+	local nodedef = minetest.registered_nodes[node_name]
+	if not nodedef then
+		return
+	end
 
 
-  local meta = minetest.get_meta(pointed_thing.under)
-  local measure = meta:get_int("roast")
+	local name =user:get_player_name()
+	local pos = user:get_pos()
 
-  if measure <= 0 or node_name ~= 'tech:iron_and_slag' then
-    minetest.chat_send_player(name, minetest.colorize("#cc6600","NOT MEASURABLE!"))
-  else
-    minetest.chat_send_player(name, minetest.colorize("#00ff00", "SMELTING UNITS REMAINING:"))
-    minetest.chat_send_player(name, minetest.colorize("#cc6600", measure))
-  end
+
+	local meta = minetest.get_meta(pointed_thing.under)
+	local measure = meta:get_int("roast")
+
+	if measure <= 0 or node_name ~= 'tech:iron_and_slag' then
+		minetest.chat_send_player(name, minetest.colorize("#cc6600","NOT MEASURABLE!"))
+	else
+		minetest.chat_send_player(name, minetest.colorize("#00ff00", "SMELTING UNITS REMAINING:"))
+		minetest.chat_send_player(name, minetest.colorize("#cc6600", measure))
+	end
 
 end
 
@@ -205,7 +205,7 @@ end
 minetest.register_craftitem("artifacts:smelter_probe", {
 	description = "Smelter Probe",
 	inventory_image = "artifacts_smelter_probe.png",
-  wield_image = "artifacts_smelter_probe.png^[transformR90",
+	wield_image = "artifacts_smelter_probe.png^[transformR90",
 	stack_max = 1,
 
 	on_use = function(itemstack, user, pointed_thing)
@@ -217,37 +217,37 @@ minetest.register_craftitem("artifacts:smelter_probe", {
 
 ------------------------------------
 --POTTERS PROBE
---get  progress
+--get progress
 ------------------------------------
 
 local potters_probe = function(user, pointed_thing)
 
-  if pointed_thing.type ~= "node" then
-    return
-  end
+	if pointed_thing.type ~= "node" then
+		return
+	end
 
-  local under = minetest.get_node(pointed_thing.under)
+	local under = minetest.get_node(pointed_thing.under)
 
-  local node_name = under.name
-  local nodedef = minetest.registered_nodes[node_name]
-  if not nodedef then
-    return
-  end
-
-
-  local name =user:get_player_name()
-  local pos = user:get_pos()
+	local node_name = under.name
+	local nodedef = minetest.registered_nodes[node_name]
+	if not nodedef then
+		return
+	end
 
 
-  local meta = minetest.get_meta(pointed_thing.under)
-  local measure = meta:get_int("firing")
+	local name =user:get_player_name()
+	local pos = user:get_pos()
 
-  if measure <= 0 then
-    minetest.chat_send_player(name, minetest.colorize("#cc6600","NOT MEASURABLE!"))
-  else
-    minetest.chat_send_player(name, minetest.colorize("#00ff00", "FIRING UNITS REMAINING:"))
-    minetest.chat_send_player(name, minetest.colorize("#cc6600", measure))
-  end
+
+	local meta = minetest.get_meta(pointed_thing.under)
+	local measure = meta:get_int("firing")
+
+	if measure <= 0 then
+		minetest.chat_send_player(name, minetest.colorize("#cc6600","NOT MEASURABLE!"))
+	else
+		minetest.chat_send_player(name, minetest.colorize("#00ff00", "FIRING UNITS REMAINING:"))
+		minetest.chat_send_player(name, minetest.colorize("#cc6600", measure))
+	end
 
 end
 
@@ -255,7 +255,7 @@ end
 minetest.register_craftitem("artifacts:potters_probe", {
 	description = "Potter's Probe",
 	inventory_image = "artifacts_potters_probe.png",
-  wield_image = "artifacts_potters_probe.png^[transformR90",
+	wield_image = "artifacts_potters_probe.png^[transformR90",
 	stack_max = 1,
 
 	on_use = function(itemstack, user, pointed_thing)
@@ -271,32 +271,32 @@ minetest.register_craftitem("artifacts:potters_probe", {
 
 local chefs_probe = function(user, pointed_thing)
 
-  if pointed_thing.type ~= "node" then
-    return
-  end
+	if pointed_thing.type ~= "node" then
+		return
+	end
 
-  local under = minetest.get_node(pointed_thing.under)
+	local under = minetest.get_node(pointed_thing.under)
 
-  local node_name = under.name
-  local nodedef = minetest.registered_nodes[node_name]
-  if not nodedef then
-    return
-  end
-
-
-  local name =user:get_player_name()
-  local pos = user:get_pos()
+	local node_name = under.name
+	local nodedef = minetest.registered_nodes[node_name]
+	if not nodedef then
+		return
+	end
 
 
-  local meta = minetest.get_meta(pointed_thing.under)
-  local measure = meta:get_int("baking")
+	local name =user:get_player_name()
+	local pos = user:get_pos()
 
-  if measure <= 0 then
-    minetest.chat_send_player(name, minetest.colorize("#cc6600","NOT MEASURABLE!"))
-  else
-    minetest.chat_send_player(name, minetest.colorize("#00ff00", "COOKING UNITS REMAINING:"))
-    minetest.chat_send_player(name, minetest.colorize("#cc6600", measure))
-  end
+
+	local meta = minetest.get_meta(pointed_thing.under)
+	local measure = meta:get_int("baking")
+
+	if measure <= 0 then
+		minetest.chat_send_player(name, minetest.colorize("#cc6600","NOT MEASURABLE!"))
+	else
+		minetest.chat_send_player(name, minetest.colorize("#00ff00", "COOKING UNITS REMAINING:"))
+		minetest.chat_send_player(name, minetest.colorize("#cc6600", measure))
+	end
 
 end
 
@@ -304,7 +304,7 @@ end
 minetest.register_craftitem("artifacts:chefs_probe", {
 	description = "Chef's Probe",
 	inventory_image = "artifacts_chefs_probe.png",
-  wield_image = "artifacts_chefs_probe.png^[transformR90",
+	wield_image = "artifacts_chefs_probe.png^[transformR90",
 	stack_max = 1,
 
 	on_use = function(itemstack, user, pointed_thing)
@@ -320,32 +320,32 @@ minetest.register_craftitem("artifacts:chefs_probe", {
 
 local farmers_probe = function(user, pointed_thing)
 
-  if pointed_thing.type ~= "node" then
-    return
-  end
+	if pointed_thing.type ~= "node" then
+		return
+	end
 
-  local under = minetest.get_node(pointed_thing.under)
+	local under = minetest.get_node(pointed_thing.under)
 
-  local node_name = under.name
-  local nodedef = minetest.registered_nodes[node_name]
-  if not nodedef then
-    return
-  end
-
-
-  local name =user:get_player_name()
-  local pos = user:get_pos()
+	local node_name = under.name
+	local nodedef = minetest.registered_nodes[node_name]
+	if not nodedef then
+		return
+	end
 
 
-  local meta = minetest.get_meta(pointed_thing.under)
-  local measure = meta:get_int("growth")
+	local name =user:get_player_name()
+	local pos = user:get_pos()
 
-  if measure <= 0 then
-    minetest.chat_send_player(name, minetest.colorize("#cc6600","NOT MEASURABLE!"))
-  else
-    minetest.chat_send_player(name, minetest.colorize("#00ff00", "GROWTH UNITS REMAINING:"))
-    minetest.chat_send_player(name, minetest.colorize("#cc6600", measure))
-  end
+
+	local meta = minetest.get_meta(pointed_thing.under)
+	local measure = meta:get_int("growth")
+
+	if measure <= 0 then
+		minetest.chat_send_player(name, minetest.colorize("#cc6600","NOT MEASURABLE!"))
+	else
+		minetest.chat_send_player(name, minetest.colorize("#00ff00", "GROWTH UNITS REMAINING:"))
+		minetest.chat_send_player(name, minetest.colorize("#cc6600", measure))
+	end
 
 end
 
@@ -353,7 +353,7 @@ end
 minetest.register_craftitem("artifacts:farmers_probe", {
 	description = "Farmer's Probe",
 	inventory_image = "artifacts_farmers_probe.png",
-  wield_image = "artifacts_farmers_probe.png^[transformR90",
+	wield_image = "artifacts_farmers_probe.png^[transformR90",
 	stack_max = 1,
 
 	on_use = function(itemstack, user, pointed_thing)
@@ -401,7 +401,7 @@ local function use_spyglass(player)
 end
 
 
---  item
+-- item
 minetest.register_craftitem("artifacts:spyglass", {
 	description = "Spyglass",
 	inventory_image = "artifacts_spyglass.png",
@@ -422,32 +422,32 @@ minetest.register_craftitem("artifacts:spyglass", {
 
 local animal_probe = function(user, pointed_thing)
 
-  if pointed_thing.type ~= "object" then
-    return
-  end
+	if pointed_thing.type ~= "object" then
+		return
+	end
 
-  local ent = pointed_thing.ref:get_luaentity()
+	local ent = pointed_thing.ref:get_luaentity()
 
-  local r_ent_e = mobkit.recall(ent,'energy')
-  local r_ent_a = mobkit.recall(ent,'age')
+	local r_ent_e = mobkit.recall(ent,'energy')
+	local r_ent_a = mobkit.recall(ent,'age')
 
-  if not r_ent_e or not r_ent_a then
-    return
-  end
+	if not r_ent_e or not r_ent_a then
+		return
+	end
 
 
-  local name =user:get_player_name()
+	local name =user:get_player_name()
 
 	minetest.chat_send_player(name, minetest.colorize("#00ff00", "ANIMAL CONDITION:"))
 
-  minetest.chat_send_player(name, minetest.colorize("#cc6600","Age: "..r_ent_a.. " sec    Energy: "..r_ent_e.." units"))
+	minetest.chat_send_player(name, minetest.colorize("#cc6600","Age: "..r_ent_a.. " sec    Energy: "..r_ent_e.." units"))
 
 end
 
 minetest.register_craftitem("artifacts:animal_probe", {
 	description = "Animal Probe",
 	inventory_image = "artifacts_animal_probe.png",
-  wield_image = "artifacts_animal_probe.png^[transformR90",
+	wield_image = "artifacts_animal_probe.png^[transformR90",
 	stack_max = 1,
 
 	on_use = function(itemstack, user, pointed_thing)

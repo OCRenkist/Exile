@@ -152,7 +152,7 @@ climate.can_thaw = function(pos)
 	end
 
 	if minetest.get_item_group(node, "water") > 0 then
-	   c = math.floor(c/3)
+		c = math.floor(c/3)
 	end
 
 	if climate.get_point_temp(posa) > c then
@@ -223,73 +223,73 @@ end
 --adjust raw air temperature to be more appropriate for the location
 local adjust_active_temp = function(pos, temp)
 
-   --average temp (make sure it matches climate)
-   local av_temp = 15
-   local name = minetest.get_node(pos).name
-   local water = minetest.get_item_group(name,"water")
+--average temp (make sure it matches climate)
+local av_temp = 15
+local name = minetest.get_node(pos).name
+local water = minetest.get_item_group(name,"water")
 
 
-   --sea water for deep ocean --stratification and density set a constant temperature
-   if water == 2 and pos.y < -40 then
-      temp = 4
-      return temp
-   end
+--sea water for deep ocean --stratification and density set a constant temperature
+if water == 2 and pos.y < -40 then
+	temp = 4
+	return temp
+end
 
-   -------------------------------
-   --Underground
-   if pos.y < -12 and water ==0  then
-      --average temp, heating under the earth. ~ 25C/km
-      temp = -0.025*pos.y + av_temp
-      temp = adjust_for_heatable(pos, name, temp)
-      return temp
-   end
+-------------------------------
+--Underground
+if pos.y < -12 and water ==0  then
+	--average temp, heating under the earth. ~ 25C/km
+	temp = -0.025*pos.y + av_temp
+	temp = adjust_for_heatable(pos, name, temp)
+	return temp
+end
 
-   --transition to underground
-   if pos.y <= 0 and water ==0 then
-      --below ground is closer to average
-      --should probably match to heightmap rather than y = 0 (maybe unnecessarily complicated)
-      local x = (-1*pos.y-12)*(-1/12)
-      temp = (temp*x)+(av_temp*(1-x))
-      temp = adjust_for_shelter(pos, temp, av_temp)
-      temp = adjust_for_heatable(pos, name, temp)
-      return temp
-   end
+--transition to underground
+if pos.y <= 0 and water ==0 then
+	--below ground is closer to average
+	--should probably match to heightmap rather than y = 0 (maybe unnecessarily complicated)
+	local x = (-1*pos.y-12)*(-1/12)
+	temp = (temp*x)+(av_temp*(1-x))
+	temp = adjust_for_shelter(pos, temp, av_temp)
+	temp = adjust_for_heatable(pos, name, temp)
+	return temp
+end
 
-   -------------------------
-   --Above ground and oceans
+-------------------------
+--Above ground and oceans
 
-   --altitude cooling. ~ -2C per 300m
-   if pos.y > 50 and pos.y <= 9000 then
-      temp = -0.0067*pos.y + temp
-   end
+--altitude cooling. ~ -2C per 300m
+if pos.y > 50 and pos.y <= 9000 then
+	temp = -0.0067*pos.y + temp
+end
 
-   --Shelter.
-   temp = adjust_for_shelter(pos, temp, av_temp)
+--Shelter.
+temp = adjust_for_shelter(pos, temp, av_temp)
 
 
-   --Water and oceans
-   if water ~= 0 then
+--Water and oceans
+if water ~= 0 then
 
-      --water is closer to average than air...
-      --also a little colder +(av_sea_temp *0.75)
-      temp = climate.active_sea_temp
-      temp = adjust_for_heatable(pos, name, temp) --currently nothing fits this
+	--water is closer to average than air...
+	--also a little colder +(av_sea_temp *0.75)
+	temp = climate.active_sea_temp
+	temp = adjust_for_heatable(pos, name, temp) --currently nothing fits this
 
-      --apply caps (not frozen or boiling)
-      --freezing/boiling dynamics should kick in (in nodes_nature)
-      if temp > 100 then
-	 temp = 100
-	 return temp
-      elseif temp < 0 then
-	 temp = 0
-	 return temp
-      else
-	 return temp
-      end
-   end
+	--apply caps (not frozen or boiling)
+	--freezing/boiling dynamics should kick in (in nodes_nature)
+	if temp > 100 then
+	temp = 100
+	return temp
+	elseif temp < 0 then
+	temp = 0
+	return temp
+	else
+	return temp
+	end
+end
 
-   temp = adjust_for_heatable(pos, name, temp)
-   return temp
+temp = adjust_for_heatable(pos, name, temp)
+return temp
 
 end
 
@@ -309,16 +309,16 @@ end
 
 
 local function swap_air(old_pos, new_pos, temp_m)
-   local oldname = minetest.get_node(old_pos).name
-   if minetest.get_node(new_pos).name == "air" then
-      local timer = 8
-      minetest.set_node(old_pos, {name = 'air'})
-      minetest.set_node(new_pos, {name = oldname})
-      local meta = minetest.get_meta(new_pos)
-      meta:set_float("temp", temp_m)
-      minetest.get_node_timer(new_pos):start(math.random(timer, timer*2))
-      return true
-   end
+local oldname = minetest.get_node(old_pos).name
+if minetest.get_node(new_pos).name == "air" then
+	local timer = 8
+	minetest.set_node(old_pos, {name = 'air'})
+	minetest.set_node(new_pos, {name = oldname})
+	local meta = minetest.get_meta(new_pos)
+	meta:set_float("temp", temp_m)
+	minetest.get_node_timer(new_pos):start(math.random(timer, timer*2))
+	return true
+end
 end
 
 
@@ -329,34 +329,34 @@ local move_air_nodes = function(pos, meta, temp_m)
 	if temp_m > 0 then
 		pos_new = {x=pos.x, y=pos.y +1, z=pos.z}
 	else
-	   pos_new = {x=pos.x, y=pos.y -1, z=pos.z}
+		pos_new = {x=pos.x, y=pos.y -1, z=pos.z}
 	end
 
 	--movement
 	if pos_new and swap_air(pos, pos_new, temp_m) then
-	   return true
+		return true
 	end
 	--blocked above/below, so look for nearby air or temp_flow nodes
 	local targets = {}
 	local pos_air = minetest.find_node_near(pos, 1, 'air')
 	if pos_air then
-	   table.insert(targets, pos_air)
+		table.insert(targets, pos_air)
 	end
 	local pos_pass = minetest.find_node_near(pos, 1, 'group:temp_flow')
 	if pos_pass then
-	   local tf = minetest.get_item_group(minetest.get_node(pos_pass).name,
-					      "temp_flow")
-	   if tf > math.random(0, 100) then
-	      local vec = vector.direction(pos, pos_pass)
-	      pos_pass = vector.add(pos_pass, vec)
-	      table.insert(targets, pos_pass)
-	   end
+		local tf = minetest.get_item_group(minetest.get_node(pos_pass).name,
+							"temp_flow")
+		if tf > math.random(0, 100) then
+			local vec = vector.direction(pos, pos_pass)
+			pos_pass = vector.add(pos_pass, vec)
+			table.insert(targets, pos_pass)
+		end
 	end
 	if #targets >=1 then -- pick one if we have two options
-	   local num = math.random(1, #targets)
-	   if swap_air(pos, targets[num], temp_m) then
-		 return true
-	   end
+		local num = math.random(1, #targets)
+		if swap_air(pos, targets[num], temp_m) then
+			return true
+		end
 	end
 	return false
 end
@@ -424,8 +424,8 @@ function climate.heat_transfer(pos, nodename, replace)
 	local pos_max = {x=pos.x +1, y=pos.y +1, z=pos.z +1}
 	local pos_min = {x=pos.x -1, y=pos.y -1, z=pos.z -1}
 	local air, cn = minetest.find_nodes_in_area(pos_min, pos_max,
-			    {'air', 'group:water', 'climate:air_temp',
-			     "climate:air_temp_visible"	})
+		{'air', 'group:water', 'climate:air_temp',
+			"climate:air_temp_visible"	})
 	--including group:temp_pass causes problems for doing pottery etc in groups (cools down bc of neighbors).
 	--taking them out of temp_pass would allow exploits (e.g. furnaces built from pots)
 	-- it seems good to let air_temp self cool. Any other temp_pass nodes that ought to be here
@@ -498,7 +498,7 @@ function climate.air_temp_source(pos, temp_effect, temp_max, chance, timer)
 	local at_node = 'climate:air_temp'
 	local meta = minetest.get_meta(pos)
 	if meta:get_string("hot_air") ~= "" then
-	   at_node = "climate:air_temp_visible"
+		at_node = "climate:air_temp_visible"
 	end
 	--get all surrounding air positions, and heatables
 	local pos_max = {x=pos.x +1, y=pos.y +1, z=pos.z +1}
@@ -639,7 +639,7 @@ local get_los = function(node_pos, target_pos)
 	else
 		--local los, lpos = minetest.line_of_sight({x=node_pos.x, y=node_pos.y - 0.51, z=node_pos.z}, target_pos)
 		local los, lpos = line_of_temp(node_pos, target_pos)
-    table.insert(results, {los, lpos})
+		table.insert(results, {los, lpos})
 	end
 
 	if target_pos.z > node_pos.z then
@@ -662,37 +662,37 @@ end
 
 -- temp source  adjusts it based on distance.
 local radiate_temp = function(target_pos, source_pos, temp_effect)
-  local dist = vector.distance(target_pos, source_pos)
+	local dist = vector.distance(target_pos, source_pos)
 
-  if dist <=1 and target_pos.y > source_pos.y then
-    --you are standing in it.
-    return temp_effect * 6
-  elseif dist <= 1 then
-    -- just next to fire
-    return temp_effect
-  end
+	if dist <=1 and target_pos.y > source_pos.y then
+		--you are standing in it.
+		return temp_effect * 6
+	elseif dist <= 1 then
+		-- just next to fire
+		return temp_effect
+	end
 
-  --{{b,o},{b,o},{b,o}}
-  local sight_lines = get_los(source_pos, target_pos)
-  local los = false
+	--{{b,o},{b,o},{b,o}}
+	local sight_lines = get_los(source_pos, target_pos)
+	local los = false
 
-  for k, v in pairs(sight_lines) do
-    if v[1] then
-      los = true
-      break
-    end
-  end
+	for k, v in pairs(sight_lines) do
+		if v[1] then
+		los = true
+		break
+		end
+	end
 
 
-  --check for line of sight, can any direction "see"
-  if los then
-    --adjust by distance
-    temp_effect = temp_effect/dist
-    return temp_effect
-  else
-    --completely blocked
-    return 0
-  end
+	--check for line of sight, can any direction "see"
+	if los then
+		--adjust by distance
+		temp_effect = temp_effect/dist
+		return temp_effect
+	else
+		--completely blocked
+		return 0
+	end
 
 
 end
@@ -713,29 +713,29 @@ climate.get_point_temp = function(pos)
 		return t_effect_max
 	end
 
-  --correct the general temperature for location
+	--correct the general temperature for location
 	local temp = climate.active_temp
-  temp = adjust_active_temp(pos, temp)
+	temp = adjust_active_temp(pos, temp)
 
-  --take into account heat and cooling sources nearby
-  local r = 4
-  local a = minetest.find_nodes_in_area({x=pos.x-r, y=pos.y-r, z=pos.z-r}, {x=pos.x+r, y=pos.y+r, z=pos.z+r}, {"group:temp_effect"})
+	--take into account heat and cooling sources nearby
+	local r = 4
+	local a = minetest.find_nodes_in_area({x=pos.x-r, y=pos.y-r, z=pos.z-r}, {x=pos.x+r, y=pos.y+r, z=pos.z+r}, {"group:temp_effect"})
 
 	if #a < 1 then
 		return temp
 	end
 
-  for i, no in pairs(a) do
+	for i, no in pairs(a) do
 		local name = minetest.get_node(no).name
 		local effect = minetest.registered_nodes[name].temp_effect
-    --adjust by distance
-    effect = radiate_temp(pos, no, effect)
+		--adjust by distance
+		effect = radiate_temp(pos, no, effect)
 
-    --check caps. If temp has already gone too far it cannot contribute more
-    local temp_effect_max = minetest.registered_nodes[name].temp_effect_max
+		--check caps. If temp has already gone too far it cannot contribute more
+		local temp_effect_max = minetest.registered_nodes[name].temp_effect_max
 		local temp_new =  temp + effect
-    --heaters
-    if effect > 0 then
+		--heaters
+		if effect > 0 then
 			if temp_new < temp_effect_max then
 				--still below cap... apply full heat.
 				temp = temp_new
@@ -747,36 +747,36 @@ climate.get_point_temp = function(pos)
 		--coolers
 		elseif effect < 0 then
 			if temp_new > temp_effect_max then
-	      --still above cap... apply cooling.
-	      temp = temp_new
+				--still above cap... apply cooling.
+				temp = temp_new
 			elseif temp > temp_effect_max then
 				--can't add full cooling, but not yet at cap
 				--so lower it to the cap
 				temp = temp_effect_max
 			end
-    end
-  end
+		end
+	end
 
 	return temp
 end
 
 --function for getting a temperature string set to the user's chosen scale
 climate.get_temp_string = function(v, meta)
-   local scale = minetest.settings:get('exile_temp_scale')
-   if meta then
-      local tempscalepref = meta:get_string("TempScalePref")
-      if tempscalepref then -- override the sitewide temp scale
-	 scale = tempscalepref
-      end
-   end
-   local t = v .." °C"
-   if scale == "Fahrenheit" then
-      v = v / 5 * 9 + 32
-      t = v .." °F"
-   elseif scale == "Kelvin" then
-      v = v + 273.15
-      t = v .."K"
-   end
-   return t
+	local scale = minetest.settings:get('exile_temp_scale')
+	if meta then
+		local tempscalepref = meta:get_string("TempScalePref")
+		if tempscalepref then -- override the sitewide temp scale
+			scale = tempscalepref
+		end
+	end
+	local t = v .." °C"
+	if scale == "Fahrenheit" then
+		v = v / 5 * 9 + 32
+		t = v .." °F"
+	elseif scale == "Kelvin" then
+		v = v + 273.15
+		t = v .."K"
+	end
+	return t
 end
 

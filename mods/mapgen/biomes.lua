@@ -144,50 +144,51 @@ local biome_list = {
 local biomes_enable = minetest.get_mapgen_setting("use_exile_v4_biomes")
 local wp = minetest.get_worldpath()
 if io.open(wp.."/env_meta.txt", "r") == nil then
-   -- This is a hack to see if it's a new world; if so, apply global setting
-   biomes_enable = minetest.settings:get_bool("exile_v4_biomes", false)
-   minetest.set_mapgen_setting("use_exile_v4_biomes",
-			       tostring(biomes_enable))
+	-- This is a hack to see if it's a new world; if so, apply global setting
+	biomes_enable = minetest.settings:get_bool("exile_v4_biomes", false)
+	minetest.set_mapgen_setting(
+		"use_exile_v4_biomes",
+		tostring(biomes_enable))
 elseif biomes_enable == nil then -- pre-existing world, but with no setting?
-   biomes_enable = false         -- set the default, then
-   minetest.set_mapgen_setting("use_exile_v4_biomes", "false", true)
-else                           -- get_mapgen_settings gives us a string, so:
-   biomes_enable = biomes_enable == "true" -- convert it to a boolean
- end
+	biomes_enable = false -- set the default, then
+	minetest.set_mapgen_setting("use_exile_v4_biomes", "false", true)
+else -- get_mapgen_settings gives us a string, so:
+	biomes_enable = biomes_enable == "true" -- convert it to a boolean
+end
 if biomes_enable == true then
-   minetest.log("action","Exile v4 experimental biomes enabled")
-   enable_experimentals = true
+	minetest.log("action","Exile v4 experimental biomes enabled")
+	enable_experimentals = true
 elseif biomes_enable == false then
-   minetest.log("action","Exile v4 experimental biomes disabled")
+	minetest.log("action","Exile v4 experimental biomes disabled")
 else
-   minetest.log("action","v4 biomes setting is invalid!")
+	minetest.log("action","v4 biomes setting is invalid!")
 end
 
 --[[Loop to Iterate for Registrations]]--
 for i in pairs(biome_list) do
-   if (enable_experimentals == false) and (i > stable_biomes) then
-      break -- End the loop if further biomes are disabled as experimental.
-   end
-   minetest.register_biome({
-	 name               = biome_list[i][01],
-	 node_dust          = biome_list[i][02],
-	 node_top           = biome_list[i][03],
-	 depth_top          = biome_list[i][04],
-	 node_filler        = biome_list[i][05],
-	 depth_filler       = biome_list[i][06],
-	 node_stone         = biome_list[i][07],
-	 node_water_top     = biome_list[i][08],
-	 depth_water_top    = biome_list[i][09],
-	 node_river_water   = biome_list[i][10],
-	 node_riverbed      = biome_list[i][11],
-	 depth_riverbed     = biome_list[i][12],
-	 node_cave_liquid   = biome_list[i][13],
-	 node_dungeon       = biome_list[i][14],
-	 node_dungeon_stair = biome_list[i][15],
-	 vertical_blend     = biome_list[i][16],
-	 y_max              = biome_list[i][17],
-	 y_min              = biome_list[i][18],
-	 heat_point         = biome_list[i][19],
-	 humidity_point     = biome_list[i][20],
-   })
+	if (enable_experimentals == false) and (i > stable_biomes) then
+		break -- End the loop if further biomes are disabled as experimental.
+	end
+	minetest.register_biome({
+		name               = biome_list[i][01],
+		node_dust          = biome_list[i][02],
+		node_top           = biome_list[i][03],
+		depth_top          = biome_list[i][04],
+		node_filler        = biome_list[i][05],
+		depth_filler       = biome_list[i][06],
+		node_stone         = biome_list[i][07],
+		node_water_top     = biome_list[i][08],
+		depth_water_top    = biome_list[i][09],
+		node_river_water   = biome_list[i][10],
+		node_riverbed      = biome_list[i][11],
+		depth_riverbed     = biome_list[i][12],
+		node_cave_liquid   = biome_list[i][13],
+		node_dungeon       = biome_list[i][14],
+		node_dungeon_stair = biome_list[i][15],
+		vertical_blend     = biome_list[i][16],
+		y_max              = biome_list[i][17],
+		y_min              = biome_list[i][18],
+		heat_point         = biome_list[i][19],
+		humidity_point     = biome_list[i][20],
+	})
 end

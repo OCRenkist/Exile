@@ -19,44 +19,44 @@ player_api.hair_colors = {
 }
 
 player_api.skin_colors = {
-   tan = nil, -- #e1bc9e
-   pale = {
-      color = "#ddeded",
-      ratio = 150,
-   },
-   red = {
-      color = "#b04d20",
-      ratio = 150,
-   },
-   yellow = {
-      color = "#ada540",
-      ratio = 150,
-   },
-   brown = {
-      color = "#a56d40",
-      ratio = 220,
-   },
-   black = {
-      color = "#462409",
-      ratio = 240,
-   },
-   --unnatural colors
-   greenmen = {
-      color = "#21b31e",
-      ratio = 160,
-   },
-   bluemen = {
-      color = "#0031c3",
-      ratio = 140,
-   },
-   graymen = {
-      color = "#909090",
-      ratio = 250,
-   },
-   redmen = {
-      color = "#ff1010",
-      ratio = 250,
-   },
+	tan = nil, -- #e1bc9e
+	pale = {
+		color = "#ddeded",
+		ratio = 150,
+	},
+	red = {
+		color = "#b04d20",
+		ratio = 150,
+	},
+	yellow = {
+		color = "#ada540",
+		ratio = 150,
+	},
+	brown = {
+		color = "#a56d40",
+		ratio = 220,
+	},
+	black = {
+		color = "#462409",
+		ratio = 240,
+	},
+	--unnatural colors
+	greenmen = {
+		color = "#21b31e",
+		ratio = 160,
+	},
+	bluemen = {
+		color = "#0031c3",
+		ratio = 140,
+	},
+	graymen = {
+		color = "#909090",
+		ratio = 250,
+	},
+	redmen = {
+		color = "#ff1010",
+		ratio = 250,
+	},
 }
 
 function player_api.load_base_texture_table(player)
@@ -130,7 +130,7 @@ function player_api.compose_base_texture(player, def)
 			--value.texture = player_api.colorize_texture(player, "eyebrowns", value.texture)
 			--texture = texture .. ":"..def.eyebrowns_pos.."="..value.texture
 		elseif key == "eye" then
-		       texture = texture .. ":"..def.eye_right_pos.."="..value
+			texture = texture .. ":"..def.eye_right_pos.."="..value
 		elseif key == "mouth" then
 			texture = texture .. ":"..def.mouth_pos.."="..value.texture
 		elseif key == "hair" then

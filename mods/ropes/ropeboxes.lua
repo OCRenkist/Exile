@@ -213,9 +213,9 @@ local rope_def = {
 	groups = {choppy=2, flammable=2, not_in_creative_inventory=1},
 	sounds =  nodes_nature.node_sound_leaves_defaults(),
 	sounds = {
-            footstep = "ropes_creak",
-            dig = "__group",
-            dug = "__group",
+			footstep = "ropes_creak",
+			dig = "__group",
+			dug = "__group",
 	},
 	drawtype = "nodebox",
 	node_box = {
@@ -249,9 +249,9 @@ local rope_bottom_def = {
 	drawtype = "nodebox",
 	groups = {choppy=2, flammable=2, not_in_creative_inventory=1},
 	sounds = {
-            footstep = "ropes_creak",
-            dig = "__group",
-            dug = "__group",
+			footstep = "ropes_creak",
+			dig = "__group",
+			dug = "__group",
 	},
 	node_box = {
 		type = "connected",
@@ -275,7 +275,7 @@ local rope_bottom_def = {
 
 	on_timer = rope_extension_timer,
 
-    after_destruct = function(pos)
+	after_destruct = function(pos)
 		ropes.hanging_after_destruct(pos, "ropes:rope_top", "ropes:rope", "ropes:rope_bottom")
 	end,
 }

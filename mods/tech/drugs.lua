@@ -21,40 +21,40 @@ minetest.register_craftitem("tech:herbal_medicine", {
 	stack_max = minimal.stack_max_medium *2,
 	groups = {flammable = 1},
 
-  on_use = function(itemstack, user, pointed_thing)
-    local meta = user:get_meta()
-    local effects_list = meta:get_string("effects_list")
-    effects_list = minetest.deserialize(effects_list) or {}
+	on_use = function(itemstack, user, pointed_thing)
+		local meta = user:get_meta()
+		local effects_list = meta:get_string("effects_list")
+		effects_list = minetest.deserialize(effects_list) or {}
 
-    --remove parasites
-    if random()<0.33 then
-  		HEALTH.remove_new_effect(user, {"Intestinal Parasites"})
-  	end
+		--remove parasites
+		if random()<0.33 then
+			HEALTH.remove_new_effect(user, {"Intestinal Parasites"})
+		end
 
-    --cure/reduce food poisoning and infections
-    --see how effective the dose is
-    local cfp = random()
-    if cfp <0.25 then
-      --cure up to severe
-      HEALTH.remove_new_effect(user, {"Food Poisoning", 3})
+		--cure/reduce food poisoning and infections
+		--see how effective the dose is
+		local cfp = random()
+		if cfp <0.25 then
+			--cure up to severe
+			HEALTH.remove_new_effect(user, {"Food Poisoning", 3})
 			HEALTH.remove_new_effect(user, {"Fungal Infection", 3})
 			HEALTH.remove_new_effect(user, {"Dust Fever", 3})
-    elseif cfp < 0.5 then
-      --cure up to moderate
-      HEALTH.remove_new_effect(user, {"Food Poisoning", 2})
+		elseif cfp < 0.5 then
+			--cure up to moderate
+			HEALTH.remove_new_effect(user, {"Food Poisoning", 2})
 			HEALTH.remove_new_effect(user, {"Fungal Infection", 2})
 			HEALTH.remove_new_effect(user, {"Dust Fever", 2})
-    elseif cfp < 0.75 then
-      --only cure mild
-      HEALTH.remove_new_effect(user, {"Food Poisoning", 1})
+		elseif cfp < 0.75 then
+			--only cure mild
+			HEALTH.remove_new_effect(user, {"Food Poisoning", 1})
 			HEALTH.remove_new_effect(user, {"Fungal Infection", 1})
 			HEALTH.remove_new_effect(user, {"Dust Fever", 1})
-    end
+		end
 
 
-    --hp_change, thirst_change, hunger_change, energy_change, temp_change, replace_with_item
-    return HEALTH.use_item(itemstack, user, 5, 0, 0, 0, 0)
-  end,
+		--hp_change, thirst_change, hunger_change, energy_change, temp_change, replace_with_item
+		return HEALTH.use_item(itemstack, user, 5, 0, 0, 0, 0)
+	end,
 })
 
 
@@ -90,14 +90,14 @@ minetest.register_craftitem("tech:tiku", {
 	stack_max = minimal.stack_max_medium *2,
 	groups = {flammable = 1},
 
-  on_use = function(itemstack, user, pointed_thing)
+on_use = function(itemstack, user, pointed_thing)
 
-    --begin the bender
+	--begin the bender
 		HEALTH.add_new_effect(user, {"Tiku High", 1})
 
-    --hp_change, thirst_change, hunger_change, energy_change, temp_change, replace_with_item
-    return HEALTH.use_item(itemstack, user, 0, 0, -24, 96, 0)
-  end,
+	--hp_change, thirst_change, hunger_change, energy_change, temp_change, replace_with_item
+	return HEALTH.use_item(itemstack, user, 0, 0, -24, 96, 0)
+end,
 })
 
 
@@ -111,7 +111,7 @@ minetest.register_craftitem("tech:tiku", {
 
 --Pot of Tang
 minetest.register_node("tech:tang", {
-  description = "Tang",
+description = "Tang",
 	tiles = {
 		"tech_pot_tang.png",
 		"tech_pottery.png",
@@ -135,12 +135,12 @@ minetest.register_node("tech:tang", {
 	},
 	groups = {dig_immediate=3, pottery = 1, temp_pass = 1},
 	sounds = nodes_nature.node_sound_stone_defaults(),
-  on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
-    --lets skull an entire vat of booze, what could possibly go wrong...
+on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
+	--lets skull an entire vat of booze, what could possibly go wrong...
 		local meta = clicker:get_meta()
 		local thirst = meta:get_int("thirst")
 		local hunger = meta:get_int("hunger")
-    local energy = meta:get_int("energy")
+	local energy = meta:get_int("energy")
 		--only drink if thirsty
 		if thirst < 100 then
 
@@ -150,26 +150,26 @@ minetest.register_node("tech:tang", {
 				thirst = 100
 			end
 
-      --all energy and half food equivalent of the fruit
-      --gets given as energy
-      energy = energy + 180
-      if energy > 1000 then
-        energy = 1000
-      end
+	--all energy and half food equivalent of the fruit
+	--gets given as energy
+	energy = energy + 180
+	if energy > 1000 then
+		energy = 1000
+	end
 
 			hunger = hunger + 60
 			if hunger > 1000 then
 				hunger = 1000
 			end
 
-      --drunkness
+	--drunkness
 			if random() < 0.75 then
 				HEALTH.add_new_effect(clicker, {"Drunk", 1})
 			end
 
 
 			meta:set_int("thirst", thirst)
-      meta:set_int("energy", energy)
+	meta:set_int("energy", energy)
 			minetest.set_node(pos, {name = "tech:clay_water_pot"})
 			minetest.sound_play("nodes_nature_slurp",	{pos = pos, max_hear_distance = 3, gain = 0.25})
 		end
@@ -216,7 +216,7 @@ end
 
 --Pot of new Tang, must be left to ferment
 minetest.register_node("tech:tang_unfermented", {
-  description = "Tang (unfermented)",
+description = "Tang (unfermented)",
 	tiles = {
 		"tech_pot_tang_uf.png",
 		"tech_pottery.png",
@@ -265,11 +265,11 @@ minetest.register_node("tech:tang_unfermented", {
 			--minetest.check_for_falling(pos)
 			return false
 		else
-      --ferment if at right temp
-      local temp = climate.get_point_temp(pos)
-      if temp > 10 and temp < 34 then
-        meta:set_int("ferment", ferment - 1)
-      end
+	--ferment if at right temp
+	local temp = climate.get_point_temp(pos)
+	if temp > 10 and temp < 34 then
+		meta:set_int("ferment", ferment - 1)
+	end
 			return true
 		end
 	end,

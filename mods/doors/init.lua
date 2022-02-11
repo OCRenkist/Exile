@@ -146,8 +146,8 @@ function doors.door_toggle(pos, node, clicker, itemstack)
 	end
 
 	if def.protected and minetest.is_protected(pos, cname) then
-	   minetest.chat_send_player(cname,"You can't open this door, ",cname)
-	   return false
+		minetest.chat_send_player(cname,"You can't open this door, ",cname)
+		return false
 	end
 
 	local cdir = minetest.dir_to_facedir(clicker:get_look_dir())
@@ -155,35 +155,35 @@ function doors.door_toggle(pos, node, clicker, itemstack)
 	local barred = meta:get_int("barred")
 
 	if barred and barred == 1 then
-	   if cdir == node.param2 and state == 0 then
-	      -- ^^ are we behind a closed, barred door? Unbar it
-	      meta:set_int("barred", 0)
-	      if itemstack and ( itemstack:is_empty() or
-				 itemstack:get_name() == "tech:stick" ) then
-		 itemstack:add_item("tech:stick")
-	      else
-		 minetest.item_drop(ItemStack("tech:stick"), clicker, pos)
-	      end
-	      minetest.chat_send_player(cname, "You unbar the door.")
-	      if not def.protected then -- unprotected only gets temporary owner
-		 meta:set_string("owner", "")
-	      end
-	   else
-	      minetest.chat_send_player(cname,
-					"This door is barred from the inside.")
-	   end
-	   return
+		if cdir == node.param2 and state == 0 then
+			-- ^^ are we behind a closed, barred door? Unbar it
+			meta:set_int("barred", 0)
+			if itemstack and ( itemstack:is_empty() or
+				itemstack:get_name() == "tech:stick" ) then
+					itemstack:add_item("tech:stick")
+				else
+					minetest.item_drop(ItemStack("tech:stick"), clicker, pos)
+			end
+			minetest.chat_send_player(cname, "You unbar the door.")
+			if not def.protected then -- unprotected only gets temporary owner
+				meta:set_string("owner", "")
+			end
+		else
+			minetest.chat_send_player(cname,
+				"This door is barred from the inside.")
+		end
+		return
 	end
 	if itemstack and itemstack:get_name() == "tech:stick" then
-	   if cdir == node.param2 and state == 0 then
-	      meta:set_int("barred", 1)
-	      minetest.chat_send_player(cname, "You bar the door.")
-	      itemstack:take_item()
-	      if not def.protected then -- ensure the door can't be dug
-		 meta:set_string("owner", cname)
-	      end
-	      return
-	   end
+		if cdir == node.param2 and state == 0 then
+			meta:set_int("barred", 1)
+			minetest.chat_send_player(cname, "You bar the door.")
+			itemstack:take_item()
+			if not def.protected then -- ensure the door can't be dug
+				meta:set_string("owner", cname)
+			end
+			return
+		end
 	end
 
 	-- until Lua-5.2 we have no bitwise operators :(
@@ -368,10 +368,10 @@ function doors.register(name, def)
 		sounds = { def.sound_close, def.sound_open },
 	}
 	if not def.on_rightclick then
-	   def.on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
-	      doors.door_toggle(pos, node, clicker, itemstack)
-	      return itemstack
-	   end
+		def.on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
+			doors.door_toggle(pos, node, clicker, itemstack)
+			return itemstack
+		end
 	end
 	def.after_dig_node = function(pos, node, meta, digger)
 		minetest.remove_node({x = pos.x, y = pos.y + 1, z = pos.z})
@@ -439,7 +439,7 @@ function doors.register(name, def)
 
 	def_opened.mesh = "door_b.obj"
 	def_opened.groups.temp_pass = 1
-        def_opened.groups.temp_flow = 100
+	def_opened.groups.temp_flow = 100
 
 	minetest.register_node(":" .. name .. "_b", def_opened)
 
@@ -476,15 +476,15 @@ function doors.trapdoor_toggle(pos, node, clicker)
 end
 
 local function Seek(pos, node, transform, func, skip)
-   local npos = pos
-   if skip == true then npos = vector.add(pos, transform) end
-   local newnode = minetest.get_node(npos)
-   while ( newnode.param2 == node.param2 and
-	   newnode.name == node.name ) do
-      func(npos)
-      npos = vector.add(npos, transform)
-      newnode = minetest.get_node(npos)
-   end
+	local npos = pos
+	if skip == true then npos = vector.add(pos, transform) end
+	local newnode = minetest.get_node(npos)
+	while ( newnode.param2 == node.param2 and
+		newnode.name == node.name ) do
+		func(npos)
+		npos = vector.add(npos, transform)
+		newnode = minetest.get_node(npos)
+	end
 end
 
 function doors.register_trapdoor(name, def)
@@ -498,15 +498,15 @@ function doors.register_trapdoor(name, def)
 	def.on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
 		--0,2,6, 8 = X;  1,3,15,17 Z
 		if node.param2 % 2 == 1 then -- Z
-		   Seek(pos, node,  { x = 0, y = 0, z =  1 },
-			doors.trapdoor_toggle, true)
-		   Seek(pos, node,  { x = 0, y = 0, z = -1 },
-			doors.trapdoor_toggle)
+			Seek(pos, node,  { x = 0, y = 0, z =  1 },
+				doors.trapdoor_toggle, true)
+			Seek(pos, node,  { x = 0, y = 0, z = -1 },
+				doors.trapdoor_toggle)
 		else
-		   Seek(pos, node, { x =  1, y = 0, z = 0 },
-			doors.trapdoor_toggle, true)
-		   Seek(pos, node, { x = -1, y = 0, z = 0 },
-			  doors.trapdoor_toggle)
+			Seek(pos, node, { x =  1, y = 0, z = 0 },
+				doors.trapdoor_toggle, true)
+			Seek(pos, node, { x = -1, y = 0, z = 0 },
+				doors.trapdoor_toggle)
 		end
 		return itemstack
 	end

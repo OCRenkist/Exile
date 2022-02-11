@@ -204,21 +204,21 @@ minetest.register_node("tech:clay_storage_pot_unfired", {
 
 --convert fuel number to a string
 local fuel_string = function(fuel)
-   if not fuel or fuel < 1 then
-      return ("Oil lamp (empty)")
-   elseif fuel > 2159 then
-      return ("Oil lamp (full)")
-   elseif fuel < 200 then
-      return ("Oil lamp (almost empty)")
-   elseif fuel < 800 then
-      return ("Oil lamp (1/4 full)")
-   elseif fuel < 1600 then
-      return ("Oil lamp (1/2 full)")
-   elseif fuel < 2200 then
-      return ("Oil lamp (3/4 full)")
-   else
-      return ("Oil lamp")
-   end
+	if not fuel or fuel < 1 then
+		return ("Oil lamp (empty)")
+	elseif fuel > 2159 then
+		return ("Oil lamp (full)")
+	elseif fuel < 200 then
+		return ("Oil lamp (almost empty)")
+	elseif fuel < 800 then
+		return ("Oil lamp (1/4 full)")
+	elseif fuel < 1600 then
+		return ("Oil lamp (1/2 full)")
+	elseif fuel < 2200 then
+		return ("Oil lamp (3/4 full)")
+	else
+		return ("Oil lamp")
+	end
 end
 
 --save usage into inventory, to prevent infinite supply
@@ -251,7 +251,7 @@ local after_place_oil_lamp = function(pos, placer, itemstack, pointed_thing)
 	local stack_meta = itemstack:get_meta()
 	local fuel = stack_meta:get_int("fuel")
 	if not fuel then
-	   fuel = 0
+		fuel = 0
 	end
 	meta:set_int("fuel", fuel)
 	meta:set_string("infotext", fuel_string(fuel))
@@ -342,14 +342,14 @@ minetest.register_node("tech:clay_oil_lamp_unlit", {
 		after_place_oil_lamp(pos, placer, itemstack, pointed_thing)
 	end,
 	on_ignite = function(pos, user)
-	   local meta = minetest.get_meta(pos)
-	   local fuel = meta:get_int("fuel")
-	   if fuel and fuel > 0 then
-	      minetest.swap_node(pos, {name = 'tech:clay_oil_lamp'})
-	      minetest.registered_nodes["tech:clay_oil_lamp"].on_construct(pos)
-	      meta:set_int("fuel", fuel)
-	      meta:set_string("infotext", fuel_string(fuel))
-	   end
+		local meta = minetest.get_meta(pos)
+		local fuel = meta:get_int("fuel")
+		if fuel and fuel > 0 then
+			minetest.swap_node(pos, {name = 'tech:clay_oil_lamp'})
+			minetest.registered_nodes["tech:clay_oil_lamp"].on_construct(pos)
+			meta:set_int("fuel", fuel)
+			meta:set_string("infotext", fuel_string(fuel))
+		end
 	end,
 
 	on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
@@ -359,16 +359,16 @@ minetest.register_node("tech:clay_oil_lamp_unlit", {
 		local meta = minetest.get_meta(pos)
 		local fuel = meta:get_int("fuel")
 		if ist_name == "tech:vegetable_oil" then
-		   if fuel and fuel < 1550 then
-		      fuel = fuel + math.random(1450,1550)
-		      meta:set_int("fuel", fuel)
-		      meta:set_string("infotext",fuel_string(fuel))
-		      local name = clicker:get_player_name()
-		      if not minetest.is_creative_enabled(name) then
+			if fuel and fuel < 1550 then
+				fuel = fuel + math.random(1450,1550)
+				meta:set_int("fuel", fuel)
+				meta:set_string("infotext",fuel_string(fuel))
+				local name = clicker:get_player_name()
+				if not minetest.is_creative_enabled(name) then
 			 itemstack:take_item()
-		      end
-		      return itemstack
-		   end
+				end
+				return itemstack
+			end
 		end
 	end,
 })
@@ -381,8 +381,8 @@ minetest.register_node("tech:clay_oil_lamp", {
 		"tech_oil_lamp_top.png",
 		"tech_oil_lamp_bottom.png",
 		{
-			    name = "tech_oil_lamp_side_animated.png",
-			    animation = {type = "vertical_frames", aspect_w = 16, aspect_h = 16, length = 3.3}
+				name = "tech_oil_lamp_side_animated.png",
+				animation = {type = "vertical_frames", aspect_w = 16, aspect_h = 16, length = 3.3}
 		},
 		{
 					name = "tech_oil_lamp_side2_animated.png",

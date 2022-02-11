@@ -10,9 +10,9 @@ dofile(modpath.."/api.lua")
 
 --Not available except through creative
 minetest.override_item("player_api:cloth_unisex_footwear_default", {
-			  temp_min = 50,
-			  temp_max = 50,
-			  adminclothes = true,
+	temp_min = 50,
+	temp_max = 50,
+	adminclothes = true,
 })
 
 ------------------------------------------------------------
@@ -45,10 +45,10 @@ sfinv.register_page("clothing:clothing", {
 })
 
 minetest.register_on_player_inventory_action(function(player, action, inventory, inventory_info)
-      if inventory_info.to_list == "cloths" or inventory_info.from_list == "cloths" then
-	 clothing:update_temp(player)
-	 player_api.set_texture(player)
-      end
+	if inventory_info.to_list == "cloths" or inventory_info.from_list == "cloths" then
+		clothing:update_temp(player)
+		player_api.set_texture(player)
+	end
 end)
 
 minetest.register_allow_player_inventory_action(function(player, action, inventory, inventory_info)
@@ -73,8 +73,8 @@ minetest.register_allow_player_inventory_action(function(player, action, invento
 		local stack_name = stack:get_name()
 		local item_group = minetest.get_item_group(stack_name , "cloth")
 		if item_group == 0 --not a cloth
-		 or item_group == 6 then -- or it's a blanket
-			return 0
+			or item_group == 6 then -- or it's a blanket
+				return 0
 		end
 		--search for another cloth of the same type
 		local player_inv = player:get_inventory()
@@ -105,28 +105,28 @@ end)
 
 
 local function load_clothing_metadata(player)
-   -- Exile clothing was stored as a metadata string, migrate to new inv
+	-- Exile clothing was stored as a metadata string, migrate to new inv
 	local player_inv = player:get_inventory()
 	local meta = player:get_meta()
 	local clothing_meta = meta:get_string("clothing:inventory")
 	local clothes = clothing_meta and minetest.deserialize(clothing_meta) or {}
 	if clothing_meta == "" then
-	   return
+		return
 	end
 	-- Fill detached slots
 	--clothing_inv:set_size("clothing", 6)
 	for i = 1, 6 do
-	   player_inv:set_stack("cloths", i, clothes[i] or "")
-	   --overwrite current clothes, but it will be empty on first migration
+		player_inv:set_stack("cloths", i, clothes[i] or "")
+		--overwrite current clothes, but it will be empty on first migration
 	end
 	meta:set_string("clothing:inventory", "")
 end
 
 minetest.register_on_joinplayer(function(player)
-      --import old clothing
-      load_clothing_metadata(player)
-      clothing:update_temp(player)
-      player_api.set_texture(player)
+	--import old clothing
+	load_clothing_metadata(player)
+	clothing:update_temp(player)
+	player_api.set_texture(player)
 end)
 
 ---------------------------------------------------------
@@ -147,7 +147,7 @@ minetest.register_on_dieplayer(function(player)
 
 	local drop = {}
 	if minetest.check_player_privs(player, "creative") then
-	   return -- Creative mode players keep their inv & leave no bones
+		return -- Creative mode players keep their inv & leave no bones
 	end
 	local player_inv = player:get_inventory()
 	local clothes = player_inv:get_list("cloths") or {}
@@ -156,8 +156,8 @@ minetest.register_on_dieplayer(function(player)
 		local stack = clothes[i]
 		--queue to drop, remove effects, remove item
 		if stack:get_count() > 0 then
-		   table.insert(drop, stack)
-		   player_inv:remove_item("cloths", stack:get_name())
+			table.insert(drop, stack)
+			player_inv:remove_item("cloths", stack:get_name())
 		end
 	end
 

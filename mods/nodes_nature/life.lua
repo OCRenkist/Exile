@@ -112,8 +112,8 @@ local function grow_seed(pos, seed_name, plant_name, place_p2, timer_avg, elapse
 	--extreme temps will kill
 	local temp = climate.get_point_temp(pos)
 	if temp < -30 or temp > 60 then
-	   minetest.remove_node(pos)
-	   return true -- this plant's done
+		minetest.remove_node(pos)
+		return true -- this plant's done
 	end
 
 	--
@@ -126,23 +126,23 @@ local function grow_seed(pos, seed_name, plant_name, place_p2, timer_avg, elapse
 
 	--We've been away, let's catch up on missing growth
 	if elapsed and elapsed > timer_avg then
-	   if pos.y < -15 and  temp >= 0 or temp <= 40 then
-	      if mushroom then
-		 --This is an underground shroom, assume steady temp
-		 growth = growth - ( elapsed / timer_avg )
-	      else
-		 -- underground plant, but we've got light so give it 50%
-		 growth = growth - ( elapsed / timer_avg / 2)
-	      end
-	   else
-	      local change = crop_rewind(elapsed, timer_avg, mushroom)
-	      if change == -1 then
-		 --Exteme heat or cold killed the plant
-		 minetest.remove_node(pos)
-		 return true
-	      end
-	      growth = growth - change
-	   end
+		if pos.y < -15 and  temp >= 0 or temp <= 40 then
+			if mushroom then
+				--This is an underground shroom, assume steady temp
+				growth = growth - ( elapsed / timer_avg )
+			else
+				-- underground plant, but we've got light so give it 50%
+				growth = growth - ( elapsed / timer_avg / 2)
+			end
+		else
+			local change = crop_rewind(elapsed, timer_avg, mushroom)
+			if change == -1 then
+				--Exteme heat or cold killed the plant
+				minetest.remove_node(pos)
+				return true
+			end
+			growth = growth - change
+		end
 	end
 
 	--after first cycle turn seeds into seedlings
@@ -156,7 +156,7 @@ local function grow_seed(pos, seed_name, plant_name, place_p2, timer_avg, elapse
 
 	--semi-extreme temps stop growth
 	if temp < 0 or temp > 40 then
-	   return
+		return
 	end
 	-- new plant, or grow
 	if growth <= 1 then
@@ -192,11 +192,11 @@ end
 -- Save/restore seedling timers on dig/place
 --
 local on_dig_seedling = function(pos,node, digger)
-   if not digger then return false end
+	if not digger then return false end
 
-   if minetest.is_protected(pos, digger:get_player_name()) then
-      return false
-   end
+	if minetest.is_protected(pos, digger:get_player_name()) then
+		return false
+	end
 	local meta = minetest.get_meta(pos)
 	local growth = meta:get_int("growth")
 	if not growth then growth = plant_base_growth end
@@ -218,7 +218,7 @@ local after_place_seedling = function(pos, placer, itemstack, pointed_thing)
 	local stack_meta = itemstack:get_meta()
 	local growth = stack_meta:get_int("growth")
 	if growth == 0 then -- new seeds have no meta
-	   growth = meta:get_int("growth") -- but it's set on the node already
+		growth = meta:get_int("growth") -- but it's set on the node already
 	end
 	if not growth then growth = plant_base_growth end
 	meta:set_int("growth", growth)
@@ -228,23 +228,23 @@ end
 -- Prevent placing seed anywhere but sediment
 --
 local on_place_seedling = function(itemstack, placer, pointed_thing)
-   local ground = minetest.get_node(pointed_thing.under)
-   local above = minetest.get_node(pointed_thing.above)
-   if minetest.get_item_group(ground.name,"sediment") == 0
-   or above.name ~= "air" then
-      local udef = minetest.registered_nodes[ground.name]
-      if udef and udef.on_rightclick and
-	 not (placer and placer:is_player() and
-	      placer:get_player_control().sneak) then
-	    return udef.on_rightclick(pointed_thing.under, ground,
-				      placer, itemstack,
-				      pointed_thing) or itemstack
-      else
-	 return itemstack
-      end
-   end
+	local ground = minetest.get_node(pointed_thing.under)
+	local above = minetest.get_node(pointed_thing.above)
+	if minetest.get_item_group(ground.name,"sediment") == 0
+		or above.name ~= "air" then
+			local udef = minetest.registered_nodes[ground.name]
+			if udef and udef.on_rightclick and
+				not (placer and placer:is_player() and
+					placer:get_player_control().sneak) then
+					return udef.on_rightclick(pointed_thing.under, ground,
+								placer, itemstack,
+								pointed_thing) or itemstack
+				else
+				return itemstack
+			end
+	end
 
-   return minetest.item_place_node(itemstack,placer,pointed_thing)
+	return minetest.item_place_node(itemstack,placer,pointed_thing)
 end
 
 -------------------------------------------------------------
@@ -346,120 +346,120 @@ for i in ipairs(plantlist) do
 				if timer_min then
 					minetest.get_node_timer(pos):start(math.random(timer_min, timer_max))
 				else
-				   minetest.get_node_timer(pos):start(plant_base_timer)
+					minetest.get_node_timer(pos):start(plant_base_timer)
 				end
 			end,
 
 			on_timer = function(pos,elapsed)
-			   local timer_min, timer_max = seed_soil_response(pos)
-			   if not timer_min then
-			      if minetest.get_node(pos).name ~= "ignore" then
-				 return false -- not on soil anymore? Stop timer
-			      else
-				 return true -- it's unloaded, skip the timer
-			      end
-			   end
-			   local timer_avg = timer_min + timer_max / 2
-			   elapsed = elapsed - timer_max
-			   if grow_seed(pos, nil, "nodes_nature:"..plantname, nil, timer_avg, elapsed) then
-			      return false -- done
-			   else
-			      minetest.get_node_timer(pos):start(math.random(timer_min, timer_max))
-			   end
+				local timer_min, timer_max = seed_soil_response(pos)
+				if not timer_min then
+					if minetest.get_node(pos).name ~= "ignore" then
+					return false -- not on soil anymore? Stop timer
+					else
+					return true -- it's unloaded, skip the timer
+					end
+				end
+				local timer_avg = timer_min + timer_max / 2
+				elapsed = elapsed - timer_max
+				if grow_seed(pos, nil, "nodes_nature:"..plantname, nil, timer_avg, elapsed) then
+					return false -- done
+				else
+					minetest.get_node_timer(pos):start(math.random(timer_min, timer_max))
+				end
 			end,
 			after_place_node = function(pos, placer, itemstack, pointed_thing)
-			   after_place_seedling(pos, placer, itemstack, pointed_thing)
+				after_place_seedling(pos, placer, itemstack, pointed_thing)
 			end,
 			on_dig = function(pos, node, digger)
-			   on_dig_seedling(pos, node, digger)
+				on_dig_seedling(pos, node, digger)
 			end,
 		})
 
 
-  else
-    minetest.register_node("nodes_nature:"..plantname, {
-      description = plantdesc,
-      drawtype = draw or "plantlike",
-      waving = 1,
-      visual_scale = vscale,
-      tiles = {"nodes_nature_"..plantname..".png"},
+	else
+		minetest.register_node("nodes_nature:"..plantname, {
+			description = plantdesc,
+			drawtype = draw or "plantlike",
+			waving = 1,
+			visual_scale = vscale,
+			tiles = {"nodes_nature_"..plantname..".png"},
 			stack_max = minimal.stack_max_medium,
-      inventory_image = "nodes_nature_"..plantname..".png",
-      wield_image = "nodes_nature_"..plantname..".png",
-      paramtype = "light",
+			inventory_image = "nodes_nature_"..plantname..".png",
+			wield_image = "nodes_nature_"..plantname..".png",
+			paramtype = "light",
 			paramtype2 = "meshoptions",
 			place_param2 = p2 or 1,
 			floodable = true,
-      sunlight_propagates = true,
-      walkable = false,
-      buildable_to = true,
-      groups = g,
-      sounds = s,
-      selection_box = {
-        type = "fixed",
-        fixed = selbox,
-      },
-    })
+			sunlight_propagates = true,
+			walkable = false,
+			buildable_to = true,
+			groups = g,
+			sounds = s,
+			selection_box = {
+				type = "fixed",
+				fixed = selbox,
+			},
+			})
 
 		--seedling
 		minetest.register_node("nodes_nature:"..plantname.."_seedling", {
-      description = "Young "..plantdesc,
-      drawtype = draw or "plantlike",
-      waving = 1,
-      visual_scale = vscale,
-      tiles = {"nodes_nature_"..plantname.."_seedling.png"},
-      inventory_image = "nodes_nature_"..plantname.."_seedling.png",
-      wield_image = "nodes_nature_"..plantname.."_seedling.png",
+			description = "Young "..plantdesc,
+			drawtype = draw or "plantlike",
+			waving = 1,
+			visual_scale = vscale,
+			tiles = {"nodes_nature_"..plantname.."_seedling.png"},
+			inventory_image = "nodes_nature_"..plantname.."_seedling.png",
+			wield_image = "nodes_nature_"..plantname.."_seedling.png",
 			stack_max = minimal.stack_max_medium,
-      paramtype = "light",
-			paramtype2 = "meshoptions",
-			place_param2 = p2 or 1,
-			floodable = true,
-      sunlight_propagates = true,
-      walkable = false,
-      buildable_to = true,
-      groups = gs,
-      sounds = s,
-      selection_box = {
-        type = "fixed",
-				fixed = {
-					{-0.2, -0.5, -0.2, 0.2, -0.3, 0.2},
-				},
-      },
+			paramtype = "light",
+				paramtype2 = "meshoptions",
+				place_param2 = p2 or 1,
+				floodable = true,
+			sunlight_propagates = true,
+			walkable = false,
+			buildable_to = true,
+			groups = gs,
+			sounds = s,
+			selection_box = {
+				type = "fixed",
+						fixed = {
+							{-0.2, -0.5, -0.2, 0.2, -0.3, 0.2},
+						},
+			},
 			on_construct = function(pos)
 				--set initial timer, growth rate depends on soil
 				local timer_min, timer_max = seed_soil_response(pos)
 				if timer_min then
 					minetest.get_node_timer(pos):start(math.random(timer_min, timer_max))
 				else
-				   minetest.get_node_timer(pos):start(plant_base_timer)
+					minetest.get_node_timer(pos):start(plant_base_timer)
 				end
 			end,
 
 			on_timer = function(pos,elapsed)
-			   local timer_min, timer_max = seed_soil_response(pos)
-			   if not timer_min then
-			      if minetest.get_node(pos).name ~= "ignore" then
-				 return false -- not on soil anymore? Stop timer
-			      else
-				 return true -- it's unloaded, skip the timer
-			      end
-			   end
-			   local timer_avg = timer_min + timer_max / 2
-			   elapsed = elapsed - timer_max
-			   if grow_seed(pos, nil, "nodes_nature:"..plantname, p2, timer_avg, elapsed) then
-			      return
-			   else
-			      minetest.get_node_timer(pos):start(math.random(timer_min, timer_max))
-			   end
-			end,
-			after_place_node = function(pos, placer, itemstack, pointed_thing)
-			   after_place_seedling(pos, placer, itemstack, pointed_thing)
-			end,
-			on_dig = function(pos, node, digger)
-			   on_dig_seedling(pos, node, digger)
-			end,
-    })
+					local timer_min, timer_max = seed_soil_response(pos)
+					if not timer_min then
+						if minetest.get_node(pos).name ~= "ignore" then
+							return false -- not on soil anymore? Stop timer
+						else
+							return true -- it's unloaded, skip the timer
+						end
+					end
+					local timer_avg = timer_min + timer_max / 2
+					elapsed = elapsed - timer_max
+					if grow_seed(pos, nil, "nodes_nature:"..plantname, p2, timer_avg, elapsed) then
+						return
+					else
+						minetest.get_node_timer(pos):start(math.random(timer_min, timer_max))
+					end
+				end,
+				after_place_node = function(pos, placer, itemstack, pointed_thing)
+					after_place_seedling(pos, placer, itemstack, pointed_thing)
+				end,
+				on_dig = function(pos, node, digger)
+					on_dig_seedling(pos, node, digger)
+				end,
+		})
 	end
 
 	minetest.register_craft({
@@ -515,36 +515,36 @@ for i in ipairs(plantlist) do
 			if timer_min then
 				minetest.get_node_timer(pos):start(math.random(timer_min, timer_max))
 			else
-			   minetest.get_node_timer(pos):start(plant_base_timer)
+				minetest.get_node_timer(pos):start(plant_base_timer)
 			end
 		end,
 
 		on_timer = function(pos,elapsed)
-			   local timer_min, timer_max = seed_soil_response(pos)
-			   if not timer_min then
-			      if minetest.get_node(pos).name ~= "ignore" then
-				 return false -- not on soil anymore? Stop timer
-			      else
-				 return true -- it's unloaded, skip the timer
-			      end
-			   end
-			   local timer_avg = timer_min + timer_max / 2
-			   elapsed = elapsed - timer_max
-			   if grow_seed(pos, "nodes_nature:"..plantname.."_seed", "nodes_nature:"..plantname,
+				local timer_min, timer_max = seed_soil_response(pos)
+				if not timer_min then
+					if minetest.get_node(pos).name ~= "ignore" then
+						return false -- not on soil anymore? Stop timer
+					else
+						return true -- it's unloaded, skip the timer
+					end
+				end
+				local timer_avg = timer_min + timer_max / 2
+				elapsed = elapsed - timer_max
+				if grow_seed(pos, "nodes_nature:"..plantname.."_seed", "nodes_nature:"..plantname,
 					p2, timer_avg, elapsed) then
-			      return
-			   else
-			      minetest.get_node_timer(pos):start(math.random(timer_min, timer_max))
-			   end
+					return
+				else
+					minetest.get_node_timer(pos):start(math.random(timer_min, timer_max))
+				end
 		end,
 		after_place_node = function(pos, placer, itemstack, pointed_thing)
-		   after_place_seedling(pos, placer, itemstack, pointed_thing)
+			after_place_seedling(pos, placer, itemstack, pointed_thing)
 		end,
 		on_dig = function(pos, node, digger)
-		   on_dig_seedling(pos, node, digger)
+			on_dig_seedling(pos, node, digger)
 		end,
 		on_place = function(itemstack, placer, pointed_thing)
-		   return on_place_seedling(itemstack, placer, pointed_thing)
+			return on_place_seedling(itemstack, placer, pointed_thing)
 		end,
 	})
 
@@ -781,65 +781,65 @@ end
 
 --exile_experimental plants, need Exile v4 biomes to spawn?
 minetest.register_node("nodes_nature:chalin", {
-			  description = "Chalin",
-			  drawtype = "plantlike",
-			  tiles = {"nodes_nature_chalin.png"},
-			  inventory_image = "nodes_nature_chalin.png",
-			  wield_image = "nodes_nature_chalin.png",
-			  stack_max = minimal.stack_max_medium,
-			  paramtype = "light",
-			  paramtype2 = "meshoptions",
-			  place_param2 = 2,
-			  sunlight_propagates = true,
-			  walkable = false,
-			  climbable = true,
-			  --floodable = true,
-			  selection_box = {
-			     type = "fixed",
-			     fixed = {-0.1875, -0.5, -0.1875, 0.1875, 0.5, 0.1875},
-			  },
-			  groups = {choppy = 3, woody_plant = 1, flammable = 1, flora = 1, cane_plant = 1, temp_pass = 1},
-			  sounds = nodes_nature.node_sound_wood_defaults(),
+	description = "Chalin",
+	drawtype = "plantlike",
+	tiles = {"nodes_nature_chalin.png"},
+	inventory_image = "nodes_nature_chalin.png",
+	wield_image = "nodes_nature_chalin.png",
+	stack_max = minimal.stack_max_medium,
+	paramtype = "light",
+	paramtype2 = "meshoptions",
+	place_param2 = 2,
+	sunlight_propagates = true,
+	walkable = false,
+	climbable = true,
+	--floodable = true,
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.1875, -0.5, -0.1875, 0.1875, 0.5, 0.1875},
+	},
+	groups = {choppy = 3, woody_plant = 1, flammable = 1, flora = 1, cane_plant = 1, temp_pass = 1},
+	sounds = nodes_nature.node_sound_wood_defaults(),
 
-			  after_dig_node = function(pos, node, metadata, digger)
-			     dig_up(pos, node, digger)
-			  end,
+	after_dig_node = function(pos, node, metadata, digger)
+		dig_up(pos, node, digger)
+	end,
 })
 
 --a bit experimental, doesn't reproduce
 minetest.register_node("nodes_nature:glow_worm", {
-			  description = "Glow Worm",
-			  drawtype = "plantlike",
-			  waving = 1,
-			  visual_scale = 1,
-			  light_source = 2,
-			  tiles = {"nodes_nature_glow_worm.png"},
-			  stack_max = minimal.stack_max_medium,
-			  inventory_image = "nodes_nature_glow_worm.png",
-			  wield_image = "nodes_nature_glow_worm.png",
-			  paramtype = "light",
-			  paramtype2 = "meshoptions",
-			  place_param2 = 3,
-			  floodable = true,
-			  sunlight_propagates = true,
-			  walkable = false,
-			  buildable_to = true,
-			  groups = {snappy = 3, flammable = 1, temp_pass = 1, bioluminescent = 1},
-			  sounds = nodes_nature.node_sound_leaves_defaults(),
-			  selection_box = {
-			     type = "fixed",
-			     fixed = {-0.3, 0.5, -0.3, 0.3, 0.35, 0.3},
-			     floodable = true,
-			     sunlight_propagates = true,
-			     walkable = false,
-			     buildable_to = true,
-			     groups = {snappy = 3, flammable = 1, temp_pass = 1, bioluminescent = 1},
-			     sounds = nodes_nature.node_sound_leaves_defaults(),
-			     selection_box = {
+			description = "Glow Worm",
+			drawtype = "plantlike",
+			waving = 1,
+			visual_scale = 1,
+			light_source = 2,
+			tiles = {"nodes_nature_glow_worm.png"},
+			stack_max = minimal.stack_max_medium,
+			inventory_image = "nodes_nature_glow_worm.png",
+			wield_image = "nodes_nature_glow_worm.png",
+			paramtype = "light",
+			paramtype2 = "meshoptions",
+			place_param2 = 3,
+			floodable = true,
+			sunlight_propagates = true,
+			walkable = false,
+			buildable_to = true,
+			groups = {snappy = 3, flammable = 1, temp_pass = 1, bioluminescent = 1},
+			sounds = nodes_nature.node_sound_leaves_defaults(),
+			selection_box = {
 				type = "fixed",
 				fixed = {-0.3, 0.5, -0.3, 0.3, 0.35, 0.3},
-			     },
-			  },
+				floodable = true,
+				sunlight_propagates = true,
+				walkable = false,
+				buildable_to = true,
+				groups = {snappy = 3, flammable = 1, temp_pass = 1, bioluminescent = 1},
+				sounds = nodes_nature.node_sound_leaves_defaults(),
+				selection_box = {
+				type = "fixed",
+				fixed = {-0.3, 0.5, -0.3, 0.3, 0.35, 0.3},
+				},
+			},
 })
 
 
@@ -871,9 +871,9 @@ minetest.override_item("nodes_nature:anperla_seed",{
 --marbhan has a Neurotoxin
 minetest.override_item("nodes_nature:marbhan",{
 	on_use = function(itemstack, user, pointed_thing)
-	   --Similar to hemlock, which tastes musty or like mouse urine
-	   minetest.chat_send_player(user:get_player_name(),
-				     "This plant has a foul musty flavor.")
+		--Similar to hemlock, which tastes musty or like mouse urine
+		minetest.chat_send_player(user:get_player_name(),
+			"This plant has a foul musty flavor.")
 		--food poisoning
 		if random() < 0.001 then
 			HEALTH.add_new_effect(user, {"Food Poisoning", 1})
@@ -893,9 +893,9 @@ minetest.override_item("nodes_nature:marbhan",{
 --nebiyi has a Hepatotoxin
 minetest.override_item("nodes_nature:nebiyi",{
 	on_use = function(itemstack, user, pointed_thing)
-	   --Flowers look a bit like oleander; it causes intense stomach pain
-	   minetest.chat_send_player(user:get_player_name(),
-				     "Your stomach hurts terribly.")
+	--Flowers look a bit like oleander; it causes intense stomach pain
+	minetest.chat_send_player(user:get_player_name(),
+			"Your stomach hurts terribly.")
 		--food poisoning
 		if random() < 0.001 then
 			HEALTH.add_new_effect(user, {"Food Poisoning", 1})

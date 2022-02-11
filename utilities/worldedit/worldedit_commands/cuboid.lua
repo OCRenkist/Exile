@@ -39,8 +39,8 @@ minetest.register_chatcommand("/outset", {
 		
 		worldedit.marker_update(name)
 		return true, "Region outset by " .. amount .. " blocks"
-      end,
-  }
+	end,
+}
 )
 
 
@@ -85,8 +85,8 @@ minetest.register_chatcommand("/inset", {
 		
 		worldedit.marker_update(name)
 		return true, "Region inset by " .. amount .. " blocks"
-      end,
-  }
+	end,
+}
 )
 
 
@@ -127,8 +127,8 @@ minetest.register_chatcommand("/shift", {
 		worldedit.marker_update(name)
 		
 		return true, "Region shifted by " .. amount .. " nodes"
-      end,
-  }
+	end,
+}
 )
 
 
@@ -181,8 +181,8 @@ minetest.register_chatcommand("/expand", {
 	worldedit.cuboid_linear_expand(name, axis, -dir, rev_amount)
 	worldedit.marker_update(name)
 	return true, "Region expanded by " .. (amount + rev_amount) .. " nodes"
-      end,
-  }
+	end,
+}
 )
 
 
@@ -235,6 +235,6 @@ minetest.register_chatcommand("/contract", {
 	worldedit.cuboid_linear_expand(name, axis, -dir, -rev_amount)
 	worldedit.marker_update(name)
 	return true, "Region contracted by " .. (amount + rev_amount) .. " nodes"
-      end,
-  }
+	end,
+}
 )

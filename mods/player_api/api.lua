@@ -322,7 +322,7 @@ function player_api.get_gender_formspec(name)
 end
 
 function player_api.select_gender(player_name)
-    minetest.show_formspec(player_name, "player_api:gender", player_api.get_gender_formspec(player_name))
+	minetest.show_formspec(player_name, "player_api:gender", player_api.get_gender_formspec(player_name))
 end
 
 function player_api.set_texture(player)

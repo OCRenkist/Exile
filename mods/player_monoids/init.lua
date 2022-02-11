@@ -41,7 +41,7 @@ local function monoid(def)
 	mon.def = actual_def
 
 	local p_map = {}
-        mon.player_map = p_map
+		mon.player_map = p_map
 
 	mon.next_id = 1
 
