@@ -3,10 +3,10 @@
 -----------------------------------------------------------
 --Chest ...see storage
 crafting.register_recipe({
-	type = "carpentry_bench",
+	type   = "carpentry_bench",
 	output = "tech:wooden_chest",
-	items = {'tech:iron_fittings 2', 'group:log 4', 'tech:vegetable_oil'},
-	level = 1,
+	items  = {"tech:iron_fittings 2", "group:log 4", "tech:vegetable_oil"},
+	level  = 1,
 	always_known = true,
 })
 ----Ladder----
@@ -16,12 +16,12 @@ minetest.register_node("tech:wooden_ladder", {
 	node_box    = {
 			type  = "fixed",
 			fixed = {
-				{ 0.3125, -0.5000, 0.3125,  0.5, 0.5, 0.5}, -- NodeBox12
-				{-0.5000, -0.5000, 0.3125, -0.3125, 0.5, 0.5}, -- NodeBox13
-				{-0.3125,  0.3125, 0.3750,  0.3125, 0.4375, 0.4375}, -- NodeBox14
-				{-0.3125, -0.4375, 0.3750, 0.3125, -0.3125, 0.4375}, -- NodeBox15
-				{-0.3125, -0.1875, 0.3750, 0.3125, -0.0625, 0.4375}, -- NodeBox16
-				{-0.3125,  0.0625, 0.3750, 0.3125, 0.1875, 0.4375}, -- NodeBox17
+				{ 0.3125, -0.5000, 0.3125,  0.5000,  0.5000, 0.5000}, -- NodeBox12
+				{-0.5000, -0.5000, 0.3125, -0.3125,  0.5000, 0.5000}, -- NodeBox13
+				{-0.3125,  0.3125, 0.3750,  0.3125,  0.4375, 0.4375}, -- NodeBox14
+				{-0.3125, -0.4375, 0.3750,  0.3125, -0.3125, 0.4375}, -- NodeBox15
+				{-0.3125, -0.1875, 0.3750,  0.3125, -0.0625, 0.4375}, -- NodeBox16
+				{-0.3125,  0.0625, 0.3750,  0.3125,  0.1875, 0.4375}, -- NodeBox17
 			}
 		},
 	tiles      = { "tech_stick.png"},
@@ -38,16 +38,17 @@ minetest.register_node("tech:wooden_ladder", {
 		local pos_under = {x = pos.x, y = pos.y - 1, z = pos.z}
 		local under     = minetest.get_node(pos_under)
 		if minetest.get_item_group(under.name, "ladder") > 0 then
-		minetest.set_node(pos, 
-			{name = node.name, param1 = node.param1,
-			param2 = under.param2})
+			minetest.set_node(pos, {
+				name   = node.name, param1 = node.param1,
+				param2 = under.param2
+			})
 		end
 	end,
 	on_rightclick      = function(pos, node, clicker, itemstack, pointed_thing)
 		local itemname = itemstack:get_name()
 		if minetest.get_item_group(itemname, "ladder") > 0 then
 			local pos_over = {x = pos.x, y = pos.y + 1, z = pos.z}
-			local over = minetest.get_node(pos_over)
+			local over     = minetest.get_node(pos_over)
 			if over.name == "air" then
 				minetest.place_node(pos_over, {name = itemname})
 				itemstack:take_item()
@@ -57,7 +58,8 @@ minetest.register_node("tech:wooden_ladder", {
 				return minetest.item_place_node(
 					itemstack, 
 					clicker,
-					pointed_thing)
+					pointed_thing
+				)
 			end
 		end
 	end
@@ -65,7 +67,7 @@ minetest.register_node("tech:wooden_ladder", {
 crafting.register_recipe({
 	type   = "carpentry_bench",
 	output = "tech:wooden_ladder 4",
-	items  = {'group:log'},
+	items  = {"group:log"},
 	level  = 1,
 	always_known = true,
 })
@@ -99,7 +101,7 @@ minetest.register_node("tech:wooden_floor_boards", {
 crafting.register_recipe({
 	type   = "carpentry_bench",
 	output = "tech:wooden_floor_boards 4",
-	items  = {'group:log', 'tech:vegetable_oil'},
+	items  = {"group:log", "tech:vegetable_oil"},
 	level  = 1,
 	always_known = true,
 })
@@ -124,14 +126,14 @@ minetest.register_node("tech:wooden_stairs", {
 	stack_max  = minimal.stack_max_medium,
 	paramtype  = "light",
 	paramtype2 = "facedir",
-	sunlight_propagates = true,
 	groups     = {choppy = 2, flammable = 1},
 	sounds     = nodes_nature.node_sound_wood_defaults(),
+	sunlight_propagates = true,
 })
 crafting.register_recipe({
 	type   = "carpentry_bench",
 	output = "tech:wooden_stairs 4",
-	items  = {'group:log', 'tech:vegetable_oil'},
+	items  = {"group:log", "tech:vegetable_oil"},
 	level  = 1,
 	always_known = true,
 })
