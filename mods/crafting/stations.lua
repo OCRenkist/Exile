@@ -55,8 +55,8 @@ if minetest.global_exists("sfinv") then
 					crafting.calc_inventory_list_hash(player:get_inventory(), "main")
 
 			local formspec = crafting.make_result_selector(player, "inv", 1, { x = 8, y = 3 }, context)
-			formspec = formspec .. "list[detached:crafting_trash;main;0,3.4;1,1;]" ..
-					"image[0.05,3.5;0.8,0.8;crafting_trash_icon.png]"
+			formspec = formspec .. "list[detached:crafting_trash;main;0, 3.4;1, 1;]" ..
+					"image[0.05, 3.5;0.8, 0.8;crafting_trash_icon.png]"
 			return sfinv.make_formspec(player, context, formspec, true)
 		end,
 		on_player_receive_fields = function(self, player, context, fields)
@@ -71,8 +71,8 @@ if minetest.global_exists("sfinv") then
 end
 
 minetest.register_node("crafting:work_bench", {
-	description = "Work Bench",
-	groups = { snappy = 1, not_in_creative_inventory=1 },
+	description   = "Work Bench",
+	groups        = { snappy = 1, not_in_creative_inventory = 1 },
 	on_rightclick = crafting.make_on_rightclick("inv", 2, { x = 8, y = 3 }),
 })
 
@@ -84,9 +84,9 @@ crafting.create_async_station("crafting:furnace", "furnace", 1, {
 		"crafting_furnace_side.png", "crafting_furnace_front.png"
 	},
 	paramtype2 = "facedir",
-	groups = {cracky=2, not_in_creative_inventory=1},
+	groups     = {cracky = 2, not_in_creative_inventory = 1},
 	legacy_facedir_simple = true,
-	is_ground_content = false,
+	is_ground_content     = false,
 }, {
 	description = "Furnace (active)",
 	tiles = {
@@ -104,10 +104,10 @@ crafting.create_async_station("crafting:furnace", "furnace", 1, {
 			},
 		}
 	},
-	paramtype2 = "facedir",
+	paramtype2   = "facedir",
 	light_source = 8,
-	drop = "crafting:furnace",
-	groups = {cracky=2, not_in_creative_inventory=1},
+	drop   = "crafting:furnace",
+	groups = {cracky = 2, not_in_creative_inventory = 1},
 	legacy_facedir_simple = true,
 	is_ground_content = false,
 })

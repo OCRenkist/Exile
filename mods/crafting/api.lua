@@ -107,7 +107,7 @@ function crafting.unlock(name, output)
 	local unlocked = crafting.get_unlocked(name)
 
 	if type(output) == "table" then
-		for i=1, #output do
+		for i = 1, #output do
 			unlocked[output[i]] = true
 			minetest.chat_send_player(name, "You've unlocked " .. output[i])
 		end
@@ -276,7 +276,7 @@ function crafting.perform_craft(name, inv, listname, outlistname, recipe)
 		end
 	end
 
-	for i=1, #crafting.registered_on_crafts do
+	for i = 1, #crafting.registered_on_crafts do
 		crafting.registered_on_crafts[i](name, recipe)
 	end
 
@@ -292,8 +292,8 @@ function crafting.perform_craft(name, inv, listname, outlistname, recipe)
 end
 
 local function to_hex(str)
-	return (str:gsub('.', function (c)
-		return string.format('%02X', string.byte(c))
+	return (str:gsub(".", function (c)
+		return string.format("%02X", string.byte(c))
 	end))
 end
 

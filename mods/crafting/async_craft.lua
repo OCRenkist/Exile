@@ -175,15 +175,15 @@ function default_def.set_formspec(pos)
 	local fuel_percent = 100 * fuel_remaining / fuel_total
 
 	local formspec = [[
-			size[8,8]
-			list[context;input;1,0.3;2,1;]
-			list[context;fuel;1.5,2.5;2,1;]
-			list[context;main;5,0.93;2,2;]
-			list[current_player;main;0,4.1;8,1;]
-			list[current_player;main;0,5.25;8,3;8]
-			image[3.5,1.35;1,1;gui_furnace_arrow_bg.png^[lowpart:]] ..
+			size[8, 8]
+			list[context;input;1, 0.3;2, 1;]
+			list[context;fuel;1.5, 2.5;2, 1;]
+			list[context;main;5, 0.93;2, 2;]
+			list[current_player;main;0, 4.1;8, 1;]
+			list[current_player;main;0, 5.25;8, 3;8]
+			image[3.5, 1.35;1, 1;gui_furnace_arrow_bg.png^[lowpart:]] ..
 		item_percent .. ":gui_furnace_arrow_fg.png^[transformR270]" ..
-		"image[1.5,1.35;1,1;crafting_furnace_fire_bg.png^[lowpart:"..
+		"image[1.5, 1.35;1, 1;crafting_furnace_fire_bg.png^[lowpart:"..
 		fuel_percent ..":crafting_furnace_fire_fg.png]"
 
 	meta:set_string("formspec", formspec)
