@@ -1,8 +1,8 @@
 ----------------------------------------------------------
 clothing = {
 	registered_callbacks = {
-		on_update = {},
-		on_equip = {},
+		on_update  = {},
+		on_equip   = {},
 		on_unequip = {},
 	},
 	player_textures = {},
@@ -44,9 +44,9 @@ note: ranges are
 		return
 	end
 	local name = player:get_player_name()
-	local inv = player:get_inventory():get_list("cloths")
+	local inv  = player:get_inventory():get_list("cloths")
 	local armorgroups = {fleshy = 100}
-	for i=1, #inv do
+	for i = 1, #inv do
 		local stack = ItemStack(inv[i])
 		if stack:get_count() == 1 then
 			local def = stack:get_definition()

@@ -5,11 +5,11 @@ local function get_formspec(pos, w, h)
 	local main_offset = 0.85 + h
 
 	local formspec = {
-		"size[8,7]",
-		"list[current_name;main;0,0.3;"..w..","..h.."]",
-		"list[current_player;main;0,"..main_offset..";8,2]",
+		"size[8, 7]",
+		"list[current_name;main;0, 0.3;"..w..", "..h.."]",
+		"list[current_player;main;0, "..main_offset..";8, 2]",
 		"listring[current_name;main]",
-		"listring[current_player;main]",}
+		"listring[current_player;main]", }
 
 	return table.concat(formspec, "")
 end

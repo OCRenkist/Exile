@@ -18,9 +18,9 @@ minetest.override_item("player_api:cloth_unisex_footwear_default", {
 ------------------------------------------------------------
 -- Inventory page
 
-local clothing_formspec = "size[8,8.5]"..
-"list[current_player;main;0,4.7;8,1;]"..
-"list[current_player;main;0,5.85;8,3;8]"
+local clothing_formspec = "size[8, 8.5]"..
+"list[current_player;main;0, 4.7;8, 1;]"..
+"list[current_player;main;0, 5.85;8, 3;8]"
 
 sfinv.register_page("clothing:clothing", {
 	title = "Clothing",
@@ -32,10 +32,10 @@ sfinv.register_page("clothing:clothing", {
 		local cur_tmax = climate.get_temp_string(meta:get_int("clothing_temp_max"), meta)
 		
 		local formspec = clothing_formspec..
-		"label[3,0.4; Min Temperature Tolerance: " .. cur_tmin .. " ]"..
-		"label[3,1; Max Temperature Tolerance: " .. cur_tmax .. " ]"..
-		--"list[detached:"..name.."_clothing;clothing;0,0.5;2,3;]"..
-		"list[current_player;cloths;0,0.5;2,3;]" ..
+		"label[3, 0.4; Min Temperature Tolerance: " .. cur_tmin .. " ]"..
+		"label[3, 1; Max Temperature Tolerance: " .. cur_tmax .. " ]"..
+		--"list[detached:"..name.."_clothing;clothing;0, 0.5;2, 3;]"..
+		"list[current_player;cloths;0, 0.5;2, 3;]" ..
 		"listring[current_player;main]"..
 		--"listring[detached:"..name.."_clothing;clothing]"
 		"listring[current_player;cloths]"
@@ -136,7 +136,7 @@ local drop_clothes = function(pos, stack)
 	if node then
 		local obj = minetest.add_item(pos, stack)
 		if obj then
-			obj:setvelocity({x=math.random(-1, 1), y=5, z=math.random(-1, 1)})
+			obj:setvelocity({x = math.random(-1, 1), y = 5, z = math.random(-1, 1)})
 		end
 	end
 end
@@ -180,7 +180,7 @@ minetest.register_on_dieplayer(function(player)
 		end
 		if meta then
 			local inv = meta:get_inventory()
-			for _,stack in ipairs(drop) do
+			for _, stack in ipairs(drop) do
 				if inv:room_for_item("main", stack) then
 					inv:add_item("main", stack)
 				else
@@ -188,7 +188,7 @@ minetest.register_on_dieplayer(function(player)
 				end
 			end
 		else
-			for _,stack in ipairs(drop) do
+			for _, stack in ipairs(drop) do
 				drop_clothes(pos, stack)
 			end
 		end

@@ -17,13 +17,13 @@ local function is_owner(pos, name)
 end
 
 local bones_formspec =
-	"size[8,9]" ..
-	"list[current_name;main;0,0.3;8,4;]" ..
-	"list[current_player;main;0,4.85;8,1;]" ..
-	"list[current_player;main;0,6.08;8,3;8]" ..
+	"size[8, 9]" ..
+	"list[current_name;main;0, 0.3;8, 4;]" ..
+	"list[current_player;main;0, 4.85;8, 1;]" ..
+	"list[current_player;main;0, 6.08;8, 3;8]" ..
 	"listring[current_name;main]" ..
 	"listring[current_player;main]"
-	--default.get_hotbar_bg(0,4.85)
+	--default.get_hotbar_bg(0, 4.85)
 
 local share_bones_time = tonumber(minetest.settings:get("share_bones_time")) or 1200
 local share_bones_time_early = tonumber(minetest.settings:get("share_bones_time_early")) or share_bones_time / 4
@@ -146,7 +146,7 @@ minetest.register_node("bones:bones", {
 			if player_inv:room_for_item("main", {name = "bones:bones"}) then
 				player_inv:add_item("main", {name = "bones:bones"})
 			else
-				minetest.add_item(pos,"bones:bones")
+				minetest.add_item(pos, "bones:bones")
 			end
 			minetest.remove_node(pos)
 		end
@@ -277,7 +277,7 @@ minetest.register_on_dieplayer(function(player)
 
 	local param2 = minetest.dir_to_facedir(player:get_look_dir())
 	repeat
-	   local pos2 = vector.add(pos, {x=0,y=-1,z=0})
+	   local pos2 = vector.add(pos, {x = 0, y=-1, z = 0})
 	   if minetest.get_node(pos2).name == "air" then
 	      pos = pos2
 	   else

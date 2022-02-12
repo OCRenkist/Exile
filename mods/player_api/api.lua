@@ -62,13 +62,13 @@ end
 function player_api.get_gender_model(gender)
 	local model
 	if gender == "male" then
-		if minetest.get_modpath("3d_armor")~=nil then
+		if minetest.get_modpath("3d_armor") ~= nil then
 			model =  "3d_armor_character.b3d"
 		else
 			model = "character.b3d"
 		end
 	else
-		if minetest.get_modpath("3d_armor")~=nil then
+		if minetest.get_modpath("3d_armor") ~= nil then
 			model =  "3d_armor_female.b3d"
 		else
 			model = "character-f.b3d"
@@ -98,12 +98,12 @@ local function move_head(player, on_water)
 	end
 	local head_rotation = {x= pitch, y= 0, z= 0} --the head movement {pitch, yaw, roll}
 	local head_offset
-	if minetest.get_modpath("3d_armor")~=nil then
+	if minetest.get_modpath("3d_armor") ~= nil then
 		head_offset = 6.75
 	else
 		head_offset = 6.3
 	end
-	local head_position = {x=0, y=head_offset, z=0}
+	local head_position = {x = 0, y = head_offset, z = 0}
 	player:set_bone_position("Head", head_position, head_rotation) --set the head movement
 end
 
@@ -205,9 +205,9 @@ minetest.register_globalstep(function(dtime)
 			if minetest.registered_nodes[node_name] then
 				if minetest.registered_nodes[node_name]["liquidtype"] == "source" or
 					minetest.registered_nodes[node_name]["liquidtype"] == "flowing" then
-						local player_pos_below = {x= player_pos.x, y= player_pos.y-1, z= player_pos.z}
+						local player_pos_below = {x= player_pos.x, y= player_pos.y - 1, z= player_pos.z}
 						local node_name_below = minetest.get_node(player_pos_below).name
-						local player_pos_above = {x= player_pos.x, y= player_pos.y+1, z= player_pos.z}
+						local player_pos_above = {x= player_pos.x, y= player_pos.y + 1, z= player_pos.z}
 						local node_name_above = minetest.get_node(player_pos_above).name
 						if minetest.registered_nodes[node_name_below] and minetest.registered_nodes[node_name_above] then
 							local node_below_is_liquid
@@ -287,10 +287,10 @@ minetest.register_globalstep(function(dtime)
 						time = 1,
 						minpos = player_pos,
 						maxpos = player_pos,
-						minvel = {x=0, y=0, z=0},
-						maxvel = {x=1, y=5, z=1},
-						minacc = {x=0, y=0, z=0},
-						maxacc = {x=1, y=1, z=1},
+						minvel = {x = 0, y = 0, z = 0},
+						maxvel = {x = 1, y = 5, z = 1},
+						minacc = {x = 0, y = 0, z = 0},
+						maxacc = {x = 1, y = 1, z = 1},
 						minexptime = 0.2,
 						maxexptime = 1.0,
 						minsize = 1,
@@ -311,10 +311,10 @@ function player_api.get_gender_formspec(name)
 
 	local formspec = {
 		"formspec_version[3]",
-		"size[3.2,2.476]",
-		"label[0.375,0.5;", minetest.formspec_escape(text), "]",
-		"image_button_exit[0.375,1;1,1;player_male_face.png;btn_male;"..S("Male").."]",
-		"image_button_exit[1.7,1;1,1;player_female_face.png;btn_female;"..S("Female").."]"
+		"size[3.2, 2.476]",
+		"label[0.375, 0.5;", minetest.formspec_escape(text), "]",
+		"image_button_exit[0.375, 1;1, 1;player_male_face.png;btn_male;"..S("Male").."]",
+		"image_button_exit[1.7, 1;1, 1;player_female_face.png;btn_female;"..S("Female").."]"
 	}
 
 	-- table.concat is faster than string concatenation - `..`
@@ -331,7 +331,7 @@ function player_api.set_texture(player)
 	local gender_model = player_api.get_gender_model(gender)
 	player_api.registered_models[gender_model].textures[1] = cloth
 	player_api.set_model(player, gender_model)
-	if minetest.get_modpath("3d_armor")~=nil then
+	if minetest.get_modpath("3d_armor") ~= nil then
 		--armor.default_skin = cloth
 		local player_name = player:get_player_name()
 		armor.textures[player_name].skin = cloth

@@ -4,7 +4,7 @@
 local S = creative.get_translator
 
 local player_inventory = {}
-local inventory_cache = {}
+local inventory_cache  = {}
 
 local function init_creative_cache(items)
 	inventory_cache[items] = {}
@@ -23,8 +23,8 @@ end
 function creative.init_creative_inventory(player)
 	local player_name = player:get_player_name()
 	player_inventory[player_name] = {
-		size = 0,
-		filter = "",
+		size    = 0,
+		filter  = "",
 		start_i = 0
 	}
 
@@ -97,29 +97,29 @@ creative.formspec_add = ""
 
 function creative.register_tab(name, title, items)
 	sfinv.register_page("creative:" .. name, {
-		title = title,
+		title     = title,
 		is_in_nav = function(self, player, context)
 			return creative.is_enabled_for(player:get_player_name())
 		end,
 		get = function(self, player, context)
 			local player_name = player:get_player_name()
 			creative.update_creative_inventory(player_name, items)
-			local inv = player_inventory[player_name]
+			local inv     = player_inventory[player_name]
 			local start_i = inv.start_i or 0
 			local pagenum = math.floor(start_i / (3*8) + 1)
 			local pagemax = math.ceil(inv.size / (3*8))
-			local esc = minetest.formspec_escape
+			local esc     = minetest.formspec_escape
 			return sfinv.make_formspec(player, context,
-				"label[6.2,3.35;" .. minetest.colorize("#FFFF00", tostring(pagenum)) .. " / " .. tostring(pagemax) .. "]" ..
+				"label[6.2, 3.35;" .. minetest.colorize("#FFFF00", tostring(pagenum)) .. " / " .. tostring(pagemax) .. "]" ..
 				[[
-					image[4.06,3.4;0.8,0.8;creative_trash_icon.png]
+					image[4.06, 3.4;0.8, 0.8;creative_trash_icon.png]
 					listcolors[#00000069;#5A5A5A;#141318;#30434C;#FFF]
-					list[detached:creative_trash;main;4,3.3;1,1;]
+					list[detached:creative_trash;main;4, 3.3;1, 1;]
 					listring[]
-					image_button[5.4,3.25;0.8,0.8;creative_prev_icon.png;creative_prev;]
-					image_button[7.2,3.25;0.8,0.8;creative_next_icon.png;creative_next;]
-					image_button[2.1,3.25;0.8,0.8;creative_search_icon.png;creative_search;]
-					image_button[2.75,3.25;0.8,0.8;creative_clear_icon.png;creative_clear;]
+					image_button[5.4, 3.25;0.8, 0.8;creative_prev_icon.png;creative_prev;]
+					image_button[7.2, 3.25;0.8, 0.8;creative_next_icon.png;creative_next;]
+					image_button[2.1, 3.25;0.8, 0.8;creative_search_icon.png;creative_search;]
+					image_button[2.75, 3.25;0.8, 0.8;creative_clear_icon.png;creative_clear;]
 				]] ..
 				"tooltip[creative_search;" .. esc(S("Search")) .. "]" ..
 				"tooltip[creative_clear;" .. esc(S("Reset")) .. "]" ..
@@ -127,32 +127,32 @@ function creative.register_tab(name, title, items)
 				"tooltip[creative_next;" .. esc(S("Next page")) .. "]" ..
 				"listring[current_player;main]" ..
 				"field_close_on_enter[creative_filter;false]" ..
-				"field[0.3,3.5;2.2,1;creative_filter;;" .. esc(inv.filter) .. "]" ..
+				"field[0.3, 3.5;2.2, 1;creative_filter;;" .. esc(inv.filter) .. "]" ..
 				"listring[detached:creative_" .. player_name .. ";main]" ..
-				"list[detached:creative_" .. player_name .. ";main;0,0;8,3;" .. tostring(start_i) .. "]" ..
+				"list[detached:creative_" .. player_name .. ";main;0, 0;8, 3;" .. tostring(start_i) .. "]" ..
 				creative.formspec_add, true)
 		end,
 		on_enter = function(self, player, context)
 			local player_name = player:get_player_name()
-			local inv = player_inventory[player_name]
+			local inv         = player_inventory[player_name]
 			if inv then
 				inv.start_i = 0
 			end
 		end,
 		on_player_receive_fields = function(self, player, context, fields)
-			local player_name = player:get_player_name()
+			local player_name    = player:get_player_name()
 			local inv = player_inventory[player_name]
 			assert(inv)
 
 			if fields.creative_clear then
 				inv.start_i = 0
-				inv.filter = ""
+				inv.filter  = ""
 				creative.update_creative_inventory(player_name, items)
 				sfinv.set_player_inventory_formspec(player, context)
 			elseif fields.creative_search or
 					fields.key_enter_field == "creative_filter" then
 				inv.start_i = 0
-				inv.filter = fields.creative_filter:lower()
+				inv.filter  = fields.creative_filter:lower()
 				creative.update_creative_inventory(player_name, items)
 				sfinv.set_player_inventory_formspec(player, context)
 			elseif not fields.quit then
@@ -180,9 +180,9 @@ function creative.register_tab(name, title, items)
 	})
 end
 
-creative.register_tab("all", S("All"), minetest.registered_items)
-creative.register_tab("nodes", S("Nodes"), minetest.registered_nodes)
-creative.register_tab("tools", S("Tools"), minetest.registered_tools)
+creative.register_tab("all",        S("All"),   minetest.registered_items)
+creative.register_tab("nodes",      S("Nodes"), minetest.registered_nodes)
+creative.register_tab("tools",      S("Tools"), minetest.registered_tools)
 creative.register_tab("craftitems", S("Items"), minetest.registered_craftitems)
 
 local old_homepage_name = sfinv.get_homepage_name

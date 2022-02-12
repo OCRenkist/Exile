@@ -11,7 +11,7 @@ for color, hex in pairs(colors) do
 		inventory_image = "clothing_inv_hat.png^[multiply:#"..hex,
 		uv_image        = "(clothing_uv_hat.png^[multiply:#"..hex..")",
 		stack_max       = 1,
-		groups          = {clothing = 1, clothing_hat = 1,},
+		groups          = {clothing = 1, clothing_hat = 1, },
 		temp_min        = 2,
 		temp_max        = 2,
 		on_equip        = clothing.default_equip,

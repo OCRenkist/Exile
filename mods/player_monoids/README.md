@@ -69,7 +69,7 @@ temporarily like this:
 -- Zoom!
 local zoom_id = mymod.speed_monoid:add_change(some_player, 10)
 
-minetest.after(5,function() mymod.speed_monoid:del_change(some_player, zoom_id) end)
+minetest.after(5, function() mymod.speed_monoid:del_change(some_player, zoom_id) end)
 ```
 You could also specify a string ID to use, instead of the numerical one that
 is automatically provided:
@@ -77,7 +77,7 @@ is automatically provided:
 -- Zoom Mk. II
 mymod.speed_monoid:add_change(some_player, 10, "mymod:zoom")
 
-minetest.after(5,function() mymod.speed_monoid:del_change(some_player, "mymod:zoom") end)
+minetest.after(5, function() mymod.speed_monoid:del_change(some_player, "mymod:zoom") end)
 ```
 
 Reading Values
