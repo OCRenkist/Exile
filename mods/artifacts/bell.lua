@@ -2,9 +2,9 @@
 -- bells ring every hour
 -- they ring as many times as a bell ought to
 bell = {};
-local RING_INTERVAL = 3600; --60*60; -- ring each hour
-local bell_SAVE_FILE = minetest.get_worldpath()..'/bell_positions.data';
-local bell_positions = {};
+local RING_INTERVAL       = 3600; --60*60; -- ring each hour
+local bell_SAVE_FILE      = minetest.get_worldpath()..'/bell_positions.data';
+local bell_positions      = {};
 local save_bell_positions = function( player )
 	str = minetest.serialize( ({ bell_data = bell_positions}) );
 	local file, err = io.open( bell_SAVE_FILE, 'wb');
@@ -42,13 +42,12 @@ local ring_bell_once = function()
 		  { pos = v, gain = 1.5, max_hear_distance = 300,});
 	end
 end
-
 bell.ring_bell = function()
 	-- figure out if this is the right time to ring
 	local sekunde = tonumber( os.date( '%S'));
 	local minute  = tonumber( os.date( '%M'));
 	local stunde  = tonumber( os.date( '%I')); -- in 12h-format (a bell that rings 24x at once would not survive long...)
-	local delay	= RING_INTERVAL;
+	local delay	  = RING_INTERVAL;
 	--print('[bells]It is now H:'..tostring( stunde )..' M:'..tostring(minute)..' S:'..tostring( sekunde ));
 	--local datum = os.date( 'Stunde:%l Minute:%M Sekunde:%S');
 	--print('[bells] ringing bells at '..tostring( datum ))
@@ -74,47 +73,49 @@ minetest.after( 10, bell.ring_bell );
 restore_bell_data();
 minetest.register_node('artifacts:bell', {
 	description = 'Automated Bell',
-	tiles = {"artifacts_bell_top.png",
-			"artifacts_bell_top.png",
-			"artifacts_bell_side.png",
-			"artifacts_bell_side.png",
+	tiles       = {
+		"artifacts_bell_top.png",
+		"artifacts_bell_top.png",
 		"artifacts_bell_side.png",
-			"artifacts_bell_side.png"},
-	drawtype = "nodebox",
-	paramtype = "light",
+		"artifacts_bell_side.png",
+		"artifacts_bell_side.png",
+		"artifacts_bell_side.png"
+	},
+	drawtype   = "nodebox",
+	paramtype  = "light",
 	paramtype2 = "facedir",
-	node_box = {
-		type = "fixed",
+	node_box   = {
+		type  = "fixed",
 		fixed = {
-			{-0.0625, -0.3125, -0.375, 0.0625, 0.375, -0.3125}, -- NodeBox2
-			{-0.0625, -0.3125, 0.3125, 0.0625, 0.375, 0.375}, -- NodeBox3
-			{-0.0625, 0.3125, -0.3125, 0.0625, 0.375, 0.3125}, -- NodeBox4
-			{-0.0625, 0.25, -0.0625, 0.0625, 0.3125, 0.0625}, -- NodeBox5
-			{-0.125, 0.0625, -0.125, 0.125, 0.25, 0.125}, -- NodeBox6
-			{-0.1875, -0.125, -0.1875, 0.1875, 0.0624999, 0.1875}, -- NodeBox7
-			{-0.0625, -0.1875, -0.0625, 0.0625, -0.125, 0.0625}, -- NodeBox8
-			{-0.0625, 0, -0.4375, 0.0625, 0.375, -0.375}, -- NodeBox9
-			{-0.125, 0.3125, 0.375, 0.125, 0.375, 0.4375}, -- NodeBox10
-			{-0.1875, -0.3125, -0.4375, 0.1875, -0.1875, -0.375}, -- NodeBox11
-			{-0.0625, -0.3125, 0.375, 0.0625, -0.1875, 0.4375}, -- NodeBox12
-			{-0.0625, -0.3125, -0.3125, 0.0625, -0.25, 0.3125}, -- NodeBox15
-			{-0.4375, -0.5, 0.3125, 0.4375, -0.3125, 0.375}, -- NodeBox16
-			{-0.4375, -0.5, -0.375, 0.4375, -0.3125, -0.3125}, -- NodeBox17
-			{-0.4375, 0.375, -0.375, 0.4375, 0.5, -0.3125}, -- NodeBox18
-			{-0.4375, 0.375, 0.3125, 0.4375, 0.5, 0.375}, -- NodeBox19
-			{-0.0625, -0.125, 0.375, 0.0625, 0.1875, 0.4375}, -- NodeBox20
-			{0.4375, 0.375, -0.5, 0.5, 0.5, 0.5}, -- NodeBox21
-			{-0.5, 0.375, -0.5, -0.4375, 0.5, 0.5}, -- NodeBox22
-			{-0.5, -0.5, -0.5, -0.4375, -0.3125, 0.5}, -- NodeBox23
-			{0.4375, -0.5, -0.5, 0.5, -0.3125, 0.5}, -- NodeBox24
-			{-0.5, -0.3125, -0.5, -0.4375, 0.375, -0.4375}, -- NodeBox25
-			{-0.5, -0.3125, 0.4375, -0.4375, 0.375, 0.5}, -- NodeBox26
-			{0.4375, -0.3125, 0.4375, 0.5, 0.375, 0.5}, -- NodeBox27
-			{0.4375, -0.3125, -0.5, 0.5, 0.375, -0.4375}, -- NodeBox28
+			{-0.0625, -0.3125, -0.3750,  0.0625,  0.3750,- 0.3125}, -- NodeBox2
+			{-0.0625, -0.3125,  0.3125,  0.0625,  0.3750,  0.3750}, -- NodeBox3
+			{-0.0625,  0.3125, -0.3125,  0.0625,  0.3750,  0.3125}, -- NodeBox4
+			{-0.0625,  0.2500, -0.0625,  0.0625,  0.3125,  0.0625}, -- NodeBox5
+			{-0.1250,  0.0625, -0.1250,  0.1250,  0.2500,  0.1250}, -- NodeBox6
+			{-0.1875, -0.1250, -0.1875,  0.1875,  0.0625,  0.1875}, -- NodeBox7
+			{-0.0625, -0.1875, -0.0625,  0.0625, -0.1250,  0.0625}, -- NodeBox8
+			{-0.0625,  0.0000, -0.4375,  0.0625,  0.3750, -0.3750}, -- NodeBox9
+			{-0.1250,  0.3125,  0.3750,  0.1250,  0.3750,  0.4375}, -- NodeBox10
+			{-0.1875, -0.3125, -0.4375,  0.1875, -0.1875, -0.3750}, -- NodeBox11
+			{-0.0625, -0.3125,  0.3750,  0.0625, -0.1875,  0.4375}, -- NodeBox12
+			{-0.0625, -0.3125, -0.3125,  0.0625, -0.2500,  0.3125}, -- NodeBox15
+			{-0.4375, -0.5000,  0.3125,  0.4375, -0.3125,  0.3750}, -- NodeBox16
+			{-0.4375, -0.5000, -0.3750,  0.4375, -0.3125, -0.3125}, -- NodeBox17
+			{-0.4375,  0.3750, -0.3750,  0.4375,  0.5000, -0.3125}, -- NodeBox18
+			{-0.4375,  0.3750,  0.3125,  0.4375,  0.5000,  0.3750}, -- NodeBox19
+			{-0.0625, -0.1250,  0.3750,  0.0625,  0.1875,  0.4375}, -- NodeBox20
+			{0.43750,  0.3750, -0.5000,  0.5000,  0.5000,  0.5000}, -- NodeBox21
+			{-0.5000,  0.3750, -0.5000, -0.4375,  0.5000,  0.5000}, -- NodeBox22
+			{-0.5000, -0.5000, -0.5000, -0.4375, -0.3125,  0.5000}, -- NodeBox23
+			{0.43750, -0.5000, -0.5000,  0.5000, -0.3125,  0.5000}, -- NodeBox24
+			{-0.5000, -0.3125, -0.5000, -0.4375,  0.3750, -0.4375}, -- NodeBox25
+			{-0.5000, -0.3125,  0.4375, -0.4375,  0.3750,  0.5000}, -- NodeBox26
+			{0.43750, -0.3125,  0.4375,  0.5000,  0.3750,  0.5000}, -- NodeBox27
+			{0.43750, -0.3125, -0.5000,  0.5000,  0.3750, -0.4375}, -- NodeBox28
 		}
 	},
 	stack_max = 1,
-	groups = {oddly_breakable_by_hand = 3, attached_node = 1, temp_pass = 1},
+	groups   = {oddly_breakable_by_hand = 3, attached_node = 1, temp_pass = 1},
 	on_punch = function (pos, node, puncher)
 		minetest.sound_play( 'artifacts_bell_punch', { pos = pos, gain = 1.5, max_hear_distance = 300,});
 		-- minetest.chat_send_all(puncher:get_player_name()..' has rung the bell!')
@@ -134,14 +135,15 @@ minetest.register_node('artifacts:bell', {
 		local found = 0;
 		-- actually remove the bell from the list
 		for i, v in ipairs( bell_positions ) do
-			if( v ~= nil and v.x == pos.x and v.y == pos.y and v.z == pos.z ) then
+			if(v ~= nil and v.x == pos.x 
+			   and v.y == pos.y and v.z == pos.z) then
 				found = i;
 			end
 		end
 		-- actually remove the bell
-		if( found > 0 ) then
-			table.remove( bell_positions, found );
-			save_bell_positions( digger );
+		if(found > 0) then
+			table.remove(bell_positions, found);
+			save_bell_positions(digger);
 		end
 	end,
 })
