@@ -32,15 +32,15 @@ local all_soils_on = {
 	"nodes_nature:highland_soil",  "nodes_nature:highland_soil_wet" ,
 	"nodes_nature:duneland_soil",  "nodes_nature:duneland_soil_wet" ,
 	"nodes_nature:woodland_soil",  "nodes_nature:woodland_soil_wet" ,
-	}
+}
 local lowland_ymax = 600
 local lowland_ymin = 1
 local canes_list   = { --- Schematics
-	-- name                 y  x  z  
+	-- name                 y  x  z
 	{"nodes_nature:gemedi", 7, 1, 1, 255, 245, 225, 205, 155,  55,  35 },
 	{"nodes_nature:cana"  , 7, 1, 1, 255, 255, 255, 255, 230, 155, 105 },
 	{"nodes_nature:tiken" , 7, 1, 1, 255, 255, 255, 255, 230, 155, 105 },
-	{"nodes_nature:chalin", 7, 1, 1 ,255, 255, 255, 255, 230, 155, 105 }, --Exile v4 cane plant, found in dry woodlands
+	{"nodes_nature:chalin", 7, 1, 1, 255, 255, 255, 255, 230, 155, 105 }, --Exile v4 cane plant, found in dry woodlands
 	}
 local canes = {}
 for i in ipairs(canes_list) do -- 
@@ -56,16 +56,16 @@ for i in ipairs(canes_list) do --
 			{ypos = 4, prob = canes_list[i][09]},
 			{ypos = 5, prob = canes_list[i][10]},
 			{ypos = 6, prob = canes_list[i][11]},
-			},
-		}
-	end
+		},
+	}
+end
 local gemedi = canes[1]
 local cana   = canes[2]
 local tiken  = canes[3]
 local chalin = canes[4]
 function find(object)
 	return minetest.get_modpath("mapgen").."/schematics/"..object..".mts"
-	end
+end
 --- Decoration --- 
 local decoration_list = {
 	--         Description                               name                                  deco_type    place_on                             place_offset_y sidelen fill_ratio noise_params                                                                                                       y_max              y_min         flags              decoration                        spawn_by       num_spawn_by schematic              place_offset_y flags                            rotation   param2 param2_max
@@ -135,7 +135,7 @@ local decoration_list = {
 	{ --[[ Dry woods: Chalin               171     ]]    "nodes_nature:chalin"               , "schematic", dry_woodland_on                    , nil,           80,     0.075000,  nil                                                                                                              ,      lowland_ymax,           35,               nil, nil                             , nil          , nil,         chalin               , nil,           nil                             ,      nil, nil,   nil, },
 	{ --[[ Dry woods: Momo                 172     ]]    "nodes_nature:momo"                 , "simple"   , dry_woodland_on                    , nil,           80,     0.001000,  nil                                                                                                              ,      lowland_ymax, lowland_ymin,               nil, "nodes_nature:momo"             , nil          , nil,         nil                  , nil,           nil                             ,      nil,   1,   nil, },
 	{ --[[ All arids: Tashvish                     ]]    "nodes_nature:tashvish"             , "simple"   , drylands_on                        , nil,           80,     0.300000,  nil                                                                                                              ,      lowland_ymax, lowland_ymin,               nil, "nodes_nature:tashvish"         , nil          , nil,         nil                  , nil,           nil                             ,      nil,   4,   nil, },
-	{ --[[ Underground: Cave worms on cave roof    ]]    "nodes_nature:glow_worm"            , "simple"   , glow_worm_on                       , nil,           16,     nil     ,  {offset = -0.04, scale = 0.4, spread = {x= 64,y= 64,z= 64}, seed=11002, octaves = 3, persist = 0.9}              ,               -15,        -1000,               nil, "nodes_nature:glow_worm"        , nil          , nil,         nil                  , nil,           "all_ceilings"                  ,      nil,   3,   nil, },
+	{ --[[ Underground: Cave worms on cave roof    ]]    "nodes_nature:glow_worm"            , "simple"   , glow_worm_on                       , nil,           16,     nil     ,  {offset = -0.04, scale = 0.4, spread = {x= 64, y= 64, z= 64}, seed = 11002, octaves = 3, persist = 0.9}          ,               -15,        -1000,               nil, "nodes_nature:glow_worm"        , nil          , nil,         nil                  , nil,           "all_ceilings"                  ,      nil,   3,   nil, },
 }
 for i in ipairs(decoration_list) do
 	minetest.register_decoration(
@@ -176,7 +176,7 @@ local egg_names = {  -- list of strings
 local eggs_nearby = {}  -- list of decoration IDs
 for i in ipairs(egg_names) do -- get decoration IDs
 	table.insert(eggs_nearby, minetest.get_decoration_id("animals:"..egg_names[i])) -- add the current egg found
-	end
+end
 minetest.set_gen_notify({decoration = true}, eggs_nearby)
 minetest.register_on_generated(
 	function(minp, maxp, blockseed) -- start node timers
@@ -186,13 +186,13 @@ minetest.register_on_generated(
 			for j, pos in ipairs(gennotify["decoration#"..eggs_nearby[i]] or {}) do -- iterate across the 
 				local eggs_pos = {x = pos.x, y = pos.y + 1, z = pos.z}
 				table.insert(poslist, eggs_pos) -- append this position to the list
-				end
 			end
+		end
 		if #poslist ~= 0 then
 			for i = 1, #poslist do
 				local pos = poslist[i] -- grab this position from the list
 				minetest.get_node_timer(pos):start(1) -- start the node timer for this egg
-				end
 			end
 		end
-	)
+	end
+)

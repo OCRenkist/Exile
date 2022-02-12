@@ -49,7 +49,7 @@ local depth_base = -50 -- point where the mountain root starts expanding
 
 local radius_vent = 8 -- approximate minimum radius of vent - noise adds a lot to this
 
-local depth_maxwidth_dist = depth_maxwidth-depth_base
+local depth_maxwidth_dist = depth_maxwidth - depth_base
 
 --nodes
 local snow_line = 165 -- above this elevation snow is added to the dirt type
@@ -76,7 +76,7 @@ local c_cone = c_basalt
 ------------------------------------------------------------------------
 -- offset for alignment
 local get_corner = function(pos)
-	return {x = math.floor((pos.x+32) / volcano_region_size) * volcano_region_size - 32, z = math.floor((pos.z+32) / volcano_region_size) * volcano_region_size - 32}
+	return {x = math.floor((pos.x + 32) / volcano_region_size) * volcano_region_size - 32, z = math.floor((pos.z + 32) / volcano_region_size) * volcano_region_size - 32}
 end
 
 ------------------------------------------------------------------------
@@ -126,7 +126,7 @@ end
 local perlin_params = {
 	offset = 0,
 	scale = 1,
-	spread = {x=30, y=30, z=30},
+	spread = {x = 30, y = 30, z = 30},
 	seed = -40681,
 	octaves = 3,
 	persist = 0.7
@@ -166,7 +166,7 @@ minetest.register_on_generated(function(minp, maxp, seed)
 	end
 
 	local vm, emin, emax = minetest.get_mapgen_object("voxelmanip")
-	local area = VoxelArea:new{MinEdge=emin, MaxEdge=emax}
+	local area = VoxelArea:new{MinEdge = emin, MaxEdge = emax}
 	vm:get_data(data)
 
 	local sidelen = mapgen_chunksize * 16 --length of a mapblock
@@ -174,7 +174,7 @@ minetest.register_on_generated(function(minp, maxp, seed)
 
 	nobj_perlin = nobj_perlin or minetest.get_perlin_map(perlin_params, chunk_lengths)
 	local nvals_perlin = nobj_perlin:get_3d_map_flat(minp, nvals_perlin_buffer)
-	local noise_area = VoxelArea:new{MinEdge=minp, MaxEdge=maxp}
+	local noise_area = VoxelArea:new{MinEdge = minp, MaxEdge = maxp}
 	local noise_iterator = noise_area:iterp(minp, maxp)
 
 	local x_coord = volcano.location.x
@@ -189,7 +189,7 @@ minetest.register_on_generated(function(minp, maxp, seed)
 		local vi3d = noise_iterator()
 
 		local distance_perturbation = (nvals_perlin[vi3d]+1)*10
-		local distance = vector.distance({x=x, y=y, z=z}, {x=x_coord, y=y, z=z_coord}) - distance_perturbation
+		local distance = vector.distance({x = x, y = y, z = z}, {x = x_coord, y = y, z = z_coord}) - distance_perturbation
 
 
 		-- Determine what materials to use at this y level
@@ -339,7 +339,7 @@ function round(val, decimal)
   if (decimal) then
 		return math.floor( (val * 10^decimal) + 0.5) / (10^decimal)
 	else
-		return math.floor(val+0.5)
+		return math.floor(val + 0.5)
 	end
 end
 
@@ -349,7 +349,7 @@ local send_volcano_state = function(pos, name)
 	if volcano == nil then
 		return false
 	end
-	local location = {x=math.floor(volcano.location.x), y=volcano.depth_peak, z=math.floor(volcano.location.z)}
+	local location = {x = math.floor(volcano.location.x), y = volcano.depth_peak, z = math.floor(volcano.location.z)}
 	local text = "Peak at " .. minetest.pos_to_string(location)
 		.. ", Slope: " .. tostring(round(volcano.slope, 2))
 		.. ", State: "
@@ -367,15 +367,15 @@ end
 
 local send_nearby_states = function(pos, name)
 	local retval = false
-	retval = send_volcano_state({x=pos.x-volcano_region_size, y=0, z=pos.z+volcano_region_size}, name) or retval
-	retval = send_volcano_state({x=pos.x, y=0, z=pos.z+volcano_region_size}, name) or retval
-	retval = send_volcano_state({x=pos.x+volcano_region_size, y=0, z=pos.z+volcano_region_size}, name) or retval
-	retval = send_volcano_state({x=pos.x-volcano_region_size, y=0, z=pos.z}, name) or retval
+	retval = send_volcano_state({x = pos.x - volcano_region_size, y = 0, z = pos.z + volcano_region_size}, name) or retval
+	retval = send_volcano_state({x = pos.x,                       y = 0, z = pos.z + volcano_region_size}, name) or retval
+	retval = send_volcano_state({x = pos.x + volcano_region_size, y = 0, z = pos.z + volcano_region_size}, name) or retval
+	retval = send_volcano_state({x = pos.x - volcano_region_size, y = 0, z = pos.z                      }, name) or retval
 	retval = send_volcano_state(pos, name) or retval
-	retval = send_volcano_state({x=pos.x+volcano_region_size, y=0, z=pos.z}, name) or retval
-	retval = send_volcano_state({x=pos.x-volcano_region_size, y=0, z=pos.z-volcano_region_size}, name) or retval
-	retval = send_volcano_state({x=pos.x, y=0, z=pos.z-volcano_region_size}, name) or retval
-	retval = send_volcano_state({x=pos.x+volcano_region_size, y=0, z=pos.z-volcano_region_size}, name) or retval
+	retval = send_volcano_state({x = pos.x + volcano_region_size, y = 0, z = pos.z                      }, name) or retval
+	retval = send_volcano_state({x = pos.x - volcano_region_size, y = 0, z = pos.z - volcano_region_size}, name) or retval
+	retval = send_volcano_state({x = pos.x,                       y = 0, z = pos.z - volcano_region_size}, name) or retval
+	retval = send_volcano_state({x = pos.x + volcano_region_size, y = 0, z = pos.z - volcano_region_size}, name) or retval
 	return retval
 end
 

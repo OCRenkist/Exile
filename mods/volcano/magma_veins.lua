@@ -19,7 +19,7 @@ minetest.register_ore({
 	noise_params = {
 		offset = 0,
 		scale = 3,
-		spread = {x=400, y=800, z=400},
+		spread = {x = 400, y = 800, z = 400},
 		seed = 66391,
 		octaves = 4,
 		persist = 0.5,
@@ -46,7 +46,7 @@ minetest.register_ore({
 	noise_params = {
 		offset = 0,
 		scale = 3,
-		spread = {x=400, y=800, z=400},
+		spread = {x = 400, y = 800, z = 400},
 		seed = 66391,
 		octaves = 4,
 		persist = 0.5,

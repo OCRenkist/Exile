@@ -156,12 +156,12 @@ else -- get_mapgen_settings gives us a string, so:
 	biomes_enable = biomes_enable == "true" -- convert it to a boolean
 end
 if biomes_enable == true then
-	minetest.log("action","Exile v4 experimental biomes enabled")
+	minetest.log("action", "Exile v4 experimental biomes enabled")
 	enable_experimentals = true
 elseif biomes_enable == false then
-	minetest.log("action","Exile v4 experimental biomes disabled")
+	minetest.log("action", "Exile v4 experimental biomes disabled")
 else
-	minetest.log("action","v4 biomes setting is invalid!")
+	minetest.log("action", "v4 biomes setting is invalid!")
 end
 
 --[[Loop to Iterate for Registrations]]--
