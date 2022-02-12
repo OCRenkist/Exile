@@ -6,13 +6,13 @@ Bottom of shallow cave food chain
 ]]
 ---------------------------------------------------------------------
 local random = math.random
-local floor = math.floor
+local floor  = math.floor
 
 --energy
-local energy_max = 5000--secs it can survive without food
-local energy_egg = energy_max/10 --energy that goes to egg
-local egg_timer  = 120*5
-local young_per_egg = 5		--will get this/energy_egg starting energy
+local energy_max    = 5000 --secs it can survive without food
+local energy_egg    = energy_max/10 --energy that goes to egg
+local egg_timer     = 120*5
+local young_per_egg = 5    --will get this/energy_egg starting energy
 
 local lifespan = energy_max * 4
 
@@ -26,7 +26,7 @@ local function brain(self)
 		return
 	end
 
-	if mobkit.timer(self,1.5) then
+	if mobkit.timer(self, 1.5) then
 
 		local pos = mobkit.get_stand_pos(self)
 
@@ -41,7 +41,7 @@ local function brain(self)
 
 		--swim to shore
 		if self.isinliquid then
-			mobkit.hq_liquid_recovery(self,60)
+			mobkit.hq_liquid_recovery(self, 60)
 		end
 
 
@@ -86,13 +86,13 @@ local function brain(self)
 				if not rival and energy < energy_max then
 					energy = energy + 2
 				end
-				mobkit.animate(self,'walk')
-				mobkit.hq_roam(self,10)
+				mobkit.animate(self, "walk")
+				mobkit.hq_roam(self, 10)
 			else
 				--random search for darkness
 				--fatigued by light
 				energy = energy - 1
-				animals.hq_roam_dark(self,15)
+				animals.hq_roam_dark(self, 15)
 			end
 
 
@@ -101,7 +101,7 @@ local function brain(self)
 			if random() < 0.005 then
 				if not rival
 				and energy >= energy_max then
-					energy = animals.place_egg(pos, "animals:impethu_eggs", energy, energy_egg, 'air')
+					energy = animals.place_egg(pos, "animals:impethu_eggs", energy, energy_egg, "air")
 				end
 			end
 
@@ -110,15 +110,15 @@ local function brain(self)
 		-------------------
 		--generic behaviour
 		if mobkit.is_queue_empty_high(self) then
-			mobkit.animate(self,'walk')
-			animals.hq_roam_dark(self,10,1)
+			mobkit.animate(self, "walk")
+			animals.hq_roam_dark(self, 10, 1)
 		end
 
 		-----------------
 		--housekeeping
 		--save energy, age
-		mobkit.remember(self,'energy',energy)
-		mobkit.remember(self,'age',age)
+		mobkit.remember(self, "energy", energy)
+		mobkit.remember(self, "age", age)
 
 	end
 end
@@ -134,25 +134,25 @@ end
 
 --eggs
 minetest.register_node("animals:impethu_eggs", {
-	description = 'Impethu Eggs',
-	tiles = {"animals_gundu_eggs.png"},
-	stack_max = minimal.stack_max_medium,
-	drawtype = "nodebox",
-	paramtype = "light",
-	node_box = {
-		type = "fixed",
+	description = "Impethu Eggs",
+	tiles       = {"animals_gundu_eggs.png"},
+	stack_max   = minimal.stack_max_medium,
+	drawtype    = "nodebox",
+	paramtype   = "light",
+	node_box    = {
+		type  = "fixed",
 		fixed = {-0.08, -0.5, -0.08,  0.08, -0.4375, 0.08},
 	},
 	groups = {snappy = 3, falling_node = 1, dig_immediate = 3, flammable = 1,  temp_pass = 1},
 	sounds = nodes_nature.node_sound_defaults(),
 	on_use = exile_eatdrink,
 	on_construct = function(pos)
-		minetest.get_node_timer(pos):start(math.random(egg_timer,egg_timer*2))
+		minetest.get_node_timer(pos):start(math.random(egg_timer, egg_timer*2))
 	end,
-	on_timer =function(pos, elapsed)
+	on_timer = function(pos, elapsed)
 		local light = (minetest.get_node_light(pos) or 0)
 		if light <= 5 then
-			return animals.hatch_egg(pos, 'air', 'air', "animals:impethu", energy_egg, young_per_egg)
+			return animals.hatch_egg(pos, "air", "air", "animals:impethu", energy_egg, young_per_egg)
 		else
 			return true
 		end
@@ -168,74 +168,74 @@ minetest.register_node("animals:impethu_eggs", {
 ----------------------------------------------
 
 --The Animal
-minetest.register_entity("animals:impethu",{
+minetest.register_entity("animals:impethu", {
 	--core
 	physical = true,
 	collide_with_objects = true,
 	collisionbox = {-0.09, -0.25, -0.09, 0.09, -0.1, 0.09},
-	visual = "mesh",
-	mesh = "animals_impethu.b3d",
-	textures = {"animals_impethu.png"},
-	visual_size = {x = 5, y = 5},
+	visual       = "mesh",
+	mesh         = "animals_impethu.b3d",
+	textures     = {"animals_impethu.png"},
+	visual_size  = {x = 5, y = 5},
 	makes_footstep_sound = false,
 	timeout = 0,
 
 	--damage
-	max_hp = 10,
+	max_hp   = 10,
 	lung_capacity = 10,
 	min_temp = -15,
 	max_temp = 50,
 
 	--interaction
 	predators = {"animals:kubwakubwa", "animals:darkasthaan", "animals:pegasun"},
-	rivals = {"animals:impethu", "animals:sneachan"},
+	rivals    = {"animals:impethu", "animals:sneachan"},
 
-	on_step = mobkit.stepfunc,
-	on_activate = mobkit.actfunc,
+	on_step        = mobkit.stepfunc,
+	on_activate    = mobkit.actfunc,
 	get_staticdata = mobkit.statfunc,
 	logic = brain,
 	-- optional mobkit props
 	-- or used by built in behaviors
 	--physics = [function user defined] 		-- optional, overrides built in physics
 	animation = {
-		walk={range={x=0, y=12}, speed=10, loop=true},
-		fast={range={x=0, y=12}, speed=10, loop=true},
-		stand={
-			{range={x=12, y=24}, speed=5, loop=true},
-			{range={x=24, y=31}, speed=5, loop=true},
+		walk = {range = {x = 0, y = 12}, speed = 10, loop = true},
+		fast = {range = {x = 0, y = 12}, speed = 10, loop = true},
+		stand = {
+			{range = {x = 12, y = 24}, speed = 5, loop = true},
+			{range = {x = 24, y = 31}, speed = 5, loop = true},
 		},
 	},
 	sounds = {
 		warn = {
-			name = "animals_impethu_warn",
-			gain={0.1, 0.4},
-			fade={0.5, 1.5},
-			pitch={0.5, 1.5},
+			name  = "animals_impethu_warn",
+			gain  = {0.1, 0.4},
+			fade  = {0.5, 1.5},
+			pitch = {0.5, 1.5},
 		},
 		punch = {
-			name = "animals_punch",
-			gain={0.5, 1.5},
-			fade={0.5, 1.5},
-			pitch={0.5, 1.5},
+			name  = "animals_punch",
+			gain  = {0.5, 1.5},
+			fade  = {0.5, 1.5},
+			pitch = {0.5, 1.5},
 		},
 	},
 
 	--movement
-	springiness=0,
-	buoyancy = 1.01,
-	max_speed = 0.5,					-- m/s
-	jump_height = 1,				-- nodes/meters
-	view_range = 2,					-- nodes/meters
+	springiness = 0.00,
+	buoyancy    = 1.01,
+	max_speed   = 0.50, -- m/s
+	jump_height = 1.00, -- nodes/meters
+	view_range  = 2.00, -- nodes/meters
 
 	--attack
-	attack={range=0.3, damage_groups={fleshy=1}},
-	armor_groups = {fleshy=100},
+	attack = {range = 0.3, damage_groups = {fleshy = 1}},
+	armor_groups = {fleshy = 100},
 
 	--on actions
 	drops = {
-		{name = "animals:carcass_invert_small", chance = 1, min = 1, max = 1,},
+		{name = "animals:carcass_invert_small", chance = 1, min = 1, max = 1, },
 	},
-	on_punch=function(self, puncher, time_from_last_punch, tool_capabilities, dir)
+	on_punch = function(self, puncher, time_from_last_punch, tool_capabilities, dir)
 		animals.on_punch(self, tool_capabilities, puncher, 55, 0.05)
 	end,
 	on_rightclick = function(self, clicker)

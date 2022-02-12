@@ -27,7 +27,7 @@ local function brain(self)
 		return
 	end
 
-	if mobkit.timer(self,1) then
+	if mobkit.timer(self, 1) then
 
 		local pos = mobkit.get_stand_pos(self)
 
@@ -42,7 +42,7 @@ local function brain(self)
 
 		--swim to shore
 		if self.isinliquid then
-			mobkit.hq_liquid_recovery(self,60)
+			mobkit.hq_liquid_recovery(self, 60)
 		end
 
 
@@ -91,20 +91,20 @@ local function brain(self)
 			if random() < ce then
 				if random() < 0.95 then
 					--wander random
-					mobkit.animate(self,'walk')
-					mobkit.hq_roam(self,10)
+					mobkit.animate(self, "walk")
+					mobkit.hq_roam(self, 10)
 				else
 					--wander temp
-					mobkit.animate(self,'walk')
-					animals.hq_roam_comfort_temp(self,12, 21)
+					mobkit.animate(self, "walk")
+					animals.hq_roam_comfort_temp(self, 12, 21)
 				end
 
 			elseif random() < cs then
 
 				--social
-				if random()< 0.3 then
+				if random() < 0.3 then
 					animals.flock(self, 25, 3)
-				elseif random()< 0.01 then
+				elseif random() < 0.01 then
 					animals.territorial(self, energy, false)
 				elseif random() < 0.05 then
 
@@ -113,63 +113,63 @@ local function brain(self)
 					and energy >= energy_max - 100 then
 
 						--are we already pregnant?
-						local preg = mobkit.recall(self,'pregnant') or false
-						if preg == true then
-							mobkit.lq_idle(self,3)
+						local preg = mobkit.recall(self, "pregnant") or false
+						if preg  == true then
+							mobkit.lq_idle(self, 3)
 							if random() < 0.05 then
-								energy = animals.place_egg(pos, "animals:pegasun_eggs", energy, energy_egg, 'air')
-								mobkit.remember(self,'pregnant',false)
+								energy = animals.place_egg(pos, "animals:pegasun_eggs", energy, energy_egg, "air")
+								mobkit.remember(self, "pregnant", false)
 							end
 
 						else
 
 							--we are randy
-							mobkit.remember(self,'sexual',true)
-							local mate = animals.mate_assess(self, 'animals:pegasun_male')
+							mobkit.remember(self, "sexual", true)
+							local mate = animals.mate_assess(self, "animals:pegasun_male")
 							if mate then
 								--go get him!
-								mobkit.make_sound(self,'mating')
+								mobkit.make_sound(self, "mating")
 								if random() < 0.5 then
 									animals.hq_mate(self, 25, mate)
 								end
 							end
 						end
 					else
-						--I'm too tired darling
-						mobkit.remember(self,'sexual',false)
+						--I"m too tired darling
+						mobkit.remember(self, "sexual", false)
 					end
 				end
 
 			elseif energy < energy_max then
 
 				--feed via a method
-				if random()< 0.85 then
+				if random() < 0.85 then
 					--scratch dirt
-					if animals.eat_spreading_under(pos, 0.001) == true then
+					if animals.eat_spreading_under(pos, 0.001)  == true then
 						energy = energy + 6
 					else
 						--wander to food source
-						mobkit.animate(self,'walk')
-						--mobkit.hq_roam(self,10)
-						animals.hq_roam_surface_group(self, 'spreading', 20)
+						mobkit.animate(self, "walk")
+						--mobkit.hq_roam(self, 10)
+						animals.hq_roam_surface_group(self, "spreading", 20)
 					end
-				elseif random()< 0.75 then
+				elseif random() < 0.75 then
 					--veg
-					if animals.eat_flora(pos, 0.005) == true then
+					if animals.eat_flora(pos, 0.005)  == true then
 						energy = energy + 20
 					else
 						--wander random
-						mobkit.animate(self,'walk')
-						--mobkit.hq_roam(self,10)
-						animals.hq_roam_walkable_group(self, 'flora', 10)
+						mobkit.animate(self, "walk")
+						--mobkit.hq_roam(self, 10)
+						animals.hq_roam_walkable_group(self, "flora", 10)
 					end
 				else
 					--hunt
 					if not animals.prey_hunt(self, 25) then
 						--random search
-						mobkit.animate(self,'walk')
-						mobkit.hq_roam(self,10)
-						--animals.hq_roam_surface_group(self, 'spreading', 10)
+						mobkit.animate(self, "walk")
+						mobkit.hq_roam(self, 10)
+						--animals.hq_roam_surface_group(self, "spreading", 10)
 					end
 				end
 			end
@@ -179,15 +179,15 @@ local function brain(self)
 		-------------------
 		--generic behaviour
 		if mobkit.is_queue_empty_high(self) then
-			mobkit.animate(self,'walk')
-			mobkit.hq_roam(self,10)
+			mobkit.animate(self, "walk")
+			mobkit.hq_roam(self, 10)
 		end
 
 		-----------------
 		--housekeeping
 		--save energy, age
-		mobkit.remember(self,'energy',energy)
-		mobkit.remember(self,'age',age)
+		mobkit.remember(self, "energy", energy)
+		mobkit.remember(self, "age", age)
 
 	end
 end
@@ -205,7 +205,7 @@ local function brain_male(self)
 		return
 	end
 
-	if mobkit.timer(self,1) then
+	if mobkit.timer(self, 1) then
 
 		local pos = mobkit.get_stand_pos(self)
 
@@ -221,7 +221,7 @@ local function brain_male(self)
 
 		--swim to shore
 		if self.isinliquid then
-			mobkit.hq_liquid_recovery(self,60)
+			mobkit.hq_liquid_recovery(self, 60)
 		end
 
 
@@ -270,20 +270,20 @@ local function brain_male(self)
 			if random() < ce then
 				if random() < 0.95 then
 					--wander random
-					mobkit.animate(self,'walk')
-					mobkit.hq_roam(self,10)
+					mobkit.animate(self, "walk")
+					mobkit.hq_roam(self, 10)
 				else
 					--wander temp
-					mobkit.animate(self,'walk')
-					animals.hq_roam_comfort_temp(self,10, 21)
+					mobkit.animate(self, "walk")
+					animals.hq_roam_comfort_temp(self, 10, 21)
 				end
 
 			elseif random() < cs then
 
 				--social
-				if random()< 0.5 then
+				if random() < 0.5 then
 					animals.flock(self, 25, 1)
-				elseif random()< 0.85 then
+				elseif random() < 0.85 then
 					animals.territorial(self, energy, false)
 				elseif random() < 0.1 then
 
@@ -293,12 +293,12 @@ local function brain_male(self)
 
 						--set status as randy
 						--find nearby prospect and try to mate
-						mobkit.remember(self, 'sexual', true)
-						local mate = animals.mate_assess(self, 'animals:pegasun')
+						mobkit.remember(self, "sexual", true)
+						local mate = animals.mate_assess(self, "animals:pegasun")
 
 						if mate then
 							--go get her!
-							mobkit.make_sound(self,'mating')
+							mobkit.make_sound(self, "mating")
 							if random() < 0.5 then
 								animals.hq_mate(self, 25, mate)
 							end
@@ -306,40 +306,40 @@ local function brain_male(self)
 
 					else
 						--in no state for hankypanky
-						mobkit.remember(self, 'sexual', false)
+						mobkit.remember(self, "sexual", false)
 					end
 				end
 
 			elseif energy < energy_max then
 
 				--feed via a method
-				if random()< 0.75 then
+				if random() < 0.75 then
 					--scratch dirt
-					if animals.eat_spreading_under(pos, 0.001) == true then
+					if animals.eat_spreading_under(pos, 0.001)  == true then
 						energy = energy + 6
 					else
 						--wander random
-						mobkit.animate(self,'walk')
-						--mobkit.hq_roam(self,10)
-						animals.hq_roam_surface_group(self, 'spreading', 20)
+						mobkit.animate(self, "walk")
+						--mobkit.hq_roam(self, 10)
+						animals.hq_roam_surface_group(self, "spreading", 20)
 					end
-				elseif random()< 0.5 then
+				elseif random() < 0.5 then
 					--veg
-					if animals.eat_flora(pos, 0.005) == true then
+					if animals.eat_flora(pos, 0.005)  == true then
 						energy = energy + 20
 					else
 						--wander random
-						mobkit.animate(self,'walk')
-						--mobkit.hq_roam(self,10)
-						animals.hq_roam_walkable_group(self, 'flora', 10)
+						mobkit.animate(self, "walk")
+						--mobkit.hq_roam(self, 10)
+						animals.hq_roam_walkable_group(self, "flora", 10)
 					end
 				else
 					--hunt
 					if not animals.prey_hunt(self, 25) then
 						--random search
-						mobkit.animate(self,'walk')
-						mobkit.hq_roam(self,10)
-						--animals.hq_roam_surface_group(self, 'spreading', 10)
+						mobkit.animate(self, "walk")
+						mobkit.hq_roam(self, 10)
+						--animals.hq_roam_surface_group(self, "spreading", 10)
 					end
 				end
 			end
@@ -349,15 +349,15 @@ local function brain_male(self)
 		-------------------
 		--generic behaviour
 		if mobkit.is_queue_empty_high(self) then
-			mobkit.animate(self,'walk')
-			mobkit.hq_roam(self,10)
+			mobkit.animate(self, "walk")
+			mobkit.hq_roam(self, 10)
 		end
 
 		-----------------
 		--housekeeping
 		--save energy, age
-		mobkit.remember(self,'energy',energy)
-		mobkit.remember(self,'age',age)
+		mobkit.remember(self, "energy", energy)
+		mobkit.remember(self, "age", age)
 
 	end
 end
@@ -371,7 +371,7 @@ end
 
 --eggs
 minetest.register_node("animals:pegasun_eggs", {
-	description = 'Pegasun Egg',
+	description = "Pegasun Egg",
 	tiles = {"animals_gundu_eggs.png"},
 	stack_max = minimal.stack_max_medium,
 	drawtype = "nodebox",
@@ -384,13 +384,13 @@ minetest.register_node("animals:pegasun_eggs", {
 	sounds = nodes_nature.node_sound_defaults(),
 	on_use = exile_eatdrink,
 	on_construct = function(pos)
-		minetest.get_node_timer(pos):start(math.random(egg_timer,egg_timer*2))
+		minetest.get_node_timer(pos):start(math.random(egg_timer, egg_timer*2))
 	end,
-	on_timer =function(pos, elapsed)
-		if random()<=0.5 then
-			return animals.hatch_egg(pos, 'air', 'air', "animals:pegasun", energy_egg, young_per_egg)
+	on_timer  = function(pos, elapsed)
+		if random() < = 0.5 then
+			return animals.hatch_egg(pos, "air", "air", "animals:pegasun", energy_egg, young_per_egg)
 		else
-			return animals.hatch_egg(pos, 'air', 'air', "animals:pegasun_male", energy_egg, young_per_egg)
+			return animals.hatch_egg(pos, "air", "air", "animals:pegasun_male", energy_egg, young_per_egg)
 		end
 
 	end,
@@ -407,7 +407,7 @@ minetest.register_node("animals:pegasun_eggs", {
 ----------------------------------------------
 --THE MALE
 
-minetest.register_entity("animals:pegasun_male",{
+minetest.register_entity("animals:pegasun_male", {
 	--core
 	physical = true,
 	collide_with_objects = true,
@@ -439,68 +439,68 @@ minetest.register_entity("animals:pegasun_male",{
 	-- or used by built in behaviors
 	--physics = [function user defined] 		-- optional, overrides built in physics
 	animation = {
-		walk={range={x=71, y=90}, speed=24, loop=true},
-		fast={range={x=91, y=110}, speed=24, loop=true},
-		stand={
-			{range={x=1, y=30}, speed=28, loop=true},
-			{range={x=31, y=70}, speed=32, loop=true},
+		walk = {range = {x = 71, y = 90}, speed = 24, loop = true},
+		fast = {range = {x = 91, y = 110}, speed = 24, loop = true},
+		stand = {
+			{range = {x = 1, y = 30}, speed = 28, loop = true},
+			{range = {x = 31, y = 70}, speed = 32, loop = true},
 		},
 	},
 	sounds = {
 		warn = {
 			name = "animals_pegasun_warn",
-			gain={0.3, 0.6},
-			fade={0.5, 1.5},
-			pitch={0.9, 1.1},
+			gain = {0.3, 0.6},
+			fade = {0.5, 1.5},
+			pitch = {0.9, 1.1},
 		},
 		scared = {
 			name = "animals_pegasun_scared",
-			gain={0.3, 0.4},
-			fade={0.5, 1.5},
-			pitch={1.2, 1.3},
+			gain = {0.3, 0.4},
+			fade = {0.5, 1.5},
+			pitch = {1.2, 1.3},
 		},
 		call = {
-			name = "animals_pegasun_call",
-			gain={0.2, 0.5},
-			fade={0.5, 1.5},
-			pitch={0.9, 1.1},
+			name  = "animals_pegasun_call",
+			gain  = {0.2, 0.5},
+			fade  = {0.5, 1.5},
+			pitch = {0.9, 1.1},
 		},
 		mating = {
-			name = "animals_pegasun_mate",
-			gain={0.5, 0.9},
-			fade={0.5, 1.5},
-			pitch={0.8, 1.2},
+			name  = "animals_pegasun_mate",
+			gain  = {0.5, 0.9},
+			fade  = {0.5, 1.5},
+			pitch = {0.8, 1.2},
 		},
 		attack = {
-			name = "animals_pegasun_attack",
-			gain={0.6, 0.8},
-			fade={0.5, 1.5},
-			pitch={0.7, 1.1},
+			name  = "animals_pegasun_attack",
+			gain  = {0.6, 0.8},
+			fade  = {0.5, 1.5},
+			pitch = {0.7, 1.1},
 		},
 		punch = {
-			name = "animals_punch",
-			gain={0.5, 1.5},
-			fade={0.5, 1.5},
-			pitch={0.5, 1.5},
+			name  = "animals_punch",
+			gain  = {0.5, 1.5},
+			fade  = {0.5, 1.5},
+			pitch = {0.5, 1.5},
 		},
 	},
 
 	--movement
-	springiness=0,
-	buoyancy = 1.01,
-	max_speed = 2.5,					-- m/s
-	jump_height = 1.5,				-- nodes/meters
-	view_range = 7,					-- nodes/meters
+	springiness = 0.00,
+	buoyancy    = 1.01,
+	max_speed   = 2.50, -- m/s
+	jump_height = 1.50, -- nodes/meters
+	view_range  = 7.00, -- nodes/meters
 
 	--attack
-	attack={range=0.5, damage_groups={fleshy=4}},
-	armor_groups = {fleshy=100},
+	attack       = {range = 0.5, damage_groups = {fleshy = 4}},
+	armor_groups = {fleshy = 100},
 
 	--on actions
 	drops = {
-		{name = "animals:carcass_bird_small", chance = 1, min = 1, max = 1,},
+		{name = "animals:carcass_bird_small", chance = 1, min = 1, max = 1, },
 	},
-	on_punch=function(self, puncher, time_from_last_punch, tool_capabilities, dir)
+	on_punch = function(self, puncher, time_from_last_punch, tool_capabilities, dir)
 		animals.on_punch(self, tool_capabilities, puncher, 55, 0.6)
 	end,
 	on_rightclick = function(self, clicker)
@@ -523,7 +523,7 @@ animals.register_egg("animals:pegasun_male", "Live Pegasun (male)", "animals_peg
 ------------------------------------------------------------------------
 --FEMALE
 
-minetest.register_entity("animals:pegasun",{
+minetest.register_entity("animals:pegasun", {
 	--core
 	physical = true,
 	collide_with_objects = true,
@@ -555,68 +555,68 @@ minetest.register_entity("animals:pegasun",{
 	-- or used by built in behaviors
 	--physics = [function user defined] 		-- optional, overrides built in physics
 	animation = {
-		walk={range={x=71, y=90}, speed=24, loop=true},
-		fast={range={x=91, y=110}, speed=24, loop=true},
-		stand={
-			{range={x=1, y=30}, speed=28, loop=true},
-			{range={x=31, y=70}, speed=32, loop=true},
+		walk = {range = {x = 71, y = 90}, speed = 24, loop = true},
+		fast = {range = {x = 91, y = 110}, speed = 24, loop = true},
+		stand = {
+			{range = {x = 1, y = 30}, speed = 28, loop = true},
+			{range = {x = 31, y = 70}, speed = 32, loop = true},
 		},
 	},
 	sounds = {
 		warn = {
 			name = "animals_pegasun_warn",
-			gain={0.2, 0.5},
-			fade={0.5, 1.5},
-			pitch={0.9, 1.1},
+			gain = {0.2, 0.5},
+			fade = {0.5, 1.5},
+			pitch = {0.9, 1.1},
 		},
 		scared = {
 			name = "animals_pegasun_scared",
-			gain={0.2, 0.3},
-			fade={0.5, 1.5},
-			pitch={1.3, 1.4},
+			gain = {0.2, 0.3},
+			fade = {0.5, 1.5},
+			pitch = {1.3, 1.4},
 		},
 		call = {
 			name = "animals_pegasun_call",
-			gain={0.2, 0.4},
-			fade={0.5, 1.5},
-			pitch={0.9, 1.1},
+			gain = {0.2, 0.4},
+			fade = {0.5, 1.5},
+			pitch = {0.9, 1.1},
 		},
 		mating = {
 			name = "animals_pegasun_mate",
-			gain={0.4, 0.7},
-			fade={0.5, 1.5},
-			pitch={0.9, 1.4},
+			gain = {0.4, 0.7},
+			fade = {0.5, 1.5},
+			pitch = {0.9, 1.4},
 		},
 		attack = {
 			name = "animals_pegasun_attack",
-			gain={0.4, 0.7},
-			fade={0.5, 1.5},
-			pitch={0.9, 1.4},
+			gain = {0.4, 0.7},
+			fade = {0.5, 1.5},
+			pitch = {0.9, 1.4},
 		},
 		punch = {
 			name = "animals_punch",
-			gain={0.5, 1.5},
-			fade={0.5, 1.5},
-			pitch={0.5, 1.5},
+			gain = {0.5, 1.5},
+			fade = {0.5, 1.5},
+			pitch = {0.5, 1.5},
 		},
 	},
 
 	--movement
-	springiness=0,
-	buoyancy = 1.01,
-	max_speed = 2,					-- m/s
-	jump_height = 1.2,				-- nodes/meters
-	view_range = 7,					-- nodes/meters
+	springiness = 0.00,
+	buoyancy    = 1.01,
+	max_speed   = 2.00, -- m/s
+	jump_height = 1.20, -- nodes/meters
+	view_range  = 7.00, -- nodes/meters
 
 	--attack
-	attack={range=0.3, damage_groups={fleshy=2}},
-	armor_groups = {fleshy=100},
+	attack = {range = 0.3, damage_groups = {fleshy = 2}},
+	armor_groups = {fleshy = 100},
 
 	--on actions
 	drops = {
-		{name = "animals:carcass_bird_small", chance = 1, min = 1, max = 1,},
+		{name = "animals:carcass_bird_small", chance = 1, min = 1, max = 1, },
 	},
-	on_punch=function(self, puncher, time_from_last_punch, tool_capabilities, dir)
+	on_punch = function(self, puncher, time_from_last_punch, tool_capabilities, dir)
 		animals.on_punch(self, tool_capabilities, puncher, 55, 0.05)
 	end,
 	on_rightclick = function(self, clicker)

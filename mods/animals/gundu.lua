@@ -27,7 +27,7 @@ local function brain(self)
 		return
 	end
 
-	if mobkit.timer(self,1) then
+	if mobkit.timer(self, 1) then
 
 		local pos = mobkit.get_stand_pos(self)
 
@@ -74,7 +74,7 @@ local function brain(self)
 
 			--feeding
 			--in bright light, when no threats
-			local light = minetest.get_node_light(pos) or 0
+			local light  = minetest.get_node_light(pos) or 0
 			local lightm = minetest.get_node_light(pos, 0.5) or 0
 			if not pred and not rival then
 
@@ -98,20 +98,20 @@ local function brain(self)
 			if tod <0.06 or tod >0.94 then
 				--sink at night to lay eggs
 				local vel = self.object:get_velocity()
-				vel.y = vel.y-0.2
+				vel.y     = vel.y-0.2
 				self.object:set_velocity(vel)
-				mobkit.hq_aqua_roam(self,10,0.2)
+				mobkit.hq_aqua_roam(self, 10, 0.2)
 
 			elseif light <= 9 then
 				--rise during day if not in best light
 				local vel = self.object:get_velocity()
-				vel.y = vel.y+0.2
+				vel.y     = vel.y+0.2
 				self.object:set_velocity(vel)
-				mobkit.hq_aqua_roam(self,10, random(1, self.max_speed))
+				mobkit.hq_aqua_roam(self, 10, random(1, self.max_speed))
 
 			else
 				--no special movement
-				mobkit.hq_aqua_roam(self,5, random(0.5, self.max_speed/2))
+				mobkit.hq_aqua_roam(self, 5, random(0.5, self.max_speed/2))
 
 			end
 
@@ -120,30 +120,25 @@ local function brain(self)
 			--asexual parthogenesis, eggs
 			--no threats, darkness, peak condition
 			if random() < 0.02
-			and not rival
-			and not pred
-			and lightm <= 11
-			and self.hp >= self.max_hp
-			and energy >= energy_max - 100 then
-				energy = animals.place_egg(pos, "animals:gundu_eggs", energy, energy_egg, 'nodes_nature:salt_water_source')
+				and not rival
+				and not pred
+				and lightm <= 11
+				and self.hp >= self.max_hp
+				and energy >= energy_max - 100 then
+					energy = animals.place_egg(pos, "animals:gundu_eggs", energy, energy_egg, "nodes_nature:salt_water_source")
 			end
-
 		end
-
 		-------------------
 		--generic behaviour
 		if mobkit.is_queue_empty_high(self) then
-			mobkit.animate(self,'def')
-			mobkit.hq_aqua_roam(self,10,1)
+			mobkit.animate(self, "def")
+			mobkit.hq_aqua_roam(self, 10, 1)
 		end
-
-
 		-----------------
 		--housekeeping
 		--save energy, age
-		mobkit.remember(self,'energy',energy)
-		mobkit.remember(self,'age',age)
-
+		mobkit.remember(self, "energy", energy)
+		mobkit.remember(self, "age", age)
 	end
 end
 
@@ -158,17 +153,17 @@ end
 
 --eggs
 minetest.register_node("animals:gundu_eggs", {
-	description = 'Gundu Eggs',
-	tiles = {"animals_gundu_eggs.png"},
-	stack_max = minimal.stack_max_bulky,
+	description = "Gundu Eggs",
+	tiles       = {"animals_gundu_eggs.png"},
+	stack_max   = minimal.stack_max_bulky,
 	groups = {snappy = 3},
 	sounds = nodes_nature.node_sound_defaults(),
 	on_use = exile_eatdrink,
 	on_construct = function(pos)
-		minetest.get_node_timer(pos):start(math.random(egg_timer,egg_timer*2))
+		minetest.get_node_timer(pos):start(math.random(egg_timer, egg_timer*2))
 	end,
-	on_timer =function(pos, elapsed)
-		return animals.hatch_egg(pos, 'nodes_nature:salt_water_source', 'nodes_nature:salt_water_flowing', "animals:gundu", energy_egg, young_per_egg)
+	on_timer = function(pos, elapsed)
+		return animals.hatch_egg(pos, "nodes_nature:salt_water_source", "nodes_nature:salt_water_flowing", "animals:gundu", energy_egg, young_per_egg)
 	end,
 })
 
@@ -178,14 +173,14 @@ minetest.register_node("animals:gundu_eggs", {
 ----------------------------------------------
 
 --The Animal
-minetest.register_entity("animals:gundu",{
+minetest.register_entity("animals:gundu", {
 	--core
 	physical = true,
 	collide_with_objects = true,
 	collisionbox = {-0.1, -0.1, -0.1, 0.1, 0.1, 0.1},
 	visual = "mesh",
-	mesh = "animals_gundu.b3d",
-	textures = {"animals_gundu.png"},
+	mesh   = "animals_gundu.b3d",
+	textures    = {"animals_gundu.png"},
 	visual_size = {x = 5, y = 5},
 	makes_footstep_sound = false,
 	timeout = 0,
@@ -198,11 +193,11 @@ minetest.register_entity("animals:gundu",{
 
 	--interaction
 	predators = {"animals:sarkamos"},
-	rivals = {"animals:gundu"},
-	friends = {"animals:gundu"},
+	rivals    = {"animals:gundu"},
+	friends   = {"animals:gundu"},
 	--prey = {"animals:impethu"},
 
-	on_step = mobkit.stepfunc,
+	on_step     = mobkit.stepfunc,
 	on_activate = mobkit.actfunc,
 	get_staticdata = mobkit.statfunc,
 	logic = brain,
@@ -210,47 +205,47 @@ minetest.register_entity("animals:gundu",{
 	-- or used by built in behaviors
 	--physics = [function user defined] 		-- optional, overrides built in physics
 	animation = {
-		def={range={x=1,y=35},speed=30,loop=true},
-		fast={range={x=1,y=35},speed=60,loop=true},
-		stand={range={x=36,y=75},speed=20,loop=true},
+		def   = {range = {x =  1, y = 35}, speed = 30, loop = true},
+		fast  = {range = {x =  1, y = 35}, speed = 60, loop = true},
+		stand = {range = {x = 36, y = 75}, speed = 20, loop = true},
 	},
 	sounds = {
 		flee = {
 			name = "animals_water_swish",
-			gain={0.5, 1.5},
-			fade={0.5, 1.5},
-			pitch={0.5, 1.5},
+			gain  = {0.5, 1.5},
+			fade  = {0.5, 1.5},
+			pitch = {0.5, 1.5},
 		},
 		call = {
 			name = "animals_gundu_call",
-			gain={0.05, 0.15},
-			fade={0.5, 1.5},
-			pitch={0.6, 1.2},
+			gain  = {0.05, 0.15},
+			fade  = {0.50, 1.50},
+			pitch = {0.60, 1.20},
 		},
 		punch = {
 			name = "animals_punch",
-			gain={0.5, 1},
-			fade={0.5, 1.5},
-			pitch={0.5, 1.5},
+			gain  = {0.5, 1.0},
+			fade  = {0.5, 1.5},
+			pitch = {0.5, 1.5},
 		},
 	},
 
 	--movement
-	springiness=0.5,
-	buoyancy = 1,
-	max_speed = 5,					-- m/s
-	jump_height = 1.5,				-- nodes/meters
-	view_range = 5,					-- nodes/meters
+	springiness = 0.5,
+	buoyancy    = 1.0,
+	max_speed   = 5.0, -- m/s
+	jump_height = 1.5, -- nodes/meters
+	view_range  = 5.0, -- nodes/meters
 
 	--attack
-	attack={range=0.3, damage_groups={fleshy=1}},
-	armor_groups = {fleshy=100},
+	attack = {range = 0.3, damage_groups = {fleshy = 1}},
+	armor_groups = {fleshy = 100},
 
 	--on actions
 	drops = {
-		{name = "animals:carcass_fish_small", chance = 1, min = 1, max = 1,},
+		{name = "animals:carcass_fish_small", chance = 1, min = 1, max = 1, },
 	},
-	on_punch=function(self, puncher, time_from_last_punch, tool_capabilities, dir)
+	on_punch = function(self, puncher, time_from_last_punch, tool_capabilities, dir)
 		animals.on_punch_water(self, tool_capabilities, puncher, 56, 0)
 	end,
 	on_rightclick = function(self, clicker)

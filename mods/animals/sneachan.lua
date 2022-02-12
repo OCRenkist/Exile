@@ -7,15 +7,15 @@ Dislikes bright light, eats sediment, plants,
 ]]
 ---------------------------------------------------------------------
 local random = math.random
-local floor = math.floor
+local floor  = math.floor
 
 --energy
-local energy_max = 5000--secs it can survive without food
-local energy_egg = energy_max-100 --energy that goes to egg
-local egg_timer  = 60*10
+local energy_max    = 5000--secs it can survive without food
+local energy_egg    = energy_max-100 --energy that goes to egg
+local egg_timer     = 60*10
 local young_per_egg = 5		--will get this/energy_egg starting energy
 
-local lifespan = energy_max * 5
+local lifespan      = energy_max * 5
 
 
 
@@ -27,7 +27,7 @@ local function brain(self)
 		return
 	end
 
-	if mobkit.timer(self,1) then
+	if mobkit.timer(self, 1) then
 
 		local pos = mobkit.get_stand_pos(self)
 
@@ -42,7 +42,7 @@ local function brain(self)
 
 		--swim to shore
 		if self.isinliquid then
-			mobkit.hq_liquid_recovery(self,60)
+			mobkit.hq_liquid_recovery(self, 60)
 		end
 
 
@@ -80,21 +80,21 @@ local function brain(self)
 			if light <= 12 then
 				--hungry eat stuff in the dark
 				if energy < energy_max then
-					if animals.eat_sediment_under(pos, 0.001) == true then
+					if animals.eat_sediment_under(pos, 0.001)  == true then
 						energy = energy + 3
-					elseif  animals.eat_flora(pos, 0.001) == true then
+					elseif  animals.eat_flora(pos, 0.001)  == true then
 						energy = energy + 4
 					else
 						--wander random
-						mobkit.animate(self,'walk')
-						--mobkit.hq_roam(self,10)
-						animals.hq_roam_surface_group(self, 'sediment', 20)
+						mobkit.animate(self, "walk")
+						--mobkit.hq_roam(self, 10)
+						animals.hq_roam_surface_group(self, "sediment", 20)
 					end
 				else
 					--full
-					mobkit.hq_roam(self,1)
+					mobkit.hq_roam(self, 1)
 				end
-			elseif random()<0.5 and energy < energy_max then
+			elseif random() <0.5 and energy < energy_max then
 				--slower, less effective feeding during day
 				if animals.eat_sediment_under(pos, 0.001) then
 					energy = energy + 1
@@ -102,12 +102,12 @@ local function brain(self)
 					energy = energy + 2
 				else
 					--wander random
-					mobkit.animate(self,'walk')
-					animals.hq_roam_dark(self,10)
+					mobkit.animate(self, "walk")
+					animals.hq_roam_dark(self, 10)
 				end
 			else
 				--get out of the light
-				animals.hq_roam_dark(self,15)
+				animals.hq_roam_dark(self, 15)
 			end
 
 
@@ -120,7 +120,7 @@ local function brain(self)
 			and not pred
 			and self.hp >= self.max_hp
 			and energy >= energy_max then
-				energy = animals.place_egg(pos, "animals:sneachan_eggs", energy, energy_egg, 'air')
+				energy = animals.place_egg(pos, "animals:sneachan_eggs", energy, energy_egg, "air")
 			end
 
 		end
@@ -128,15 +128,15 @@ local function brain(self)
 		-------------------
 		--generic behaviour
 		if mobkit.is_queue_empty_high(self) then
-			mobkit.animate(self,'walk')
-			animals.hq_roam_dark(self,10,1)
+			mobkit.animate(self, "walk")
+			animals.hq_roam_dark(self, 10, 1)
 		end
 
 		-----------------
 		--housekeeping
 		--save energy, age
-		mobkit.remember(self,'energy',energy)
-		mobkit.remember(self,'age',age)
+		mobkit.remember(self, "energy", energy)
+		mobkit.remember(self, "age", age)
 
 	end
 end
@@ -152,28 +152,28 @@ end
 
 --eggs
 minetest.register_node("animals:sneachan_eggs", {
-	description = 'Sneachan Eggs',
-	tiles = {"animals_gundu_eggs.png"},
+	description = "Sneachan Eggs",
+	tiles     = {"animals_gundu_eggs.png"},
 	stack_max = minimal.stack_max_medium,
-	drawtype = "nodebox",
+	drawtype  = "nodebox",
 	paramtype = "light",
 	node_box = {
-		type = "fixed",
+		type  = "fixed",
 		fixed = {-0.08, -0.5, -0.08,  0.08, -0.4375, 0.08},
 	},
-	groups = {snappy = 3, falling_node = 1, dig_immediate = 3, flammable = 1,  temp_pass = 1},
-	sounds = nodes_nature.node_sound_defaults(),
-	on_use = exile_eatdrink,
+	groups       = {snappy = 3, falling_node = 1, dig_immediate = 3, flammable = 1,  temp_pass = 1},
+	sounds       = nodes_nature.node_sound_defaults(),
+	on_use       = exile_eatdrink,
 	on_construct = function(pos)
-		minetest.get_node_timer(pos):start(math.random(egg_timer,egg_timer*2))
+		minetest.get_node_timer(pos):start(math.random(egg_timer, egg_timer*2))
 	end,
-	on_timer =function(pos, elapsed)
+	on_timer  = function(pos, elapsed)
 		local light = (minetest.get_node_light(pos) or 0)
 		if light <= 10 then
-			return animals.hatch_egg(pos, 'air', 'air', "animals:sneachan", energy_egg, young_per_egg)
+			return animals.hatch_egg(pos, "air", "air", "animals:sneachan", energy_egg, young_per_egg)
 		else
-			if random()<0.3 then
-				return animals.hatch_egg(pos, 'air', 'air', "animals:sneachan", energy_egg, young_per_egg)
+			if random() < 0.3 then
+				return animals.hatch_egg(pos, "air", "air", "animals:sneachan", energy_egg, young_per_egg)
 			end
 			return true
 		end
@@ -189,17 +189,17 @@ minetest.register_node("animals:sneachan_eggs", {
 ----------------------------------------------
 
 --The Animal
-minetest.register_entity("animals:sneachan",{
+minetest.register_entity("animals:sneachan", {
 	--core
-	physical = true,
+	physical     = true,
 	collide_with_objects = true,
 	collisionbox = {-0.1, -0.01, -0.1, 0.1, 0.15, 0.1},
-	visual = "mesh",
-	mesh = "animals_sneachan.b3d",
-	textures = {"animals_sneachan.png"},
-	visual_size = {x = 1, y = 1},
+	visual       = "mesh",
+	mesh         = "animals_sneachan.b3d",
+	textures     = {"animals_sneachan.png"},
+	visual_size  = {x = 1, y = 1},
 	makes_footstep_sound = true,
-	timeout = 0,
+	timeout      = 0,
 
 	--damage
 	max_hp = 10,
@@ -219,41 +219,41 @@ minetest.register_entity("animals:sneachan",{
 	-- or used by built in behaviors
 	--physics = [function user defined] 		-- optional, overrides built in physics
 	animation = {
-		walk={range={x=0, y=20}, speed=20, loop=true},
-		fast={range={x=0, y=20}, speed=40, loop=true},
-		stand={range={x=0, y=20}, speed=10, loop=true},
+		walk = {range = {x = 0, y = 20}, speed = 20, loop = true},
+		fast = {range = {x = 0, y = 20}, speed = 40, loop = true},
+		stand = {range = {x = 0, y = 20}, speed = 10, loop = true},
 	},
 	sounds = {
 		warn = {
 			name = "animals_sneachan_warn",
-			gain={0.05, 0.2},
-			fade={0.5, 1.5},
-			pitch={0.6, 1.3},
+			gain = {0.05, 0.2},
+			fade = {0.5, 1.5},
+			pitch = {0.6, 1.3},
 		},
 		punch = {
 			name = "animals_punch",
-			gain={0.3, 0.9},
-			fade={0.5, 1.5},
-			pitch={0.5, 1.5},
+			gain = {0.3, 0.9},
+			fade = {0.5, 1.5},
+			pitch = {0.5, 1.5},
 		},
 	},
 
 	--movement
-	springiness=0,
-	buoyancy = 1.01,
-	max_speed = 1,					-- m/s
-	jump_height = 1,				-- nodes/meters
-	view_range = 2,					-- nodes/meters
+	springiness = 0.00,
+	buoyancy    = 1.01,
+	max_speed   = 1.00, -- m/s
+	jump_height = 1.00, -- nodes/meters
+	view_range  = 2.00, -- nodes/meters
 
 	--attack
-	attack={range=0.3, damage_groups={fleshy=1}},
-	armor_groups = {fleshy=100},
+	attack = {range = 0.3, damage_groups = {fleshy = 1}},
+	armor_groups = {fleshy = 100},
 
 	--on actions
 	drops = {
-		{name = "animals:carcass_invert_small", chance = 1, min = 1, max = 1,},
+		{name = "animals:carcass_invert_small", chance = 1, min = 1, max = 1, },
 	},
-	on_punch=function(self, puncher, time_from_last_punch, tool_capabilities, dir)
+	on_punch = function(self, puncher, time_from_last_punch, tool_capabilities, dir)
 		animals.on_punch(self, tool_capabilities, puncher, 55, 0.1)
 	end,
 	on_rightclick = function(self, clicker)

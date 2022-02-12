@@ -27,7 +27,7 @@ local function brain(self)
 		return
 	end
 
-	if mobkit.timer(self,1) then
+	if mobkit.timer(self, 1) then
 
 		local pos = mobkit.get_stand_pos(self)
 
@@ -42,7 +42,7 @@ local function brain(self)
 
 		--swim to shore
 		if self.isinliquid then
-			mobkit.hq_liquid_recovery(self,60)
+			mobkit.hq_liquid_recovery(self, 60)
 		end
 
 
@@ -76,7 +76,7 @@ local function brain(self)
 			if energy < energy_max then
 				if not animals.prey_hunt(self, 25) then
 					--random search for darkness
-					animals.hq_roam_dark(self,15)
+					animals.hq_roam_dark(self, 15)
 				end
 			end
 
@@ -87,7 +87,7 @@ local function brain(self)
 			and not rival
 			and self.hp >= self.max_hp
 			and energy >= energy_egg + 100 then
-				energy = animals.place_egg(pos, "animals:kubwakubwa_eggs", energy, energy_egg, 'air')
+				energy = animals.place_egg(pos, "animals:kubwakubwa_eggs", energy, energy_egg, "air")
 			end
 
 		end
@@ -95,15 +95,15 @@ local function brain(self)
 		-------------------
 		--generic behaviour
 		if mobkit.is_queue_empty_high(self) then
-			mobkit.animate(self,'walk')
-			animals.hq_roam_dark(self,10,1)
+			mobkit.animate(self, "walk")
+			animals.hq_roam_dark(self, 10, 1)
 		end
 
 		-----------------
 		--housekeeping
 		--save energy, age
-		mobkit.remember(self,'energy',energy)
-		mobkit.remember(self,'age',age)
+		mobkit.remember(self, "energy", energy)
+		mobkit.remember(self, "age", age)
 
 	end
 end
@@ -119,7 +119,7 @@ end
 
 --eggs
 minetest.register_node("animals:kubwakubwa_eggs", {
-	description = 'Kubwakubwa Eggs',
+	description = "Kubwakubwa Eggs",
 	tiles = {"animals_gundu_eggs.png"},
 	stack_max = minimal.stack_max_medium,
 	drawtype = "nodebox",
@@ -132,13 +132,13 @@ minetest.register_node("animals:kubwakubwa_eggs", {
 	sounds = nodes_nature.node_sound_defaults(),
 	on_use = exile_eatdrink,
 	on_construct = function(pos)
-		minetest.get_node_timer(pos):start(math.random(egg_timer,egg_timer*2))
+		minetest.get_node_timer(pos):start(math.random(egg_timer, egg_timer*2))
 	end,
-	on_timer =function(pos, elapsed)
+	on_timer  = function(pos, elapsed)
 	   if minetest.get_node_light(pos, 0.5) >= 13 then
 	      minetest.remove_node(pos)
 	   else
-	      return animals.hatch_egg(pos, 'air', 'air', "animals:kubwakubwa", energy_egg, young_per_egg)
+	      return animals.hatch_egg(pos, "air", "air", "animals:kubwakubwa", energy_egg, young_per_egg)
 	   end
 	end,
 })
@@ -152,7 +152,7 @@ minetest.register_node("animals:kubwakubwa_eggs", {
 ----------------------------------------------
 
 --The Animal
-minetest.register_entity("animals:kubwakubwa",{
+minetest.register_entity("animals:kubwakubwa", {
 	--core
 	physical = true,
 	collide_with_objects = true,
@@ -184,41 +184,41 @@ minetest.register_entity("animals:kubwakubwa",{
 	-- or used by built in behaviors
 	--physics = [function user defined] 		-- optional, overrides built in physics
 	animation = {
-		walk={range={x=0,y=20},speed=20,loop=true},
-		fast={range={x=0,y=20},speed=50,loop=true},
-		stand={range={x=20,y=40},speed=10,loop=true},
+		walk = {range = {x = 0, y = 20}, speed = 20, loop = true},
+		fast = {range = {x = 0, y = 20}, speed = 50, loop = true},
+		stand = {range = {x = 20, y = 40}, speed = 10, loop = true},
 	},
 	sounds = {
 		warn = {
 			name = "animals_kubwakubwa_warn",
-			gain={0.4, 0.8},
-			fade={0.5, 1.5},
-			pitch={0.9, 1.1},
+			gain = {0.4, 0.8},
+			fade = {0.5, 1.5},
+			pitch = {0.9, 1.1},
 		},
 		punch = {
 			name = "animals_punch",
-			gain={0.5, 1},
-			fade={0.5, 1.5},
-			pitch={0.5, 1.5},
+			gain = {0.5, 1},
+			fade = {0.5, 1.5},
+			pitch = {0.5, 1.5},
 		},
 	},
 
 	--movement
-	springiness=0,
-	buoyancy = 1.01,
-	max_speed = 0.75,					-- m/s
-	jump_height = 1.5,				-- nodes/meters
-	view_range = 4,					-- nodes/meters
+	springiness = 0.00,
+	buoyancy    = 1.01,
+	max_speed   = 0.75, -- m/s
+	jump_height = 1.50, -- nodes/meters
+	view_range  = 4.00, -- nodes/meters
 
 	--attack
-	attack={range=0.5, damage_groups={fleshy=4}},
-	armor_groups = {fleshy=100},
+	attack = {range = 0.5, damage_groups = {fleshy = 4}},
+	armor_groups = {fleshy = 100},
 
 	--on actions
 	drops = {
-		{name = "animals:carcass_invert_large", chance = 1, min = 1, max = 1,},
+		{name = "animals:carcass_invert_large", chance = 1, min = 1, max = 1, },
 	},
-	on_punch=function(self, puncher, time_from_last_punch, tool_capabilities, dir)
+	on_punch = function(self, puncher, time_from_last_punch, tool_capabilities, dir)
 		animals.on_punch(self, tool_capabilities, puncher, 55, 0.75)
 	end,
 	on_rightclick = function(self, clicker)
