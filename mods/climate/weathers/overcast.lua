@@ -7,7 +7,7 @@
 local overcast = {}
 
 
-overcast.name = 'overcast'
+overcast.name = "overcast"
 
 
 
@@ -18,7 +18,7 @@ overcast.sky_data = {
 		day_sky = "#B5B6B6",
 		day_horizon = "#bcbdbd",
 		dawn_sky = "#CBC0D6",
-		dawn_horizon ="#d5ccde",
+		dawn_horizon = "#d5ccde",
 		night_sky = "#4B3C5A",
 		night_horizon = "#6e627a",
 		indoors = "#2B2B2B",
@@ -34,7 +34,7 @@ overcast.cloud_data = {
 	density = 0.6,
 	height = 300,
 	thickness = 128,
-	speed = {x=2, z=0}
+	speed = {x = 2, z = 0}
 }
 
 
@@ -67,12 +67,12 @@ overcast.star_data = {
 --probabilities in each temp class
 overcast.chain = {
 	--name, p_cold, p_mid , p_hot
-	{'overcast_light_rain',0.01, 0.2, 0.1, 0.5},
-	{'light_rain', 0.01, 0.05, 0.15, 0.25},
-	{'medium_cloud', 0.01, 0.01, 0.01, 0.1},
-	{'overcast_light_snow', 0.25, 0, 0, 0},
-	{'light_snow', 0.1, 0, 0, 0},
-	{'fog', 0.15, 0.1, 0.01, 0.01}
+	{"overcast_light_rain", 0.01, 0.2, 0.1, 0.5},
+	{"light_rain", 0.01, 0.05, 0.15, 0.25},
+	{"medium_cloud", 0.01, 0.01, 0.01, 0.1},
+	{"overcast_light_snow", 0.25, 0, 0, 0},
+	{"light_snow", 0.1, 0, 0, 0},
+	{"fog", 0.15, 0.1, 0.01, 0.01}
 
 }
 

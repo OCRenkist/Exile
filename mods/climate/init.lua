@@ -78,14 +78,14 @@ local plvl_mid = 25
 --what weather is on, and how long it will last, and temp
 --random values that should get overriden by mod storage
 climate.active_weather = registered_weathers[math.random(#registered_weathers)]
-climate.active_temp = math.random(15,25)
-climate.sea_temp = climate.active_temp * math.random(0.6,8)
+climate.active_temp = math.random(15, 25)
+climate.sea_temp = climate.active_temp * math.random(0.6, 8)
 local active_weather_interval = 1
 
 
 --random walk, for temp
 local ran_walk_range = 10
-local ran_walk = math.random(-ran_walk_range,ran_walk_range)
+local ran_walk = math.random(-ran_walk_range, ran_walk_range)
 
 --------------------------
 -- Functions
@@ -243,7 +243,7 @@ local function select_new_active_weather()
 						registered_weathers)
 	end
 	--do for each player
-	for _,player in ipairs(minetest.get_connected_players()) do
+	for _, player in ipairs(minetest.get_connected_players()) do
 		--set sky and clouds for new state using the new active_weather
 		set_sky_clouds(player)
 	end
@@ -288,7 +288,7 @@ local function set_world_temperature()
 	climate.active_temp =  dc_wav + dn_wav + ran_walk
 	climate.active_sea_temp = sea_wav + ((dn_wav + ran_walk) * 0.3)
 	--save state so can be reloaded.
-	--only actually needed on log out,... but that doesn't work
+	--only actually needed on log out, ... but that doesn't work
 	store:set_string("weather", climate.active_weather.name)
 	store:set_float("temp", climate.active_temp)
 	store:set_float("sea_temp", climate.active_sea_temp)
@@ -341,7 +341,7 @@ minetest.register_globalstep(function(dtime)
 	end
 	--check if anyone is above ground to bother doing effects for
 	local ag_c = 0
-	for _,player in ipairs(minetest.get_connected_players()) do
+	for _, player in ipairs(minetest.get_connected_players()) do
 		local pos = player:get_pos()
 		local p_name = player:get_player_name()
 		local sound = sound_handlers[p_name]
@@ -397,7 +397,7 @@ minetest.register_privilege("set_temp", {
 minetest.register_chatcommand("set_temp", {
 	params = "<temp>",
 	description = "Set the Climate active temperature",
-	privs = {privs=true},
+	privs = {privs = true},
 	func = function(name, param)
 		local newtemp = tonumber(param)
 		if not newtemp then
@@ -409,7 +409,7 @@ minetest.register_chatcommand("set_temp", {
 		if minetest.check_player_privs(name, {set_temp = true}) then
 			climate.active_temp = newtemp
 
-			--only actually needed on log out,... but that doesn't work
+			--only actually needed on log out, ... but that doesn't work
 			store:set_float("temp", climate.active_temp)
 
 			return true, "Climate active temperature set to: "..newtemp
@@ -433,13 +433,13 @@ minetest.register_privilege("set_weather", {
 minetest.register_chatcommand("set_weather", {
 	params = "<weather> or help",
 	description = "Set the Climate active weather",
-	privs = {privs=true},
+	privs = {privs = true},
 	func = function(name, param)
 		if minetest.check_player_privs(name, {set_weather = true}) then
 			--check valid
 			if param == "help" then
 		local wlist = "Available weather states:\n"
-		for i = 1,#registered_weathers do
+		for i = 1, #registered_weathers do
 			wlist = wlist..registered_weathers[i].name.."\n"
 		end
 		return false, wlist
@@ -449,7 +449,7 @@ minetest.register_chatcommand("set_weather", {
 			if weather then
 		climate.active_weather = weather
 		--do for each player
-		for _,player in ipairs(minetest.get_connected_players()) do
+		for _, player in ipairs(minetest.get_connected_players()) do
 			--set sky and clouds for new state using the new active_weather
 
 			set_sky_clouds(player)
@@ -467,7 +467,7 @@ minetest.register_chatcommand("set_weather", {
 			end
 
 		end
-		--only actually needed on log out,... but that doesn't work
+		--only actually needed on log out, ... but that doesn't work
 		store:set_string("weather", climate.active_weather.name)
 
 		return true, "Climate active weather set to: "..param

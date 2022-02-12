@@ -6,7 +6,7 @@
 
 local overcast_light_rain = {}
 
-overcast_light_rain.name = 'overcast_light_rain'
+overcast_light_rain.name = "overcast_light_rain"
 
 
 overcast_light_rain.sky_data = {
@@ -16,7 +16,7 @@ overcast_light_rain.sky_data = {
 		day_sky = "#979AA1",
 		day_horizon = "#a1a4aa",
 		dawn_sky = "#CBC0D6",
-		dawn_horizon ="#d5ccde",
+		dawn_horizon = "#d5ccde",
 		night_sky = "#4B3C5A",
 		night_horizon = "#6e627a",
 		indoors = "#2B2B2B",
@@ -32,7 +32,7 @@ overcast_light_rain.cloud_data = {
 	density = 0.6,
 	height = 300,
 	thickness = 128,
-	speed = {x=2, z=0}
+	speed = {x = 2, z = 0}
 }
 
 
@@ -62,15 +62,15 @@ overcast_light_rain.star_data = {
 
 
 
-overcast_light_rain.sound_loop = 'light_rain_loop'
+overcast_light_rain.sound_loop = "light_rain_loop"
 
 --probabilities in each temp class
 overcast_light_rain.chain = {
 	--name, p_cold, p_mid , p_hot
-	{'light_rain', 0.01, 0.25, 0.5, 0.75},
-	{'overcast', 0.5, 0.5, 0.5, 0.75},
-	{'overcast_rain', 0.01, 0.3, 0.2, 0.5},
-	{'overcast_light_snow', 0.25, 0, 0, 0}
+	{"light_rain", 0.01, 0.25, 0.5, 0.75},
+	{"overcast", 0.5, 0.5, 0.5, 0.75},
+	{"overcast_rain", 0.01, 0.3, 0.2, 0.5},
+	{"overcast_light_snow", 0.25, 0, 0, 0}
 
 }
 

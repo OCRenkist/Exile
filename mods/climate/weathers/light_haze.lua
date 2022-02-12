@@ -8,7 +8,7 @@
 local light_haze = {}
 
 
-light_haze.name = 'light_haze'
+light_haze.name = "light_haze"
 
 
 light_haze.sky_data = {
@@ -18,7 +18,7 @@ light_haze.sky_data = {
 		day_sky = "#DAEDFB",
 		day_horizon = "#F9FBE7",
 		dawn_sky = "daacfb",
-		dawn_horizon ="#fbacf4",
+		dawn_horizon = "#fbacf4",
 		night_sky = "#0600A9",
 		night_horizon = "#615f98",
 		indoors = "#2B2B2B",
@@ -35,7 +35,7 @@ light_haze.cloud_data = {
 	density = 0.1,
 	height = 500,
 	thickness = 4,
-	speed = {x=1, z=0}
+	speed = {x = 1, z = 0}
 }
 
 
@@ -67,8 +67,8 @@ light_haze.star_data = {
 --probabilities in each temp class
 light_haze.chain = {
 		--name, p_froz, p_cold, p_mid , p_hot
-		{'clear', 1, 0.85, 0.4, 0.1},
-		{'haze', 0, 0, 0, 0.25}
+		{"clear", 1, 0.85, 0.4, 0.1},
+		{"haze", 0, 0, 0, 0.25}
 	}
 
 

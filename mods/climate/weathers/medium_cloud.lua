@@ -7,7 +7,7 @@
 local medium_cloud = {}
 
 
-medium_cloud.name = 'medium_cloud'
+medium_cloud.name = "medium_cloud"
 
 medium_cloud.sky_data = {
 	type = "regular",
@@ -16,7 +16,7 @@ medium_cloud.sky_data = {
 		day_sky = "#BBDDF6",
 		day_horizon = "#c1e0f6",
 		dawn_sky = "#9EADFF",
-		dawn_horizon ="#b1bdff",
+		dawn_horizon = "#b1bdff",
 		night_sky = "#020042",
 		night_horizon = "#343267",
 		indoors = "#2B2B2B",
@@ -32,7 +32,7 @@ medium_cloud.cloud_data = {
 	density = 0.3,
 	height = 360,
 	thickness = 15,
-	speed = {x=2, z=0}
+	speed = {x = 2, z = 0}
 }
 
 
@@ -66,10 +66,10 @@ medium_cloud.star_data = {
 
 medium_cloud.chain = {
 	--name, p_froz, p_cold, p_mid , p_hot
-	{'light_cloud', 0.2, 0.2, 0.3, 0.5},
-	{'overcast', 0.06, 0.06, 0.06, 0.06},
-	{'sun_shower', 0, 0.5, 0.3, 0.02},
-	{'snow_flurry', 0.25, 0, 0, 0}
+	{"light_cloud", 0.20, 0.20, 0.30, 0.50},
+	{"overcast",    0.06, 0.06, 0.06, 0.06},
+	{"sun_shower",  0.00, 0.50, 0.30, 0.02},
+	{"snow_flurry", 0.25, 0.00, 0, 0,     }
 
 }
 

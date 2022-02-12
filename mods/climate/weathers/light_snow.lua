@@ -15,7 +15,7 @@ end
 
 local light_snow = {}
 
-light_snow.name = 'light_snow'
+light_snow.name = "light_snow"
 
 light_snow.sky_data = {
 	type = "regular",
@@ -24,7 +24,7 @@ light_snow.sky_data = {
 		day_sky = "#97C0F9",
 		day_horizon = "#ABCCFA",
 		dawn_sky = "#9EADFF",
-		dawn_horizon ="#b1bdff",
+		dawn_horizon = "#b1bdff",
 		night_sky = "#0600A9",
 		night_horizon = "#3732ba",
 		indoors = "#2B2B2B",
@@ -40,7 +40,7 @@ light_snow.cloud_data = {
 	density = 0.5,
 	height = 320,
 	thickness = 64,
-	speed = {x=0, z=-2}
+	speed = {x = 0, z=-2}
 }
 
 
@@ -74,10 +74,10 @@ light_snow.star_data = {
 --probabilities in each temp class
 light_snow.chain = {
 	--name, p_cold, p_mid , p_hot
-	{'overcast_light_rain', 0, 0.75, 1, 1},
-	{'overcast', 0.15, 1, 1, 1},
-	{'snow_flurry', 0.25, 0, 0, 0},
-	{'overcast_light_snow', 0.25, 0, 0, 0}
+	{"overcast_light_rain", 0, 0.75, 1, 1},
+	{"overcast", 0.15, 1, 1, 1},
+	{"snow_flurry", 0.25, 0, 0, 0},
+	{"overcast_light_snow", 0.25, 0, 0, 0}
 
 }
 
@@ -86,13 +86,13 @@ light_snow.particle_interval = 0.1
 
 light_snow.particle_function = function()
 
-	local velxz = math.random(-1,-0.1)
-	local vely = math.random(-1.5,-0.5)
-	local accxz = math.random(-1,-0.1)
-	local accy = -0.5
-	local ext = 7
-	local size = 2
-	local tex = random_texture()
+	local velxz = math.random(-1, -0.1)
+	local vely  = math.random(-1.5, -0.5)
+	local accxz = math.random(-1, -0.1)
+	local accy  = -0.5
+	local ext   = 7
+	local size  = 2
+	local tex   = random_texture()
 	local sound = ""
 
 	climate.add_blizzard_particle(velxz, vely, accxz, accy, ext, size, tex)

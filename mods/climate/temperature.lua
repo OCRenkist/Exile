@@ -17,16 +17,16 @@ climate.get_rain = function(pos, l)
 	end
 	--check if raining and outside
 	if not l then
-		l = minetest.get_natural_light({x=pos.x, y=pos.y + 1, z=pos.z}, 0.5)
+		l = minetest.get_natural_light({x = pos.x, y = pos.y + 1, z = pos.z}, 0.5)
 	end
 
 	local w = climate.active_weather.name
 
 	if l == 15
-	and (w == 'overcast_heavy_rain'
-	or w == 'overcast_rain'
-	or w == 'thunderstorm'
-	or w == 'superstorm') then
+	and (w == "overcast_heavy_rain"
+	or w == "overcast_rain"
+	or w == "thunderstorm"
+	or w == "superstorm") then
 		return true
 	else
 		return false
@@ -41,15 +41,16 @@ climate.get_snow = function(pos, l)
 	end
 	--check if raining and outside
 	if not l then
-		l = minetest.get_natural_light({x=pos.x, y=pos.y + 1, z=pos.z}, 0.5)
+		l = minetest.get_natural_light({x = pos.x, y = pos.y + 1, z = pos.z}, 0.5)
 	end
 
 	local w = climate.active_weather.name
 
 	if l == 15
-	and (w == 'overcast_heavy_snow'
-	or w == 'overcast_snow'
-	or w == 'snowstorm') then
+		and (w == "overcast_heavy_snow"
+		or w == "overcast_snow"
+		or w == "snowstorm") 
+	then
 		return true
 	else
 		return false
@@ -61,7 +62,7 @@ end
 climate.can_evaporate = function(pos, l)
 
 	--must have air to be taken up by
-	local posa = {x=pos.x, y=pos.y + 1, z=pos.z}
+	local posa = {x = pos.x, y = pos.y + 1, z = pos.z}
 	if minetest.get_node(posa).name ~= "air" then
 		return false
 	end
@@ -78,7 +79,7 @@ climate.can_evaporate = function(pos, l)
 		if t > 500 then
 			--so hot things would get steamy fast
 			return true
-		elseif t > math.random(0,1000) then
+		elseif t > math.random(0, 1000) then
 			--none below 0 C, 10% chance at 100 C
 			return true
 		end
@@ -91,7 +92,7 @@ end
 --freeze
 climate.can_freeze = function(pos)
 
-	local c = math.random(-50,0)
+	local c = math.random(-50, 0)
 
 	--stop freezing underwater
 	--although technically you should be able to do it
@@ -99,11 +100,11 @@ climate.can_freeze = function(pos)
 	--even if probabilities are low
 	local t
 
-	local posa = {x=pos.x, y=pos.y + 1, z=pos.z}
+	local posa = {x = pos.x, y = pos.y + 1, z = pos.z}
 	local node = minetest.get_node(posa).name
 	if minetest.get_item_group(node, "water") > 0 then
 		return false
-	elseif node == 'air' then
+	elseif node == "air" then
 		--use air temp for air exposed ()
 		t = climate.get_point_temp(posa)
 	else
@@ -123,11 +124,11 @@ end
 --thaw frozen
 climate.can_thaw = function(pos)
 
-	local posa = {x=pos.x, y=pos.y + 1, z=pos.z}
+	local posa = {x = pos.x, y = pos.y + 1, z = pos.z}
 
 	--threshold must be low,
 	--as its getting cooled by the ice itself
-	local c = math.random(0,12)
+	local c = math.random(0, 12)
 
 	--rain washes it away
 	if c < 2 then
@@ -171,7 +172,7 @@ climate.get_damage_weather = function(pos, l)
 	end
 	--check if a damage weather and outside
 	if not l then
-		l = minetest.get_natural_light({x=pos.x, y=pos.y + 1, z=pos.z}, 0.5)
+		l = minetest.get_natural_light({x = pos.x, y = pos.y + 1, z = pos.z}, 0.5)
 	end
 
 	if l == 15 and climate.active_weather.damage then
@@ -190,7 +191,7 @@ end
 --heatable nodes carry extra heat or cooling gained from sources
 local adjust_for_heatable = function(pos, name, temp)
 
-	local heatable = minetest.get_item_group(name,"heatable")
+	local heatable = minetest.get_item_group(name, "heatable")
 	if heatable then
 		local meta = minetest.get_meta(pos)
 		local boost = meta:get_float("temp")
@@ -204,7 +205,7 @@ end
 local adjust_for_shelter = function(pos, temp, av_temp)
 	--Shelter. Brings temp closer to average
 	--daytime dark is the closest proxy for shelter.
-	local light = minetest.get_natural_light({x=pos.x, y=pos.y+1, z=pos.z}, 0.5)
+	local light = minetest.get_natural_light({x = pos.x, y = pos.y+1, z = pos.z}, 0.5)
 	if light and light <= 14 then
 		if light <= 10 then     -- 1-10
 			temp = (temp*0.25)+(av_temp*0.75)
@@ -226,7 +227,7 @@ local adjust_active_temp = function(pos, temp)
 --average temp (make sure it matches climate)
 local av_temp = 15
 local name = minetest.get_node(pos).name
-local water = minetest.get_item_group(name,"water")
+local water = minetest.get_item_group(name, "water")
 
 
 --sea water for deep ocean --stratification and density set a constant temperature
@@ -312,7 +313,7 @@ local function swap_air(old_pos, new_pos, temp_m)
 local oldname = minetest.get_node(old_pos).name
 if minetest.get_node(new_pos).name == "air" then
 	local timer = 8
-	minetest.set_node(old_pos, {name = 'air'})
+	minetest.set_node(old_pos, {name = "air"})
 	minetest.set_node(new_pos, {name = oldname})
 	local meta = minetest.get_meta(new_pos)
 	meta:set_float("temp", temp_m)
@@ -327,9 +328,9 @@ local move_air_nodes = function(pos, meta, temp_m)
 	--heat rises 	-cold sink
 	local pos_new
 	if temp_m > 0 then
-		pos_new = {x=pos.x, y=pos.y +1, z=pos.z}
+		pos_new = {x = pos.x, y = pos.y +1, z = pos.z}
 	else
-		pos_new = {x=pos.x, y=pos.y -1, z=pos.z}
+		pos_new = {x = pos.x, y = pos.y -1, z = pos.z}
 	end
 
 	--movement
@@ -338,11 +339,11 @@ local move_air_nodes = function(pos, meta, temp_m)
 	end
 	--blocked above/below, so look for nearby air or temp_flow nodes
 	local targets = {}
-	local pos_air = minetest.find_node_near(pos, 1, 'air')
+	local pos_air = minetest.find_node_near(pos, 1, "air")
 	if pos_air then
 		table.insert(targets, pos_air)
 	end
-	local pos_pass = minetest.find_node_near(pos, 1, 'group:temp_flow')
+	local pos_pass = minetest.find_node_near(pos, 1, "group:temp_flow")
 	if pos_pass then
 		local tf = minetest.get_item_group(minetest.get_node(pos_pass).name,
 							"temp_flow")
@@ -386,7 +387,7 @@ function climate.heat_transfer(pos, nodename, replace)
 		end
 	end
 
-	--heat transfers (exchange heat with other 'heatable')
+	--heat transfers (exchange heat with other "heatable")
 
 	local pos_neighs = minetest.find_nodes_in_area(
 		{x = pos.x - 1, y = pos.y - 1, z = pos.z - 1},
@@ -421,10 +422,10 @@ function climate.heat_transfer(pos, nodename, replace)
 	end
 
 	--dissappation..lose heat to environment
-	local pos_max = {x=pos.x +1, y=pos.y +1, z=pos.z +1}
-	local pos_min = {x=pos.x -1, y=pos.y -1, z=pos.z -1}
+	local pos_max = {x = pos.x +1, y = pos.y +1, z = pos.z +1}
+	local pos_min = {x = pos.x -1, y = pos.y -1, z = pos.z -1}
 	local air, cn = minetest.find_nodes_in_area(pos_min, pos_max,
-		{'air', 'group:water', 'climate:air_temp',
+		{"air", "group:water", "climate:air_temp",
 			"climate:air_temp_visible"	})
 	--including group:temp_pass causes problems for doing pottery etc in groups (cools down bc of neighbors).
 	--taking them out of temp_pass would allow exploits (e.g. furnaces built from pots)
@@ -441,7 +442,7 @@ function climate.heat_transfer(pos, nodename, replace)
 	temp_m = temp_m *(1 - dis_rate)
 	meta:set_float("temp", temp_m)
 
-	if string.sub(nodename,9,16) == "air_temp" then
+	if string.sub(nodename, 9, 16) == "air_temp" then
 		local moved = move_air_nodes(pos, meta, temp_m)
 		--no longer here, stop timer
 		if moved then
@@ -471,18 +472,18 @@ local air_def = {
 	buildable_to = true,
 	floodable = true,
 	groups = {temp_pass = 1, heatable = 100},
-	on_timer =function(pos, elapsed)
-		return climate.heat_transfer(pos, "climate:air_temp", 'air')
+	on_timer = function(pos, elapsed)
+		return climate.heat_transfer(pos, "climate:air_temp", "air")
 	end,
 	post_effect_color = {a = 5, r = 254, g = 254, b = 254},
-	color = {a=0, r=254, g = 254, b = 254},
+	color = {a = 0, r = 254, g = 254, b = 254},
 	use_texture_alpha = "blend"
 }
 minetest.register_node("climate:air_temp", air_def)
 air_def.description = "Temperature Effect Air (Visible)"
 air_def.drawtype = "glasslike"
-air_def.on_timer =function(pos, elapsed)
-   return climate.heat_transfer(pos, "climate:air_temp_visible", 'air')
+air_def.on_timer = function(pos, elapsed)
+   return climate.heat_transfer(pos, "climate:air_temp_visible", "air")
 end,
 minetest.register_node("climate:air_temp_visible", air_def)
 
@@ -495,15 +496,15 @@ minetest.register_node("climate:air_temp_visible", air_def)
 --node timers call this to  heat/cool `heatable` group.
 --if only air around it will create air_temp nodes
 function climate.air_temp_source(pos, temp_effect, temp_max, chance, timer)
-	local at_node = 'climate:air_temp'
+	local at_node = "climate:air_temp"
 	local meta = minetest.get_meta(pos)
 	if meta:get_string("hot_air") ~= "" then
 		at_node = "climate:air_temp_visible"
 	end
 	--get all surrounding air positions, and heatables
-	local pos_max = {x=pos.x +1, y=pos.y +1, z=pos.z +1}
-	local pos_min = {x=pos.x -1, y=pos.y -1, z=pos.z -1}
-	local heatable = minetest.find_nodes_in_area(pos_min, pos_max, {'air', 'group:heatable'})
+	local pos_max = {x = pos.x +1, y = pos.y +1, z = pos.z +1}
+	local pos_min = {x = pos.x -1, y = pos.y -1, z = pos.z -1}
+	local heatable = minetest.find_nodes_in_area(pos_min, pos_max, {"air", "group:heatable"})
 
 	--heat/cool or create air nodes
 	for _, node in pairs(heatable) do
@@ -513,7 +514,7 @@ function climate.air_temp_source(pos, temp_effect, temp_max, chance, timer)
 			local name = minetest.get_node(node).name
 
 			--create air_temp
-			if name == 'air' then
+			if name == "air" then
 				--if it is air then create air_temp
 				minetest.set_node(node, {name = at_node })
 				--save temp_effect in meta. This can accumulate over time
@@ -588,7 +589,7 @@ local line_of_temp = function(node_pos, target_pos)
 
 	--checks
 	local new_name = minetest.get_node(new_pos).name
-	local pass = minetest.get_item_group(new_name,"temp_pass")
+	local pass = minetest.get_item_group(new_name, "temp_pass")
 
 	--have reached target
 	if vector.distance(new_pos, target_pos) < step then
@@ -596,12 +597,12 @@ local line_of_temp = function(node_pos, target_pos)
 	end
 
 	--loop through
-	while new_name == 'air' or pass > 0 do
+	while new_name == "air" or pass > 0 do
 		--check neighbor
 		stepv = vector.direction(new_pos, target_pos)
 		new_pos = vector.add(new_pos, stepv)
 		new_name = minetest.get_node(new_pos).name
-		pass = minetest.get_item_group(new_name,"temp_pass")
+		pass = minetest.get_item_group(new_name, "temp_pass")
 
 		--have reached target
 		if vector.distance(new_pos, target_pos) < step then
@@ -623,31 +624,31 @@ local get_los = function(node_pos, target_pos)
 	local results = {}
 
 	if target_pos.x > node_pos.x then
-		--local los, lpos = minetest.line_of_sight({x=node_pos.x+0.51, y=node_pos.y, z=node_pos.z}, target_pos)
+		--local los, lpos = minetest.line_of_sight({x = node_pos.x+0.51, y = node_pos.y, z = node_pos.z}, target_pos)
 		local los, lpos = line_of_temp(node_pos, target_pos)
 		table.insert(results, {los, lpos})
 	else
-		--local los, lpos = minetest.line_of_sight({x=node_pos.x-0.51, y=node_pos.y, z=node_pos.z}, target_pos)
+		--local los, lpos = minetest.line_of_sight({x = node_pos.x-0.51, y = node_pos.y, z = node_pos.z}, target_pos)
 		local los, lpos = line_of_temp(node_pos, target_pos)
 		table.insert(results, {los, lpos})
 	end
 
 	if target_pos.y > node_pos.y then
-		--local los, lpos = minetest.line_of_sight({x=node_pos.x, y=node_pos.y + 0.51, z=node_pos.z}, target_pos)
+		--local los, lpos = minetest.line_of_sight({x = node_pos.x, y = node_pos.y + 0.51, z = node_pos.z}, target_pos)
 		local los, lpos = line_of_temp(node_pos, target_pos)
 		table.insert(results, {los, lpos})
 	else
-		--local los, lpos = minetest.line_of_sight({x=node_pos.x, y=node_pos.y - 0.51, z=node_pos.z}, target_pos)
+		--local los, lpos = minetest.line_of_sight({x = node_pos.x, y = node_pos.y - 0.51, z = node_pos.z}, target_pos)
 		local los, lpos = line_of_temp(node_pos, target_pos)
 		table.insert(results, {los, lpos})
 	end
 
 	if target_pos.z > node_pos.z then
-		--local los, lpos = minetest.line_of_sight({x=node_pos.x, y=node_pos.y, z=node_pos.z +0.51}, target_pos)
+		--local los, lpos = minetest.line_of_sight({x = node_pos.x, y = node_pos.y, z = node_pos.z +0.51}, target_pos)
 		local los, lpos = line_of_temp(node_pos, target_pos)
 		table.insert(results, {los, lpos})
 	else
-		--local los, lpos = minetest.line_of_sight({x=node_pos.x, y=node_pos.y, z=node_pos.z -0.51}, target_pos)
+		--local los, lpos = minetest.line_of_sight({x = node_pos.x, y = node_pos.y, z = node_pos.z -0.51}, target_pos)
 		local los, lpos = line_of_temp(node_pos, target_pos)
 		table.insert(results, {los, lpos})
 	end
@@ -672,7 +673,7 @@ local radiate_temp = function(target_pos, source_pos, temp_effect)
 		return temp_effect
 	end
 
-	--{{b,o},{b,o},{b,o}}
+	--{{b, o}, {b, o}, {b, o}}
 	local sight_lines = get_los(source_pos, target_pos)
 	local los = false
 
@@ -707,7 +708,7 @@ climate.get_point_temp = function(pos)
 
 	--if it's a temp_effect node then thats how hot it is by definition
 	local nodename = minetest.get_node(pos).name
-	local t_effect = minetest.get_item_group(nodename,"temp_effect")
+	local t_effect = minetest.get_item_group(nodename, "temp_effect")
 	if t_effect ~= 0 then
 		local t_effect_max = minetest.registered_nodes[nodename].temp_effect_max
 		return t_effect_max
@@ -719,7 +720,7 @@ climate.get_point_temp = function(pos)
 
 	--take into account heat and cooling sources nearby
 	local r = 4
-	local a = minetest.find_nodes_in_area({x=pos.x-r, y=pos.y-r, z=pos.z-r}, {x=pos.x+r, y=pos.y+r, z=pos.z+r}, {"group:temp_effect"})
+	local a = minetest.find_nodes_in_area({x = pos.x-r, y = pos.y-r, z = pos.z-r}, {x = pos.x+r, y = pos.y+r, z = pos.z+r}, {"group:temp_effect"})
 
 	if #a < 1 then
 		return temp
@@ -762,7 +763,7 @@ end
 
 --function for getting a temperature string set to the user's chosen scale
 climate.get_temp_string = function(v, meta)
-	local scale = minetest.settings:get('exile_temp_scale')
+	local scale = minetest.settings:get("exile_temp_scale")
 	if meta then
 		local tempscalepref = meta:get_string("TempScalePref")
 		if tempscalepref then -- override the sitewide temp scale

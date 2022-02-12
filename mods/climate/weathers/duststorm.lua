@@ -17,7 +17,7 @@ duststorm.sky_data = {
 		day_sky = "#F4DFBE",
 		day_horizon = "#f6e5cb",
 		dawn_sky = "#F9A09C",
-		dawn_horizon ="#fab3af",
+		dawn_horizon = "#fab3af",
 		night_sky = "#513200",
 		night_horizon = "#735a32",
 		indoors = "#2B2B2B",
@@ -33,7 +33,7 @@ duststorm.cloud_data = {
 	density = 0.6,
 	height = 100,
 	thickness = 180,
-	speed = {x=0, z=4}
+	speed = {x = 0, z = 4}
 }
 
 
@@ -80,7 +80,7 @@ duststorm.particle_interval = 0.0007
 duststorm.particle_function = function()
 	local velxz = math.random(-5, 2)
 	local vely = math.random(-3, 2)
-	local accxz = math.random(-3,2)
+	local accxz = math.random(-3, 2)
 	local accy = math.random(-2, 2)
 	local ext = 10
 	local size = 20

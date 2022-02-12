@@ -35,10 +35,10 @@ function record_climate_history(climate)
 		ch = ch + 1 -- sunlight: 0001
 	end
 	local w = climate.active_weather.name
-	if (w == 'overcast_heavy_rain'
-	or w == 'overcast_rain'
-	or w == 'thunderstorm'
-		or w == 'superstorm') then
+	if (w == "overcast_heavy_rain"
+	or w == "overcast_rain"
+	or w == "thunderstorm"
+		or w == "superstorm") then
 		ch = ch + 4 -- rain: 0100
 	end
 	local t = climate.active_temp
@@ -47,14 +47,14 @@ function record_climate_history(climate)
 	elseif t >= 0 and t <= 40 then
 		ch = ch + 2 -- grow: 0010
 	end
-	local cstring=string.format("%x", ch)
+	local cstring = string.format("%x", ch)
 	climate_history = cstring..climate_history
 end
 
 
 --read out a specified chunk from the history
 local function history(age)
-	local chunk = {sun=false,grow=false,rain=false,kill=false}
+	local chunk = {sun = false, grow = false, rain = false, kill = false}
 	local len = #climate_history
 	if len == 0 then
 		return -- No history? Why did we get called then?
@@ -92,7 +92,7 @@ function crop_rewind(duration, timer_avg, mushroom)
 	local growth_ticks = 0
 	local timeradjust = 60/timer_avg -- how many growth ticks per 60 second chunk
 	local chunks = floor(duration / 60)
-	for i = 0,chunks,1 do
+	for i = 0, chunks, 1 do
 		local conditions = history(i)
 		if conditions == nil then -- we don't have any history!
 	growth_ticks = 0

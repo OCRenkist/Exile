@@ -7,7 +7,7 @@
 local overcast_rain = {}
 
 
-overcast_rain.name = 'overcast_rain'
+overcast_rain.name = "overcast_rain"
 
 
 overcast_rain.sky_data = {
@@ -17,7 +17,7 @@ overcast_rain.sky_data = {
 		day_sky = "#777D89",
 		day_horizon = "#848a94",
 		dawn_sky = "#CBC0D6",
-		dawn_horizon ="#d5ccde",
+		dawn_horizon = "#d5ccde",
 		night_sky = "#4B3C5A",
 		night_horizon = "#6e627a",
 		indoors = "#2B2B2B",
@@ -33,7 +33,7 @@ overcast_rain.cloud_data = {
 	density = 0.6,
 	height = 280,
 	thickness = 128,
-	speed = {x=2, z=0}
+	speed = {x = 2, z = 0}
 }
 
 overcast_rain.moon_data = {
@@ -62,14 +62,14 @@ overcast_rain.star_data = {
 
 
 
-overcast_rain.sound_loop = 'rain_loop'
+overcast_rain.sound_loop = "rain_loop"
 
 --probabilities in each temp class
 overcast_rain.chain = {
 	--name, p_cold, p_mid , p_hot
-	{'overcast_light_rain', 0.01, 0.3, 0.4, 0.75},
-	{'overcast_heavy_rain', 0.01, 0.2, 0.1, 0.5},
-	{'overcast_snow', 0.5, 0, 0, 0}
+	{"overcast_light_rain", 0.01, 0.3, 0.4, 0.75},
+	{"overcast_heavy_rain", 0.01, 0.2, 0.1, 0.5},
+	{"overcast_snow", 0.5, 0, 0, 0}
 
 
 }
@@ -87,11 +87,11 @@ end
 overcast_rain.particle_interval = 0.004
 
 overcast_rain.particle_function = function()
-	local vel = -12
-	local acc = -10
-	local ext = 6
-	local size = 1
-	local tex = random_texture()
+	local vel   = -12
+	local acc   = -10
+	local ext   =   6
+	local size  =   1
+	local tex   = random_texture()
 	local sound = ""
 
 	climate.add_particle(vel, acc, ext, size, tex)

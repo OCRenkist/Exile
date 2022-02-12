@@ -7,7 +7,7 @@
 local superstorm = {}
 
 
-superstorm.name = 'superstorm'
+superstorm.name = "superstorm"
 
 
 superstorm.sky_data = {
@@ -17,7 +17,7 @@ superstorm.sky_data = {
 		day_sky = "#40434F",
 		day_horizon = "#535560",
 		dawn_sky = "#CBC0D6",
-		dawn_horizon ="#d5ccde",
+		dawn_horizon = "#d5ccde",
 		night_sky = "#4B3C5A",
 		night_horizon = "#6e627a",
 		indoors = "#2B2B2B",
@@ -29,11 +29,11 @@ superstorm.sky_data = {
 
 
 superstorm.cloud_data = {
-	color = "#2E3036",
-	density = 0.6,
-	height = 260,
+	color     = "#2E3036",
+	density   = 0.6,
+	height    = 260,
 	thickness = 128,
-	speed = {x=3, z=0}
+	speed     = {x = 3, z = 0}
 }
 
 
@@ -41,7 +41,7 @@ superstorm.moon_data = {
 	visible = false,
 	texture = "moon.png",
 	tonemap = "moon_tonemap.png",
-	scale = 0.5
+	scale   = 0.5
 }
 
 
@@ -51,13 +51,13 @@ superstorm.sun_data = {
 	tonemap = "sun_tonemap.png",
 	sunrise = "sunrisebg.png",
 	sunrise_visible = false,
-	scale = 0.4
+	scale   = 0.4
 }
 
 superstorm.star_data = {
 	visible = false,
-	count = 1000,
-	color = "#80FCFEFF"
+	count   = 1000,
+	color   = "#80FCFEFF"
 }
 
 
@@ -65,13 +65,13 @@ superstorm.star_data = {
 
 
 
-superstorm.sound_loop = 'heavy_rain_loop'
+superstorm.sound_loop = "heavy_rain_loop"
 
 	--probabilities in each temp class
 superstorm.chain = {
 	--name, p_froz, p_cold, p_mid , p_hot
-	{'thunderstorm', 0, 1, 1, 1},
-	{'snowstorm', 1, 0, 0, 0}
+	{"thunderstorm", 0, 1, 1, 1},
+	{"snowstorm", 1, 0, 0, 0}
 
 }
 
@@ -79,11 +79,11 @@ superstorm.chain = {
 superstorm.particle_interval = 0.0009
 
 superstorm.particle_function = function()
-		local vel = -10
-		local acc = -10
-		local ext = 6
-		local size = 20
-		local tex = "heavy_rain_drops.png"
+		local vel   = -10
+		local acc   = -10
+		local ext   = 6
+		local size  = 20
+		local tex   = "heavy_rain_drops.png"
 		local sound = ""
 
 		climate.add_particle(vel, acc, ext, size, tex)
