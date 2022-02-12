@@ -1,21 +1,12 @@
-
 -- bell_positions are saved through server restart
 -- bells ring every hour
 -- they ring as many times as a bell ought to
-
 bell = {};
-
 local RING_INTERVAL = 3600; --60*60; -- ring each hour
-
 local bell_SAVE_FILE = minetest.get_worldpath()..'/bell_positions.data';
-
 local bell_positions = {};
-
-
 local save_bell_positions = function( player )
-
 	str = minetest.serialize( ({ bell_data = bell_positions}) );
-
 	local file, err = io.open( bell_SAVE_FILE, 'wb');
 	if (err ~= nil) then
 		if( player ) then
@@ -28,12 +19,8 @@ local save_bell_positions = function( player )
 	file:close();
 	--minetest.chat_send_all('Wrote data to savefile '..tostring( bell_SAVE_FILE ));
 end
-
-
 local restore_bell_data = function()
-
 	local bell_position_table;
-
 	local file, err = io.open(bell_SAVE_FILE, 'rb');
 	if (err ~= nil) then
 		print('Error: Could not open bell data savefile (ignore this message on first start)');
@@ -41,70 +28,50 @@ local restore_bell_data = function()
 	end
 	local str = file:read();
 	file:close();
-
 	local bell_positions_table = minetest.deserialize( str );
 	if( bell_positions_table and bell_positions_table.bell_data ) then
 	  bell_positions = bell_positions_table.bell_data;
 	  print('[bell] Read positions of bells from savefile.');
 	end
 end
-
-
 -- actually ring the bell
 local ring_bell_once = function()
-
-	for i,v in ipairs( bell_positions ) do
+	for i, v in ipairs( bell_positions ) do
 -- print('Ringing bell at '..tostring( minetest.pos_to_string( v )));
 		minetest.sound_play( 'artifacts_bell',
 		  { pos = v, gain = 1.5, max_hear_distance = 300,});
 	end
 end
 
-
-
 bell.ring_bell = function()
-
 	-- figure out if this is the right time to ring
 	local sekunde = tonumber( os.date( '%S'));
 	local minute  = tonumber( os.date( '%M'));
 	local stunde  = tonumber( os.date( '%I')); -- in 12h-format (a bell that rings 24x at once would not survive long...)
 	local delay	= RING_INTERVAL;
-
 	--print('[bells]It is now H:'..tostring( stunde )..' M:'..tostring(minute)..' S:'..tostring( sekunde ));
-
 	--local datum = os.date( 'Stunde:%l Minute:%M Sekunde:%S');
 	--print('[bells] ringing bells at '..tostring( datum ))
-
 	delay = RING_INTERVAL - sekunde - (minute*60);
-
 	-- make sure the bell rings the next hour
 	minetest.after( delay, bell.ring_bell );
-
 	-- if no bells are around then don't ring
 	if( bell_positions == nil or #bell_positions < 1 ) then
 		return;
 	end
-
 	if( sekunde > 10 ) then
---		print('[bells] Too late. Waiting for '..tostring( delay )..' seconds.');
+		--print('[bells] Too late. Waiting for '..tostring( delay )..' seconds.');
 		return;
 	end
-
 	-- ring the bell for each hour once
-	for i=1,stunde do
+	for i = 1, stunde do
 	  minetest.after( (i-1)*5,  ring_bell_once );
 	end
-
 end
-
 -- first call (after the server has been started)
 minetest.after( 10, bell.ring_bell );
 -- read data about bell positions
 restore_bell_data();
-
-
-
-
 minetest.register_node('artifacts:bell', {
 	description = 'Automated Bell',
 	tiles = {"artifacts_bell_top.png",
@@ -148,12 +115,10 @@ minetest.register_node('artifacts:bell', {
 	},
 	stack_max = 1,
 	groups = {oddly_breakable_by_hand = 3, attached_node = 1, temp_pass = 1},
-
-	on_punch = function (pos,node,puncher)
+	on_punch = function (pos, node, puncher)
 		minetest.sound_play( 'artifacts_bell_punch', { pos = pos, gain = 1.5, max_hear_distance = 300,});
 		-- minetest.chat_send_all(puncher:get_player_name()..' has rung the bell!')
 	end,
-
 	after_place_node = function(pos, placer)
 		if( placer ~= nil ) then
 			-- minetest.chat_send_all(placer:get_player_name()..' has placed a new bell at '..tostring( minetest.pos_to_string( pos )));
@@ -162,15 +127,13 @@ minetest.register_node('artifacts:bell', {
 		table.insert( bell_positions, pos );
 		save_bell_positions( placer );
 	end,
-
 	after_dig_node = function(pos, oldnode, oldmetadata, digger)
 		--if( digger ~= nil ) then
 			-- minetest.chat_send_all(digger:get_player_name()..' has removed the bell at '..tostring( minetest.pos_to_string( pos )));
 		--end
-
 		local found = 0;
 		-- actually remove the bell from the list
-		for i,v in ipairs( bell_positions ) do
+		for i, v in ipairs( bell_positions ) do
 			if( v ~= nil and v.x == pos.x and v.y == pos.y and v.z == pos.z ) then
 				found = i;
 			end
@@ -181,5 +144,4 @@ minetest.register_node('artifacts:bell', {
 			save_bell_positions( digger );
 		end
 	end,
-
 })
