@@ -87,22 +87,22 @@ local function sfinv_get(self, player, context)
 
 
 
-	local formspec = "label[0.1,0.1; Health: " .. health .. " / 20]"..
-	"label[0.1,0.6; Thirst: " .. thirst .. " / 100]"..
-	"label[0.1,1.1; Hunger: " .. hunger .. " / 1000]"..
-	"label[0.1,1.6; Energy: " .. energy .. " / 1000]"..
-	"label[0.1,2.1; Body Temperature: " .. temperature .. " C]"..
-	"label[0.1,3.1; Move Speed: " .. move .. " % change]"..
-	"label[0.1,3.6; Jumping: " .. jump .. " % change]"..
+	local formspec = "label[0.1, 0.1; Health: " .. health .. " / 20]"..
+	"label[0.1, 0.6; Thirst: " .. thirst .. " / 100]"..
+	"label[0.1, 1.1; Hunger: " .. hunger .. " / 1000]"..
+	"label[0.1, 1.6; Energy: " .. energy .. " / 1000]"..
+	"label[0.1, 2.1; Body Temperature: " .. temperature .. " C]"..
+	"label[0.1, 3.1; Move Speed: " .. move .. " % change]"..
+	"label[0.1, 3.6; Jumping: " .. jump .. " % change]"..
 
-	"label[4,0.1; Heal Rate: " .. heal_rate .. " ]"..
-	"label[4,0.6; Thirst Rate: " .. thirst_rate .. " ]"..
-	"label[4,1.1; Hunger Rate: " .. hunger_rate .. " ]"..
-	"label[4,1.6; Recovery Rate: " .. recovery_rate .. " ]"..
-	"label[4,2.1; External Temperature: " .. enviro_temp .. " C]"..
-	"button[4,3.1;1,1;toggle_health_hud;HUD]"
+	"label[4, 0.1; Heal Rate: " .. heal_rate .. " ]"..
+	"label[4, 0.6; Thirst Rate: " .. thirst_rate .. " ]"..
+	"label[4, 1.1; Hunger Rate: " .. hunger_rate .. " ]"..
+	"label[4, 1.6; Recovery Rate: " .. recovery_rate .. " ]"..
+	"label[4, 2.1; External Temperature: " .. enviro_temp .. " C]"..
+	"button[4, 3.1;1, 1;toggle_health_hud;HUD]"
 	--..
-	--"textarea[0.5,5.1;6,6;;Active Effects:;"..active_list.." ]"
+	--"textarea[0.5, 5.1;6, 6;;Active Effects:;"..active_list.." ]"
 
 	return formspec
 end
@@ -484,7 +484,7 @@ if minetest.settings:get_bool("enable_damage") then
 		--run
 		if timer > interval then
 
-			for _,player in ipairs(minetest.get_connected_players()) do
+			for _, player in ipairs(minetest.get_connected_players()) do
 
 
 				local name = player:get_player_name()

@@ -9,7 +9,7 @@ A string name is used both for checks and is displayed on Char Tab (Lore)
 This string has an associated function.
 
 Effects List:
-Stored as string in the player meta. {{name, order},{name2, order},... }
+Stored as string in the player meta. {{name, order}, {name2, order}, ... }
 
 Run health function:
 Applies the health effect. Returns modifiers to main helath loop, runs
@@ -64,7 +64,7 @@ local function vomit(player, meta, repeat_min, repeat_max, delay_min, delay_max,
 
 	local randel = 0
 
-	for i=1, ranrep do
+	for i = 1, ranrep do
 		randel = randel + random(delay_min, delay_max)
 		minetest.after(randel, function()
 
@@ -103,13 +103,13 @@ local function stagger(player, repeat_min, repeat_max, delay_min, delay_max, sta
 	local ranrep = random(repeat_min, repeat_max)
 	local randel = 0
 
-	for i=1, ranrep do
+	for i = 1, ranrep do
 		randel = randel + random(delay_min, delay_max)
 		minetest.after(randel, function()
 			if not bed_rest.player[name] then
 				local xr = random(-stag, stag)
 				local zr = random(-stag, stag)
-				player:add_velocity({x=xr, y=0, z=zr})
+				player:add_velocity({x = xr, y = 0, z = zr})
 				--player_api.set_animation(player, "walk", 10) --doesn't work
 			end
 		end)
@@ -125,7 +125,7 @@ local function organ_failure(player, repeat_min, repeat_max, delay_min, delay_ma
 
 	local randel = 0
 
-	for i=1, ranrep do
+	for i = 1, ranrep do
 		randel = randel + random(delay_min, delay_max)
 		minetest.after(randel, function()
 
@@ -156,7 +156,7 @@ local function auditory_hallucination(player, repeat_min, repeat_max, delay_min,
 
 	local randel = 0
 
-	for i=1, ranrep do
+	for i = 1, ranrep do
 		randel = randel + random(delay_min, delay_max)
 		minetest.after(randel, function()
 
@@ -164,9 +164,9 @@ local function auditory_hallucination(player, repeat_min, repeat_max, delay_min,
 			-- happens after randel delay, so player may be gone
 			if pos == nil then return end
 
-			pos = {x=pos.x+random(-15,15), y=pos.y+random(-15,15), z=pos.z+random(-15,15)}
+			pos = {x = pos.x+random(-15, 15), y = pos.y+random(-15, 15), z = pos.z+random(-15, 15)}
 
-			minetest.sound_play("health_hallucinate", {to_player = name, pos = pos, gain = random(min_gain,max_gain)})
+			minetest.sound_play("health_hallucinate", {to_player = name, pos = pos, gain = random(min_gain, max_gain)})
 
 		end)
 	end
@@ -203,10 +203,10 @@ local function do_timer(meta, t_name, t_min, t_max)
 		local time = meta:get_int(t_name)
 		time = time - 1
 		if time <= 0 then
-			meta:set_int(t_name,0)
+			meta:set_int(t_name, 0)
 			return true
 		else
-			meta:set_int(t_name,time)
+			meta:set_int(t_name, time)
 			return false
 		end
 	end
@@ -223,14 +223,14 @@ local function extend_timer(meta, t_name, t_min, t_max)
 	if time <= 0 then
 		time = 0
 	end
-	meta:set_int(t_name,time)
+	meta:set_int(t_name, time)
 
 end
 
 --end timer, e.g. when removing an effect
 local function end_timer(meta, t_name)
 	local time = meta:get_int(t_name)
-	meta:set_int(t_name,0)
+	meta:set_int(t_name, 0)
 end
 
 
@@ -367,7 +367,7 @@ function HEALTH.food_poisoning(order, player, meta, effects_list, r_rate, mov, j
 		mov = mov - 2
 		jum = jum - 2
 		--some vomiting
-		if random()<0.3 then
+		if random() < 0.3 then
 			vomit(player, meta, 1, 3, 1, 10, 1, 5, 1, 5 )
 		end
 
@@ -377,7 +377,7 @@ function HEALTH.food_poisoning(order, player, meta, effects_list, r_rate, mov, j
 		mov = mov - 4
 		jum = jum - 4
 		--some vomiting
-		if random()<0.6 then
+		if random() < 0.6 then
 			vomit(player, meta, 1, 4, 1, 10, 1, 10, 1, 10 )
 		end
 
@@ -388,7 +388,7 @@ function HEALTH.food_poisoning(order, player, meta, effects_list, r_rate, mov, j
 		jum = jum - 20
 		--fever
 		if temperature <= 42 then
-			temperature = temperature + random(2,3)
+			temperature = temperature + random(2, 3)
 		end
 		--vomiting
 		vomit(player, meta, 1, 5, 1, 10, 5, 10, 5, 10 )
@@ -402,7 +402,7 @@ function HEALTH.food_poisoning(order, player, meta, effects_list, r_rate, mov, j
 		jum = jum - 30
 		--fever
 		if temperature <= 42 then
-			temperature = temperature + random(2,3)
+			temperature = temperature + random(2, 3)
 		end
 		--vomiting
 		vomit(player, meta, 5, 10, 1, 10, 5, 10, 5, 10 )
@@ -415,7 +415,7 @@ function HEALTH.food_poisoning(order, player, meta, effects_list, r_rate, mov, j
 	if do_timer(meta, "Food Poisoning", 3, 6) == true then
 		--small chance of worsening, otherwise recover
 
-		if random()<0.1 then
+		if random() < 0.1 then
 			local added_order = order + 1
 			if added_order > 4 then
 				added_order = 4
@@ -480,7 +480,7 @@ function HEALTH.fungal_infection(order, player, meta, effects_list, r_rate, mov,
 	--PROGRESSION (timers, conditionals, chance)
 	if do_timer(meta, "Fungal Infection", 6, 12) == true then
 		--small chance of worsening, otherwise recover
-		if random()<0.1 then
+		if random() < 0.1 then
 			local added_order = order + 1
 			if added_order > 4 then
 				added_order = 4
@@ -516,7 +516,6 @@ function HEALTH.dust_fever(order, player, meta, effects_list, r_rate, mov, jum, 
 		if temperature <= 39 then
 			temperature = temperature + 1
 		end
-
 	elseif order == 2 then
 		--slow recovery, movement
 		r_rate = r_rate - 8
@@ -526,7 +525,6 @@ function HEALTH.dust_fever(order, player, meta, effects_list, r_rate, mov, jum, 
 		if temperature <= 39 then
 			temperature = temperature + 1
 		end
-
 	elseif order == 3 then
 		--slow recovery, movement
 		r_rate = r_rate - 16
@@ -536,7 +534,6 @@ function HEALTH.dust_fever(order, player, meta, effects_list, r_rate, mov, jum, 
 		if temperature <= 40 then
 			temperature = temperature + 1
 		end
-
 	elseif order == 4 then
 		--slow recovery, movement
 		r_rate = r_rate - 32
@@ -553,7 +550,7 @@ function HEALTH.dust_fever(order, player, meta, effects_list, r_rate, mov, jum, 
 	--PROGRESSION (timers, conditionals, chance)
 	if do_timer(meta, "Dust Fever", 6, 12) == true then
 		--small chance of worsening, otherwise recover
-		if random()<0.1 then
+		if random() < 0.1 then
 			local added_order = order + 1
 			if added_order > 4 then
 				added_order = 4
@@ -617,7 +614,7 @@ function HEALTH.drunk(order, player, meta, effects_list, r_rate, mov, jum, h_rat
 		mov = mov - 10
 		jum = jum - 15
 		--vomit chance
-		if random()<0.5 then
+		if random() < 0.5 then
 			vomit(player, meta, 1, 3, 1, 10, 1, 5, 1, 5 )
 		end
 		--major staggering
@@ -637,10 +634,10 @@ function HEALTH.drunk(order, player, meta, effects_list, r_rate, mov, jum, h_rat
 		--vomiting and hypothermia
 		vomit(player, meta, 1, 5, 1, 10, 5, 10, 5, 10 )
 		if temperature >= 34 then
-			temperature = temperature - random(1,3)
+			temperature = temperature - random(1, 3)
 		end
 		--damage
-		if random()<0.25 then
+		if random() < 0.25 then
 			organ_failure(player, 1, 3, 1, 8, 2, 3)
 		end
 		--major staggering
@@ -730,7 +727,7 @@ function HEALTH.intestinal_parasites(order, player, meta, effects_list, r_rate, 
 	hun_rate = hun_rate - 6
 
 	--end chance
-	if random()<0.001 then
+	if random() < 0.001 then
 		update_list_swap(meta, effects_list, "Intestinal Parasites")
 	end
 
@@ -764,7 +761,7 @@ function HEALTH.tiku_high(order, player, meta, effects_list, r_rate, hun_rate, m
 		hun_rate = hun_rate - 2
 		mov = mov + 24
 		jum = jum + 12
-		if random()<0.1 then
+		if random() < 0.1 then
 			auditory_hallucination(player, 1, 3, 3, 10, 0.01, 0.02)
 		end
 
@@ -778,10 +775,10 @@ function HEALTH.tiku_high(order, player, meta, effects_list, r_rate, hun_rate, m
 		mov = mov + 36
 		jum = jum + 24
 		-- mild fever
-		if temperature < 38 and random()<0.3 then
-			temperature = temperature + random(2,3)
+		if temperature < 38 and random() < 0.3 then
+			temperature = temperature + random(2, 3)
 		end
-		if random()<0.1 then
+		if random() < 0.1 then
 			auditory_hallucination(player, 1, 4, 2, 10, 0.02, 0.08)
 		end
 
@@ -791,13 +788,13 @@ function HEALTH.tiku_high(order, player, meta, effects_list, r_rate, hun_rate, m
 			max_drunk = 3
 			meta:set_int("max_hangover", max_drunk)
 		end
-		r_rate = r_rate + 24
+		r_rate   = r_rate + 24
 		hun_rate = hun_rate - 8
-		mov = mov + 48
-		jum = jum + 45
+		mov      = mov + 48
+		jum      = jum + 45
 		-- mild fever
-		if temperature <= 38 and random()<0.6 then
-			temperature = temperature + random(2,3)
+		if temperature <= 38 and random() < 0.6 then
+			temperature = temperature + random(2, 3)
 		end
 		--time to go crazy
 		auditory_hallucination(player, 30, 60, 0.4, 1, 0.5, 4)
@@ -817,18 +814,18 @@ function HEALTH.tiku_high(order, player, meta, effects_list, r_rate, hun_rate, m
 
 		--  fever
 		if temperature <= 43 then
-			temperature = temperature + random(2,4)
+			temperature = temperature + random(2, 4)
 		end
 		--time to go crazy
 		auditory_hallucination(player, 30, 60, 0.5, 1, 1, 4)
 		--major staggering
 		stagger(player, 30, 60, 0.5, 1, 4)
 		--vomit chance
-		if random()<0.75 then
+		if random() < 0.75 then
 			vomit(player, meta, 1, 3, 1, 10, 1, 5, 1, 5 )
 		end
 		--damage
-		if random()<0.33 then
+		if random() < 0.33 then
 			organ_failure(player, 1, 5, 1, 8, 1, 2)
 		end
 
@@ -838,7 +835,7 @@ function HEALTH.tiku_high(order, player, meta, effects_list, r_rate, hun_rate, m
 	--PROGRESSION (timers, conditionals, chance)
 	if do_timer(meta, "Tiku High", 6, 12) == true then
 		--small chance of worsening, otherwise recover
-		if random()<0.1 then
+		if random() < 0.1 then
 			local added_order = order + 1
 			if added_order > 4 then
 				added_order = 4
@@ -887,7 +884,7 @@ function HEALTH.neurotoxicity(order, player, meta, effects_list, mov, jum)
 		--major staggering
 		stagger(player, 20, 30, 0.3, 1, 4)
 		--damage
-		if random()<0.05 then
+		if random() < 0.05 then
 			organ_failure(player, 1, 3, 1, 5, 1, 5)
 		end
 
@@ -898,7 +895,7 @@ function HEALTH.neurotoxicity(order, player, meta, effects_list, mov, jum)
 		--major staggering
 		stagger(player, 50, 60, 0.3, 1, 4)
 		--damage
-		if random()<0.25 then
+		if random() < 0.25 then
 			organ_failure(player, 1, 3, 1, 5, 1, 5)
 		end
 
@@ -939,7 +936,7 @@ function HEALTH.hepatotoxicity(order, player, meta, effects_list, mov, jum, r_ra
 
 	--APPLY SYMPTOMS
 	--you're fine until you really aren't
-	if random()<0.3 then
+	if random() < 0.3 then
 
 		if order == 1 then
 			vomit(player, meta, 2, 6, 0.75, 3, 1, 2, 5, 10 )
@@ -948,7 +945,7 @@ function HEALTH.hepatotoxicity(order, player, meta, effects_list, mov, jum, r_ra
 			r_rate = r_rate - 7
 			h_rate = h_rate - 1
 			--damage
-			if random()<0.05 then
+			if random() < 0.05 then
 				organ_failure(player, 1, 2, 1, 5, 5, 8)
 			end
 
@@ -959,7 +956,7 @@ function HEALTH.hepatotoxicity(order, player, meta, effects_list, mov, jum, r_ra
 			r_rate = r_rate - 15
 			h_rate = h_rate - 3
 			--damage
-			if random()<0.25 then
+			if random() < 0.25 then
 				organ_failure(player, 1, 2, 1, 5, 5, 8)
 			end
 
@@ -970,7 +967,7 @@ function HEALTH.hepatotoxicity(order, player, meta, effects_list, mov, jum, r_ra
 			r_rate = r_rate - 30
 			h_rate = h_rate - 6
 			--damage
-			if random()<0.5 then
+			if random() < 0.5 then
 				organ_failure(player, 1, 2, 1, 5, 5, 8)
 			end
 
@@ -1172,12 +1169,12 @@ function HEALTH.meta_stim(order, player, meta, effects_list, h_rate, r_rate, hun
 			end
 
 			--I am a GOD!
-			minetest.sound_play( {name="health_superpower", gain=1}, {pos=pos, max_hear_distance=20})
+			minetest.sound_play( {name = "health_superpower", gain = 1}, {pos = pos, max_hear_distance = 20})
 			minetest.add_particlespawner({
 				amount = 80,
 				time = 18,
-				minpos = {x=pos.x+7, y=pos.y+7, z=pos.z+7},
-				maxpos = {x=pos.x-7, y=pos.y-7, z=pos.z-7},
+				minpos = {x = pos.x+7, y = pos.y+7, z = pos.z+7},
+				maxpos = {x = pos.x-7, y = pos.y-7, z = pos.z-7},
 				minvel = {x = -5,  y = -5,  z = -5},
 				maxvel = {x = 5, y = 5, z = 5},
 				minacc = {x = -3, y = -3, z = -3},

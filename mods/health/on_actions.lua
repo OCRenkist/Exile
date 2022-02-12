@@ -115,8 +115,8 @@ local function quick_physics(player, name, health, energy, thirst, hunger, tempe
 	--apply player physics
 	--don't do in bed or it buggers the physics
 	if not bed_rest.player[name] then
-		player_monoids.speed:add_change(player, 1 + (mov/100), "health:physics")
-		player_monoids.jump:add_change(player, 1 + (jum/100), "health:physics")
+		player_monoids.speed:add_change(player, 1 + (mov / 100), "health:physics")
+		player_monoids.jump:add_change(player, 1 + (jum / 100), "health:physics")
 	end
 
 
@@ -228,7 +228,7 @@ if minetest.settings:get_bool("enable_damage") then
 
 		--run
 		if timer > interval then
-			for _,player in ipairs(minetest.get_connected_players()) do
+			for _, player in ipairs(minetest.get_connected_players()) do
 				local name = player:get_player_name()
 				local meta = player:get_meta()
 
@@ -269,7 +269,7 @@ if minetest.settings:get_bool("enable_damage") then
 				--Environmental temperature
 				local player_pos = player:get_pos()
 				local node_name = minetest.get_node(player_pos).name
-				local water = minetest.get_item_group(node_name,"water")
+				local water = minetest.get_item_group(node_name, "water")
 				player_pos.y = player_pos.y + 0.6 --adjust to body height (for radiant heat)
 				local enviro_temp = climate.get_point_temp(player_pos)
 				--being outside tolerance range will drain energy. When energy is drained will succumb.

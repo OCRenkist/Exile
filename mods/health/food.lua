@@ -20,7 +20,7 @@
 	#TODO: Test this ^^ after the cooking pot supports both tables
 ]]--
 local cook_rate = 6   -- speed of the cook timer; tenth of a minute seems fine
-dofile(minetest.get_modpath('health')..'/food_data.lua')
+dofile(minetest.get_modpath("health").."/food_data.lua")
 local function do_food_harm(user, nodename)
 	if not food_harm_table[nodename] then return end
 	local fht = food_harm_table[nodename]
@@ -112,7 +112,7 @@ minetest.after(1, function()
 			minetest.log("info", k)
 		end
 	end
-	minetest.log("info","-------")
+	minetest.log("info", "-------")
 	minetest.log("info", "Finalized list of bake_table entries:")
 	for k, v in pairs(bake_table) do
 		if not minetest.registered_nodes[k] then
@@ -128,18 +128,18 @@ minetest.after(1, function()
 			end
 		end
 	end
-	minetest.log("info","-------")
+	minetest.log("info", "-------")
 end)
 function exile_start_bake(pos)
 	local selfname = minetest.get_node(pos).name
 	local meta     = minetest.get_meta(pos)
-	selfname       = selfname:gsub("_cooked","") -- ensure we have the base name
+	selfname       = selfname:gsub("_cooked", "") -- ensure we have the base name
 	meta:set_int("baking", bake_table[selfname][2])
 	minetest.get_node_timer(pos):start(cook_rate)
 end
 function exile_bake(pos, elapsed)
 	local selfname    = minetest.get_node(pos).name
-	selfname          = selfname:gsub("_cooked","") -- ensure we have the base name
+	selfname          = selfname:gsub("_cooked", "") -- ensure we have the base name
 	local name_cooked = selfname.."_cooked"
 	local name_burned = selfname.."_burned"
 	local heat        = bake_table[selfname][1]
@@ -176,7 +176,7 @@ function exile_bake(pos, elapsed)
 			minetest.set_node(pos, {name = "air"})
 		end
 		--Smoke
-		minetest.sound_play("tech_fire_small",{pos = pos, max_hear_distance = 10, loop = false, gain = 0.1})
+		minetest.sound_play("tech_fire_small", {pos = pos, max_hear_distance = 10, loop = false, gain = 0.1})
 		minetest.add_particlespawner({
 		amount     = 2,
 		time       = 0.5,
