@@ -33,8 +33,8 @@ end
 
 
 ------------------------------
--- Seeds/seedling soil timers
---if the soil quality changes under the seed it will slow/speed the timer
+-- Seeds / seedling soil timers
+--if the soil quality changes under the seed it will slow / speed the timer
 local function seed_soil_response(pos)
 
 	local pos_under = {x = pos.x, y = pos.y - 1, z = pos.z}
@@ -102,7 +102,7 @@ local function grow_seed(pos, seed_name, plant_name, place_p2, timer_avg, elapse
 
 	--cannot grow indoors (unless a mushroom)
 	if minetest.get_item_group(plant_name, "mushroom") == 0 then
-		local light = minetest.get_natural_light({x=pos.x, y=pos.y + 1, z=pos.z}, 0.5)
+		local light = minetest.get_natural_light({x = pos.x, y = pos.y + 1, z = pos.z}, 0.5)
 		if not light or light < 13 then
 			return
 		end
@@ -191,7 +191,7 @@ end
 ---------------------------
 -- Save/restore seedling timers on dig/place
 --
-local on_dig_seedling = function(pos,node, digger)
+local on_dig_seedling = function(pos, node, digger)
 	if not digger then return false end
 
 	if minetest.is_protected(pos, digger:get_player_name()) then
@@ -230,7 +230,7 @@ end
 local on_place_seedling = function(itemstack, placer, pointed_thing)
 	local ground = minetest.get_node(pointed_thing.under)
 	local above = minetest.get_node(pointed_thing.above)
-	if minetest.get_item_group(ground.name,"sediment") == 0
+	if minetest.get_item_group(ground.name, "sediment") == 0
 		or above.name ~= "air" then
 			local udef = minetest.registered_nodes[ground.name]
 			if udef and udef.on_rightclick and
@@ -244,7 +244,7 @@ local on_place_seedling = function(itemstack, placer, pointed_thing)
 			end
 	end
 
-	return minetest.item_place_node(itemstack,placer,pointed_thing)
+	return minetest.item_place_node(itemstack, placer, pointed_thing)
 end
 
 -------------------------------------------------------------
@@ -350,7 +350,7 @@ for i in ipairs(plantlist) do
 				end
 			end,
 
-			on_timer = function(pos,elapsed)
+			on_timer = function(pos, elapsed)
 				local timer_min, timer_max = seed_soil_response(pos)
 				if not timer_min then
 					if minetest.get_node(pos).name ~= "ignore" then
@@ -436,7 +436,7 @@ for i in ipairs(plantlist) do
 				end
 			end,
 
-			on_timer = function(pos,elapsed)
+			on_timer = function(pos, elapsed)
 					local timer_min, timer_max = seed_soil_response(pos)
 					if not timer_min then
 						if minetest.get_node(pos).name ~= "ignore" then
@@ -519,7 +519,7 @@ for i in ipairs(plantlist) do
 			end
 		end,
 
-		on_timer = function(pos,elapsed)
+		on_timer = function(pos, elapsed)
 				local timer_min, timer_max = seed_soil_response(pos)
 				if not timer_min then
 					if minetest.get_node(pos).name ~= "ignore" then
@@ -847,14 +847,14 @@ minetest.register_node("nodes_nature:glow_worm", {
 --Extra effects
 
 --glowing mushroom
-minetest.override_item("nodes_nature:merki",{
+minetest.override_item("nodes_nature:merki", {
 	light_source = 2,
 	groups = {crumbly = 3, attached_node = 1, flammable = 1, mushroom = 1, temp_pass = 1, bioluminescent= 1}
 })
 
 
 -- tuber
-minetest.override_item("nodes_nature:anperla_seed",{
+minetest.override_item("nodes_nature:anperla_seed", {
 	tiles = {'nodes_nature_silt.png'},
 	node_box = {
 		type = "fixed",
@@ -869,7 +869,7 @@ minetest.override_item("nodes_nature:anperla_seed",{
 })
 
 --marbhan has a Neurotoxin
-minetest.override_item("nodes_nature:marbhan",{
+minetest.override_item("nodes_nature:marbhan", {
 	on_use = function(itemstack, user, pointed_thing)
 		--Similar to hemlock, which tastes musty or like mouse urine
 		minetest.chat_send_player(user:get_player_name(),
@@ -881,7 +881,7 @@ minetest.override_item("nodes_nature:marbhan",{
 
 		--toxin
 		if random() < 0.75 then
-			HEALTH.add_new_effect(user, {"Neurotoxicity", floor(random(1,4))})
+			HEALTH.add_new_effect(user, {"Neurotoxicity", floor(random(1, 4))})
 		end
 
 		--hp_change, thirst_change, hunger_change, energy_change, temp_change, replace_with_item
@@ -891,7 +891,7 @@ minetest.override_item("nodes_nature:marbhan",{
 
 
 --nebiyi has a Hepatotoxin
-minetest.override_item("nodes_nature:nebiyi",{
+minetest.override_item("nodes_nature:nebiyi", {
 	on_use = function(itemstack, user, pointed_thing)
 	--Flowers look a bit like oleander; it causes intense stomach pain
 	minetest.chat_send_player(user:get_player_name(),
@@ -903,7 +903,7 @@ minetest.override_item("nodes_nature:nebiyi",{
 
 		--toxin
 		if random() < 0.75 then
-			HEALTH.add_new_effect(user, {"Hepatotoxicity", floor(random(1,4))})
+			HEALTH.add_new_effect(user, {"Hepatotoxicity", floor(random(1 , 4))})
 		end
 
 		--hp_change, thirst_change, hunger_change, energy_change, temp_change, replace_with_item
@@ -913,7 +913,7 @@ minetest.override_item("nodes_nature:nebiyi",{
 
 
 --hakimi is antibacterial, antifungal
-minetest.override_item("nodes_nature:hakimi",{
+minetest.override_item("nodes_nature:hakimi", {
 	on_use = function(itemstack, user, pointed_thing)
 
 		--only cure mild
@@ -929,7 +929,7 @@ minetest.override_item("nodes_nature:hakimi",{
 })
 
 --merki is anti-parasitic
-minetest.override_item("nodes_nature:merki",{
+minetest.override_item("nodes_nature:merki", {
 	on_use = function(itemstack, user, pointed_thing)
 
 		if random()<0.15 then
@@ -948,7 +948,7 @@ minetest.override_item("nodes_nature:merki",{
 --------------------------------------
 --lambakap. is also a mushroom.
 --slow growing food and water source, main crop for longterm underground living.
-minetest.override_item("nodes_nature:lambakap",{
+minetest.override_item("nodes_nature:lambakap", {
 	light_source = 2,
 	node_box = {
 		type = "fixed",
@@ -967,7 +967,7 @@ minetest.override_item("nodes_nature:lambakap",{
 --reshedaar.  is also a mushroom.
 --slow growing fibre mushroom, main fibre crop for longterm underground living.
 --(can't be bioluminescent or conflicts with recipe)
-minetest.override_item("nodes_nature:reshedaar",{
+minetest.override_item("nodes_nature:reshedaar", {
 	--light_source = 2,
 	node_box = {
 		type = "fixed",
@@ -988,15 +988,15 @@ minetest.override_item("nodes_nature:reshedaar",{
 
 --Mahal. is also a mushroom.
 --slow growing woody mushroom, main stick crop for longterm underground living.
-minetest.override_item("nodes_nature:mahal",{
+minetest.override_item("nodes_nature:mahal", {
 	light_source = 2,
 	node_box = {
 		type = "fixed",
 		fixed = {
-			{-0.125, -0.5, -0.125, 0.125, -0.3125, 0.125}, -- NodeBox1
-			{-0.0625, -0.3125, -0.0625, 0.0625, 0.3125, 0.0625}, -- NodeBox2
-			{-0.125, 0.375, -0.125, 0.125, 0.5, 0.125}, -- NodeBox3
-			{-0.1875, 0.3125, -0.1875, 0.1875, 0.375, 0.1875}, -- NodeBox4
+			{-0.1250, -0.5000, -0.1250, 0.1250, -0.3125, 0.1250}, -- NodeBox1
+			{-0.0625, -0.3125, -0.0625, 0.0625,  0.3125, 0.0625}, -- NodeBox2
+			{-0.1250,  0.3750, -0.1250, 0.1250,  0.5000, 0.1250}, -- NodeBox3
+			{-0.1875,  0.3125, -0.1875, 0.1875,  0.3750, 0.1875}, -- NodeBox4
 		}
 	},
 	groups = {choppy = 3, mushroom = 1, woody_plant = 1, falling_node = 1, attached_node = 1, flammable = 1, flora = 1, temp_pass = 1, bioluminescent = 1}
@@ -1006,7 +1006,7 @@ minetest.override_item("nodes_nature:mahal",{
 --Bulk recipes
 
 --page spacing
-for i = 1,3,1 do
+for i = 1, 3 , 1 do
 crafting.register_recipe({
 	type = "threshing_spot",
 	output = "",

@@ -4,15 +4,15 @@
 --sedimentary rocks are of the weakly consolidated soft variety
 
 stone_list = {
-	{"sandstone", "Sandstone",3, "sediment", "nodes_nature:sand",},
-	{"siltstone", "Siltstone", 3, "sediment", "nodes_nature:silt",},
-	{"claystone", "Claystone", 3, "sediment", "nodes_nature:clay",},
-	{"conglomerate", "Conglomerate", 3,  "sediment", "nodes_nature:gravel",},
+	{"sandstone", "Sandstone", 3, "sediment", "nodes_nature:sand", },
+	{"siltstone", "Siltstone", 3, "sediment", "nodes_nature:silt", },
+	{"claystone", "Claystone", 3, "sediment", "nodes_nature:clay", },
+	{"conglomerate", "Conglomerate", 3,  "sediment", "nodes_nature:gravel", },
 }
 rock_list = {
 	{"limestone", "Limestone", 3},
 	{"ironstone", "Ironstone", 3},
-  {"granite", "Granite", 1},
+	{"granite", "Granite", 1},
 	{"basalt", "Basalt", 2},
 	{"gneiss", "Gneiss", 1},
 	{"jade", "Jade", 1},

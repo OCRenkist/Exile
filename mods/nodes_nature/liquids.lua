@@ -128,7 +128,7 @@ end
 --Drink Liquids with weild hand
 
 --make freshwater drinkable on click
-minetest.override_item("nodes_nature:freshwater_source",{
+minetest.override_item("nodes_nature:freshwater_source", {
 	on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
 		local meta = clicker:get_meta()
 		local thirst = meta:get_int("thirst")
@@ -144,7 +144,8 @@ minetest.override_item("nodes_nature:freshwater_source",{
 			meta:set_int("thirst", thirst)
 			--remove so don't get infinity water supply
 			minetest.set_node(pos, {name = "air"})
-			minetest.sound_play("nodes_nature_slurp",	{pos = pos, max_hear_distance = 3, gain = 0.25})
+			minetest.sound_play("nodes_nature_slurp",
+				{pos = pos, max_hear_distance = 3, gain = 0.25})
 
 			--food poisoning
 			local c = 0.005
@@ -172,7 +173,7 @@ minetest.override_item("nodes_nature:freshwater_source",{
 	end
 })
 
-minetest.override_item("nodes_nature:salt_water_source",{
+minetest.override_item("nodes_nature:salt_water_source", {
 	color = "#90ff95",
 	on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
 	   minetest.chat_send_player(clicker:get_player_name(),
@@ -180,7 +181,7 @@ minetest.override_item("nodes_nature:salt_water_source",{
 	end
 })
 
-minetest.override_item("nodes_nature:salt_water_flowing",{
+minetest.override_item("nodes_nature:salt_water_flowing", {
 			  color = "#99ff95",
 })
 
@@ -377,7 +378,8 @@ minetest.register_node("nodes_nature:lava_flowing", {
 	liquid_renewable = false,
 	damage_per_second = 4 * 2,
 	post_effect_color = {a = 191, r = 255, g = 64, b = 0},
-	groups = {igniter = 1,	not_in_creative_inventory = 1, temp_effect = 1, temp_pass = 1},
+	groups = {igniter = 1,
+		not_in_creative_inventory = 1, temp_effect = 1, temp_pass = 1},
 })
 
 
@@ -388,7 +390,8 @@ minetest.register_node("nodes_nature:lava_flowing", {
 --cool when next to a cooling node
 local cool_lava = function(pos, node)
 	minetest.set_node(pos, {name = "nodes_nature:basalt"})
-	minetest.sound_play("nodes_nature_cool_lava",	{pos = pos, max_hear_distance = 16, gain = 0.25})
+	minetest.sound_play("nodes_nature_cool_lava",
+		{pos = pos, max_hear_distance = 16, gain = 0.25})
 end
 
 minetest.register_abm({
@@ -416,7 +419,8 @@ local erupt = function(pos, aname)
 			height = height + 1
 			pos.y = pos.y + 1
 			minetest.set_node(pos, {name = "nodes_nature:lava_flowing"})
-			minetest.sound_play("nodes_nature_cool_lava",	{pos = pos, max_hear_distance = 16, gain = 0.25})
+			minetest.sound_play("nodes_nature_cool_lava",
+				{pos = pos, max_hear_distance = 16, gain = 0.25})
 			local posa = 	{x = pos.x, y = pos.y+1, z = pos.z}
 			aname = minetest.get_node(posa).name
 		else
@@ -449,7 +453,8 @@ local lava_melt = function(pos, node)
 			--cool vs erupt
 			if c<0.5 then
 				minetest.set_node(pos, {name = "nodes_nature:basalt"})
-				minetest.sound_play("nodes_nature_cool_lava",	{pos = pos, max_hear_distance = 16, gain = 0.25})
+				minetest.sound_play("nodes_nature_cool_lava",
+					{pos = pos, max_hear_distance = 16, gain = 0.25})
 				return
 			elseif c<0.75 then
 				erupt(pos, aname)
@@ -480,7 +485,8 @@ local lava_melt = function(pos, node)
 			end
 			--melt above
 			minetest.set_node(posa, {name = "nodes_nature:lava_source"})
-			minetest.sound_play("nodes_nature_cool_lava",	{pos = pos, max_hear_distance = 16, gain = 0.25})
+			minetest.sound_play("nodes_nature_cool_lava",
+				{pos = pos, max_hear_distance = 16, gain = 0.25})
 		end
 	end
 
@@ -495,7 +501,8 @@ local lava_melt = function(pos, node)
 			return
 		end
 		minetest.set_node(pos, {name = "nodes_nature:basalt"})
-		minetest.sound_play("nodes_nature_cool_lava",	{pos = pos, max_hear_distance = 16, gain = 0.25})
+		minetest.sound_play("nodes_nature_cool_lava",
+			{pos = pos, max_hear_distance = 16, gain = 0.25})
 		return
 	end
 

@@ -224,18 +224,18 @@ for i in ipairs(tree_list) do
 
 	--leaves
 	minetest.register_node("nodes_nature:"..treename.."_leaves", {
-		description = treedesc.." Leaves",
-		drawtype =  "plantlike",
+		description  = treedesc.." Leaves",
+		drawtype     =  "plantlike",
 		visual_scale = 1,
-		tiles ={"nodes_nature_"..treename.."_leaves.png" },
-		stack_max = minimal.stack_max_bulky * 3,
-		paramtype = "light",
-		paramtype2 = "meshoptions",
+		tiles = {"nodes_nature_"..treename.."_leaves.png" },
+		stack_max    = minimal.stack_max_bulky * 3,
+		paramtype    = "light",
+		paramtype2   = "meshoptions",
 		place_param2 = 4,
-		walkable = false,
+		walkable  = false,
 		climbable = true,
-		groups = {choppy = 3, flammable = 1, woody_plant = 1, leafdecay = 1, leafdecay_drop = 1},
-		sounds = nodes_nature.node_sound_leaves_defaults(),
+		groups    = {choppy = 3, flammable = 1, woody_plant = 1, leafdecay = 1, leafdecay_drop = 1},
+		sounds    = nodes_nature.node_sound_leaves_defaults(),
 		after_place_node = function(pos, placer, itemstack)
 			minetest.set_node(pos, {name = "nodes_nature:"..treename.."_leaves", param2 = 4, param3 = 1})
 		end,
@@ -257,21 +257,21 @@ for i in ipairs(tree_list) do
 		minetest.register_node("nodes_nature:"..fruitname, {
 			description = fruitdesc,
 			drawtype = "plantlike",
-			tiles = { "nodes_nature_"..fruitname..".png" },
+			tiles    = { "nodes_nature_"..fruitname..".png" },
 			inventory_image = "nodes_nature_"..fruitname..".png",
 			wield_image = "nodes_nature_"..fruitname..".png",
-			stack_max = minimal.stack_max_medium,
+			stack_max   = minimal.stack_max_medium,
 			visual_scale = 1,
-			paramtype = "light",
+			paramtype  = "light",
 			paramtype2 = "meshoptions",
 			place_param2 = p2_fruit or 2,
 			sunlight_propagates = true,
 			walkable = false,
 			selection_box = {
-				type = "fixed",
+				type  = "fixed",
 				fixed = selbox_fruit
 			},
-			groups = {dig_immediate=3, flammable=1, leafdecay = 3, leafdecay_drop = 1},
+			groups = {dig_immediate = 3, flammable = 1, leafdecay = 3, leafdecay_drop = 1},
 			sounds = nodes_nature.node_sound_defaults(),
 			after_place_node = function(pos, placer, itemstack)
 				minetest.set_node(pos, {name = "nodes_nature:"..fruitname, param2 = p2_fruit, param3 = 1})
@@ -309,30 +309,26 @@ end
 
 -------------------------------------------------
 --Special properties
-
 --maraka thorns
-minetest.override_item("nodes_nature:maraka_leaves",{damage_per_second = 1})
-
---tangkal fruit is good food, but bulky
-minetest.override_item("nodes_nature:tangkal_fruit",{stack_max = minimal.stack_max_medium/2})
-
---exile_experimental trees
-minetest.override_item("nodes_nature:sasaran_cone",{
-			  on_use = function(itemstack, user, pointed_thing)
-
-			     --food poisoning
-			     if random() < 0.08 then
-				HEALTH.add_new_effect(user, {"Food Poisoning", 1})
-			     end
-
-			     --hp_change, thirst_change, hunger_change, energy_change, temp_change, replace_with_item
-			     return HEALTH.use_item(itemstack, user, 0, 0, 1, 0, 0)
-
-			  end,
+minetest.override_item("nodes_nature:maraka_leaves", {
+	damage_per_second = 1
 })
-
-
-minetest.override_item("nodes_nature:kagum_pod",{
- light_source = 2,
- groups = {dig_immediate=3, flammable=1, leafdecay = 3, leafdecay_drop = 1, bioluminescent= 1},
+--tangkal fruit is good food, but bulky
+minetest.override_item("nodes_nature:tangkal_fruit", {
+	stack_max = minimal.stack_max_medium/2
+})
+--exile_experimental trees
+minetest.override_item("nodes_nature:sasaran_cone", {
+	on_use = function(itemstack, user, pointed_thing)
+		--food poisoning
+		if random() < 0.08 then
+			HEALTH.add_new_effect(user, {"Food Poisoning", 1})
+		end
+		--hp_change, thirst_change, hunger_change, energy_change, temp_change, replace_with_item
+		return HEALTH.use_item(itemstack, user, 0, 0, 1, 0, 0)
+	end,
+})
+minetest.override_item("nodes_nature:kagum_pod", {
+	light_source = 2,
+	groups = {dig_immediate = 3, flammable = 1, leafdecay = 3, leafdecay_drop = 1, bioluminescent = 1},
 })

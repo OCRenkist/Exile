@@ -31,7 +31,7 @@ local function flora_spread(pos, node)
 	end
 
 	--cannot grow indoors
-	local light = minetest.get_natural_light({x=pos.x, y=pos.y + 1, z=pos.z}, 0.5)
+	local light = minetest.get_natural_light({x = pos.x, y = pos.y + 1, z = pos.z}, 0.5)
 	if not light or light < 13 then
 		return
 	end
@@ -224,7 +224,7 @@ minetest.register_abm({
 		end
 
 		--remove in dark
-		local light = minetest.get_natural_light({x=pos.x, y=pos.y + 1, z=pos.z}, 0.5)
+		local light = minetest.get_natural_light({x = pos.x, y = pos.y + 1, z = pos.z}, 0.5)
 		if light ~= nil and light < 10 then
 			minetest.set_node(pos, {name = drop})
 			return

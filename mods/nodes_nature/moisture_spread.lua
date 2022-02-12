@@ -36,7 +36,7 @@ end
 
 --------------------------
 --move sources down, otherwise erosion leaves them stranded
-local function fall_water(pos,node)
+local function fall_water(pos, node)
 
 	local pos_under = {x = pos.x, y = pos.y - 1, z = pos.z}
 	local under_name = minetest.get_node(pos_under).name
@@ -170,7 +170,7 @@ end
 minetest.register_abm({
 	label = "snow accumulate",
 	nodenames = {"air", "nodes_nature:snow"},
-	neighbors = {"group:crumbly","group:cracky", "group:snappy"},
+	neighbors = {"group:crumbly", "group:cracky", "group:snappy"},
 	interval = 72,
 	chance = 770,
 	action = function(...)
