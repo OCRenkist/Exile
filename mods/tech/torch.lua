@@ -144,7 +144,7 @@ minetest.register_entity("tech:torch_entity", torch_entity)
 -------------------------------------------
 local function on_flood(pos, oldnode, newnode)
 	minetest.add_item(pos, ItemStack("tech:torch 1"))
-	-- Play flame - extinguish sound if liquid is not an 'igniter'
+	-- Play flame - extinguish sound if liquid is not an "igniter"
 	--[[
 	local nodedef = minetest.registered_items[newnode.name]
 	if not (nodedef and nodedef.groups and

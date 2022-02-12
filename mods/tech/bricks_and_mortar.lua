@@ -97,11 +97,13 @@ minetest.register_node("tech:quicklime", {
 		if water_type == 1 then
 			minetest.set_node(pos, {name = "tech:slaked_lime"})
 			minetest.set_node(p_water, {name = "air"})
-			minetest.sound_play("tech_boil",	{pos = pos, max_hear_distance = 8, gain = 1})
+			minetest.sound_play("tech_boil",
+				{pos = pos, max_hear_distance = 8, gain = 1})
 		elseif water_type == 2 then
 			minetest.set_node(pos, {name = "tech:slaked_lime_ruined"})
 			minetest.set_node(p_water, {name = "air"})
-			minetest.sound_play("tech_boil",	{pos = pos, max_hear_distance = 8, gain = 1})
+			minetest.sound_play("tech_boil",
+				{pos = pos, max_hear_distance = 8, gain = 1})
 		end
 	return false
 	end

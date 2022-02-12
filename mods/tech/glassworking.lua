@@ -341,7 +341,7 @@ minetest.register_node("tech:dry_potash_pot", {
 minetest.override_item("tech:clay_water_pot_potash",
 {
 	on_construct = function(pos)
-		minetest.get_node_timer(pos):start(math.random(10,20))
+		minetest.get_node_timer(pos):start(math.random(10, 20))
 	end,
 	on_timer = function(pos, elapsed)
 		if climate.get_point_temp(pos) > 100 then
@@ -515,13 +515,13 @@ minetest.register_node("tech:pane_green",
 	drawtype = "nodebox",
 	node_box = 
 	{
-		type = "fixed",
-		fixed = {{-1/2 + 1/10, -1/2, -1/32, 1/2 - 1/10, 1/2 - 2/10, 1/32}}, -- Modified from xpanes
+		type  = "fixed",
+		fixed = {{-1 / 2 + 1 / 10, -1 / 2, -1 / 32, 1 / 2 - 1 / 10, 1 / 2 - 2 / 10, 1 / 32}}, -- Modified from xpanes
 	},
-	stack_max = minimal.stack_max_medium * 2,
+	stack_max  = minimal.stack_max_medium * 2,
 	paramtype2 = "facedir",
 	groups = {cracky = 3, oddly_breakable_by_hand = 3},
-	use_texture_alpha = "blend",
+	use_texture_alpha   = "blend",
 	sunlight_propagates = true,
 	sounds = nodes_nature.node_sound_glass_defaults(),
 })
@@ -535,7 +535,7 @@ minetest.register_node("tech:pane_clear",
 	node_box = 
 	{
 		type = "fixed",
-		fixed = {{-1/2 + 1/10, -1/2, -1/32, 1/2 - 1/10, 1/2 - 2/10, 1/32}}, -- Modified from xpanes	
+		fixed = {{-1 / 2 + 1 / 10, -1 / 2, -1 / 32, 1 / 2 - 1 / 10, 1 / 2 - 2 / 10, 1 / 32}}, -- Modified from xpanes	
 	},
 	stack_max = minimal.stack_max_medium * 2,
 	paramtype2 = "facedir",
@@ -555,8 +555,8 @@ minetest.register_node("tech:window_green",
 	drawtype = "nodebox",
 	node_box = 
 	{
-		type = "fixed",
-		fixed = {{-1/2, -1/2, -1/32, 1/2, 1/2, 1/32}}, -- From xpanes
+		type  = "fixed",
+		fixed = {{-1 / 2, -1 / 2, -1 / 32, 1 / 2, 1 / 2, 1 / 32}}, -- From xpanes
 	},
 	stack_max = minimal.stack_max_medium * 2,
 	paramtype2 = "facedir",
@@ -575,7 +575,7 @@ minetest.register_node("tech:window_clear",
 	node_box = 
 	{
 		type = "fixed",
-		fixed = {{-1/2, -1/2, -1/32, 1/2, 1/2, 1/32}}, -- From xpanes
+		fixed = {{-1 / 2, -1 / 2, -1 / 32, 1 / 2, 1 / 2, 1 / 32}}, -- From xpanes
 	},
 	stack_max = minimal.stack_max_medium * 2,
 	paramtype2 = "facedir",
@@ -620,7 +620,7 @@ minetest.register_node("tech:glass_bottle_green", {
 	end,
 		--collect rain water
 	on_construct = function(pos)
-		minetest.get_node_timer(pos):start(math.random(30,60))
+		minetest.get_node_timer(pos):start(math.random(30 , 60))
 	end,
 	groups = {dig_immediate = 2, pottery = 1, temp_pass = 1},
 	sounds = nodes_nature.node_sound_stone_defaults(),
@@ -632,23 +632,23 @@ minetest.register_node("tech:glass_bottle_clear", {
 	description = "Clear Glass Bottle",
 	tiles = {"tech_clear_glass.png"},
 	inventory_image = "tech_bottle_clear_icon.png",
-	drawtype = "mesh",
-	mesh = "tech_bottle.obj",
+	drawtype  = "mesh",
+	mesh      = "tech_bottle.obj",
 	stack_max = minimal.stack_max_bulky * 2,
 	paramtype = "light",
-	liquids_pointable = true,
+	liquids_pointable  = true,
 	sunlight_prpagates = true,
 	on_use = function(itemstack, user, pointed_thing)
 		return liquid_store.on_use_empty_bucket(itemstack, user, pointed_thing)
 	end,
 		--collect rain water
 	on_construct = function(pos)
-		minetest.get_node_timer(pos):start(math.random(30,60))
+		minetest.get_node_timer(pos):start(math.random(30 , 60))
 	end,
 	groups = {dig_immediate = 2, pottery = 1, temp_pass = 1},
 	sounds = nodes_nature.node_sound_stone_defaults(),
 	use_texture_alpha = "blend",
-	selection_box = {-0.5, -0.5, -0.5, 0.5, 0.5, 0.5},
+	selection_box     = {-0.5, -0.5, -0.5, 0.5, 0.5, 0.5},
 
 })
 
@@ -657,10 +657,10 @@ minetest.register_node("tech:glass_bottle_clear", {
 -- For simplicity, crafts use charcoal as an ingredient, assuming its used for fuel somehow
 
 crafting.register_recipe({
-	type = "glass_furnace",
+	type   = "glass_furnace",
 	output = "tech:glass_bottle_green",
-	items = {"tech:green_glass_ingot", "tech:charcoal"},
-	level = 1,
+	items  = {"tech:green_glass_ingot", "tech:charcoal"},
+	level  = 1,
 	always_known = true,
 })
 
@@ -814,7 +814,8 @@ minetest.override_item("tech:glass_bottle_green_freshwater",
 
 			meta:set_int("thirst", thirst)
 			minetest.set_node(pos, {name = "tech:glass_bottle_green"})
-			minetest.sound_play("nodes_nature_slurp",	{pos = pos, max_hear_distance = 3, gain = 0.25})
+			minetest.sound_play("nodes_nature_slurp",
+				{pos = pos, max_hear_distance = 3, gain = 0.25})
 		end
 	end
 
@@ -877,7 +878,8 @@ minetest.override_item("tech:glass_bottle_clear_freshwater",
 
 			meta:set_int("thirst", thirst)
 			minetest.set_node(pos, {name = "tech:glass_bottle_clear"})
-			minetest.sound_play("nodes_nature_slurp",	{pos = pos, max_hear_distance = 3, gain = 0.25})
+			minetest.sound_play("nodes_nature_slurp",
+				{pos = pos, max_hear_distance = 3, gain = 0.25})
 		end
 	end
 

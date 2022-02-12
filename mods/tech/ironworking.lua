@@ -92,7 +92,8 @@ local function roast(pos, selfname, name, length, heat, smelt)
 				local n = minetest.get_node(p).name
 				--must drain into air or other slag mix
 				if n == 'air' or n == 'climate:air_temp' or n == 'tech:iron_and_slag' then
-					minetest.sound_play("nodes_nature_cool_lava",	{pos = pos, max_hear_distance = 8, gain = 0.1})
+					minetest.sound_play("nodes_nature_cool_lava",
+						{pos = pos, max_hear_distance = 8, gain = 0.1})
 					if n ~= 'tech:iron_and_slag' then
 						minetest.set_node(p, {name = 'tech:molten_slag_flowing'})
 						--only drain to one place (i.e. so they all drain the same amount)
@@ -320,7 +321,7 @@ minetest.register_node("tech:iron_ingot", {
 	stack_max = minimal.stack_max_bulky * 8,
 	paramtype = "light",
 	paramtype2 = "facedir",
-	groups = {falling_node = 1, dig_immediate=3, temp_pass = 1},
+	groups = {falling_node = 1, dig_immediate = 3, temp_pass = 1},
 	sounds = nodes_nature.node_sound_stone_defaults(),
 })
 
@@ -408,7 +409,8 @@ minetest.register_node("tech:molten_slag_source", {
 	end,
 	on_timer = function(pos, elapsed)
 		if math.random()>0.87 then
-			minetest.sound_play("nodes_nature_cool_lava",	{pos = pos, max_hear_distance = 8, gain = 0.1})
+			minetest.sound_play("nodes_nature_cool_lava",
+				{pos = pos, max_hear_distance = 8, gain = 0.1})
 			minetest.set_node(pos, {name = 'tech:slag'})
 			minetest.check_for_falling(pos)
 			return false
@@ -463,14 +465,16 @@ minetest.register_node("tech:molten_slag_flowing", {
 	liquid_renewable = false,
 	damage_per_second = 4 * 2,
 	post_effect_color = {a = 191, r = 255, g = 64, b = 0},
-	groups = {igniter = 1,	not_in_creative_inventory = 1, temp_effect = 1, temp_pass = 1},
+	groups = {igniter = 1,
+		not_in_creative_inventory = 1, temp_effect = 1, temp_pass = 1},
 	--cooling
 	on_construct = function(pos)
 		minetest.get_node_timer(pos):start(1)
 	end,
 	on_timer = function(pos, elapsed)
 		if math.random()>0.95 then
-			minetest.sound_play("nodes_nature_cool_lava",	{pos = pos, max_hear_distance = 8, gain = 0.1})
+			minetest.sound_play("nodes_nature_cool_lava",
+				{pos = pos, max_hear_distance = 8, gain = 0.1})
 			minetest.set_node(pos, {name = 'tech:slag'})
 			minetest.check_for_falling(pos)
 			return false

@@ -30,7 +30,7 @@ minetest.register_node("tech:broken_pottery", {
 
 -------------------------------------------------------------------
 local function water_pot(pos)
-	local light = minetest.get_natural_light({x=pos.x, y=pos.y + 1, z=pos.z}, 0.5)
+	local light = minetest.get_natural_light({x = pos.x, y = pos.y + 1, z = pos.z}, 0.5)
 	--collect rain
 	if light == 15 then
 		if climate.get_rain(pos, light) then
@@ -40,7 +40,7 @@ local function water_pot(pos)
 	else
 		--drain wet sediment into the pot
 		--or melt snow and ice
-		local posa = 	{x = pos.x, y = pos.y+1, z = pos.z}
+		local posa = {x = pos.x, y = pos.y + 1, z = pos.z}
 		local name_a = minetest.get_node(posa).name
 		if name_a == "air" then
 			return true
@@ -111,9 +111,9 @@ minetest.register_node("tech:clay_water_pot", {
 	end,
 		--collect rain water
 	on_construct = function(pos)
-		minetest.get_node_timer(pos):start(math.random(30,60))
+		minetest.get_node_timer(pos):start(math.random(30 , 60))
 	end,
-	on_timer =function(pos, elapsed)
+	on_timer = function(pos, elapsed)
 		return water_pot(pos)
 	end,
 	groups = {dig_immediate = 3, pottery = 1, temp_pass = 1},
@@ -147,7 +147,7 @@ minetest.register_node("tech:clay_water_pot_unfired", {
 			{-0.3125, 0.3125, -0.3125, 0.3125, 0.375, 0.3125}, -- NodeBox5
 		}
 	},
-	groups = {dig_immediate=3, temp_pass = 1, heatable = 20},
+	groups = {dig_immediate = 3, temp_pass = 1, heatable = 20},
 	sounds = nodes_nature.node_sound_stone_defaults(),
 	on_construct = function(pos)
 		--length(i.e. difficulty of firing), interval for checks (speed)
@@ -185,15 +185,15 @@ minetest.register_node("tech:clay_storage_pot_unfired", {
 				{-0.5, -0.25, -0.5, 0.5, 0.25, 0.5},
 			}
 		},
-	groups = {dig_immediate=3, temp_pass = 1, heatable = 20},
+	groups = {dig_immediate = 3, temp_pass = 1, heatable = 20},
 	sounds = nodes_nature.node_sound_stone_defaults(),
 	on_construct = function(pos)
 		--length(i.e. difficulty of firing), interval for checks (speed)
-		ncrafting.set_firing(pos, base_firing+5, firing_int)
+		ncrafting.set_firing(pos, base_firing + 5, firing_int)
 	end,
 	on_timer = function(pos, elapsed)
 		--finished product, length
-		return ncrafting.fire_pottery(pos, "tech:clay_storage_pot_unfired", "tech:clay_storage_pot", base_firing+5)
+		return ncrafting.fire_pottery(pos, "tech:clay_storage_pot_unfired", "tech:clay_storage_pot", base_firing + 5)
 	end,
 })
 
@@ -286,7 +286,7 @@ minetest.register_node("tech:clay_oil_lamp_unfired", {
 			{-0.0625, -0.3125, -0.25, 0.0625, -0.125, -0.1875}, -- handle
 		}
 	},
-	groups = {dig_immediate=3, temp_pass = 1, falling_node = 1, heatable = 20},
+	groups = {dig_immediate = 3, temp_pass = 1, falling_node = 1, heatable = 20},
 	sounds = nodes_nature.node_sound_stone_defaults(),
 	on_construct = function(pos)
 		--length(i.e. difficulty of firing), interval for checks (speed)
@@ -328,7 +328,7 @@ minetest.register_node("tech:clay_oil_lamp_unlit", {
 			{-0.0625, -0.3125, -0.25, 0.0625, -0.125, -0.1875}, -- handle
 		}
 	},
-	groups = {dig_immediate=3, pottery = 1, temp_pass = 1, falling_node = 1},
+	groups = {dig_immediate = 3, pottery = 1, temp_pass = 1, falling_node = 1},
 	sounds = nodes_nature.node_sound_stone_defaults(),
 	floodable = true,
 	on_flood = function(pos, oldnode, newnode)
@@ -360,9 +360,9 @@ minetest.register_node("tech:clay_oil_lamp_unlit", {
 		local fuel = meta:get_int("fuel")
 		if ist_name == "tech:vegetable_oil" then
 			if fuel and fuel < 1550 then
-				fuel = fuel + math.random(1450,1550)
+				fuel = fuel + math.random(1450 , 1550)
 				meta:set_int("fuel", fuel)
-				meta:set_string("infotext",fuel_string(fuel))
+				meta:set_string("infotext", fuel_string(fuel))
 				local name = clicker:get_player_name()
 				if not minetest.is_creative_enabled(name) then
 			 itemstack:take_item()
@@ -411,7 +411,7 @@ minetest.register_node("tech:clay_oil_lamp", {
 			{-0.0625, -0.3125, -0.25, 0.0625, -0.125, -0.1875}, -- handle
 		}
 	},
-	groups = {dig_immediate=3, pottery = 1, temp_pass = 1, falling_node = 1, not_in_creative_inventory = 1},
+	groups = {dig_immediate = 3, pottery = 1, temp_pass = 1, falling_node = 1, not_in_creative_inventory = 1},
 	sounds = nodes_nature.node_sound_stone_defaults(),
 	floodable = true,
 	on_flood = function(pos, oldnode, newnode)
@@ -424,10 +424,10 @@ minetest.register_node("tech:clay_oil_lamp", {
 	on_construct = function(pos)
 		minetest.get_node_timer(pos):start(5)
 	end,
-	on_timer =function(pos, elapsed)
+	on_timer = function(pos, elapsed)
 		local meta = minetest.get_meta(pos)
 		local fuel = meta:get_int("fuel")
-		meta:set_string("infotext",fuel_string(fuel))
+		meta:set_string("infotext", fuel_string(fuel))
 		if fuel < 1 then
 			minetest.swap_node(pos, {name = "tech:clay_oil_lamp_unlit"})
 			--minetest.check_for_falling(pos)
@@ -446,7 +446,7 @@ minetest.register_node("tech:clay_oil_lamp", {
 		minetest.swap_node(pos, {name = 'tech:clay_oil_lamp_unlit'})
 		if fuel then
 		   meta:set_int("fuel", fuel)
-		   meta:set_string("infotext",fuel_string(fuel))
+		   meta:set_string("infotext", fuel_string(fuel))
 		end
 		return itemstack
 	end,
@@ -581,7 +581,7 @@ liquid_store.register_stored_liquid(
 
 
 --make freshwater Pot drinkable on click
-minetest.override_item("tech:clay_water_pot_freshwater",{
+minetest.override_item("tech:clay_water_pot_freshwater", {
 	on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
 		local meta = clicker:get_meta()
 		local thirst = meta:get_int("thirst")
@@ -599,7 +599,8 @@ minetest.override_item("tech:clay_water_pot_freshwater",{
 
 			meta:set_int("thirst", thirst)
 			minetest.set_node(pos, {name = "tech:clay_water_pot"})
-			minetest.sound_play("nodes_nature_slurp",	{pos = pos, max_hear_distance = 3, gain = 0.25})
+			minetest.sound_play("nodes_nature_slurp",
+				{pos = pos, max_hear_distance = 3, gain = 0.25})
 		end
 	end
 })

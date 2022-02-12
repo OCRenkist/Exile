@@ -48,9 +48,9 @@ local pot_box = {
 	{0.3125, -0.0625, -0.0625, 0.4375, 0.0625, 0.0625}, -- NodeBox24
 }
 
-local pot_formspec = "size[8,4.1]"..
-	"list[current_name;main;0,0;8,2]"..
-	"list[current_player;main;0,2.3;8,4]"..
+local pot_formspec = "size[8 , 4.1]"..
+	"list[current_name;main;0 , 0;8 , 2]"..
+	"list[current_player;main;0 , 2.3;8 , 4]"..
 	"listring[current_name;main]"..
 	"listring[current_player;main]"
 
@@ -58,7 +58,7 @@ minetest.register_craftitem("tech:soup", {
 	description = "Soup",
 	inventory_image = "tech_vegetable_oil.png",
 	stack_max = minimal.stack_max_medium,
-	on_use = function(itemstack, user, pointed_thing)
+	on_use    = function(itemstack, user, pointed_thing)
 		return exile_eatdrink_playermade(itemstack, user)
 	end
 })
@@ -253,15 +253,15 @@ minetest.register_node("tech:cooking_pot_unfired", {
 		 "nodes_nature_clay.png",
 		 "nodes_nature_clay.png",
 		 "nodes_nature_clay.png"},
-	drawtype = "nodebox",
-	stack_max = minimal.stack_max_bulky,
-	paramtype = "light",
+	drawtype   = "nodebox",
+	stack_max  = minimal.stack_max_bulky,
+	paramtype  = "light",
 	paramtype2 = "facedir",
-	node_box = {
-		type = "fixed",
+	node_box   = {
+		type  = "fixed",
 		fixed = pot_box,
 	},
-	groups = {dig_immediate=3, temp_pass = 1, falling_node = 1, heatable = 20},
+	groups = {dig_immediate = 3, temp_pass = 1, falling_node = 1, heatable = 20},
 	sounds = nodes_nature.node_sound_stone_defaults(),
 	on_construct = function(pos)
 		ncrafting.set_firing(pos, ncrafting.base_firing, ncrafting.firing_int)
@@ -274,9 +274,9 @@ minetest.register_node("tech:cooking_pot_unfired", {
 })
 
 crafting.register_recipe({
-	type = "crafting_spot",
+	type   = "crafting_spot",
 	output = "tech:cooking_pot_unfired 1",
-	items = {"nodes_nature:clay_wet 4"},
-	level = 1,
+	items  = {"nodes_nature:clay_wet 4"},
+	level  = 1,
 	always_known = true,
 })

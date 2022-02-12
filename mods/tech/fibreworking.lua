@@ -59,7 +59,7 @@ local function retting(pos, name, length)
 	local retting = meta:get_int("retting")
 
 	--check if wet,
-	local node_a = minetest.get_node({x=pos.x, y=pos.y + 1, z=pos.z})
+	local node_a = minetest.get_node({x = pos.x, y = pos.y + 1, z = pos.z})
 
 	--check if wet,
 	if minetest.get_item_group(node_a.name, "water") > 0 then
@@ -89,7 +89,7 @@ minetest.register_node('tech:unretted_cana_bundle', {
 	description = 'Unretted Cana Bundle',
 	tiles = {"tech_unretted_cana_bundle.png"},
 	stack_max = minimal.stack_max_bulky * 2,
-	groups = {snappy=3, flammable=1},
+	groups = {snappy = 3, flammable = 1},
 	sounds = nodes_nature.node_sound_leaves_defaults(),
 	on_burn = function(pos)
 		if math.random()<0.5 then
@@ -115,7 +115,7 @@ minetest.register_node('tech:retted_cana_bundle', {
 	description = 'Retted Cana Bundle',
 	tiles = {"tech_retted_cana_bundle.png"},
 	stack_max = minimal.stack_max_bulky * 2,
-	groups = {snappy=3, flammable=1},
+	groups = {snappy = 3, flammable = 1},
 	sounds = nodes_nature.node_sound_leaves_defaults(),
 })
 

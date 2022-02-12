@@ -80,7 +80,7 @@ description = "Tang",
 		"tech_pottery.png"
 	},
 	drawtype  = "nodebox",
-	stack_max = 1,--minimal.stack_max_bulky,
+	stack_max = 1, --minimal.stack_max_bulky,
 	paramtype = "light",
 	node_box  = {
 		type  = "fixed",
@@ -124,7 +124,8 @@ description = "Tang",
 			meta:set_int("thirst", thirst)
 			meta:set_int("energy", energy)
 			minetest.set_node(pos, {name = "tech:clay_water_pot"})
-			minetest.sound_play("nodes_nature_slurp",	{pos = pos, max_hear_distance = 3, gain = 0.25})
+			minetest.sound_play("nodes_nature_slurp",
+				{pos = pos, max_hear_distance = 3, gain = 0.25})
 		end
 	end
 })
@@ -133,8 +134,8 @@ local on_dig_tang = function(pos, node, digger)
 	if minetest.is_protected(pos, digger:get_player_name()) then
 		return false
 	end
-	local meta    = minetest.get_meta(pos)
-	local ferment = meta:get_int("ferment")
+	local meta       = minetest.get_meta(pos)
+	local ferment    = meta:get_int("ferment")
 	local new_stack  = ItemStack("tech:tang_unfermented")
 	local stack_meta = new_stack:get_meta()
 	stack_meta:set_int("ferment", ferment)
@@ -148,9 +149,9 @@ local on_dig_tang = function(pos, node, digger)
 end
 --set saved
 local after_place_tang = function(pos, placer, itemstack, pointed_thing)
-	local meta       = minetest.get_meta(pos)
-	local stack_meta = itemstack:get_meta()
-	local ferment    = stack_meta:get_int("ferment")
+	local meta         = minetest.get_meta(pos)
+	local stack_meta   = itemstack:get_meta()
+	local ferment      = stack_meta:get_int("ferment")
 	if ferment > 0 then
 		meta:set_int("ferment", ferment)
 	end
@@ -166,11 +167,11 @@ description = "Tang (unfermented)",
 		"tech_pottery.png",
 		"tech_pottery.png"
 	},
-	drawtype = "nodebox",
-	stack_max = 1,--minimal.stack_max_bulky,
+	drawtype  = "nodebox",
+	stack_max = 1, --minimal.stack_max_bulky,
 	paramtype = "light",
-	node_box = {
-		type = "fixed",
+	node_box  = {
+		type  = "fixed",
 		fixed = {
 			{-0.2500,  0.3750, -0.2500, 0.2500,  0.5000, 0.2500}, -- NodeBox1
 			{-0.3750, -0.2500, -0.3750, 0.3750,  0.3125, 0.3750}, -- NodeBox2
@@ -194,8 +195,8 @@ description = "Tang (unfermented)",
 	after_place_node = function(pos, placer, itemstack, pointed_thing)
 		after_place_tang(pos, placer, itemstack, pointed_thing)
 	end,
-	on_timer =function(pos, elapsed)
-		local meta = minetest.get_meta(pos)
+	on_timer = function(pos, elapsed)
+		local meta    = minetest.get_meta(pos)
 		local ferment = meta:get_int("ferment")
 		if ferment < 1 then
 			minetest.set_node(pos, {name = "tech:tang"})

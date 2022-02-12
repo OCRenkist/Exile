@@ -36,7 +36,8 @@ local function can_smolder(pos, meta, fire_name, ash_name)
 			minetest.swap_node(pos, {name = ext_name})
 			meta:set_int("fuel", f)
 		end
-		minetest.sound_play("nodes_nature_cool_lava",	{pos = pos, max_hear_distance = 16, gain = 0.25})
+		minetest.sound_play("nodes_nature_cool_lava",
+			{pos = pos, max_hear_distance = 16, gain = 0.25})
 		return false
 	end
 	--check for the presence of air
@@ -62,7 +63,8 @@ local function can_burn_air(pos, meta, smolder_name, ash_name)
 			minetest.swap_node(pos, {name = ext_name})
 			meta:set_int("fuel", f)
 		end
-		minetest.sound_play("nodes_nature_cool_lava",	{pos = pos, max_hear_distance = 16, gain = 0.25})
+		minetest.sound_play("nodes_nature_cool_lava", 
+			{pos = pos, max_hear_distance = 16, gain = 0.25})
 		return false
 	end
 	--check for the presence of air
@@ -77,8 +79,9 @@ local function can_burn_air(pos, meta, smolder_name, ash_name)
 end
 --Particle Effects
 local function hearth_fire_on(pos)
-	if math.random()<0.6 then
-		minetest.sound_play("tech_fire_small",{pos = pos, max_hear_distance = 15, loop = false, gain = 0.2})
+	if math.random() < 0.6 then
+		minetest.sound_play("tech_fire_small",
+			{pos = pos, max_hear_distance = 15, loop = false, gain = 0.2})
 		--Smoke
 		minetest.add_particlespawner({
 			amount     = 4,
@@ -205,17 +208,18 @@ local function extinguish_fire(pos, puncher, ext_name)
 	local ist_name  = itemstack:get_name()
 	 -- make slabs/etc work too
 	local nn = "nodes_nature:"
-	ist_name = ist_name:gsub("stairs:slab_",nn)
-	ist_name = ist_name:gsub("stairs:stair_inner_",nn)
-	ist_name = ist_name:gsub("stairs:stair_outer_",nn)
-	ist_name = ist_name:gsub("stairs:stair_",nn)
+	ist_name = ist_name:gsub("stairs:slab_", nn)
+	ist_name = ist_name:gsub("stairs:stair_inner_", nn)
+	ist_name = ist_name:gsub("stairs:stair_outer_", nn)
+	ist_name = ist_name:gsub("stairs:stair_", nn)
 	if minetest.get_item_group(ist_name, "sediment") >= 1 then
 		--get meta and save to extinguished version
 		local meta = minetest.get_meta(pos)
 		local fuel = meta:get_int("fuel")
 		minetest.set_node(pos, {name = ext_name})
 		meta:set_int("fuel", fuel)
-		minetest.sound_play("nodes_nature_cool_lava",	{pos = pos, max_hear_distance = 16, gain = 0.25})
+		minetest.sound_play("nodes_nature_cool_lava",
+			{pos = pos, max_hear_distance = 16, gain = 0.25})
 	else
 		local hp = puncher:get_hp()
 		puncher:set_hp(hp - 1)
@@ -266,10 +270,10 @@ minetest.register_node("tech:small_wood_fire", {
 	temp_effect_max = wood_temp_max,
 	paramtype    = "light",
 	--walkable = false,
-	drop = "tech:wood_ash",
+	drop   = "tech:wood_ash",
 	groups = {crumbly = 1, igniter = 1, falling_node = 1,  temp_effect = 1, temp_pass = 1},
 	--damage_per_second = 1,
-	sounds = nodes_nature.node_sound_dirt_defaults(),
+	sounds   = nodes_nature.node_sound_dirt_defaults(),
 	on_punch = function(pos, node, puncher, pointed_thing)
 		extinguish_fire(pos, puncher, "tech:small_wood_fire_ext")
 	end,
@@ -280,7 +284,7 @@ minetest.register_node("tech:small_wood_fire", {
 		--fire effects..
 		minetest.get_node_timer(pos):start(math.random(base_burn_rate - 1 , base_burn_rate + 1))
 	end,
-	on_timer =function(pos, elapsed)
+	on_timer = function(pos, elapsed)
 		local meta = minetest.get_meta(pos)
 		local fuel = meta:get_int("fuel")
 		if fuel < 1 then
@@ -321,7 +325,7 @@ minetest.register_node("tech:large_wood_fire", {
 		--fire effects
 		minetest.get_node_timer(pos):start(math.random(base_burn_rate - 1 , base_burn_rate + 1))
 	end,
-	on_timer =function(pos, elapsed)
+	on_timer = function(pos, elapsed)
 		local meta = minetest.get_meta(pos)
 		local fuel = meta:get_int("fuel")
 		if fuel < 1 then
@@ -449,7 +453,7 @@ minetest.register_node("tech:small_charcoal_fire", {
 		--fire effects...more consistent burn.
 		minetest.get_node_timer(pos):start(base_burn_rate)
 	end,
-	on_timer =function(pos, elapsed)
+	on_timer = function(pos, elapsed)
 		local meta = minetest.get_meta(pos)
 		local fuel = meta:get_int("fuel")
 		if fuel < 1 then
