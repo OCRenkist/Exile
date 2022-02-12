@@ -3,11 +3,11 @@
 ----LIGHT METER----
 --get positon light
 local light_meter = function(user, pointed_thing)
-	local name =user:get_player_name()
-	local pos = user:get_pos()
+	local name = user:get_player_name()
+	local pos  = user:get_pos()
 	minetest.chat_send_player(name, minetest.colorize("#00ff00", "LIGHT MEASUREMENT:"))
 	local measure = ((minetest.get_node_light({x = pos.x, y = pos.y, z = pos.z})) or 0)
-	minetest.chat_send_player(name, minetest.colorize("#cc6600","LIGHT LEVEL = "..measure))
+	minetest.chat_send_player(name, minetest.colorize("#cc6600", "LIGHT LEVEL = "..measure))
 	--minetest.sound_play("ecobots2_tool_good", {gain = 0.2, pos = pos, max_hear_distance = 5})
 end
 minetest.register_craftitem("artifacts:light_meter", {
@@ -26,7 +26,7 @@ local thermometer = function(user, pointed_thing)
 	local pos  = user:get_pos()
 	minetest.chat_send_player(name, minetest.colorize("#00ff00", "AMBIENT TEMPERATURE MEASUREMENT:"))
 	local measure = climate.get_point_temp(pos)
-	minetest.chat_send_player(name, minetest.colorize("#cc6600","TEMPERATURE = "..measure))
+	minetest.chat_send_player(name, minetest.colorize("#cc6600", "TEMPERATURE = "..measure))
 	--minetest.sound_play("ecobots2_tool_good", {gain = 0.2, pos = pos, max_hear_distance = 5})
 end
 minetest.register_craftitem("artifacts:thermometer", {
@@ -54,7 +54,7 @@ local temp_probe = function(user, pointed_thing)
 	local pos  = user:get_pos()
 	minetest.chat_send_player(name, minetest.colorize("#00ff00", "OBJECT TEMPERATURE MEASUREMENT:"))
 	local measure = climate.get_point_temp(pointed_thing.under)
-	minetest.chat_send_player(name, minetest.colorize("#cc6600","TEMPERATURE = "..measure))
+	minetest.chat_send_player(name, minetest.colorize("#cc6600", "TEMPERATURE = "..measure))
 	--minetest.sound_play("ecobots2_tool_good", {gain = 0.2, pos = pos, max_hear_distance = 5})
 end
 minetest.register_craftitem("artifacts:temp_probe", {
@@ -83,7 +83,7 @@ local fuel_probe = function(user, pointed_thing)
 	local meta    = minetest.get_meta(pointed_thing.under)
 	local measure = meta:get_int("fuel")
 	if measure <= 0 then
-		minetest.chat_send_player(name, minetest.colorize("#cc6600","NOT MEASURABLE!"))
+		minetest.chat_send_player(name, minetest.colorize("#cc6600", "NOT MEASURABLE!"))
 	else
 		minetest.chat_send_player(name, minetest.colorize("#00ff00", "BURN UNITS REMAINING:"))
 		minetest.chat_send_player(name, minetest.colorize("#cc6600", measure))
@@ -114,8 +114,8 @@ local smelter_probe = function(user, pointed_thing)
 	local pos     = user:get_pos()
 	local meta    = minetest.get_meta(pointed_thing.under)
 	local measure = meta:get_int("roast")
-	if measure <= 0 or node_name ~= 'tech:iron_and_slag' then
-		minetest.chat_send_player(name, minetest.colorize("#cc6600","NOT MEASURABLE!"))
+	if measure <= 0 or node_name ~= "tech:iron_and_slag" then
+		minetest.chat_send_player(name, minetest.colorize("#cc6600", "NOT MEASURABLE!"))
 	else
 		minetest.chat_send_player(name, minetest.colorize("#00ff00", "SMELTING UNITS REMAINING:"))
 		minetest.chat_send_player(name, minetest.colorize("#cc6600", measure))
@@ -148,7 +148,7 @@ local potters_probe = function(user, pointed_thing)
 	local measure = meta:get_int("firing")
 
 	if measure <= 0 then
-		minetest.chat_send_player(name, minetest.colorize("#cc6600","NOT MEASURABLE!"))
+		minetest.chat_send_player(name, minetest.colorize("#cc6600", "NOT MEASURABLE!"))
 	else
 		minetest.chat_send_player(name, minetest.colorize("#00ff00", "FIRING UNITS REMAINING:"))
 		minetest.chat_send_player(name, minetest.colorize("#cc6600", measure))
@@ -180,7 +180,7 @@ local chefs_probe = function(user, pointed_thing)
 	local meta    = minetest.get_meta(pointed_thing.under)
 	local measure = meta:get_int("baking")
 	if measure <= 0 then
-		minetest.chat_send_player(name, minetest.colorize("#cc6600","NOT MEASURABLE!"))
+		minetest.chat_send_player(name, minetest.colorize("#cc6600", "NOT MEASURABLE!"))
 	else
 		minetest.chat_send_player(name, minetest.colorize("#00ff00", "COOKING UNITS REMAINING:"))
 		minetest.chat_send_player(name, minetest.colorize("#cc6600", measure))
@@ -212,7 +212,7 @@ local farmers_probe = function(user, pointed_thing)
 	local meta    = minetest.get_meta(pointed_thing.under)
 	local measure = meta:get_int("growth")
 	if measure <= 0 then
-		minetest.chat_send_player(name, minetest.colorize("#cc6600","NOT MEASURABLE!"))
+		minetest.chat_send_player(name, minetest.colorize("#cc6600", "NOT MEASURABLE!"))
 	else
 		minetest.chat_send_player(name, minetest.colorize("#00ff00", "GROWTH UNITS REMAINING:"))
 		minetest.chat_send_player(name, minetest.colorize("#cc6600", measure))
@@ -236,7 +236,7 @@ minetest.register_tool("artifacts:antiquorium_chisel", {
 		full_punch_interval = 1.0,
 		max_drop_level      = 3,
 		groupcaps = {
-			cracky = {times={[1] = 6.5, [2] = 5.5, [3] = 4.50}, uses = 3000, maxlevel = 3},
+			cracky = {times = {[1] = 6.5, [2] = 5.5, [3] = 4.50}, uses = 3000, maxlevel = 3},
 		},
 		damage_groups = {fleshy = 1},
 	},
@@ -270,14 +270,14 @@ local animal_probe = function(user, pointed_thing)
 		return
 	end
 	local ent     = pointed_thing.ref:get_luaentity()
-	local r_ent_e = mobkit.recall(ent,'energy')
-	local r_ent_a = mobkit.recall(ent,'age')
+	local r_ent_e = mobkit.recall(ent, "energy")
+	local r_ent_a = mobkit.recall(ent, "age")
 	if not r_ent_e or not r_ent_a then
 		return
 	end
-	local name =user:get_player_name()
+	local name = user:get_player_name()
 	minetest.chat_send_player(name, minetest.colorize("#00ff00", "ANIMAL CONDITION:"))
-	minetest.chat_send_player(name, minetest.colorize("#cc6600","Age: "..r_ent_a.. " sec    Energy: "..r_ent_e.." units"))
+	minetest.chat_send_player(name, minetest.colorize("#cc6600", "Age: "..r_ent_a.. " sec    Energy: "..r_ent_e.." units"))
 end
 minetest.register_craftitem("artifacts:animal_probe", {
 	description     = "Animal Probe",

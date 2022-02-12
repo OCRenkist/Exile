@@ -44,12 +44,12 @@ local function teleport_effects(target_pos, pos, player, player_name, regulator,
 	target_pos.y = target_pos.y + 0.5
 
 	--effects at source
-	minetest.sound_play( {name="artifacts_transport", gain=1}, {pos=pos, max_hear_distance=100})
+	minetest.sound_play( {name = "artifacts_transport", gain = 1}, {pos = pos, max_hear_distance = 100})
 	minetest.add_particlespawner({
 		amount = 15,
 		time = 0.75,
-		minpos = {x=pos.x, y=pos.y+0.3, z=pos.z},
-		maxpos = {x=pos.x, y=pos.y+2, z=pos.z},
+		minpos = {x = pos.x, y = pos.y+0.3, z = pos.z},
+		maxpos = {x = pos.x, y = pos.y+2, z = pos.z},
 		minvel = {x = 1,  y = -6,  z = 1},
 		maxvel = {x = -1, y = 2, z = -1},
 		minacc = {x = 0, y = -2, z = 0},
@@ -70,12 +70,12 @@ local function teleport_effects(target_pos, pos, player, player_name, regulator,
 
 
 	--effects at target
-	minetest.sound_play( {name="artifacts_transport", gain=1}, {pos=target_pos, max_hear_distance=100})
+	minetest.sound_play( {name = "artifacts_transport", gain = 1}, {pos = target_pos, max_hear_distance = 100})
 	minetest.add_particlespawner({
 		amount = 15,
 		time = 0.75,
-		minpos = {x=target_pos.x, y=target_pos.y+0.3, z=target_pos.z},
-		maxpos = {x=target_pos.x, y=target_pos.y+2, z=target_pos.z},
+		minpos = {x = target_pos.x, y = target_pos.y+0.3, z = target_pos.z},
+		maxpos = {x = target_pos.x, y = target_pos.y+2, z = target_pos.z},
 		minvel = {x = 1,  y = -6,  z = 1},
 		maxvel = {x = -1, y = 2, z = -1},
 		minacc = {x = 0, y = -2, z = 0},
@@ -91,9 +91,9 @@ local function teleport_effects(target_pos, pos, player, player_name, regulator,
 	--dangerous effects (super heated air)
 	if not regulator then
 		local node = minetest.get_node(target_pos).name
-		if node == 'air' then
-			--minetest.set_node(target_pos, {name = 'nodes_nature:lava_flowing'})
-			minetest.set_node(target_pos, {name = 'climate:air_temp'})
+		if node == "air" then
+			--minetest.set_node(target_pos, {name = "nodes_nature:lava_flowing"})
+			minetest.set_node(target_pos, {name = "climate:air_temp"})
 			local meta = minetest.get_meta(target_pos)
 			meta:set_float("temp", 3000)
 		end
@@ -104,11 +104,11 @@ local function teleport_effects(target_pos, pos, player, player_name, regulator,
 	--your teleporter pad
 	--means you get zapped instead of thrown to a random place,
 	-- which serves the purpose of a fail either way
-	if random ~= 'locked' then
+	if random ~= "locked" then
 
 		local dest_node = minetest.get_node(target_pos).name
 		local def = minetest.registered_nodes[dest_node]
-		if dest_node == 'ignore' or (def and def.walkable) then
+		if dest_node == "ignore" or (def and def.walkable) then
 			--potentially went into a solid
 			--return to origin
 			player:set_pos(origin)
@@ -163,16 +163,16 @@ local function check_teleport_dest(dest, pos, range, random)
 	local dest_top = minetest.get_node({ x = dest.x, y = dest.y+2, z = dest.z })
 
 	if random == "locked" then
-		if dest_bot.name ~= 'ignore'
-		and dest_bot.name ~= 'artifacts:transporter_pad'
-		and dest_bot.name ~= 'artifacts:transporter_pad_charging'
-		and dest_bot.name ~= 'artifacts:transporter_pad_active' then
+		if dest_bot.name ~= "ignore"
+		and dest_bot.name ~= "artifacts:transporter_pad"
+		and dest_bot.name ~= "artifacts:transporter_pad_charging"
+		and dest_bot.name ~= "artifacts:transporter_pad_active" then
 			dest_ok = false
 			return dest_ok
 		end
 	end
 
-	if dest_mid.name ~= 'ignore' and dest_mid.name ~= 'air' then
+	if dest_mid.name ~= "ignore" and dest_mid.name ~= "air" then
 		local def = minetest.registered_nodes[dest_mid.name]
 		if def and def.walkable then
 			dest_ok = false
@@ -180,7 +180,7 @@ local function check_teleport_dest(dest, pos, range, random)
 		end
 	end
 
-	if dest_top.name ~= 'ignore' and dest_top.name ~= 'air' then
+	if dest_top.name ~= "ignore" and dest_top.name ~= "air" then
 		local def = minetest.registered_nodes[dest_top.name]
 		if def and def.walkable then
 			dest_ok = false
@@ -202,7 +202,7 @@ local function find_random_dest(pos)
 
 	local cnt = 0
 	while cnt < 30 do
-		local randpos = {x = pos.x + rand(-r,r), y = pos.y + rand(-r, r), z = pos.z + rand(-r,r)}
+		local randpos = {x = pos.x + rand(-r, r), y = pos.y + rand(-r, r), z = pos.z + rand(-r, r)}
 		local dest_ok = check_teleport_dest(randpos, pos, MIN_DIST, true)
 		if dest_ok then
 			target_pos = randpos
@@ -268,7 +268,7 @@ end
 local function get_transporter_target(pos, stabilizer)
 
 	local meta = minetest.get_meta(pos)
-	local target = meta:get_string('target_pos')
+	local target = meta:get_string("target_pos")
 
 
 	--no pre-saved target, go to random
@@ -480,10 +480,10 @@ local function set_from_key(itemstack, placer, pointed_thing)
 			player_meta:set_string("tmp_target_pos", posstring)
 
 			minetest.show_formspec(player_name, "set_from_trans_key",
-					"size[10,2.5]" ..
-					"label[1,1;Target name: "..target_name.."]"..
-					"button_exit[0.7,2;3,1;cancel;Cancel]"..
-					"button_exit[3.7,2;5,1;ok;Bond Transporter to Target]" )
+					"size[10, 2.5]" ..
+					"label[1, 1;Target name: "..target_name.."]"..
+					"button_exit[0.7, 2;3, 1;cancel;Cancel]"..
+					"button_exit[3.7, 2;5, 1;ok;Bond Transporter to Target]" )
 
 		elseif posstring == "" then
 			minetest.chat_send_player(player_name, minetest.colorize("#cc6600", "KEY IS BLANK!: use leftclick to save this location"))
@@ -513,7 +513,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 		meta_tran:set_string("infotext", infotext.. "\nDestination: "..target_name)
 
 		local player_name = player:get_player_name()
-		minetest.sound_play( 'artifacts_key', { pos = pos_tran, gain = 1, max_hear_distance = 5,})
+		minetest.sound_play( "artifacts_key", { pos = pos_tran, gain = 1, max_hear_distance = 5, })
 		minetest.chat_send_player(player_name, minetest.colorize("#00ff00", "TRANSPORTER DESTINATION SET TO: "..target_name.." at "..target_pos))
 		minetest.sound_play("artifacts_transport_fail", {pos = pos, gain = 1, max_hear_distance = 6})
 
@@ -558,10 +558,10 @@ local function save_to_key(itemstack, player, pointed_thing)
 			--minetest.chat_send_player(player_name, minetest.colorize("#cc6600", "KEY ALREADY BONDED: use rightclick to set transporter to this key's location"))
 			local target_name = meta:get_string("target_name")
 			minetest.show_formspec(player_name, "wipe_trans_key",
-					"size[10,2.5]" ..
-					"label[1,1;Key's target name: "..target_name.."]"..
-					"button_exit[0.7,2;3,1;cancel;Cancel]"..
-					"button_exit[3.7,2;5,1;ok;Wipe Key]" )
+					"size[10, 2.5]" ..
+					"label[1, 1;Key's target name: "..target_name.."]"..
+					"button_exit[0.7, 2;3, 1;cancel;Cancel]"..
+					"button_exit[3.7, 2;5, 1;ok;Wipe Key]" )
 			return
 
 		elseif posstring == "" then
@@ -575,17 +575,17 @@ local function save_to_key(itemstack, player, pointed_thing)
 			local tran_name = meta_tran:get_string("tran_name")
 			if tran_name == "" then
 				minetest.show_formspec(player_name, "create_transporter_key_nameless",
-						"size[10,2.5]" ..
-						"field[1,1;8,1;name;Destination name:;".."]"..
-						"button_exit[0.7,2;3,1;cancel;Cancel]"..
-						"button_exit[3.7,2;5,1;ok;Create Bonded Key]" )
+						"size[10, 2.5]" ..
+						"field[1, 1;8, 1;name;Destination name:;".."]"..
+						"button_exit[0.7, 2;3, 1;cancel;Cancel]"..
+						"button_exit[3.7, 2;5, 1;ok;Create Bonded Key]" )
 				return itemstack
 			else
 				minetest.show_formspec(player_name, "create_transporter_key",
-						"size[10,2.5]" ..
-						"label[1,1;Destination name: "..tran_name.."]"..
-						"button_exit[0.7,2;3,1;cancel;Cancel]"..
-						"button_exit[3.7,2;5,1;ok;Create Bonded Key]" )
+						"size[10, 2.5]" ..
+						"label[1, 1;Destination name: "..tran_name.."]"..
+						"button_exit[0.7, 2;3, 1;cancel;Cancel]"..
+						"button_exit[3.7, 2;5, 1;ok;Create Bonded Key]" )
 				return itemstack
 			end
 		end
@@ -597,8 +597,8 @@ end
 minetest.register_on_player_receive_fields(function(player, formname, fields)
 	if formname == "wipe_trans_key" and (fields.ok or fields.key_enter) then
 		local player_name = player:get_player_name()
-		local stack=player:get_wielded_item()
-		local meta=stack:get_meta()
+		local stack = player:get_wielded_item()
+		local meta = stack:get_meta()
 
 		meta:set_string("target_pos", "")
 		meta:set_string("target_name", "target_name")
@@ -617,8 +617,8 @@ end)
 minetest.register_on_player_receive_fields(function(player, formname, fields)
 	if formname == "create_transporter_key_nameless" and fields.name and (fields.ok or fields.key_enter) then
 		local player_name = player:get_player_name()
-		local stack=player:get_wielded_item()
-		local meta=stack:get_meta()
+		local stack = player:get_wielded_item()
+		local meta = stack:get_meta()
 
 		local target = meta:get_string("tmp_target_pos")
 		meta:set_string("target_pos", target)
@@ -635,7 +635,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 
 		--set name and infotext of transporter
 		local meta_tran = minetest.get_meta(minetest.string_to_pos(target))
-		local infotext = meta_tran:get_string("infotext")
+		local infotext  = meta_tran:get_string("infotext")
 		meta_tran:set_string("infotext", infotext.. "\nName: "..target_name)
 		meta_tran:set_string("tran_name", target_name)
 
@@ -654,8 +654,8 @@ end)
 minetest.register_on_player_receive_fields(function(player, formname, fields)
 	if formname == "create_transporter_key" and (fields.ok or fields.key_enter) then
 		local player_name = player:get_player_name()
-		local stack=player:get_wielded_item()
-		local meta=stack:get_meta()
+		local stack = player:get_wielded_item()
+		local meta = stack:get_meta()
 
 		local target = meta:get_string("tmp_target_pos")
 		meta:set_string("target_pos", target)
@@ -722,9 +722,9 @@ end
 ------------------------------------------------------------------
 --NODES, ITEMS
 
-minetest.register_node('artifacts:transporter_pad', {
-	description = 'Transporter Pad',
-	tiles = {'artifacts_antiquorium.png'},
+minetest.register_node("artifacts:transporter_pad", {
+	description = "Transporter Pad",
+	tiles = {"artifacts_antiquorium.png"},
 	stack_max = minimal.stack_max_bulky,
 	drawtype = "nodebox",
 	paramtype = "light",
@@ -747,14 +747,14 @@ minetest.register_node('artifacts:transporter_pad', {
 })
 
 
-minetest.register_node('artifacts:transporter_pad_charging', {
-	description = 'Transporter Pad (Charging)',
-	tiles = {'artifacts_antiquorium.png^artifacts_moon_glass.png'},
+minetest.register_node("artifacts:transporter_pad_charging", {
+	description = "Transporter Pad (Charging)",
+	tiles = {"artifacts_antiquorium.png^artifacts_moon_glass.png"},
 	stack_max = minimal.stack_max_bulky,
 	drawtype = "nodebox",
 	paramtype = "light",
 	light_source = 3,
-	drop = 'artifacts:transporter_pad',
+	drop = "artifacts:transporter_pad",
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -782,13 +782,13 @@ minetest.register_node('artifacts:transporter_pad_charging', {
 		local tmp_dest = meta_tran:get_string("tmp_dest")
 		local tmp_random = meta_tran:get_string("tmp_random")
 
-		minetest.set_node(pos, {name = 'artifacts:transporter_pad_active'})
+		minetest.set_node(pos, {name = "artifacts:transporter_pad_active"})
 		minetest.sound_play("artifacts_transport_charged", {pos = pos, gain = 2, max_hear_distance = 20})
 		minetest.add_particlespawner({
 			amount = 15,
 			time = 0.75,
-			minpos = {x=pos.x, y=pos.y+0.3, z=pos.z},
-			maxpos = {x=pos.x, y=pos.y+2, z=pos.z},
+			minpos = {x = pos.x, y = pos.y+0.3, z = pos.z},
+			maxpos = {x = pos.x, y = pos.y+2, z = pos.z},
 			minvel = {x = 1,  y = -6,  z = 1},
 			maxvel = {x = -1, y = 2, z = -1},
 			minacc = {x = 0, y = -2, z = 0},
@@ -812,14 +812,14 @@ minetest.register_node('artifacts:transporter_pad_charging', {
 })
 
 
-minetest.register_node('artifacts:transporter_pad_active', {
-	description = 'Transporter Pad (active)',
-	tiles = {'artifacts_antiquorium.png^artifacts_sun_stone.png'},
+minetest.register_node("artifacts:transporter_pad_active", {
+	description = "Transporter Pad (active)",
+	tiles = {"artifacts_antiquorium.png^artifacts_sun_stone.png"},
 	stack_max = minimal.stack_max_bulky,
 	light_source = 6,
 	drawtype = "nodebox",
 	paramtype = "light",
-	drop = 'artifacts:transporter_pad',
+	drop = "artifacts:transporter_pad",
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -846,7 +846,7 @@ minetest.register_node('artifacts:transporter_pad_active', {
 		local tran_name = meta_tran:get_string("tran_name")
 		local infotext = meta_tran:get_string("infotext")
 
-		minetest.set_node(pos, {name = 'artifacts:transporter_pad'})
+		minetest.set_node(pos, {name = "artifacts:transporter_pad"})
 		minetest.sound_play("artifacts_transport_fail", {pos = pos, gain = 1, max_hear_distance = 6})
 
 		meta_tran:set_string("target_name", target_name)
@@ -859,10 +859,10 @@ minetest.register_node('artifacts:transporter_pad_active', {
 })
 
 
-minetest.register_node('artifacts:transporter_power', {
-	description = 'Transporter Power Core (charged)',
+minetest.register_node("artifacts:transporter_power", {
+	description = "Transporter Power Core (charged)",
 	tiles = {
-		'artifacts_sun_stone.png',
+		"artifacts_sun_stone.png",
 	},
 	light_source = 2,
 	stack_max = minimal.stack_max_bulky *2,
@@ -895,10 +895,10 @@ minetest.register_node('artifacts:transporter_power', {
 
 
 
-minetest.register_node('artifacts:transporter_power_dep', {
-	description = 'Transporter Power Core (depleted)',
+minetest.register_node("artifacts:transporter_power_dep", {
+	description = "Transporter Power Core (depleted)",
 	tiles = {
-		'artifacts_moon_glass.png',
+		"artifacts_moon_glass.png",
 	},
 	stack_max = minimal.stack_max_bulky *2,
 	drawtype = "nodebox",
@@ -934,9 +934,9 @@ minetest.register_node('artifacts:transporter_power_dep', {
 	end,
 })
 
-minetest.register_node('artifacts:transporter_focalizer', {
-	description = 'Transporter Focalizer',
-	tiles = {'artifacts_antiquorium.png'},
+minetest.register_node("artifacts:transporter_focalizer", {
+	description = "Transporter Focalizer",
+	tiles = {"artifacts_antiquorium.png"},
 	stack_max = minimal.stack_max_bulky,
 	drawtype = "nodebox",
 	paramtype = "light",
@@ -960,9 +960,9 @@ minetest.register_node('artifacts:transporter_focalizer', {
 	sounds = nodes_nature.node_sound_glass_defaults(),
 })
 
-minetest.register_node('artifacts:transporter_stabilizer', {
-	description = 'Transporter Stabilizer',
-	tiles = {'artifacts_antiquorium.png'},
+minetest.register_node("artifacts:transporter_stabilizer", {
+	description = "Transporter Stabilizer",
+	tiles = {"artifacts_antiquorium.png"},
 	stack_max = minimal.stack_max_bulky,
 	drawtype = "nodebox",
 	paramtype = "light",
@@ -982,9 +982,9 @@ minetest.register_node('artifacts:transporter_stabilizer', {
 	sounds = nodes_nature.node_sound_glass_defaults(),
 })
 
-minetest.register_node('artifacts:transporter_regulator', {
-	description = 'Transporter Regulator',
-	tiles = {'artifacts_antiquorium.png'},
+minetest.register_node("artifacts:transporter_regulator", {
+	description = "Transporter Regulator",
+	tiles = {"artifacts_antiquorium.png"},
 	stack_max = minimal.stack_max_bulky,
 	drawtype = "nodebox",
 	paramtype = "light",
@@ -1010,9 +1010,9 @@ minetest.register_node('artifacts:transporter_regulator', {
 
 
 
-minetest.register_tool('artifacts:transporter_key', {
-		description = 'Transporter Key',
-		inventory_image = 'artifacts_transporter_key.png',
+minetest.register_tool("artifacts:transporter_key", {
+		description = "Transporter Key",
+		inventory_image = "artifacts_transporter_key.png",
 		--groups = {},
 		on_use = save_to_key,
 		on_place = set_from_key,

@@ -10,7 +10,7 @@ minetest.register_node("artifacts:moon_glass", {
 	light_source = 5,
 	paramtype    = "light",
 	sounds       = nodes_nature.node_sound_glass_defaults(),
-	groups       = {cracky = 1,},
+	groups       = {cracky = 1, },
 	use_texture_alpha = "clip",
 })
 ----SUN STONE----
@@ -128,7 +128,7 @@ minetest.register_node("artifacts:antiquorium", {
 	tiles       = {"artifacts_antiquorium.png"},
 	stack_max   = minimal.stack_max_bulky *4,
 	sounds      = nodes_nature.node_sound_glass_defaults(),
-	groups      = {cracky = 1,},
+	groups      = {cracky = 1, },
 })
 ----ANTIQUORIUM LADDER----
 minetest.register_node("artifacts:antiquorium_ladder", {
@@ -174,9 +174,9 @@ doors.register_trapdoor("artifacts:trapdoor_antiquorium", {
 	sounds          = nodes_nature.node_sound_wood_defaults(),
 })
 ----TRAMPOLINE----
-minetest.register_node('artifacts:trampoline', {
-	description = 'Trampoline',
-	tiles       = {'artifacts_antiquorium_chest_top.png'},
+minetest.register_node("artifacts:trampoline", {
+	description = "Trampoline",
+	tiles       = {"artifacts_antiquorium_chest_top.png"},
 	stack_max   = minimal.stack_max_bulky,
 	drawtype    = "nodebox",
 	paramtype   = "light",
@@ -197,15 +197,15 @@ minetest.register_node('artifacts:trampoline', {
 	},
 })
 ----TRAMPOLINE----
-minetest.register_node('artifacts:conveyor', {
-	description  = 'Conveyor',
-	tiles        = {'artifacts_antiquorium_chest_top.png'},
+minetest.register_node("artifacts:conveyor", {
+	description  = "Conveyor",
+	tiles        = {"artifacts_antiquorium_chest_top.png"},
 	stack_max    = minimal.stack_max_medium *2,
 	drawtype     = "nodebox",
 	light_source = 2,
 	paramtype    = "light",
 	groups       = {slippery = 1000, oddly_breakable_by_hand = 3, temp_pass = 1},
-	sounds       = nodes_nature.node_sound_defaults({footstep = {name="artifacts_transport_fail", gain = 0.5}}),
+	sounds       = nodes_nature.node_sound_defaults({footstep = {name = "artifacts_transport_fail", gain = 0.5}}),
 	node_box     = {
 		type  = "fixed",
 		fixed = {

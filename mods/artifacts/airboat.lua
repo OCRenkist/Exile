@@ -1,60 +1,45 @@
 local random = math.random
-
 -- Functions
-
 local function get_sign(i)
-	if i == 0 then
+	if i  == 0 then
 		return 0
 	else
 		return i / math.abs(i)
 	end
 end
-
-
 local function get_velocity(v, yaw, y)
 	local x = -math.sin(yaw) * v
 	local z =  math.cos(yaw) * v
 	return {x = x, y = y, z = z}
 end
-
-
 local function get_v(v)
 	return math.sqrt(v.x ^ 2 + v.z ^ 2)
 end
-
-
-
-
-
 -- Airboat entity
-
 local airboat = {
 		initial_properties = {
-		physical = true,
+		physical     = true,
 		collide_with_objects = false, -- Workaround fix for a MT engine bug
 		collisionbox = {-0.9, 0.3, -0.9, 0.9, 1.7, 0.9},
-		visual = "wielditem",
-		visual_size = {x = 2.0, y = 2.0}, -- Scale up of nodebox is these * 1.5
-		textures = {"artifacts:airboat_nodebox"},
+		visual       = "wielditem",
+		visual_size  = {x = 2.0, y = 2.0}, -- Scale up of nodebox is these * 1.5
+		textures     = {"artifacts:airboat_nodebox"},
 	},
-
 	-- Custom fields
-	driver = nil,
+	driver  = nil,
 	removed = false,
-	v = 0,
-	vy = 0,
-	rot = 0,
-	auto = false,
+	v       = 0,
+	vy      = 0,
+	rot     = 0,
+	auto    = false,
 }
-
-
 function airboat.on_rightclick(self, clicker)
 	if not clicker or not clicker:is_player() then
 		return
 	end
 	local name = clicker:get_player_name()
 	local pos = clicker:get_pos()
-	if self.driver and name == self.driver then
+	if self.driver and name  == self.driver then
 		-- Detach
 		self.driver = nil
 		self.auto = false
@@ -90,21 +75,16 @@ function airboat.on_rightclick(self, clicker)
 		clicker:set_look_horizontal(self.object:get_yaw())
 	end
 end
-
-
 function airboat.on_activate(self, staticdata, dtime_s)
 	self.object:set_armor_groups({immortal = 1})
 end
-
-
 function airboat.on_punch(self, puncher)
 	if not puncher or not puncher:is_player() or self.removed then
 		return
 	end
-
 	local name = puncher:get_player_name()
 		local pos = puncher:get_pos()
-	if self.driver and name == self.driver then
+	if self.driver and name  == self.driver then
 		-- Detach
 		--only use on_rightclick
 		--[[
@@ -132,16 +112,12 @@ function airboat.on_punch(self, puncher)
 		end)
 	end
 end
-
-
 function airboat.on_step(self, dtime)
-	self.v = get_v(self.object:get_velocity()) * get_sign(self.v)
-	self.vy = self.object:get_velocity().y
+	self.v    = get_v(self.object:get_velocity()) * get_sign(self.v)
+	self.vy   = self.object:get_velocity().y
 	local pos = self.object:get_pos()
-
 	-- Controls
 	if self.driver then
-
 		local driver_objref = minetest.get_player_by_name(self.driver)
 		if driver_objref then
 			local ctrl = driver_objref:get_player_control()
@@ -165,46 +141,46 @@ function airboat.on_step(self, dtime)
 			end
 			if ctrl.left then
 				self.rot = self.rot + 0.005
-				if random()>0.98 then
+				if random() > 0.98 then
 					minetest.sound_play("artifacts_airboat_gear", {pos = pos, gain = 0.25, max_hear_distance = 6})
 				end
 			elseif ctrl.right then
 				self.rot = self.rot - 0.005
-				if random()>0.98 then
+				if random() > 0.98 then
 					minetest.sound_play("artifacts_airboat_gear", {pos = pos, gain = 0.25, max_hear_distance = 6})
 				end
 			end
 			if ctrl.jump then
 				self.vy = self.vy + 0.06
-				if random()>0.98 then
+				if random() > 0.98 then
 					minetest.sound_play("artifacts_airboat_gear", {pos = pos, gain = 0.25, max_hear_distance = 6})
 				end
 			elseif ctrl.sneak then
 				self.vy = self.vy - 0.06
-				if random()>0.98 then
+				if random() > 0.98 then
 					minetest.sound_play("artifacts_airboat_gear", {pos = pos, gain = 0.25, max_hear_distance = 6})
 				end
 			end
 		else
 			-- Player left server while driving
-			-- In MT 5.0.0 use 'airboat:on_detach_child()' to do this
+			-- In MT 5.0.0 use "airboat:on_detach_child()" to do this
 			self.driver = nil
 			self.auto = false
 			minetest.log("warning", "[airboat] Driver left server while" ..
-				" driving. This may cause some 'Pushing ObjectRef to" ..
-				" removed/deactivated object' warnings.")
+				" driving. This may cause some "Pushing ObjectRef to" ..
+				" removed/deactivated object" warnings.")
 		end
 	end
 
 	-- Early return for stationary vehicle
-	if self.v == 0 and self.rot == 0 and self.vy == 0 then
+	if self.v  == 0 and self.rot  == 0 and self.vy  == 0 then
 		self.object:set_pos(self.object:get_pos())
 		return
 	end
 
 	-- Reduction and limiting of linear speed
 	local s = get_sign(self.v)
-	self.v = self.v - 0.02 * s
+	self.v  = self.v - 0.02 * s
 	if s ~= get_sign(self.v) then
 		self.v = 0
 	end
@@ -224,7 +200,7 @@ function airboat.on_step(self, dtime)
 
 	-- Reduction and limiting of vertical speed
 	local sy = get_sign(self.vy)
-	self.vy = self.vy - 0.03 * sy
+	self.vy  = self.vy - 0.03 * sy
 	if sy ~= get_sign(self.vy) then
 		self.vy = 0
 	end
@@ -237,7 +213,7 @@ function airboat.on_step(self, dtime)
 	local p = self.object:get_pos()
 	p.y = p.y - 1.5
 	local def = minetest.registered_nodes[minetest.get_node(p).name]
-	if def and (def.liquidtype == "source" or def.liquidtype == "flowing") then
+	if def and (def.liquidtype  == "source" or def.liquidtype  == "flowing") then
 		new_acce = {x = 0, y = 10, z = 0}
 	end
 
@@ -256,7 +232,7 @@ minetest.register_entity("artifacts:airboat", airboat)
 minetest.register_craftitem("artifacts:airboat", {
 	description = "Airboat",
 	inventory_image = "artifacts_airboat_inv.png",
-	stack_max = 1,
+	stack_max   = 1,
 	wield_scale = {x = 4, y = 4, z = 4},
 	liquids_pointable = true,
 
@@ -309,18 +285,18 @@ minetest.register_node("artifacts:airboat_nodebox", {
 		"artifacts_airboat_back.png",
 	},
 	paramtype = "light",
-	drawtype = "nodebox",
-	node_box = {
-		type = "fixed",
+	drawtype  = "nodebox",
+	node_box  = {
+		type  = "fixed",
 		fixed = {
-			{-0.1875, -0.375, -0.1875, 0.1875, -0.3125, 0.25}, -- seat_floor
-			{-0.25, -0.1875, -0.1875, -0.1875, -0.0625, 0.1875}, -- seat_side_1
-			{0.1875, -0.1875, -0.1875, 0.25, -0.0625, 0.1875}, -- seat_side_2
-			{-0.25, -0.375, -0.25, 0.25, 0.125, -0.1875}, -- seat_side_back
-			{-0.25, -0.3125, 0.1875, 0.25, -0.125, 0.25}, -- seat_side_front
-			{-0.25, 0.125, -0.25, 0.25, 0.1875, 0.125}, -- seat_roof
-			{-0.5, 0.1875, -0.5, -0.125, 0.5, 0.5}, -- balloon
-			{0.125, 0.1875, -0.5, 0.5, 0.5, 0.5}, -- balloon2
+			{-0.1875, -0.3750, -0.1875,  0.1875, -0.3125,  0.2500}, -- seat_floor
+			{-0.2500, -0.1875, -0.1875, -0.1875, -0.0625,  0.1875}, -- seat_side_1
+			{ 0.1875, -0.1875, -0.1875,  0.2500, -0.0625,  0.1875}, -- seat_side_2
+			{-0.2500, -0.3750, -0.2500,  0.2500,  0.1250, -0.1875}, -- seat_side_back
+			{-0.2500, -0.3125,  0.1875,  0.2500, -0.1250,  0.2500}, -- seat_side_front
+			{-0.2500,  0.1250, -0.2500,  0.2500,  0.1875,  0.1250}, -- seat_roof
+			{-0.5000,  0.1875, -0.5000, -0.1250,  0.5000,  0.5000}, -- balloon
+			{ 0.1250,  0.1875, -0.5000,  0.5000,  0.5000,  0.5000}, -- balloon2
 		}
 	},
 	groups = {not_in_creative_inventory = 1},
