@@ -85,7 +85,7 @@ function liquid_store.on_use_empty_bucket(itemstack, user, pointed_thing)
 	local storeddef  = liquid_store.stored_liquids[node.name]
 	if liquiddef ~= nil
 	and node.name == liquiddef.source then
-		if check_protection(pointed_thing.under, user:get_player_name(),"take ".. node.name) then
+		if check_protection(pointed_thing.under, user:get_player_name(), "take ".. node.name) then
 			return nil
 		end
 		--find a registered stored liquid who has an empty that matches what we are using
@@ -107,7 +107,7 @@ function liquid_store.on_use_empty_bucket(itemstack, user, pointed_thing)
 		end
 		return new_wield
 	elseif storeddef ~= nil then
-		if check_protection(pointed_thing.under, user:get_player_name(),"take ".. node.name) then
+		if check_protection(pointed_thing.under, user:get_player_name(), "take ".. node.name) then
 			return nil
 		end
 		local giving_back = find_stored(itemstack:get_name(),

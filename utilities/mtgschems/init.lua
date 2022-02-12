@@ -519,11 +519,11 @@ mts_save("jungle_tree", {
 		_, _, _, _, _,
 	},
 	yslice_prob = {
-		{ypos=6, prob=191},
-		{ypos=7, prob=191},
-		{ypos=8, prob=191},
-		{ypos=9, prob=191},
-		{ypos=10, prob=191},
+		{ypos = 6, prob = 191},
+		{ypos = 7, prob = 191},
+		{ypos = 8, prob = 191},
+		{ypos = 9, prob = 191},
+		{ypos = 10, prob = 191},
 	},
 })
 
@@ -628,11 +628,11 @@ mts_save("jungle_tree_from_sapling", {
 		_, _, _, _, _,
 	},
 	yslice_prob = {
-		{ypos=6, prob=191},
-		{ypos=7, prob=191},
-		{ypos=8, prob=191},
-		{ypos=9, prob=191},
-		{ypos=10, prob=191},
+		{ypos = 6, prob = 191},
+		{ypos = 7, prob = 191},
+		{ypos = 8, prob = 191},
+		{ypos = 9, prob = 191},
+		{ypos = 10, prob = 191},
 	},
 })
 

@@ -125,7 +125,7 @@ lightning.strike = function(pos)
 		-- to make it appear hitting the node that will get set on fire, make sure
 		-- to make the texture lightning bolt hit exactly in the middle of the
 		-- texture (e.g. 127/128 on a 256x wide texture)
-		texture = "lightning_lightning_" .. rng:next(1,3) .. ".png",
+		texture = "lightning_lightning_" .. rng:next(1, 3) .. ".png",
 		-- 0.4.15+
 		glow = 14,
 	})
@@ -135,7 +135,7 @@ lightning.strike = function(pos)
 	-- damage nearby objects, player or not
 	for _, obj in ipairs(minetest.get_objects_inside_radius(pos, 5)) do
 		-- nil as param#1 is supposed to work, but core can't handle it.
-		obj:punch(obj, 1.0, {full_punch_interval = 1.0, damage_groups = {fleshy=8}}, nil)
+		obj:punch(obj, 1.0, {full_punch_interval = 1.0, damage_groups = {fleshy = 8}}, nil)
 	end
 
 
@@ -165,18 +165,18 @@ lightning.strike = function(pos)
 	if minetest.get_item_group(minetest.get_node({x = pos2.x, y = pos2.y - 1, z = pos2.z}).name, "liquid") < 1 then
 		if minetest.get_node(pos2).name == "air" then
 			-- only 1/4 of the time, something is changed
-			if rng:next(1,4) > 1 then
+			if rng:next(1, 4) > 1 then
 				return
 			end
 			-- very rarely, potentially cause a fire
-			if fire_enabled and rng:next(1,200) == 1 then
+			if fire_enabled and rng:next(1, 200) == 1 then
 				minetest.set_node(pos2, {name = "inferno:basic_flame"})
 			end
 		end
 	end
 
 	-- perform block modifications
-	if rng:next(1,10) > 1 then
+	if rng:next(1, 10) > 1 then
 		return
 	end
 	pos2.y = pos2.y - 1

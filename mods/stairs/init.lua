@@ -418,7 +418,7 @@ end
 
 
 -- Stair/slab registration function.
--- Nodes will be called stairs:{stair,slab}_<subname>
+-- Nodes will be called stairs:{stair, slab}_<subname>
 
 function stairs.register_stair_and_slab(subname, recipeitem, craft_station,
 	recycle, groups, images, desc_stair, desc_slab, stack_size,
@@ -427,11 +427,11 @@ function stairs.register_stair_and_slab(subname, recipeitem, craft_station,
 	local droptypesub = ""
 	if droptypemain ~= nil then
 		-- 50% chance to drop the whole node if no stair/slabs exist
-		droptype = { max_items = 1,items = {
+		droptype = { max_items = 1 , items = {
 				{rarity = 2, items = {droptypemain} }
 				}}
 		--Else remove the modname so we can build the stairs names if they do
-		droptypesub = string.split(droptypemain,":")[2]
+		droptypesub = string.split(droptypemain, ":")[2]
 	end
 	local stexist = minetest.registered_nodes["stairs:stair_"..droptypesub]
 	if stexist then droptype = "stairs:stair_"..droptypesub end

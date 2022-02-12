@@ -33,9 +33,9 @@ minetest.register_on_joinplayer(function(player)
 	local name = player:get_player_name()
 	local info = minetest.get_player_information(name)
 	if info.formspec_version > 1 then
-		formspec = formspec .. "background9[5,5;1,1;gui_formbg.png;true;10]"
+		formspec = formspec .. "background9[5, 5;1, 1;gui_formbg.png;true;10]"
 	else
-		formspec = formspec .. "background[5,5;1,1;gui_formbg.png;true]"
+		formspec = formspec .. "background[5, 5;1, 1;gui_formbg.png;true]"
 	end
 	player:set_formspec_prepend(formspec)
 
@@ -46,10 +46,10 @@ end)
 
 
 --[[
-function minimal.get_hotbar_bg(x,y)
+function minimal.get_hotbar_bg(x, y)
 	local out = ""
-	for i=0,7,1 do
-		out = out .."image["..x+i..","..y..";1,1;gui_hb_bg.png]"
+	for i = 0, 7, 1 do
+		out = out .."image["..x+i..", "..y..";1, 1;gui_hb_bg.png]"
 	end
 	return out
 end
@@ -59,24 +59,24 @@ end
 minetest.register_item(":", {
 	type = "none",
 	wield_image = "wieldhand.png",
-	wield_scale = {x=1,y=1,z=2.5},
+	wield_scale = {x = 1, y = 1, z = 2.5},
 	liquids_pointable = true,
 	tool_capabilities = {
 		full_punch_interval = minimal.hand_punch_int,
 		max_drop_level = minimal.hand_max_lvl,
 		groupcaps = {
-			choppy = {times={[3]=minimal.hand_chop}, uses=0, maxlevel=minimal.hand_max_lvl},
-			crumbly = {times={[3]=minimal.hand_crum}, uses=0, maxlevel=minimal.hand_max_lvl},
-			snappy = {times={[3]=minimal.hand_snap}, uses=0, maxlevel=minimal.hand_max_lvl},
-			oddly_breakable_by_hand = {times={[1]=minimal.hand_crum*minimal.t_scale1,[2]=minimal.hand_crum*minimal.t_scale2,[3]=minimal.hand_crum}, uses=0},
+			choppy = {times = {[3] = minimal.hand_chop}, uses = 0, maxlevel = minimal.hand_max_lvl},
+			crumbly = {times = {[3] = minimal.hand_crum}, uses = 0, maxlevel = minimal.hand_max_lvl},
+			snappy = {times = {[3] = minimal.hand_snap}, uses = 0, maxlevel = minimal.hand_max_lvl},
+			oddly_breakable_by_hand = {times = {[1] = minimal.hand_crum*minimal.t_scale1, [2] = minimal.hand_crum*minimal.t_scale2, [3] = minimal.hand_crum}, uses = 0},
 		},
-		damage_groups = {fleshy=minimal.hand_dmg},
+		damage_groups = {fleshy = minimal.hand_dmg},
 	}
 })
 
 
 --Custom small inventory
 minetest.register_on_joinplayer(function(player)
-	minetest.get_inventory({type="player", name=player:get_player_name()}):set_size("main", 16)
+	minetest.get_inventory({type = "player", name = player:get_player_name()}):set_size("main", 16)
 end
 )

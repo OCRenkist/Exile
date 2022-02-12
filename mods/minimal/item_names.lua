@@ -8,7 +8,7 @@ local hudbars_mod = minetest.get_modpath("hudbars")
 
 local function set_hud(player)
 	local player_name = player:get_player_name()
-	local off = {x=0, y=-70}
+	local off = {x = 0, y=-70}
 	if air_hud_mod or hud_mod then
 		off.y = off.y - 20
 	elseif hudbars_mod then
@@ -17,9 +17,9 @@ local function set_hud(player)
 	item_names[player_name] = {
 		hud = player:hud_add({
 			hud_elem_type = "text",
-			position = {x=0.5, y=1},
+			position = {x = 0.5, y = 1},
 			offset = off,
-			alignment = {x=0, y=0},
+			alignment = {x = 0, y = 0},
 			number = 0xFFFFFF,
 			text = "",
 		}),

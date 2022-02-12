@@ -29,7 +29,7 @@ end
 function sfinv.get_nav_fs(player, context, nav, current_idx)
 	-- Only show tabs if there is more than one page
 	if #nav > 1 then
-		return "tabheader[0,0;sfinv_nav_tabs;" .. table.concat(nav, ",") ..
+		return "tabheader[0, 0;sfinv_nav_tabs;" .. table.concat(nav, ", ") ..
 				";" .. current_idx .. ";true;false]"
 	else
 		return ""
@@ -37,21 +37,21 @@ function sfinv.get_nav_fs(player, context, nav, current_idx)
 end
 
 local theme_inv = [[
-		image[0,4.7;1,1;gui_hb_bg.png]
-		image[1,4.7;1,1;gui_hb_bg.png]
-		image[2,4.7;1,1;gui_hb_bg.png]
-		image[3,4.7;1,1;gui_hb_bg.png]
-		image[4,4.7;1,1;gui_hb_bg.png]
-		image[5,4.7;1,1;gui_hb_bg.png]
-		image[6,4.7;1,1;gui_hb_bg.png]
-		image[7,4.7;1,1;gui_hb_bg.png]
-		list[current_player;main;0,4.7;8,1;]
-		list[current_player;main;0,5.85;8,3;8]
+		image[0, 4.7;1, 1;gui_hb_bg.png]
+		image[1, 4.7;1, 1;gui_hb_bg.png]
+		image[2, 4.7;1, 1;gui_hb_bg.png]
+		image[3, 4.7;1, 1;gui_hb_bg.png]
+		image[4, 4.7;1, 1;gui_hb_bg.png]
+		image[5, 4.7;1, 1;gui_hb_bg.png]
+		image[6, 4.7;1, 1;gui_hb_bg.png]
+		image[7, 4.7;1, 1;gui_hb_bg.png]
+		list[current_player;main;0, 4.7;8, 1;]
+		list[current_player;main;0, 5.85;8, 3;8]
 	]]
 
 function sfinv.make_formspec(player, context, content, show_inv, size)
 	local tmp = {
-		size or "size[8,8.6]",
+		size or "size[8, 8.6]",
 		sfinv.get_nav_fs(player, context, context.nav_titles, context.nav_idx),
 		show_inv and theme_inv or "",
 		content

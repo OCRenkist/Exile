@@ -47,12 +47,12 @@ These are physical actions and interactions: steps, jumps, turns etc. here you'l
 
 Low level behavior definition:
 
-function mobkit.lq_bhv1(self,[optional additional persistent parameters])	-- enclosing function
+function mobkit.lq_bhv1(self, [optional additional persistent parameters])	-- enclosing function
 	...										-- optional definitions of additional persistent variables
-	local func=function(self)				-- enclosed function, self is mandatory and the only allowed parameter
+	local func = function(self)				-- enclosed function, self is mandatory and the only allowed parameter
 		...									-- actual function definition, remember to return true eventually
 	end
-	mobkit.queue_low(self,func)				-- this will queue the behavior at the time of lq_bhv1 call
+	mobkit.queue_low(self, func)				-- this will queue the behavior at the time of lq_bhv1 call
 end
 
 
@@ -63,12 +63,12 @@ Their job is tracking changes in the environment and managing low level behavior
 
 High level behavior definition:
 
-function mobkit.hq_bhv1(self,priority,[optional additional persistent parameters])	-- enclosing function
+function mobkit.hq_bhv1(self, priority, [optional additional persistent parameters])	-- enclosing function
 	...										-- optional definitions of additional persistent variables
-	local func=function(self)				-- enclosed function, self is mandatory and the only allowed parameter
+	local func = function(self)				-- enclosed function, self is mandatory and the only allowed parameter
 		...									-- actual function definition, remember to return true eventually
 	end
-	mobkit.queue_high(self,func,priority)				-- this will queue the behavior at the time of hq_bhv1 call
+	mobkit.queue_high(self, func, priority)				-- this will queue the behavior at the time of hq_bhv1 call
 end
 
 
@@ -85,15 +85,15 @@ If the new behavior supersedes the one currently executing, low level queue is p
 
 Common idioms:
 
-hq_bhv1(self,prty):
+hq_bhv1(self, prty):
 	...
-	hq_bhv2(self,prty)		-- bhv1 kicks off bhv2 with equal priority
+	hq_bhv2(self, prty)		-- bhv1 kicks off bhv2 with equal priority
 	return true				-- and ends,
 							-- bhv2 becomes active on the next engine step.
 
-hq_bhv1(self,prty):
+hq_bhv1(self, prty):
 	...
-	hq_bhv2(self,prty+1)	-- bhv1 kicks off bhv2 with higher priority
+	hq_bhv2(self, prty+1)	-- bhv1 kicks off bhv2 with higher priority
 							-- bhv2 takes over and when it ends, bhv1 resumes.
 
 
@@ -108,28 +108,28 @@ Contrary to what the name suggests, these functions needn't necessarily be too c
 
 Typical flow might look like this:
 
-if mobkit.timer(self,1) then 			-- returns true approx every second
+if mobkit.timer(self, 1) then 			-- returns true approx every second
 	local prty = mobkit.get_queue_priority(self)
 
 	if prty < 20
 		if ... then
-			hq_do_important_stuff(self,20)
+			hq_do_important_stuff(self, 20)
 			return
 		end
 	end
 
 	if prty < 10 then
 		if ... then
-			hq_do_something_else(self,10)
+			hq_do_something_else(self, 10)
 			return
 		elseif ... then
-			hq_do_this_instead(self,10)
+			hq_do_this_instead(self, 10)
 			return
 		end
 	end
 
 	if mobkit.is_queue_empty_high(self) then
-		hq_fool_around(self,0)
+		hq_fool_around(self, 0)
 	end
 end
 
@@ -164,7 +164,7 @@ end
 1.4 Entity definition
 ---------------------
 
-minetest.register_entity("mod:name",{
+minetest.register_entity("mod:name", {
 
 	-- required minetest api props
 
@@ -180,14 +180,14 @@ minetest.register_entity("mod:name",{
 
 	-- required mobkit props
 
-	timeout = [num],			-- entities are removed after this many seconds inactive
-								-- 0 is never
-								-- mobs having memory entries are not affected
+	timeout = [num], -- entities are removed after this many seconds inactive
+	                 -- 0 is never
+	                 -- mobs having memory entries are not affected
 
-	buoyancy = [num],			-- (0,1) - portion of collisionbox submerged
-								-- = 1 - controlled buoyancy (fish, submarine)
-								-- > 1 - drowns
-								-- < 0 - MC like water trampolining
+	buoyancy = [num], -- (0, 1) - portion of collisionbox submerged
+	                  -- = 1 - controlled buoyancy (fish, submarine)
+	                  -- > 1 - drowns
+	                  -- < 0 - MC like water trampolining
 
 	lung_capacity = [num], 		-- seconds
 	max_hp = [num],
@@ -200,11 +200,11 @@ minetest.register_entity("mod:name",{
 				-- or used by built in behaviors
 	physics = [function user defined] 		-- optional, overrides built in physics
 	animation = {
-		[name]={range={x=[num],y=[num]},speed=[num],loop=[bool]},		-- single
+		[name] = {range = {x = [num], y = [num]}, speed = [num], loop = [bool]},		-- single
 
-		[name]={														-- variant, animations are chosen randomly.
-				{range={x=[num],y=[num]},speed=[num],loop=[bool]},
-				{range={x=[num],y=[num]},speed=[num],loop=[bool]},
+		[name] = {														-- variant, animations are chosen randomly.
+				{range = {x = [num], y = [num]}, speed = [num], loop = [bool]},
+				{range = {x = [num], y = [num]}, speed = [num], loop = [bool]},
 				...
 			}
 		...
@@ -214,44 +214,44 @@ minetest.register_entity("mod:name",{
 
 		[name] = {								--single, more powerful. All fields but 'name' are optional
 			name = [string filename],
-			gain=[num or range],				--range is a table of the format {left_bound, right_bound}
-			fade=[num or range],
-			pitch=[num or range],
+			gain = [num or range],				--range is a table of the format {left_bound, right_bound}
+			fade = [num or range],
+			pitch = [num or range],
 			},
 
 		[name] = {								--variant, sound is chosen randomly
 			{
 			name = [string filename],
-			gain=[num or range],
-			fade=[num or range],
-			pitch=[num or range],
+			gain = [num or range],
+			fade = [num or range],
+			pitch = [num or range],
 			},
 			{
 			name = [string filename],
-			gain=[num or range],
-			fade=[num or range],
-			pitch=[num or range],
+			gain = [num or range],
+			fade = [num or range],
+			pitch = [num or range],
 			},
 			...
 		},
 		...
 	},
-	max_speed = [num],					-- m/s
-	jump_height = [num],				-- nodes/meters
-	view_range = [num],					-- nodes/meters
-	attack={range=[num],				-- range is distance between attacker's collision box center
-		damage_groups={fleshy=[num]}},	-- and the tip of the murder weapon in nodes/meters
-	armor_groups = {fleshy=[num]}
+	max_speed = [num], -- m/s
+	jump_height = [num], -- nodes/meters
+	view_range = [num], -- nodes/meters
+	attack = {range = [num], -- range is distance between attacker's collision box center
+		damage_groups = {fleshy = [num]}},	-- and the tip of the murder weapon in nodes/meters
+	armor_groups = {fleshy = [num]}
 })
 
 1.5 Exposed luaentity members
 
 Some frequently used entity fields to be accessed directly for convenience
 
-	self.dtime		-- max(dtime as passed to on_step,0.5) - limit of 0.05 to prevent jerkines on long steps.
+	self.dtime		-- max(dtime as passed to on_step, 0.5) - limit of 0.05 to prevent jerkines on long steps.
 	self.hp			-- hitpoints
 	self.isonground		-- true if pos.y remains unchanged for 2 consecutive steps
-	self.isinliquid		-- true if the node at foot level is drawtype=='liquid'
+	self.isinliquid		-- true if the node at foot level is drawtype =  = 'liquid'
 
 ------------
 2. Reference
@@ -259,35 +259,35 @@ Some frequently used entity fields to be accessed directly for convenience
 
 2.1 Utility Functions
 
-function mobkit.minmax(v,m)
-	-- v,n: numbers
-	-- returns v trimmed to <-m,m> range
+function mobkit.minmax(v, m)
+	-- v, n: numbers
+	-- returns v trimmed to <-m, m> range
 
-function mobkit.get_terrain_height(pos,steps)
+function mobkit.get_terrain_height(pos, steps)
 	-- recursively search for walkable surface at pos.
 	-- steps (optional) is how far from pos it gives up, expressed in nodes, default 3
 	-- Returns:
 		-- surface height at pos, or nil if not found
 		-- liquid flag: true if found surface is covered with liquid
 
-function mobkit.turn2yaw(self,tyaw,rate)
+function mobkit.turn2yaw(self, tyaw, rate)
 	-- gradually turns towards yaw
 	-- self: luaentity
 	-- tyaw: target yaw in radians
 	-- rate: turn rate in rads/s
 	--returns: true if facing tyaw; current yaw
 
-function mobkit.timer(self,s)
+function mobkit.timer(self, s)
 	-- returns true approx every s seconds
 	-- used to reduce execution of code that needn't necessarily be done on every engine step
 
-function mobkit.pos_shift(pos,vec)
+function mobkit.pos_shift(pos, vec)
 	-- convenience function
 	-- returns pos shifted by vec
 	-- vec needn't have all three components given, absent components are assumed zero.
-	-- e.g pos_shift(pos,{y=1}) is valid
+	-- e.g pos_shift(pos,{y = 1}) is valid
 
-function mobkit.pos_translate2d(pos,yaw,dist)
+function mobkit.pos_translate2d(pos, yaw, dist)
 	-- returns pos translated in the yaw direction by dist
 
 function mobkit.get_stand_pos(thing)
@@ -301,29 +301,29 @@ function mobkit.nodeatpos(pos)
 function mobkit.get_node_pos(pos)
 	-- returns center of the node that pos is inside
 
-function mobkit.get_nodes_in_area(pos1,pos2,[full])
+function mobkit.get_nodes_in_area(pos1, pos2, [full])
 	-- in basic mode returns a table of unique nodes within area indexed by node
-	-- in full=true mode returns a table of nodes indexed by pos
+	-- in full = true mode returns a table of nodes indexed by pos
 	-- works for up to 125 nodes.
 
-function mobkit.isnear2d(p1,p2,thresh)
+function mobkit.isnear2d(p1, p2, thresh)
 	-- returns true if pos p2 is within a square with center at pos p1 and radius thresh
 	-- y components are ignored
 
-function mobkit.is_there_yet2d(pos,dir,dest) -- obj positon; facing vector; destination position
+function mobkit.is_there_yet2d(pos, dir, dest) -- obj positon; facing vector; destination position
 	-- returns true if a position dest is behind position pos according to facing vector dir
 	-- (checks if dest is in the rear half plane as defined by pos and dir)
 	-- y components are ignored
 
-function mobkit.isnear3d(p1,p2,thresh)
+function mobkit.isnear3d(p1, p2, thresh)
 	-- returns true if pos p2 is within a cube with center at pos p1 and radius thresh
 
-function mobkit.dir_to_rot(v,rot)
+function mobkit.dir_to_rot(v, rot)
 	-- converts a 3d vector v to rotation like in set_rotation() object method
 	-- rot (optional) is current object rotation
 
 function mobkit.rot_to_dir(rot)
-	-- converts minetest rotation vector (pitch,yaw,roll) to direction unit vector
+	-- converts minetest rotation vector (pitch, yaw, roll) to direction unit vector
 
 function mobkit.is_alive(thing)
 	-- non essential, checks if thing exists in the world and is alive
@@ -336,18 +336,18 @@ function mobkit.exists(thing)
 	-- thing can be luaentity or objectref.
 	-- used for stored luaentities and objectrefs
 
-function mobkit.hurt(luaent,dmg)
+function mobkit.hurt(luaent, dmg)
 	-- decrease luaent.hp by dmg
 
-function mobkit.heal(luaent,dmg)
+function mobkit.heal(luaent, dmg)
 	-- increase luaent.hp by dmg
 
-function mobkit.get_spawn_pos_abr(dtime,intrvl,radius,chance,reduction)
+function mobkit.get_spawn_pos_abr(dtime, intrvl, radius, chance, reduction)
 	-- returns a potential spawn position at random intervals
 	-- intrvl: avg spawn attempt interval for every player
 	-- radius: spawn distance in nodes, active_block_range*16 is recommended
-	-- chance: (0,1) chance to spawn a mob if there are no other objects in area
-	-- reduction: (0,1) spawn chance is reduced by this factor for every object in range.
+	-- chance: (0, 1) chance to spawn a mob if there are no other objects in area
+	-- reduction: (0, 1) spawn chance is reduced by this factor for every object in range.
 	--usage:
 	minetest.register_globalstep(function(dtime)
 		local spawnpos = mobkit.get_spawn_pos_abr(...)
@@ -356,20 +356,20 @@ function mobkit.get_spawn_pos_abr(dtime,intrvl,radius,chance,reduction)
 		end
 	end)
 
-function mobkit.animate(self,anim)
+function mobkit.animate(self, anim)
 	-- makes an entity play an animation of name anim, or does nothing if not defined
 	-- anim is string, see entity definition
 	-- does nothing if the same animation is already running
 
-function mobkit.make_sound(self,sound)
+function mobkit.make_sound(self, sound)
 	-- sound is string, see entity definition
 	-- makes an entity play sound, or does nothing if not defined
 	--returns sound handle
 
-function mobkit.go_forward_horizontal(self,speed)
+function mobkit.go_forward_horizontal(self, speed)
 	-- sets an entity's horizontal velocity in yaw direction. Vertical velocity unaffected.
 
-function mobkit.drive_to_pos(self,tpos,speed,turn_rate,dist)
+function mobkit.drive_to_pos(self, tpos, speed, turn_rate, dist)
 	-- moves in facing direction while gradually turning towards tpos, returns true if in dist distance from tpos
 	-- tpos: target position
 	-- speed: in m/s
@@ -382,19 +382,19 @@ This represents mob long term memory
 Warning: Stuff in memory is serialized, never try to remember objectrefs or tables referencing them
 or the engine will crash.
 
-function mobkit.remember(self,key,val)
+function mobkit.remember(self, key, val)
 	-- premanently store a key, value pair
-function mobkit.forget(self,key)
+function mobkit.forget(self, key)
 	-- clears a memory entry
-function mobkit.recall(self,key)
+function mobkit.recall(self, key)
 	-- returns val associated with key
 
 -- Queue functions
 
-function mobkit.queue_high(self,func,priority)
+function mobkit.queue_high(self, func, priority)
 	-- only for use in behavior definitions, see 1.1.2
 
-function mobkit.queue_low(self,func)
+function mobkit.queue_low(self, func)
 	-- only for use in behavior definitions, see 1.1.1
 
 
@@ -415,9 +415,9 @@ function mobkit.vitals(self)
 	-- default drowning and fall damage, call it before hp check
 function mobkit.get_nearby_player(self)
 	-- returns random player if nearby or nil
-function mobkit.get_nearby_entity(self,name)
+function mobkit.get_nearby_entity(self, name)
 	-- returns random nearby entity of name or nil
-function mobkit.get_closest_entity(self,name)
+function mobkit.get_closest_entity(self, name)
 	-- returns closest entity of name or nil
 
 
@@ -427,46 +427,46 @@ Neighbors structure represents a node's horizontal neighbors
 Not essential, used by some built in behaviors
 Custom behaviors may not need it.
 
-Neighbor #1 is offset {x=1,z=0}, subsequent numbers go clockwise
+Neighbor #1 is offset {x = 1, z = 0}, subsequent numbers go clockwise
 
 function mobkit.dir2neighbor(dir)
 	-- converts a 3d vector to neighbor number, y component ignored
 
-function mobkit.neighbor_shift(neighbor,shift)
+function mobkit.neighbor_shift(neighbor, shift)
 	-- get another neighbor number relative to the given, shift: plus is clockwise, minus the opposite
-	-- 1,1 = 2; 1,-2 = 7
+	-- 1, 1 = 2; 1,-2 = 7
 
 
 2.2 Built in behaviors
 
-function mobkit.goto_next_waypoint(self,tpos)
+function mobkit.goto_next_waypoint(self, tpos)
 	-- this functions groups common operations making mobs move in a specific direction
 	-- not a behavior itself, but is used by some built in HL behaviors
 	-- which use node by node movement algorithm
 
 2.2.1 High Level Behaviors --
 
-function mobkit.hq_roam(self,prty)
+function mobkit.hq_roam(self, prty)
 	-- slow random roaming
 	-- never returns
 
-function mobkit.hq_follow(self,prty,tgtobj)
+function mobkit.hq_follow(self, prty, tgtobj)
 	-- follow the tgtobj
 	-- returns if tgtobj becomes inactive
 
-function mobkit.hq_goto(self,prty,tpos)
+function mobkit.hq_goto(self, prty, tpos)
 	-- go to tpos position
 	-- returns on arrival
 
-function mobkit.hq_runfrom(self,prty,tgtobj)
+function mobkit.hq_runfrom(self, prty, tgtobj)
 	-- run away from tgtobj object
 	-- returns when tgtobj far enough
 
-function mobkit.hq_hunt(self,prty,tgtobj)
+function mobkit.hq_hunt(self, prty, tgtobj)
 	-- follow tgtobj and when close enough, kick off hq_attack
 	-- returns when tgtobj too far
 
-function mobkit.hq_warn(self,prty,tgtobj)
+function mobkit.hq_warn(self, prty, tgtobj)
 	-- when a tgtobj close by, turn towards them and make the 'warn' sound
 	-- kick off hq_hunt if tgtobj too close or timer expired
 	-- returns when tgtobj moves away
@@ -474,23 +474,23 @@ function mobkit.hq_warn(self,prty,tgtobj)
 function mobkit.hq_die(self)
 	-- default death, rotate and remove() after set time
 
-function mobkit.hq_attack(self,prty,tgtobj)
+function mobkit.hq_attack(self, prty, tgtobj)
 	-- default attack, turns towards tgtobj and leaps
 	-- returns when tgtobj out of range
 
-function mobkit.hq_liquid_recovery(self,prty)
+function mobkit.hq_liquid_recovery(self, prty)
 	-- use when submerged in liquid, scan for nearest land
 	-- if land is found within view_range, kick off hq_swimto
 	-- otherwise die
 
-function mobkit.hq_swimto(self,prty,tpos)
+function mobkit.hq_swimto(self, prty, tpos)
 	-- swim towards the position tpos, jump if necessary
 	-- returns if standing firmly on dry land
 
 	Aquatic behaviors:
 
 	Macros:
-function aqua_radar_dumb(pos,yaw,range,reverse)
+function aqua_radar_dumb(pos, yaw, range, reverse)
 	-- assumes a mob will avoid shallows
 	-- checks if a pos in front of a moving entity swimmable
 	-- otherwise returns new position
@@ -499,26 +499,26 @@ function mobkit.is_in_deep(target)
 	-- checks if an object is in water at least 2 nodes deep
 
 	Hq Behaviors:
-function mobkit.hq_aqua_roam(self,prty,speed)
-function mobkit.hq_aqua_attack(self,prty,tgtobj,speed)
-function mobkit.hq_aqua_turn(self,prty,tyaw,speed)
+function mobkit.hq_aqua_roam(self, prty, speed)
+function mobkit.hq_aqua_attack(self, prty, tgtobj, speed)
+function mobkit.hq_aqua_turn(self, prty, tyaw, speed)
 	-- used by both previous bhv
 
 2.2.2 Low Level Behaviors --
 
-function mobkit.lq_turn2pos(self,tpos)
+function mobkit.lq_turn2pos(self, tpos)
 	-- gradually turn towards tpos position
 	-- returns when facing tpos
 
-function mobkit.lq_idle(self,duration)
+function mobkit.lq_idle(self, duration)
 	-- do nothing for duration seconds
 	-- set 'stand' animation
 
-function mobkit.lq_dumbwalk(self,dest,speed_factor)
+function mobkit.lq_dumbwalk(self, dest, speed_factor)
 	-- simply move towards dest
 	-- set 'walk' animation
 
-function mobkit.lq_dumbjump(self,height)
+function mobkit.lq_dumbjump(self, height)
 	-- if standing on the ground, jump in the facing direction
 	-- height is relative to feet level
 	-- set 'stand' animation
@@ -528,7 +528,7 @@ function mobkit.lq_freejump(self)
 	-- useful e.g for getting out of water
 	-- returns when the apex has been reached
 
-function mobkit.lq_jumpattack(self,height,target)
+function mobkit.lq_jumpattack(self, height, target)
 	-- jump towards the target, punch if a hit
 	-- returns after punch or on the ground
 
@@ -544,4 +544,4 @@ mobkit.friction = 0.4 	-- inert entities will slow down when in contact with the
 
 self.dtime				-- for convenience, dtime as passed to currently executing on_step()
 self.isonground			-- true if y velocity is 0 for at least two succesive steps
-self.isinliquid			-- true if feet submerged in liquid type=source
+self.isinliquid			-- true if feet submerged in liquid type = source

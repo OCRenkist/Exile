@@ -2,16 +2,16 @@ illumination = {}
 illumination.playerLights = {}
 
 local lightPoint = {
-	drawtype = "airlike",
+	drawtype  = "airlike",
 	paramtype = "light",
-	groups = {not_in_creative_inventory=1},
+	groups    = {not_in_creative_inventory = 1},
 	sunlight_propagates = true,
-	can_dig = false,
-	walkable = false,
-	buildable_to = true,
-	light_source = 4,
+	can_dig       = false,
+	walkable      = false,
+	buildable_to  = true,
+	light_source  = 4,
 	selection_box = {
-		type = "fixed",
+		type  = "fixed",
 		fixed = {0, 0, 0, 0, 0, 0}},
 }
 
@@ -24,9 +24,9 @@ lightPoint.light_source = 14
 minetest.register_node("illumination:light_full", lightPoint)
 
 minetest.register_lbm({ --This should clean up nodes that don't get deleted for some reason
-	nodenames={"illumination:light_faint","illumination:light_dim","illumination:light_mid","illumination:light_full"},
-	label="Remove invalid illumination points",
-	name="illumination:lightpoint_cleanup",
+	nodenames = {"illumination:light_faint", "illumination:light_dim", "illumination:light_mid", "illumination:light_full"},
+	label = "Remove invalid illumination points",
+	name = "illumination:lightpoint_cleanup",
 	run_at_every_load = true,
 	action = function(pos)
 		local canExist = false
@@ -34,7 +34,7 @@ minetest.register_lbm({ --This should clean up nodes that don't get deleted for 
 			if illumination.playerLights[player:get_player_name()] then
 				local pos1 = illumination.playerLights[player:get_player_name()].pos
 				if pos1 then
-					if vector.equals(pos1,pos) then
+					if vector.equals(pos1 , pos) then
 						canExist = true
 					end
 				end
@@ -90,28 +90,28 @@ minetest.register_globalstep(function(dtime)
 			pos.y = math.floor(pos.y + 0.5)
 			pos.z = math.floor(pos.z + 0.5)
 			if not canLight(minetest.get_node(pos).name) then
-				if canLight(minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name) then
-					pos = {x=pos.x, y=pos.y+1, z=pos.z}
-				elseif canLight(minetest.get_node({x=pos.x, y=pos.y+2, z=pos.z}).name) then
-					pos = {x=pos.x, y=pos.y+2, z=pos.z}
-				elseif canLight(minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name) then
-					pos = {x=pos.x, y=pos.y-1, z=pos.z}
-				elseif canLight(minetest.get_node({x=pos.x+1, y=pos.y, z=pos.z}).name) then
-					pos = {x=pos.x+1, y=pos.y, z=pos.z}
-				elseif canLight(minetest.get_node({x=pos.x, y=pos.y, z=pos.z+1}).name) then
-					pos = {x=pos.x, y=pos.y, z=pos.z+1}
-				elseif canLight(minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z}).name) then
-					pos = {x=pos.x-1, y=pos.y, z=pos.z}
-				elseif canLight(minetest.get_node({x=pos.x, y=pos.y, z=pos.z-1}).name) then
-					pos = {x=pos.x, y=pos.y, z=pos.z-1}
-				elseif canLight(minetest.get_node({x=pos.x+1, y=pos.y+1, z=pos.z}).name) then
-					pos = {x=pos.x+1, y=pos.y+1, z=pos.z}
-				elseif canLight(minetest.get_node({x=pos.x-1, y=pos.y+1, z=pos.z}).name) then
-					pos = {x=pos.x-1, y=pos.y+1, z=pos.z}
-				elseif canLight(minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z+1}).name) then
-					pos = {x=pos.x, y=pos.y+1, z=pos.z+1}
-				elseif canLight(minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z-1}).name) then
-					pos = {x=pos.x, y=pos.y+1, z=pos.z-1}
+				if canLight(minetest.get_node({x = pos.x, y = pos.y + 1, z = pos.z}).name) then
+					pos = {x = pos.x, y = pos.y + 1, z = pos.z}
+				elseif canLight(minetest.get_node({x = pos.x, y = pos.y + 2, z = pos.z}).name) then
+					pos = {x = pos.x, y = pos.y + 2, z = pos.z}
+				elseif canLight(minetest.get_node({x = pos.x, y = pos.y - 1, z = pos.z}).name) then
+					pos = {x = pos.x, y = pos.y - 1, z = pos.z}
+				elseif canLight(minetest.get_node({x = pos.x + 1, y = pos.y, z = pos.z}).name) then
+					pos = {x = pos.x + 1, y = pos.y, z = pos.z}
+				elseif canLight(minetest.get_node({x = pos.x, y = pos.y, z = pos.z + 1}).name) then
+					pos = {x = pos.x, y = pos.y, z = pos.z + 1}
+				elseif canLight(minetest.get_node({x = pos.x - 1, y = pos.y, z = pos.z}).name) then
+					pos = {x = pos.x - 1, y = pos.y, z = pos.z}
+				elseif canLight(minetest.get_node({x = pos.x, y = pos.y, z = pos.z - 1}).name) then
+					pos = {x = pos.x, y = pos.y, z = pos.z - 1}
+				elseif canLight(minetest.get_node({x = pos.x + 1, y = pos.y + 1, z = pos.z}).name) then
+					pos = {x = pos.x + 1, y = pos.y + 1, z = pos.z}
+				elseif canLight(minetest.get_node({x = pos.x - 1, y = pos.y + 1, z = pos.z}).name) then
+					pos = {x = pos.x - 1, y = pos.y + 1, z = pos.z}
+				elseif canLight(minetest.get_node({x = pos.x, y = pos.y + 1, z = pos.z + 1}).name) then
+					pos = {x = pos.x, y = pos.y + 1, z = pos.z + 1}
+				elseif canLight(minetest.get_node({x = pos.x, y = pos.y + 1, z = pos.z - 1}).name) then
+					pos = {x = pos.x, y = pos.y + 1, z = pos.z - 1}
 				end
 			end
 			local pos1 = illumination.playerLights[player:get_player_name()].pos
@@ -135,7 +135,7 @@ minetest.register_globalstep(function(dtime)
 					nodeName = "illumination:light_full"
 				end
 				if nodeName then
-					minetest.swap_node(pos, {name=nodeName})
+					minetest.swap_node(pos, {name = nodeName})
 				end
 			end
 			

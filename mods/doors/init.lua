@@ -146,7 +146,7 @@ function doors.door_toggle(pos, node, clicker, itemstack)
 	end
 
 	if def.protected and minetest.is_protected(pos, cname) then
-		minetest.chat_send_player(cname,"You can't open this door, ",cname)
+		minetest.chat_send_player(cname, "You can't open this door, ", cname)
 		return false
 	end
 
@@ -429,8 +429,8 @@ function doors.register(name, def)
 	def.walkable = true
 	def.is_ground_content = false
 	def.buildable_to = false
-	def.selection_box = {type = "fixed", fixed = {-1/2,-1/2,-1/2,1/2,3/2,-6/16}}
-	def.collision_box = {type = "fixed", fixed = {-1/2,-1/2,-1/2,1/2,3/2,-6/16}}
+	def.selection_box = {type = "fixed", fixed = {-1/2, -1/2, -1/2, 1/2, 3/2, -6/16}}
+	def.collision_box = {type = "fixed", fixed = {-1/2, -1/2, -1/2, 1/2, 3/2, -6/16}}
 
 	def.mesh = "door_a.obj"
 	minetest.register_node(":" .. name .. "_a", def)
@@ -496,7 +496,7 @@ function doors.register_trapdoor(name, def)
 	local name_opened = name.."_open"
 
 	def.on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
-		--0,2,6, 8 = X;  1,3,15,17 Z
+		--0, 2, 6, 8 = X;  1, 3, 15, 17 Z
 		if node.param2 % 2 == 1 then -- Z
 			Seek(pos, node,  { x = 0, y = 0, z =  1 },
 				doors.trapdoor_toggle, true)
