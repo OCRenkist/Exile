@@ -6,7 +6,7 @@ local chat_confirm = {};
 local timestamp = {}
 
 local function killplayer(name)
-	local player=minetest.get_player_by_name(name)
+	local player = minetest.get_player_by_name(name)
 	local inv = player:get_inventory()
 	if inv:is_empty("cloths") then
 		-- no clothes, try to pull an exile letter and see if main's empty then
@@ -41,23 +41,23 @@ local function suicide (name, param)
 	else
 		timestamp[name] = nil
 		minetest.chat_send_player(name, "Are you sure?  Reply with: Yes")
-		chat_confirm[name]="suicide";
+		chat_confirm[name] = "suicide";
 	end
 end
 
-minetest.register_chatcommand("suicide",{
+minetest.register_chatcommand("suicide", {
 	privs = {
 		interact = true,
 	},
 	func = suicide
 })
-minetest.register_chatcommand("killme",{
+minetest.register_chatcommand("killme", {
 	privs = {
 		interact = true,
 	},
 	func = suicide
 })
-minetest.register_chatcommand("respawn",{
+minetest.register_chatcommand("respawn", {
 	privs = {
 		interact = true,
 	},

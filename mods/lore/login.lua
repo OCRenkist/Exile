@@ -13,13 +13,13 @@ local logintext = (
 	"cursed land of the Ancients, as an.." )
 
 local loginspec = (-- "formspec_version 4"..
-		"size[6,6.5]"..
-		"label[0.5,0;"..logintext.."]"..
-		"image[1.5,5;6,2;logo.png]" )
+		"size[6 , 6.5]"..
+		"label[0.5 , 0;"..logintext.."]"..
+		"image[1.5 , 5;6 , 2;logo.png]" )
 
 
 minetest.register_on_newplayer(function(player)
-	minetest.show_formspec(player:get_player_name(),"lore:login",loginspec)
+	minetest.show_formspec(player:get_player_name(), "lore:login", loginspec)
 end)
 
 local rspawn_available = false

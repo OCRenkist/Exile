@@ -10,16 +10,16 @@ local SC = {"tan", "pale", "red", "yellow", "brown", "black",
 		"tan", "pale", "red", "yellow", "brown", "black",
 		"tan", "pale", "red", "yellow", "brown", "black",
 		--unnatural colors
-		"greenmen","bluemen","graymen","redmen"}
-local EC = {"blue","brown","gray","green","hazel","violet"}
+		"greenmen", "bluemen", "graymen", "redmen"}
+local EC = {"blue", "brown", "gray", "green", "hazel", "violet"}
 
 local function NewBody(player)
 	player_api.set_gender(player, "random")
 	player_api.set_base_textures(player)
 	local base_texture = player_api.load_base_texture_table(player)
-	local SColor = SC[math.random(1,#SC)]
-	local HColor = HC[math.random(1,#HC)]
-	local EColor = EC[math.random(1,#EC)]
+	local SColor = SC[math.random(1, #SC)]
+	local HColor = HC[math.random(1, #HC)]
+	local EColor = EC[math.random(1, #EC)]
 	base_texture["skin"].color = SColor 
 	base_texture["hair"].color = HColor
 	base_texture["eye"] = "player_"..EColor.."_eye.png"

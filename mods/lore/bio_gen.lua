@@ -397,8 +397,8 @@ lore.generate_bio = function(player)
 
 
 	text =
-		"\n "..persona.." and "..virt..","..
-		"\n "..your_name.." had lived "..lif.." life,"..
+		"\n "..persona.." and "..virt..", "..
+		"\n "..your_name.." had lived "..lif.." life, "..
 		"\n until one day "..gender[gend].." "..your_woe.."...."
 
 		meta:set_string("bio", text)
