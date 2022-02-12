@@ -5,7 +5,7 @@ Example:
 
 	worldedit.register_gui_function("worldedit_gui_hollow_cylinder", {
 		name = "Make Hollow Cylinder",
-		privs = {worldedit=true},
+		privs = {worldedit = true},
 		get_formspec = function(name) return "some formspec here" end,
 		on_select = function(name) print(name .. " clicked the button!") end,
 	})
@@ -58,8 +58,8 @@ end
 
 worldedit.get_formspec_header = function(identifier)
 	local entry = worldedit.pages[identifier] or {}
-	return "button[0,0;2,0.5;worldedit_gui;Back]" ..
-		string.format("label[2,0;WorldEdit GUI > %s]", entry.name or "")
+	return "button[0 , 0; 2 , 0.5; worldedit_gui;Back]" 
+		.. string.format("label[2 , 0; WorldEdit GUI > %s]", entry.name or "")
 end
 
 local get_formspec = function(name, identifier)
@@ -74,7 +74,7 @@ if minetest.global_exists("unified_inventory") then -- unified inventory install
 	local old_func = worldedit.register_gui_function
 	worldedit.register_gui_function = function(identifier, options)
 		old_func(identifier, options)
-		unified_inventory.register_page(identifier, {get_formspec=function(player) return {formspec=options.get_formspec(player:get_player_name())} end})
+		unified_inventory.register_page(identifier, {get_formspec = function(player) return {formspec = options.get_formspec(player:get_player_name())} end})
 	end
 
 	unified_inventory.register_button("worldedit_gui", {
@@ -105,7 +105,7 @@ if minetest.global_exists("unified_inventory") then -- unified inventory install
 	end
 elseif minetest.global_exists("inventory_plus") then -- inventory++ installed
 	minetest.register_on_joinplayer(function(player)
-		local can_worldedit = minetest.check_player_privs(player:get_player_name(), {worldedit=true})
+		local can_worldedit = minetest.check_player_privs(player:get_player_name(), {worldedit = true})
 		if can_worldedit then
 			inventory_plus.register_button(player, "worldedit_gui", "WorldEdit")
 		end
@@ -149,8 +149,8 @@ elseif minetest.global_exists("smart_inventory") then -- smart_inventory install
 		local codebox = state:element("code", { name = "code", code = "" })
 		function codebox:set_we_formspec(we_page)
 			local new_formspec = get_formspec(state.location.rootState.location.player, we_page)
-			new_formspec = new_formspec:gsub('button_exit','button') --no inventory closing
-			self.data.code = "container[1,1]".. new_formspec .. "container_end[]"
+			new_formspec = new_formspec:gsub('button_exit', 'button') --no inventory closing
+			self.data.code = "container[1 , 1]".. new_formspec .. "container_end[]"
 		end
 		codebox:set_we_formspec("worldedit_gui")
 
@@ -188,9 +188,9 @@ elseif minetest.global_exists("sfinv") then -- sfinv installed
 	local orig_get = sfinv.pages["sfinv:crafting"].get
 	sfinv.override_page("sfinv:crafting", {
 		get = function(self, player, context)
-			local can_worldedit = minetest.check_player_privs(player, {worldedit=true})
+			local can_worldedit = minetest.check_player_privs(player, {worldedit = true})
 			local fs = orig_get(self, player, context)
-			return fs .. (can_worldedit and "image_button[0,0;1,1;inventory_plus_worldedit_gui.png;worldedit_gui;]" or "")
+			return fs .. (can_worldedit and "image_button[0 , 0;1 , 1;inventory_plus_worldedit_gui.png;worldedit_gui;]" or "")
 		end
 	})
 
@@ -224,7 +224,7 @@ end
 
 worldedit.register_gui_function("worldedit_gui", {
 	name = "WorldEdit GUI",
-	privs = {interact=true},
+	privs = {interact = true},
 	get_formspec = function(name)
 		--create a form with all the buttons arranged in a grid
 		local buttons, x, y, index = {}, 0, 1, 0
@@ -234,7 +234,7 @@ worldedit.register_gui_function("worldedit_gui", {
 			if identifier ~= "worldedit_gui" then
 				local entry = worldedit.pages[identifier]
 				table.insert(buttons, string.format((entry.get_formspec and "button" or "button_exit") ..
-					"[%g,%g;%g,%g;%s;%s]", x, y, width, height, identifier, minetest.formspec_escape(entry.name)))
+					"[%g, %g;%g, %g;%s;%s]", x, y, width, height, identifier, minetest.formspec_escape(entry.name)))
 
 				index, x = index + 1, x + width
 				if index == columns then --row is full
@@ -246,9 +246,9 @@ worldedit.register_gui_function("worldedit_gui", {
 		if index == 0 then --empty row
 			y = y - height
 		end
-		return string.format("size[%g,%g]", math.max(columns * width, 5), math.max(y + 0.5, 3)) ..
-			"button[0,0;2,0.5;worldedit_gui_exit;Back]" ..
-			"label[2,0;WorldEdit GUI]" ..
+		return string.format("size[%g, %g]", math.max(columns * width, 5), math.max(y + 0.5, 3)) ..
+			"button[0 , 0;2 , 0.5;worldedit_gui_exit;Back]" ..
+			"label[2 , 0;WorldEdit GUI]" ..
 			table.concat(buttons)
 	end,
 })

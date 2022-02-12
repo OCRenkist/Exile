@@ -1,7 +1,7 @@
 minetest.register_chatcommand("/outset", {
 	params = "[h|v] <amount>",
 	description = "outset the selection",
-	privs = {worldedit=true},
+	privs = {worldedit = true},
 	func = function(name, param)
 		local find, _, dir, amount = param:find("(%a*)%s*([+-]?%d+)")
 		
@@ -26,13 +26,13 @@ minetest.register_chatcommand("/outset", {
 		if dir == "" or dir == "hv" or dir == "vh" then
 			assert(worldedit.cuboid_volumetric_expand(name, amount))
 		elseif dir == "h" then
-			assert(worldedit.cuboid_linear_expand(name, 'x', 1, amount))
-			assert(worldedit.cuboid_linear_expand(name, 'x', -1, amount))
-			assert(worldedit.cuboid_linear_expand(name, 'z', 1, amount))
-			assert(worldedit.cuboid_linear_expand(name, 'z', -1, amount))
+			assert(worldedit.cuboid_linear_expand(name, "x", 1, amount))
+			assert(worldedit.cuboid_linear_expand(name, "x", -1, amount))
+			assert(worldedit.cuboid_linear_expand(name, "z", 1, amount))
+			assert(worldedit.cuboid_linear_expand(name, "z", -1, amount))
 		elseif dir == "v" then
-			assert(worldedit.cuboid_linear_expand(name, 'y', 1, amount))
-			assert(worldedit.cuboid_linear_expand(name, 'y', -1, amount))
+			assert(worldedit.cuboid_linear_expand(name, "y", 1, amount))
+			assert(worldedit.cuboid_linear_expand(name, "y", -1, amount))
 		else
 			return false, "Invalid number of arguments"
 		end
@@ -47,7 +47,7 @@ minetest.register_chatcommand("/outset", {
 minetest.register_chatcommand("/inset", {
 	params = "[h|v] <amount>",
 	description = "inset the selection",
-	privs = {worldedit=true},
+	privs = {worldedit = true},
 	func = function(name, param)
 		local find, _, dir, amount = param:find("(%a*)%s*([+-]?%d+)")
 		
@@ -72,13 +72,13 @@ minetest.register_chatcommand("/inset", {
 		if dir == "" or dir == "vh" or dir == "hv" then
 			assert(worldedit.cuboid_volumetric_expand(name, -amount))
 		elseif dir == "h" then
-			assert(worldedit.cuboid_linear_expand(name, 'x', 1, -amount))
-			assert(worldedit.cuboid_linear_expand(name, 'x', -1, -amount))
-			assert(worldedit.cuboid_linear_expand(name, 'z', 1, -amount))
-			assert(worldedit.cuboid_linear_expand(name, 'z', -1, -amount))
+			assert(worldedit.cuboid_linear_expand(name, "x", 1, -amount))
+			assert(worldedit.cuboid_linear_expand(name, "x", -1, -amount))
+			assert(worldedit.cuboid_linear_expand(name, "z", 1, -amount))
+			assert(worldedit.cuboid_linear_expand(name, "z", -1, -amount))
 		elseif dir == "v" then
-			assert(worldedit.cuboid_linear_expand(name, 'y', 1, -amount))
-			assert(worldedit.cuboid_linear_expand(name, 'y', -1, -amount))
+			assert(worldedit.cuboid_linear_expand(name, "y", 1, -amount))
+			assert(worldedit.cuboid_linear_expand(name, "y", -1, -amount))
 		else
 			return false, "Invalid number of arguments"
 		end
@@ -93,7 +93,7 @@ minetest.register_chatcommand("/inset", {
 minetest.register_chatcommand("/shift", {
 	params = "[x|y|z|?|up|down|left|right|front|back] [+|-]<amount>",
 	description = "Moves the selection region. Does not move contents.",
-	privs = {worldedit=true},
+	privs = {worldedit = true},
 	func = function(name, param)
 		local pos1 = worldedit.pos1[name]
 		local pos2 = worldedit.pos2[name]
@@ -133,9 +133,9 @@ minetest.register_chatcommand("/shift", {
 
 
 minetest.register_chatcommand("/expand", {
-	params = "[+|-]<x|y|z|?|up|down|left|right|front|back> <amount> [reverse-amount]",
+	params = "[+|-]<x|y|z|?|up|down|left|right|front|back> <amount> [reverse - amount]",
 	description = "expand the selection in one or two directions at once",
-	privs = {worldedit=true},
+	privs = {worldedit = true},
 	func = function(name, param)
 	local find, _, sign, direction, amount, 
 			rev_amount = param:find("([+-]?)([%?%l]+)%s*(%d+)%s*(%d*)")
@@ -187,9 +187,9 @@ minetest.register_chatcommand("/expand", {
 
 
 minetest.register_chatcommand("/contract", {
-	params = "[+|-]<x|y|z|?|up|down|left|right|front|back> <amount> [reverse-amount]",
+	params = "[+|-]<x|y|z|?|up|down|left|right|front|back> <amount> [reverse - amount]",
 	description = "contract the selection in one or two directions at once",
-	privs = {worldedit=true},
+	privs = {worldedit = true},
 	func = function(name, param)
 	local find, _, sign, direction, amount, 
 			rev_amount = param:find("([+-]?)([%?%l]+)%s*(%d+)%s*(%d*)")

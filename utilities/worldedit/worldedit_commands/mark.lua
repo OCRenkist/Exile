@@ -82,10 +82,10 @@ worldedit.mark_region = function(name)
 
 		--XY plane markers
 		for _, z in ipairs({pos1.z - 0.5, pos2.z + 0.5}) do
-			local marker = minetest.add_entity({x=pos1.x + sizex - 0.5, y=pos1.y + sizey - 0.5, z=z}, "worldedit:region_cube")
+			local marker = minetest.add_entity({x = pos1.x + sizex - 0.5, y = pos1.y + sizey - 0.5, z = z}, "worldedit:region_cube")
 			if marker ~= nil then
 				marker:set_properties({
-					visual_size={x=sizex * 2, y=sizey * 2},
+					visual_size = {x = sizex * 2, y = sizey * 2},
 					collisionbox = {-sizex, -sizey, -thickness, sizex, sizey, thickness},
 				})
 				marker:get_luaentity().player_name = name
@@ -95,10 +95,10 @@ worldedit.mark_region = function(name)
 
 		--YZ plane markers
 		for _, x in ipairs({pos1.x - 0.5, pos2.x + 0.5}) do
-			local marker = minetest.add_entity({x=x, y=pos1.y + sizey - 0.5, z=pos1.z + sizez - 0.5}, "worldedit:region_cube")
+			local marker = minetest.add_entity({x = x, y = pos1.y + sizey - 0.5, z = pos1.z + sizez - 0.5}, "worldedit:region_cube")
 			if marker ~= nil then
 				marker:set_properties({
-					visual_size={x=sizez * 2, y=sizey * 2},
+					visual_size = {x = sizez * 2, y = sizey * 2},
 					collisionbox = {-thickness, -sizey, -sizez, thickness, sizey, sizez},
 				})
 				marker:set_yaw(math.pi / 2)
@@ -114,7 +114,7 @@ end
 minetest.register_entity(":worldedit:pos1", {
 	initial_properties = {
 		visual = "cube",
-		visual_size = {x=1.1, y=1.1},
+		visual_size = {x = 1.1, y = 1.1},
 		textures = {"worldedit_pos1.png", "worldedit_pos1.png",
 			"worldedit_pos1.png", "worldedit_pos1.png",
 			"worldedit_pos1.png", "worldedit_pos1.png"},
@@ -135,7 +135,7 @@ minetest.register_entity(":worldedit:pos1", {
 minetest.register_entity(":worldedit:pos2", {
 	initial_properties = {
 		visual = "cube",
-		visual_size = {x=1.1, y=1.1},
+		visual_size = {x = 1.1, y = 1.1},
 		textures = {"worldedit_pos2.png", "worldedit_pos2.png",
 			"worldedit_pos2.png", "worldedit_pos2.png",
 			"worldedit_pos2.png", "worldedit_pos2.png"},
@@ -156,9 +156,9 @@ minetest.register_entity(":worldedit:pos2", {
 minetest.register_entity(":worldedit:region_cube", {
 	initial_properties = {
 		visual = "upright_sprite",
-		visual_size = {x=1.1, y=1.1},
+		visual_size = {x = 1.1, y = 1.1},
 		textures = {"worldedit_cube.png"},
-		visual_size = {x=10, y=10},
+		visual_size = {x = 10, y = 10},
 		physical = false,
 	},
 	on_step = function(self, dtime)

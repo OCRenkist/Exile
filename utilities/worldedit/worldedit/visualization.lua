@@ -8,7 +8,7 @@ minetest.register_node("worldedit:placeholder", {
 	diggable = false,
 	pointable = false,
 	walkable = false,
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory = 1},
 })
 
 --- Hides all nodes in a region defined by positions `pos1` and `pos2` by
@@ -19,7 +19,7 @@ function worldedit.hide(pos1, pos2)
 
 	worldedit.keep_loaded(pos1, pos2)
 
-	local pos = {x=pos1.x, y=0, z=0}
+	local pos = {x = pos1.x, y = 0, z = 0}
 	local get_node, get_meta, swap_node = minetest.get_node,
 			minetest.get_meta, minetest.swap_node
 	while pos.x <= pos2.x do
@@ -79,7 +79,7 @@ function worldedit.highlight(pos1, pos2, node_name)
 
 	worldedit.keep_loaded(pos1, pos2)
 
-	local pos = {x=pos1.x, y=0, z=0}
+	local pos = {x = pos1.x, y = 0, z = 0}
 	local get_node, get_meta, swap_node = minetest.get_node,
 			minetest.get_meta, minetest.swap_node
 	local count = 0

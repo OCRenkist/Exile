@@ -11,7 +11,7 @@
 
 worldedit = {}
 
-local ver = {major=1, minor=2}
+local ver = {major = 1, minor = 2}
 worldedit.version = ver
 worldedit.version_string = string.format("%d.%d", ver.major, ver.minor)
 

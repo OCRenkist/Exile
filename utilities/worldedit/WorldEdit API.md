@@ -11,7 +11,7 @@ General
 
 ### value = worldedit.version
 
-Contains the current version of WorldEdit in a table of the form `{major=MAJOR_INTEGER, minor=MINOR_INTEGER}`, where `MAJOR_INTEGER` is the major version (the number before the period) as an integer, and `MINOR_INTEGER` is the minor version (the number after the period) as an integer. This is intended for version checking purposes.
+Contains the current version of WorldEdit in a table of the form `{major = MAJOR_INTEGER, minor = MINOR_INTEGER}`, where `MAJOR_INTEGER` is the major version (the number before the period) as an integer, and `MINOR_INTEGER` is the minor version (the number after the period) as an integer. This is intended for version checking purposes.
 
 ### value = worldedit.version_string
 

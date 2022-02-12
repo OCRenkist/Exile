@@ -5,8 +5,8 @@
 -- `pos1` is less than or equal to the corresponding component of `pos2`.
 -- Returns the new positions.
 function worldedit.sort_pos(pos1, pos2)
-	pos1 = {x=pos1.x, y=pos1.y, z=pos1.z}
-	pos2 = {x=pos2.x, y=pos2.y, z=pos2.z}
+	pos1 = {x = pos1.x, y = pos1.y, z = pos1.z}
+	pos2 = {x = pos2.x, y = pos2.y, z = pos2.z}
 	if pos1.x > pos2.x then
 		pos2.x, pos1.x = pos1.x, pos2.x
 	end
@@ -72,7 +72,7 @@ end
 function mh.init(pos1, pos2)
 	local manip = minetest.get_voxel_manip()
 	local emerged_pos1, emerged_pos2 = manip:read_from_map(pos1, pos2)
-	local area = VoxelArea:new({MinEdge=emerged_pos1, MaxEdge=emerged_pos2})
+	local area = VoxelArea:new({MinEdge = emerged_pos1, MaxEdge = emerged_pos2})
 	return manip, area
 end
 
@@ -97,7 +97,7 @@ function mh.init_axis_radius_length(base_pos, axis, radius, length)
 		[other2] = base_pos[other2] - radius
 	}
 	local pos2 = {
-		[axis]   = base_pos[axis] + length,
+		[axis]   = base_pos[axis]   + length,
 		[other1] = base_pos[other1] + radius,
 		[other2] = base_pos[other2] + radius
 	}

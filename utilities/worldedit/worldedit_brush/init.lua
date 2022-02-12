@@ -52,7 +52,7 @@ local brush_on_use = function(itemstack, placer)
 	end
 
 	local raybegin = vector.add(placer:get_pos(),
-		{x=0, y=placer:get_properties().eye_height, z=0})
+		{x = 0, y = placer:get_properties().eye_height, z = 0})
 	local rayend = vector.add(raybegin, vector.multiply(placer:get_look_dir(), BRUSH_MAX_DIST))
 	local ray = minetest.raycast(raybegin, rayend, false, true)
 	local pointed_thing = ray:next()
@@ -94,7 +94,7 @@ minetest.register_tool(":worldedit:brush", {
 })
 
 minetest.register_chatcommand("/brush", {
-	privs = {worldedit=true},
+	privs = {worldedit = true},
 	params = "none/<cmd> [parameters]",
 	description = "Assign command to WorldEdit brush item",
 	func = function(name, param)

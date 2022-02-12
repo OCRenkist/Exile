@@ -40,11 +40,11 @@ worldedit.cuboid_linear_expand = function(name, axis, direction, amount)
 	local marker = worldedit.marker_get_closest_to_axis(name, axis, direction)
 	local deltavect = vector.new()
 	
-	if axis == 'x' then
+	if axis == "x" then
 		deltavect.x = amount * direction
-	elseif axis == 'y' then
+	elseif axis == "y" then
 		deltavect.y = amount * direction
-	elseif axis == 'z' then
+	elseif axis == "z" then
 		deltavect.z = amount * direction
 	else
 		return false, "invalid axis"
@@ -55,7 +55,7 @@ worldedit.cuboid_linear_expand = function(name, axis, direction, amount)
 end
 
 
--- Shifts the cuboid by '+-amount' in axis 'axis'
+-- Shifts the cuboid by "+-amount" in axis "axis"
 worldedit.cuboid_shift = function(name, axis, amount)
 	local pos1 = worldedit.pos1[name]
 	local pos2 = worldedit.pos2[name]
@@ -64,13 +64,13 @@ worldedit.cuboid_shift = function(name, axis, amount)
 		return false, "undefined cuboid"
 	end
 	
-	if axis == 'x' then
+	if axis == "x" then
 		worldedit.pos1[name].x = pos1.x + amount
 		worldedit.pos2[name].x = pos2.x + amount
-	elseif axis == 'y' then
+	elseif axis == "y" then
 		worldedit.pos1[name].y = pos1.y + amount
 		worldedit.pos2[name].y = pos2.y + amount
-	elseif axis == 'z' then
+	elseif axis == "z" then
 		worldedit.pos1[name].z = pos1.z + amount
 		worldedit.pos2[name].z = pos2.z + amount
 	else
@@ -124,23 +124,23 @@ worldedit.get_expansion_directions = function(mark1, mark2)
 
 	if mark1.x < mark2.x then
 		dir1.x = -1
-		dir2.x = 1
+		dir2.x =  1
 	else
-		dir1.x = 1
+		dir1.x =  1
 		dir2.x = -1
 	end
 	if mark1.y < mark2.y then
 		dir1.y = -1
-		dir2.y = 1
+		dir2.y =  1
 	else
-		dir1.y = 1
+		dir1.y =  1
 		dir2.y = -1
 	end
 	if mark1.z < mark2.z then
 		dir1.z = -1
-		dir2.z = 1
+		dir2.z =  1
 	else
-		dir1.z = 1
+		dir1.z =  1
 		dir2.z = -1
 	end
 	return dir1, dir2
@@ -170,7 +170,7 @@ worldedit.marker_get_closest_to_axis = function(name, axis, direction)
 		return nil
 	end
 
-	if axis == 'x' then
+	if axis == "x" then
 		pos1.x = worldedit.pos1[name].x * direction
 		pos2.x = worldedit.pos2[name].x * direction
 		if pos1.x > pos2.x then
@@ -178,7 +178,7 @@ worldedit.marker_get_closest_to_axis = function(name, axis, direction)
 		else
 			return 2
 		end
-	elseif axis == 'y' then
+	elseif axis == "y" then
 		pos1.y = worldedit.pos1[name].y * direction
 		pos2.y = worldedit.pos2[name].y * direction
 		if pos1.y > pos2.y then
@@ -186,7 +186,7 @@ worldedit.marker_get_closest_to_axis = function(name, axis, direction)
 		else
 			return 2
 		end
-	elseif axis == 'z' then
+	elseif axis == "z" then
 		pos1.z = worldedit.pos1[name].z * direction
 		pos2.z = worldedit.pos2[name].z * direction
 		if pos1.z > pos2.z then
@@ -207,11 +207,11 @@ worldedit.translate_direction = function(name, direction)
 	local resaxis, resdir
 	
 	if direction == "up" then
-		return 'y', 1
+		return "y", 1
 	end
 	
 	if direction == "down" then
-		return 'y', -1
+		return "y", -1
 	end
 	
 	if direction == "front" then
@@ -235,21 +235,21 @@ worldedit.translate_direction = function(name, direction)
 	end
 	
 	if direction == "left" then
-		if axis == 'x' then
-			resaxis = 'z'
+		if axis == "x" then
+			resaxis = "z"
 			resdir = dir
-		elseif axis == 'z' then
-			resaxis = 'x'
+		elseif axis == "z" then
+			resaxis = "x"
 			resdir = -dir
 		end
 	end
 	
 	if direction == "right" then
-		if axis == 'x' then
-			resaxis = 'z'
+		if axis == "x" then
+			resaxis = "z"
 			resdir = -dir
-		elseif axis == 'z' then
-			resaxis = 'x'
+		elseif axis == "z" then
+			resaxis = "x"
 			resdir = dir
 		end
 	end

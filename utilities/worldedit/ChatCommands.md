@@ -394,15 +394,15 @@ Load nodes from "(world folder)/schems/`<file>`.we" with position 1 of the curre
 
 Executes `<code>` as a Lua chunk in the global namespace.
 
-	//lua worldedit.pos1["singleplayer"] = {x=0, y=0, z=0}
+	//lua worldedit.pos1["singleplayer"] = {x = 0, y = 0, z = 0}
 	//lua worldedit.rotate(worldedit.pos1["singleplayer"], worldedit.pos2["singleplayer"], "y", 90)
 
 ### `//luatransform <code>`
 
 Executes `<code>` as a Lua chunk in the global namespace with the variable pos available, for each node in the current WorldEdit region.
 
-	//luatransform minetest.add_node(pos, {name="default:stone"})
-	//luatransform if minetest.get_node(pos).name == "air" then minetest.add_node(pos, {name="default:water_source"})
+	//luatransform minetest.add_node(pos, {name = "default:stone"})
+	//luatransform if minetest.get_node(pos).name == "air" then minetest.add_node(pos, {name = "default:water_source"})
 
 ### `//mtschemcreate <file>`
 
