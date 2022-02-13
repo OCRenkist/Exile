@@ -487,7 +487,7 @@ local function rain_soak(pos, node)
 
 	if climate.get_rain(pos) then
 		--dry sediment absorbs water, wet and solids can trap puddles
-		if minetest.get_item_group(name, "sediment") >0
+		if minetest.get_item_group(name, "sediment") > 0
 		and minetest.get_item_group(name, "wet_sediment") == 0
 		then
 			--set wet version of what draining into
@@ -497,7 +497,7 @@ local function rain_soak(pos, node)
 			end
 			minetest.swap_node(pos, {name = nodedef._wet_name})
 			return
-		elseif math.random()<0.3 then
+		elseif math.random() < 0.3 then
 			local posa = {x = pos.x, y = pos.y + 1, z = pos.z}
 			if puddle_detect(posa) then
 				minetest.set_node(posa, {name = "nodes_nature:freshwater_source"})

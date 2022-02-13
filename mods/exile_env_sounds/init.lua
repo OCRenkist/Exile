@@ -40,7 +40,7 @@ local function update_sound(player)
 	local areamax = vector.add(ppos, radius)
 
 	--flowing water
-	if ran()<0.7 then
+	if ran() < 0.7 then
 		local water_nodes = {"nodes_nature:freshwater_flowing", "nodes_nature:salt_water_flowing"}
 		local wpos, _ = minetest.find_nodes_in_area(areamin, areamax, water_nodes)
 		local waters = #wpos
@@ -60,7 +60,7 @@ local function update_sound(player)
 	end
 
 	--beach sounds
-	if ran()<0.7 then
+	if ran() < 0.7 then
 		if ppos.y > radius or ppos.y < -radius then
 			return
 		end

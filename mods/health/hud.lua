@@ -22,23 +22,24 @@ local setup_hud = function(player)
 
 	--labels then values
 	player:hud_add({
-		alignment = "right",
+		alignment     = "right",
 		hud_elem_type = "text",
-	  number = col, offset = {x = 0, y = 0},
+		number   = col, offset = {x = 0, y = 0},
 		position = {x = 0.694, y = 0.925}, text = "Health:"
 	})
 
 	hud_data.hp_hud = player:hud_add({
-		alignment = "right",
+		alignment   = "right",
 		hud_elem_type = "text",
+		number   = col, offset = {x = 0, y = 0},
 		position = {x = 0.76, y = 0.925}, text = ""
 	})
 
 
 	player:hud_add({
-		alignment = "right",
+		alignment     = "right",
 		hud_elem_type = "text",
-	  number = col, offset = {x = 0, y = 0},
+		number   = col, offset = {x = 0, y = 0},
 		position = {x = 0.44, y = 0.88}, text = "Energy:"
 	})
 

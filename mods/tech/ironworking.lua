@@ -257,7 +257,7 @@ local after_place_iron_and_slag = function(pos, placer, itemstack, pointed_thing
 	local meta = minetest.get_meta(pos)
 	local stack_meta = itemstack:get_meta()
 	local roast = stack_meta:get_int("roast")
-	if roast >0 then
+	if roast > 0 then
 		meta:set_int("roast", roast)
 	end
 end
@@ -408,7 +408,7 @@ minetest.register_node("tech:molten_slag_source", {
 		minetest.get_node_timer(pos):start(10)
 	end,
 	on_timer = function(pos, elapsed)
-		if math.random()>0.87 then
+		if math.random() > 0.87 then
 			minetest.sound_play("nodes_nature_cool_lava",
 				{pos = pos, max_hear_distance = 8, gain = 0.1})
 			minetest.set_node(pos, {name = 'tech:slag'})
@@ -472,7 +472,7 @@ minetest.register_node("tech:molten_slag_flowing", {
 		minetest.get_node_timer(pos):start(1)
 	end,
 	on_timer = function(pos, elapsed)
-		if math.random()>0.95 then
+		if math.random() > 0.95 then
 			minetest.sound_play("nodes_nature_cool_lava",
 				{pos = pos, max_hear_distance = 8, gain = 0.1})
 			minetest.set_node(pos, {name = 'tech:slag'})

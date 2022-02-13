@@ -87,12 +87,12 @@ end
 --Requires retting ie soak and semi-rot
 minetest.register_node('tech:unretted_cana_bundle', {
 	description = 'Unretted Cana Bundle',
-	tiles = {"tech_unretted_cana_bundle.png"},
-	stack_max = minimal.stack_max_bulky * 2,
-	groups = {snappy = 3, flammable = 1},
-	sounds = nodes_nature.node_sound_leaves_defaults(),
-	on_burn = function(pos)
-		if math.random()<0.5 then
+	tiles       = {"tech_unretted_cana_bundle.png"},
+	stack_max   = minimal.stack_max_bulky * 2,
+	groups      = {snappy = 3, flammable = 1},
+	sounds      = nodes_nature.node_sound_leaves_defaults(),
+	on_burn     = function(pos)
+		if math.random() < 0.5 then
 			minetest.set_node(pos, {name = "tech:small_wood_fire"})
 			minetest.check_for_falling(pos)
 		else

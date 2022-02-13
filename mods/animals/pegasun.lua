@@ -7,10 +7,10 @@ lives off flora, spreading surface and insects
 ]]
 ---------------------------------------------------------------------
 local random = math.random
-local floor = math.floor
+local floor  = math.floor
 
 --energy
-local energy_max = 8000--secs it can survive without food
+local energy_max = 8000 --secs it can survive without food
 local energy_egg = energy_max/2 --energy that goes to egg
 local egg_timer  = 60*60
 local young_per_egg = 1 --will get this/energy_egg starting energy
@@ -77,11 +77,11 @@ local function brain(self)
 			-- c feeding is simply what happens if no
 			--others are selected
 			local tod = minetest.get_timeofday()
-			if tod <0.2 or tod >0.8 then
+			if tod < 0.2 or tod > 0.8 then
 				--more social at night
 				ce = 0.01
 				cs = 0.75
-			elseif tod >0.55 and tod <0.55 then
+			elseif tod > 0.55 and tod < 0.55 then
 				--explore during midday
 				ce = 0.5
 				cs = 0.1
@@ -256,11 +256,11 @@ local function brain_male(self)
 			-- c feeding is simply what happens if no
 			--others are selected
 			local tod = minetest.get_timeofday()
-			if tod <0.2 or tod >0.8 then
+			if tod < 0.2 or tod > 0.8 then
 				--more social at night
 				ce = 0.01
 				cs = 0.95
-			elseif tod >0.55 and tod <0.55 then
+			elseif tod > 0.55 and tod < 0.55 then
 				--explore during midday
 				ce = 0.6
 				cs = 0.2
@@ -528,75 +528,75 @@ minetest.register_entity("animals:pegasun", {
 	physical = true,
 	collide_with_objects = true,
 	collisionbox = {-0.16, -0.75, -0.16, 0.16, -0.25, 0.16},
-	visual = "mesh",
-	mesh = "animals_pegasun.b3d",
+	visual   = "mesh",
+	mesh     = "animals_pegasun.b3d",
 	textures = {"animals_pegasun.png"},
 	visual_size = {x = 1, y = 1},
 	makes_footstep_sound = true,
 	timeout = 0,
 
 	--damage
-	max_hp = 40,
-	lung_capacity = 20,
-	min_temp = -20,
-	max_temp = 45,
+	max_hp        =  40,
+	lung_capacity =  20,
+	min_temp      = -20,
+	max_temp      =  45,
 
 	--interaction
 	predators = {"animals:kubwakubwa", "animals:darkasthaan"},
-	prey = {"animals:sneachan", "animals:impethu"},
-	friends = {"animals:pegasun", "animals:pegasun_male"},
-	rivals = {"animals:pegasun"},
+	prey      = {"animals:sneachan", "animals:impethu"},
+	friends   = {"animals:pegasun", "animals:pegasun_male"},
+	rivals    = {"animals:pegasun"},
 
-	on_step = mobkit.stepfunc,
-	on_activate = mobkit.actfunc,
+	on_step        = mobkit.stepfunc,
+	on_activate    = mobkit.actfunc,
 	get_staticdata = mobkit.statfunc,
-	logic = brain,
+	logic          = brain,
 	-- optional mobkit props
 	-- or used by built in behaviors
 	--physics = [function user defined] 		-- optional, overrides built in physics
 	animation = {
-		walk = {range = {x = 71, y = 90}, speed = 24, loop = true},
-		fast = {range = {x = 91, y = 110}, speed = 24, loop = true},
+		walk  = {range = {x = 71, y =  90}, speed = 24, loop = true},
+		fast  = {range = {x = 91, y = 110}, speed = 24, loop = true},
 		stand = {
-			{range = {x = 1, y = 30}, speed = 28, loop = true},
+			{range = {x = 1,  y = 30}, speed = 28, loop = true},
 			{range = {x = 31, y = 70}, speed = 32, loop = true},
 		},
 	},
 	sounds = {
 		warn = {
-			name = "animals_pegasun_warn",
-			gain = {0.2, 0.5},
-			fade = {0.5, 1.5},
+			name  = "animals_pegasun_warn",
+			gain  = {0.2, 0.5},
+			fade  = {0.5, 1.5},
 			pitch = {0.9, 1.1},
 		},
 		scared = {
-			name = "animals_pegasun_scared",
-			gain = {0.2, 0.3},
-			fade = {0.5, 1.5},
+			name  = "animals_pegasun_scared",
+			gain  = {0.2, 0.3},
+			fade  = {0.5, 1.5},
 			pitch = {1.3, 1.4},
 		},
 		call = {
-			name = "animals_pegasun_call",
-			gain = {0.2, 0.4},
-			fade = {0.5, 1.5},
+			name  = "animals_pegasun_call",
+			gain  = {0.2, 0.4},
+			fade  = {0.5, 1.5},
 			pitch = {0.9, 1.1},
 		},
 		mating = {
-			name = "animals_pegasun_mate",
-			gain = {0.4, 0.7},
-			fade = {0.5, 1.5},
+			name  = "animals_pegasun_mate",
+			gain  = {0.4, 0.7},
+			fade  = {0.5, 1.5},
 			pitch = {0.9, 1.4},
 		},
 		attack = {
-			name = "animals_pegasun_attack",
-			gain = {0.4, 0.7},
-			fade = {0.5, 1.5},
+			name  = "animals_pegasun_attack",
+			gain  = {0.4, 0.7},
+			fade  = {0.5, 1.5},
 			pitch = {0.9, 1.4},
 		},
 		punch = {
-			name = "animals_punch",
-			gain = {0.5, 1.5},
-			fade = {0.5, 1.5},
+			name  = "animals_punch",
+			gain  = {0.5, 1.5},
+			fade  = {0.5, 1.5},
 			pitch = {0.5, 1.5},
 		},
 	},

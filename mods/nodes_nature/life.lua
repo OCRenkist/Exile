@@ -166,7 +166,7 @@ local function grow_seed(pos, seed_name, plant_name, place_p2, timer_avg, elapse
 		--still growing
 		--chance to deplete soil
 		if minetest.get_item_group(node_under.name, "agricultural_soil") >= 1 then
-			if math.random()<0.0001 then
+			if math.random() < 0.0001 then
 				local deplete_name = node_under.name.."_depleted"
 				minetest.set_node(pos_under, {name = deplete_name})
 			end

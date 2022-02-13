@@ -246,13 +246,13 @@ function HEALTH.malus_bonus(player, name, meta, health, energy, thirst, hunger, 
 	--20-40 fatigued. malus
 	--0-20 exhausted. malus no heal
 
-	--<27 death
+	-- < 27 death
 	--27-32: severe hypo. malus no heal
 	--32-37: hypothermia. malus
 	--36-38: normal
 	--38-43: hyperthermia. malus.
 	--43-47: severe heat stroke. malus no heal
-	-->47 death
+	-- > 47 death
 
 	--
 	--update rates

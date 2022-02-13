@@ -321,7 +321,7 @@ local function default_timer_regress(player, effect_name, t_min, t_max, meta, ef
 	if current_order > removed_order then
 		--trying to remove lower than current (i.e. not powerful enough)
 		--chance it does some small help
-		if random() <0.1 then
+		if random() < 0.1 then
 			extend_timer(meta, effect_name, -t_max, -t_min)
 		end
 	else
@@ -1351,7 +1351,7 @@ function HEALTH.remove_new_effect(player, name)
 			elseif name[1] == "Photosensitivity" then
 				default_timer_regress(player, "Photosensitivity", 12, 24, meta, effects_list, effect[2], name[2])
 			--elseif name[1] == "Meta-Stim" then
-			--note, this wont remove flying effects. Not needed at this point,
+			-- note, this wont remove flying effects. Not needed at this point,
 			-- but will need something better if want to have an item that removes meta-stim
 			-- default_timer_regress(player, "Meta-Stim", 12, 24, meta, effects_list, effect[2], name[2], {"Neurotoxicity", meta:get_int("max_metastim") or 1})
 

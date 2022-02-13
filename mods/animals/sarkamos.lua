@@ -9,7 +9,7 @@ local random = math.random
 local floor  = math.floor
 
 --energy
-local energy_max = 14000--secs it can survive without food
+local energy_max = 14000 --secs it can survive without food
 local energy_egg = energy_max/8 --energy that goes to egg
 local egg_timer  = 60*45
 local young_per_egg = 2 --will get this/energy_egg starting energy
@@ -119,7 +119,7 @@ end
 --eggs
 minetest.register_node("animals:sarkamos_eggs", {
 	description = "Sarkamos Eggs",
-	tiles = {"animals_gundu_eggs.png"},
+	tiles  = {"animals_gundu_eggs.png"},
 	stack_max = minimal.stack_max_bulky,
 	groups = {snappy = 3},
 	sounds = nodes_nature.node_sound_defaults(),

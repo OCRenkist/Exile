@@ -143,7 +143,7 @@ climate.can_thaw = function(pos)
 	--water is an effective melting agent, so adjust c
 	local node
 
-	if c <6 then
+	if c < 6 then
 		--above
 		node = minetest.get_node(posa).name
 	else

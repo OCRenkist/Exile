@@ -130,14 +130,14 @@ minetest.register_node("tech:green_glass_ingot", {
 	inventory_image = "tech_glass_ingot_green_icon.png",
   	drawtype = "nodebox",
 	node_box = {
-		type = "fixed",
+		type  = "fixed",
 		fixed = {-0.3, -0.5, -0.3, 0.3, -0.1, 0.3},
 	},
 	stack_max = minimal.stack_max_bulky * 4,
 	paramtype = "light",
 	groups = {cracky = 3, oddly_breakable_by_hand = 3, falling_node = 1, temp_pass = 1, heatable = 20},
 	sounds = nodes_nature.node_sound_glass_defaults(),
-	use_texture_alpha = "blend",
+	use_texture_alpha   = "blend",
 	sunlight_propagates = true,
 	on_construct = function(pos)
 	   minetest.get_node_timer(pos):start(20)
@@ -154,10 +154,10 @@ minetest.register_node("tech:green_glass_ingot", {
 -- Crafts
 -- Mix sand and ash 50/50
 crafting.register_recipe({
-	type = "hammering_block",
+	type   = "hammering_block",
 	output = "tech:green_glass_mix 2",
-	items = {'tech:wood_ash_block 1', 'nodes_nature:sand 1'},
-	level = 1,
+	items  = {'tech:wood_ash_block 1', 'nodes_nature:sand 1'},
+	level  = 1,
 	always_known = true,
 })
 
@@ -167,20 +167,20 @@ crafting.register_recipe({
 
 minetest.register_node("tech:potash_block", {
 	description = "Potash Block",
-	tiles = {"tech_potash.png"},
-	stack_max = minimal.stack_max_bulky,
-	groups = {crumbly = 3, falling_node = 1, fertilizer = 1},
-	sounds = nodes_nature.node_sound_dirt_defaults(),
+	tiles       = {"tech_potash.png"},
+	stack_max   = minimal.stack_max_bulky,
+	groups      = {crumbly = 3, falling_node = 1, fertilizer = 1},
+	sounds      = nodes_nature.node_sound_dirt_defaults(),
 })
 
 
 minetest.register_node("tech:potash", {
 	description = "Potash",
-	tiles = {"tech_potash.png"},
+	tiles     = {"tech_potash.png"},
 	stack_max = minimal.stack_max_bulky *2,
-	drawtype = "nodebox",
-	node_box = {
-		type = "fixed",
+	drawtype  = "nodebox",
+	node_box  = {
+		type  = "fixed",
 		fixed = {-0.5, -0.5, -0.5, 0.5, 0, 0.5},
 	},
 	groups = {crumbly = 3, falling_node = 1, fertilizer = 1},

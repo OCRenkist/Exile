@@ -251,7 +251,7 @@ if minetest.settings:get_bool("enable_damage") then
 				then
 					energy = energy - 3
 					--thirsty work
-					if random()<0.07 then
+					if random() < 0.07 then
 						thirst = thirst - 1
 						hunger = hunger - 2
 					end
@@ -259,7 +259,7 @@ if minetest.settings:get_bool("enable_damage") then
 				or controls.jump then
 					energy = energy - 8
 					--thirsty work
-					if random()<0.07 then
+					if random() < 0.07 then
 						thirst = thirst - 2
 						hunger = hunger - 4
 					end
@@ -340,7 +340,7 @@ if minetest.settings:get_bool("enable_damage") then
 						or enviro_temp < stress_low
 						or enviro_temp > stress_high then
 							--terrible sleep in the rain etc
-							if random()>0.1 then
+							if random() > 0.1 then
 								energy = energy + (2 * lvl)
 							end
 
@@ -361,13 +361,13 @@ if minetest.settings:get_bool("enable_damage") then
 				--drink a little rain
 				if rain and thirst < 100 then
 					--only sometimes or too easy
-					if random()<0.2 then
+					if random() < 0.2 then
 						thirst = thirst + 1
 					end
 				end
 
 				--thirsty in heat
-				if random()<0.1 then
+				if random() < 0.1 then
 					if enviro_temp > stress_high then
 						thirst = thirst - 2
 					elseif enviro_temp > comfort_high then
@@ -378,7 +378,7 @@ if minetest.settings:get_bool("enable_damage") then
 				------------------
 				--harmed by damaging weather,
 				--exhausted by rain, snow
-				if random()<0.5 then
+				if random() < 0.5 then
 
 					if dam_weather then
 						health = health - 1

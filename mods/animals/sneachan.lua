@@ -10,7 +10,7 @@ local random = math.random
 local floor  = math.floor
 
 --energy
-local energy_max    = 5000--secs it can survive without food
+local energy_max    = 5000 --secs it can survive without food
 local energy_egg    = energy_max-100 --energy that goes to egg
 local egg_timer     = 60*10
 local young_per_egg = 5 --will get this/energy_egg starting energy
@@ -94,7 +94,7 @@ local function brain(self)
 					--full
 					mobkit.hq_roam(self, 1)
 				end
-			elseif random() <0.5 and energy < energy_max then
+			elseif random() < 0.5 and energy < energy_max then
 				--slower, less effective feeding during day
 				if animals.eat_sediment_under(pos, 0.001) then
 					energy = energy + 1
@@ -202,38 +202,38 @@ minetest.register_entity("animals:sneachan", {
 	timeout      = 0,
 
 	--damage
-	max_hp = 10,
-	lung_capacity = 10,
-	min_temp = -28,
-	max_temp = 48,
+	max_hp        = 10,
+	lung_capacity =  10,
+	min_temp      = -28,
+	max_temp      =  48,
 
 	--interaction
 	predators = {"animals:pegasun", "animals:kubwakubwa", "animals:darkasthaan"},
-	rivals = {"animals:sneachan", "animals:impethu"},
+	rivals    = {"animals:sneachan", "animals:impethu"},
 
-	on_step = mobkit.stepfunc,
-	on_activate = mobkit.actfunc,
+	on_step        = mobkit.stepfunc,
+	on_activate    = mobkit.actfunc,
 	get_staticdata = mobkit.statfunc,
 	logic = brain,
 	-- optional mobkit props
 	-- or used by built in behaviors
-	--physics = [function user defined] 		-- optional, overrides built in physics
+	--physics = [function user defined] -- optional, overrides built in physics
 	animation = {
-		walk = {range = {x = 0, y = 20}, speed = 20, loop = true},
-		fast = {range = {x = 0, y = 20}, speed = 40, loop = true},
+		walk  = {range = {x = 0, y = 20}, speed = 20, loop = true},
+		fast  = {range = {x = 0, y = 20}, speed = 40, loop = true},
 		stand = {range = {x = 0, y = 20}, speed = 10, loop = true},
 	},
 	sounds = {
 		warn = {
-			name = "animals_sneachan_warn",
-			gain = {0.05, 0.2},
-			fade = {0.5, 1.5},
+			name  = "animals_sneachan_warn",
+			gain  = {0.05, 0.2},
+			fade  = {0.5, 1.5},
 			pitch = {0.6, 1.3},
 		},
 		punch = {
-			name = "animals_punch",
-			gain = {0.3, 0.9},
-			fade = {0.5, 1.5},
+			name  = "animals_punch",
+			gain  = {0.3, 0.9},
+			fade  = {0.5, 1.5},
 			pitch = {0.5, 1.5},
 		},
 	},

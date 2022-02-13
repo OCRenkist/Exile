@@ -10,7 +10,7 @@ local random = math.random
 local floor = math.floor
 
 --energy
-local energy_max = 8000--secs it can survive without food
+local energy_max = 8000 --secs it can survive without food
 local energy_egg = energy_max/8 --energy that goes to egg
 local egg_timer  = 60*45
 local young_per_egg = 5		--will get this/energy_egg starting energy
@@ -64,11 +64,11 @@ local function brain(self)
 			local rival
 			if pred then
 				animals.flock(self, 21, 1, self.max_speed)
-			elseif random() <0.25 then
+			elseif random() < 0.25 then
 				rival = animals.territorial_water(self, energy, false)
-			elseif random() <0.01 then
+			elseif random() < 0.01 then
 				rival = animals.territorial_water(self, energy, true)
-			elseif random() <0.25 then
+			elseif random() < 0.25 then
 				animals.flock(self, 15, 2, self.max_speed/2)
 			end
 
@@ -95,7 +95,7 @@ local function brain(self)
 			--movement
 			local tod = minetest.get_timeofday()
 
-			if tod <0.06 or tod >0.94 then
+			if tod < 0.06 or tod > 0.94 then
 				--sink at night to lay eggs
 				local vel = self.object:get_velocity()
 				vel.y     = vel.y-0.2
@@ -195,10 +195,10 @@ minetest.register_entity("animals:gundu", {
 	predators = {"animals:sarkamos"},
 	rivals    = {"animals:gundu"},
 	friends   = {"animals:gundu"},
-	--prey = {"animals:impethu"},
+	--prey      = {"animals:impethu"},
 
-	on_step     = mobkit.stepfunc,
-	on_activate = mobkit.actfunc,
+	on_step        = mobkit.stepfunc,
+	on_activate    = mobkit.actfunc,
 	get_staticdata = mobkit.statfunc,
 	logic = brain,
 	-- optional mobkit props

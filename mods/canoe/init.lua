@@ -156,17 +156,17 @@ function canoe.on_step(self, dtime)
 			local ctrl = driver_objref:get_player_control()
 			if ctrl.down then
 				self.v = self.v - dtime * 1.8
-				if random()>0.9 then
+				if random() > 0.9 then
 					minetest.sound_play("nodes_nature_water_footstep", {pos = pos, gain = random(0.1, 0.3), max_hear_distance = 6})
 				end
 			elseif ctrl.up then
 				self.v = self.v + dtime * 1.5
-				if random()>0.9 then
+				if random() > 0.9 then
 					minetest.sound_play("nodes_nature_water_footstep", {pos = pos, gain = random(0.1, 0.3), max_hear_distance = 6})
 				end
 			end
 			if ctrl.left then
-				if random()>0.9 then
+				if random() > 0.9 then
 					minetest.sound_play("nodes_nature_water_footstep", {pos = pos, gain = random(0.1, 0.3), max_hear_distance = 6})
 				end
 				if self.v < -0.001 then

@@ -7,7 +7,7 @@
 
 	Bricks:
 	clay + sand -> unfired loose brick (using brick mold etc)
-	Fire @ >600 (more like 1000?. Depends on the clay. We'll do within range of our wood fire)
+	Fire @ > 600 (more like 1000?. Depends on the clay. We'll do within range of our wood fire)
 	-> fired loose brick
 	Plus mortar -> bricks and mortar
 

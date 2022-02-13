@@ -208,19 +208,19 @@ minetest.register_on_generated(function(minp, maxp, seed)
 			elseif y > snow_line - snow_border then
 				c_top = c_high_soil
 				c_filler =  c_gravel
-				if math.random()>0.25 then
+				if math.random() > 0.25 then
 					c_dust = c_snow
 				end
 			elseif y > snow_line - snow_border *2 then
 				c_top = c_high_soil
 				c_filler =  c_gravel
-				if math.random()>0.5 then
+				if math.random() > 0.5 then
 					c_dust = c_snow
 				end
 			elseif y > snow_line - snow_border *3 then
 				c_top = c_dune_soil
 				c_filler =  c_gravel
-				if math.random()>0.75 then
+				if math.random() > 0.75 then
 					c_dust = c_snow
 				end
 			else
@@ -296,7 +296,7 @@ minetest.register_on_generated(function(minp, maxp, seed)
 			elseif distance <  current_elevation * -volcano.slope + base_radius then
 				data[vi] = c_cone
 				if data[vi + area.ystride] == c_air and c_dust ~= nil then
-					if c_dust ~= c_boulder and math.random()>0.95 then
+					if c_dust ~= c_boulder and math.random() > 0.95 then
 						c_dust = c_boulder
 					end
 					data[vi + area.ystride] = c_dust
@@ -307,9 +307,9 @@ minetest.register_on_generated(function(minp, maxp, seed)
 					data[vi - area.ystride] = c_filler
 				end
 				if data[vi + area.ystride] == c_air then
-					if math.random()>0.95 then
+					if math.random() > 0.95 then
 						data[vi + area.ystride] = c_moss
-					elseif math.random()>0.995 then
+					elseif math.random() > 0.995 then
 						data[vi + area.ystride] = c_boulder
 					elseif c_dust ~= nil then
 						data[vi + area.ystride] = c_dust
