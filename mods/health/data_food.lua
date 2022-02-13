@@ -4,10 +4,10 @@
 --[[Some notes:
 	Calculating sensible values for food:
 	(intervals/day) * hunger_rate = daily basal food needs
-	i.e. 20 min/1 min*2 = 40 units per day
+	i.e. 20 min/1 min * 2 = 40 units per day
 
 	Therefore 40 units = 2,000 Calories.
-	 Calories -> units = 2,000/40 = 50 kcal/unit
+	 calories -> units = 2,000/40 = 50 kcal/unit
 
 	Sugar   3,900 kcal/kg = 78.0 units/kg  172.0 per lb.
 	Bread   2,600 kcal/kg = 52.0 units/kg  115.0 per lb.
