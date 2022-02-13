@@ -1,5 +1,5 @@
 
---food_data.lua
+--data_food.lua
 --Contains data for all the predefined foods in Exile.
 --[[Some notes:
 	Calculating sensible values for food:

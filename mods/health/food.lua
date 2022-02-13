@@ -20,7 +20,7 @@
 	#TODO: Test this ^^ after the cooking pot supports both tables
 ]]--
 local cook_rate = 6   -- speed of the cook timer; tenth of a minute seems fine
-dofile(minetest.get_modpath("health").."/food_data.lua")
+dofile(minetest.get_modpath("health").."/data_food.lua")
 local function do_food_harm(user, nodename)
 	if not food_harm_table[nodename] then return end
 	local fht = food_harm_table[nodename]
