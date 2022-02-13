@@ -437,7 +437,7 @@ minetest.register_entity("animals:pegasun_male", {
 	logic = brain_male,
 	-- optional mobkit props
 	-- or used by built in behaviors
-	--physics = [function user defined] 		-- optional, overrides built in physics
+	--physics = [function user defined] -- optional, overrides built in physics
 	animation = {
 		walk = {range = {x = 71, y = 90}, speed = 24, loop = true},
 		fast = {range = {x = 91, y = 110}, speed = 24, loop = true},
@@ -553,7 +553,7 @@ minetest.register_entity("animals:pegasun", {
 	logic          = brain,
 	-- optional mobkit props
 	-- or used by built in behaviors
-	--physics = [function user defined] 		-- optional, overrides built in physics
+	--physics = [function user defined] -- optional, overrides built in physics
 	animation = {
 		walk  = {range = {x = 71, y =  90}, speed = 24, loop = true},
 		fast  = {range = {x = 91, y = 110}, speed = 24, loop = true},

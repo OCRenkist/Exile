@@ -438,7 +438,7 @@ local lava_melt = function(pos, node)
 
 	--lava works it's way up through rocks and more, melting them as it goes
 	--being on top of a magma chamber is now very dangerous
-	local posa = 	{x = pos.x, y = pos.y+1, z = pos.z}
+	local posa  = {x = pos.x, y = pos.y+1, z = pos.z}
 	local aname = minetest.get_node(posa).name
 	local nodename = node.name
 

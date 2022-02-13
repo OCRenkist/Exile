@@ -365,7 +365,7 @@ minetest.register_node("tech:clear_glass_mix",
 	paramtype = "light",
 	groups = {crumbly = 3, falling_node = 1, heatable = 20},
 	sounds = nodes_nature.node_sound_sand_defaults(),
-  	on_construct = function(pos)
+	on_construct = function(pos)
 		--length(i.e. difficulty of firing), interval for checks (speed)
 		set_roast(pos, 40, 10)
 	end,
@@ -381,7 +381,7 @@ minetest.register_node("tech:clear_glass_ingot", {
 	description = "Clear Glass Ingot",
 	tiles = {"tech_clear_glass.png"},
 	inventory_image = "tech_glass_ingot_clear_icon.png",
-  	drawtype = "nodebox",
+	drawtype = "nodebox",
 	node_box = {
 		type = "fixed",
 		fixed = {-0.3, -0.5, -0.3, 0.3, -0.1, 0.3},
