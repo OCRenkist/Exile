@@ -31,8 +31,7 @@ local setup_hud = function(player)
 	hud_data.hp_hud = player:hud_add({
 		alignment = "right",
 		hud_elem_type = "text",
-		number = col, offset = {x = 0, y = 0},
-		position = 	{x = 0.76, y = 0.925}, text = ""
+		position = {x = 0.76, y = 0.925}, text = ""
 	})
 
 

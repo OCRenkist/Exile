@@ -561,7 +561,7 @@ function doors.register_trapdoor(name, def)
 		end
 	end
 
---[[	if not def.sounds then
+--[[ if not def.sounds then
 		def.sounds = default.node_sound_wood_defaults()
 	end
 	]]

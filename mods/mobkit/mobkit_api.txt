@@ -38,7 +38,7 @@ For a behavior to begin executing it has to be put on a queue. There are two sep
 Queuing is covered by behavour defining conventions
 
 !!! In simplest scenarios there's no need to code behaviors, much can be achieved using only built-in stuff !!!
-!!! To start using the api it's enough to learn defining mobs and writing brain functions					 !!!
+!!! To start using the api it's enough to learn defining mobs and writing brain functions !!!
 
 
 1.1.1 Low level behavior functions
@@ -47,12 +47,12 @@ These are physical actions and interactions: steps, jumps, turns etc. here you'l
 
 Low level behavior definition:
 
-function mobkit.lq_bhv1(self, [optional additional persistent parameters])	-- enclosing function
-	...										-- optional definitions of additional persistent variables
-	local func = function(self)				-- enclosed function, self is mandatory and the only allowed parameter
-		...									-- actual function definition, remember to return true eventually
+function mobkit.lq_bhv1(self, [optional additional persistent parameters]) -- enclosing function
+	...                          -- optional definitions of additional persistent variables
+	local func = function(self)  -- enclosed function, self is mandatory and the only allowed parameter
+		...                      -- actual function definition, remember to return true eventually
 	end
-	mobkit.queue_low(self, func)				-- this will queue the behavior at the time of lq_bhv1 call
+	mobkit.queue_low(self, func) -- this will queue the behavior at the time of lq_bhv1 call
 end
 
 
@@ -63,12 +63,12 @@ Their job is tracking changes in the environment and managing low level behavior
 
 High level behavior definition:
 
-function mobkit.hq_bhv1(self, priority, [optional additional persistent parameters])	-- enclosing function
-	...										-- optional definitions of additional persistent variables
-	local func = function(self)				-- enclosed function, self is mandatory and the only allowed parameter
-		...									-- actual function definition, remember to return true eventually
+function mobkit.hq_bhv1(self, priority, [optional additional persistent parameters]) -- enclosing function
+	...                          -- optional definitions of additional persistent variables
+	local func = function(self)  -- enclosed function, self is mandatory and the only allowed parameter
+		...                      -- actual function definition, remember to return true eventually
 	end
-	mobkit.queue_high(self, func, priority)				-- this will queue the behavior at the time of hq_bhv1 call
+	mobkit.queue_high(self, func, priority) -- this will queue the behavior at the time of hq_bhv1 call
 end
 
 
@@ -87,14 +87,14 @@ Common idioms:
 
 hq_bhv1(self, prty):
 	...
-	hq_bhv2(self, prty)		-- bhv1 kicks off bhv2 with equal priority
-	return true				-- and ends,
-							-- bhv2 becomes active on the next engine step.
+	hq_bhv2(self, prty)     -- bhv1 kicks off bhv2 with equal priority
+	return true             -- and ends,
+	                        -- bhv2 becomes active on the next engine step.
 
 hq_bhv1(self, prty):
 	...
-	hq_bhv2(self, prty+1)	-- bhv1 kicks off bhv2 with higher priority
-							-- bhv2 takes over and when it ends, bhv1 resumes.
+	hq_bhv2(self, prty+1)   -- bhv1 kicks off bhv2 with higher priority
+	                        -- bhv2 takes over and when it ends, bhv1 resumes.
 
 
 Particular prioritization scheme is to be designed by the user according to specific mod requirements.
@@ -211,35 +211,33 @@ minetest.register_entity("mod:name", {
 		}
 	sounds = {
 		[name] = [string filename],				--single, simple,
-
 		[name] = {								--single, more powerful. All fields but 'name' are optional
-			name = [string filename],
-			gain = [num or range],				--range is a table of the format {left_bound, right_bound}
-			fade = [num or range],
+			name  = [string filename],
+			gain  = [num or range],				--range is a table of the format {left_bound, right_bound}
+			fade  = [num or range],
 			pitch = [num or range],
-			},
-
+		},
 		[name] = {								--variant, sound is chosen randomly
 			{
-			name = [string filename],
-			gain = [num or range],
-			fade = [num or range],
-			pitch = [num or range],
+				name  = [string filename],
+				gain  = [num or range],
+				fade  = [num or range],
+				pitch = [num or range],
 			},
 			{
-			name = [string filename],
-			gain = [num or range],
-			fade = [num or range],
-			pitch = [num or range],
+				name  = [string filename],
+				gain  = [num or range],
+				fade  = [num or range],
+				pitch = [num or range],
 			},
 			...
 		},
 		...
 	},
-	max_speed = [num], -- m/s
+	max_speed   = [num], -- m/s
 	jump_height = [num], -- nodes/meters
-	view_range = [num], -- nodes/meters
-	attack = {range = [num], -- range is distance between attacker's collision box center
+	view_range  = [num], -- nodes/meters
+	attack      = {range = [num], -- range is distance between attacker's collision box center
 		damage_groups = {fleshy = [num]}},	-- and the tip of the murder weapon in nodes/meters
 	armor_groups = {fleshy = [num]}
 })
@@ -248,10 +246,10 @@ minetest.register_entity("mod:name", {
 
 Some frequently used entity fields to be accessed directly for convenience
 
-	self.dtime		-- max(dtime as passed to on_step, 0.5) - limit of 0.05 to prevent jerkines on long steps.
-	self.hp			-- hitpoints
-	self.isonground		-- true if pos.y remains unchanged for 2 consecutive steps
-	self.isinliquid		-- true if the node at foot level is drawtype =  = 'liquid'
+	self.dtime      -- max(dtime as passed to on_step, 0.5) - limit of 0.05 to prevent jerkines on long steps.
+	self.hp         -- hitpoints
+	self.isonground -- true if pos.y remains unchanged for 2 consecutive steps
+	self.isinliquid -- true if the node at foot level is drawtype =  = 'liquid'
 
 ------------
 2. Reference
@@ -539,9 +537,9 @@ function mobkit.lq_fallover(self)
 2.3 Constants and member variables --
 
 mobkit.gravity = -9.8
-mobkit.friction = 0.4 	-- inert entities will slow down when in contact with the ground
-						-- the smaller the number, the greater the effect
+mobkit.friction = 0.4 -- inert entities will slow down when in contact with the ground
+                      -- the smaller the number, the greater the effect
 
-self.dtime				-- for convenience, dtime as passed to currently executing on_step()
-self.isonground			-- true if y velocity is 0 for at least two succesive steps
-self.isinliquid			-- true if feet submerged in liquid type = source
+self.dtime      -- for convenience, dtime as passed to currently executing on_step()
+self.isonground -- true if y velocity is 0 for at least two succesive steps
+self.isinliquid -- true if feet submerged in liquid type = source

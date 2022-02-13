@@ -68,7 +68,7 @@ local vault_offset = math.floor(vault_width / 2)
 
 -----------------------------------------------------------------------
 local seal_underground = false
-local seal_box = 	{act = "cube", node = stone_main, loc = vn(0, 0, 0), size = vn(80, 80, 80)}
+local seal_box = {act = "cube", node = stone_main, loc = vn(0, 0, 0), size = vn(80, 80, 80)}
 
 -----------------------------------------------------------------------
 
@@ -212,7 +212,7 @@ local crossroads = {
 	{act = "cube", node = "air", loc = vn(59, 21, 39), size = vn(20, 3, 2)},
 	{act = "cube", node = "air", loc = vn(39, 21, 59), size = vn(2, 3, 20)},
 
-	--	exit alcoves
+	-- exit alcoves
 	{act = "cube", node = "air", treasure = 3, loc = vn(16, 51, 4), size = vn(4, 3, 4)},
 	{act = "cube", node = "air", treasure = 3, loc = vn(60, 51, 4), size = vn(4, 3, 4)},
 	{act = "cube", node = "air", treasure = 3, loc = vn(4, 51, 60), size = vn(4, 3, 4)},
@@ -266,13 +266,13 @@ end
 local air_shaft = {
 
 	--cross horizontal
---	{act = "cylinder", node = "air", axis = "x", loc = vn(0, 38, 38), size = vn(80, 4, 4)},
---	{act = "cylinder", node = "air", axis = "z", loc = vn(38, 38, 0), size = vn(4, 4, 80)},
+--  {act = "cylinder", node = "air", axis = "x", loc = vn(0, 38, 38), size = vn(80, 4, 4)},
+--  {act = "cylinder", node = "air", axis = "z", loc = vn(38, 38, 0), size = vn(4, 4, 80)},
 	--shaft
 	{act = "cylinder", node = "air", axis = "y", loc = vn(36, 1, 36), size = vn(8, 78, 8)},
 	--cross horizontal low
---	{act = "cylinder", node = "air", axis = "x", loc = vn(0, 1, 40), size = vn(80, 2, 1)},
---	{act = "cylinder", node = "air", axis = "z", loc = vn(40, 1, 0), size = vn(1, 2, 80)},
+--  {act = "cylinder", node = "air", axis = "x", loc = vn(0, 1, 40), size = vn(80, 2, 1)},
+--  {act = "cylinder", node = "air", axis = "z", loc = vn(40, 1, 0), size = vn(1, 2, 80)},
 }
 
 for _, item in pairs(shaft_filter) do
@@ -391,27 +391,27 @@ local highway_linked = {
 
 --rooms
 for _, y in pairs({7, 13,  19, 54, 60, 66}) do
-	table.insert(highway_linked, 	{act = "cube", node = "air", treasure = 20, loc = vn(y, 51, 33), size = vn(5, 3, 5)})
-	table.insert(highway_linked, 	{act = "cube", node = "air", loc = vn(y+1, 51, 38), size = vn(3, 2, 1)})
+	table.insert(highway_linked, {act = "cube", node = "air", treasure = 20, loc = vn(y, 51, 33), size = vn(5, 3, 5)})
+	table.insert(highway_linked, {act = "cube", node = "air", loc = vn(y+1, 51, 38), size = vn(3, 2, 1)})
 
-	table.insert(highway_linked, 	{act = "cube", node = "air", treasure = 20, loc = vn(y, 51, 42), size = vn(5, 3, 5)})
-	table.insert(highway_linked, 	{act = "cube", node = "air", loc = vn(y+1, 51, 41), size = vn(3, 2, 1)})
+	table.insert(highway_linked, {act = "cube", node = "air", treasure = 20, loc = vn(y, 51, 42), size = vn(5, 3, 5)})
+	table.insert(highway_linked, {act = "cube", node = "air", loc = vn(y+1, 51, 41), size = vn(3, 2, 1)})
 end
 
 for _, y in pairs({7, 13,  19, 54, 60, 66}) do
-	table.insert(highway_linked, 	{act = "cube", node = "air", treasure = 20, loc = vn(y, 21, 33), size = vn(5, 3, 5)})
-	table.insert(highway_linked, 	{act = "cube", node = "air", loc = vn(y+1, 21, 38), size = vn(3, 2, 1)})
+	table.insert(highway_linked, {act = "cube", node = "air", treasure = 20, loc = vn(y, 21, 33), size = vn(5, 3, 5)})
+	table.insert(highway_linked, {act = "cube", node = "air", loc = vn(y+1, 21, 38), size = vn(3, 2, 1)})
 
-	table.insert(highway_linked, 	{act = "cube", node = "air", treasure = 20, loc = vn(y, 21, 42), size = vn(5, 3, 5)})
-	table.insert(highway_linked, 	{act = "cube", node = "air", loc = vn(y+1, 21, 41), size = vn(3, 2, 1)})
+	table.insert(highway_linked, {act = "cube", node = "air", treasure = 20, loc = vn(y, 21, 42), size = vn(5, 3, 5)})
+	table.insert(highway_linked, {act = "cube", node = "air", loc = vn(y+1, 21, 41), size = vn(3, 2, 1)})
 end
 
 for _, y in pairs({7, 13,  19, 54, 60, 66}) do
-	table.insert(highway_linked, 	{act = "cube", node = "air", treasure = 20, loc = vn(33, 21, y), size = vn(5, 3, 3)})
-	table.insert(highway_linked, 	{act = "cube", node = "air", loc = vn(38, 21, y+1), size = vn(3, 2, 1)})
+	table.insert(highway_linked, {act = "cube", node = "air", treasure = 20, loc = vn(33, 21, y), size = vn(5, 3, 3)})
+	table.insert(highway_linked, {act = "cube", node = "air", loc = vn(38, 21, y+1), size = vn(3, 2, 1)})
 
-	table.insert(highway_linked, 	{act = "cube", node = "air", treasure = 20, loc = vn(42, 21, y), size = vn(7, 6, 5)})
-	table.insert(highway_linked, 	{act = "cube", node = "air", loc = vn(41, 21, y), size = vn(1, 3, 5)})
+	table.insert(highway_linked, {act = "cube", node = "air", treasure = 20, loc = vn(42, 21, y), size = vn(7, 6, 5)})
+	table.insert(highway_linked, {act = "cube", node = "air", loc = vn(41, 21, y), size = vn(1, 3, 5)})
 end
 
 

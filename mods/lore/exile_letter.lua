@@ -365,17 +365,17 @@ local generate_text = function(player)
 		"\n "..your_name.." of "..origin_name..
 		"\n \n "..
 		"\nis hereby sentenced to exile for the crimes of "..
-		"\n	"..
+		"\n "..
 		"\n"..cr1..
-		"\n	"..
+		"\n "..
 		"\nand "..
-		"\n	"..
+		"\n "..
 		"\n"..cr2.."."..
 		"\n \n \n"..
 		"\nThey are banished to the land of "..exile_land.."."..
-		"\n	"..
+		"\n "..
 		"\nThe land of the "..terror.."."..
-		"\n	\n \n"..
+		"\n \n \n"..
 		"\n"..your_woe
 
 	return letter_text

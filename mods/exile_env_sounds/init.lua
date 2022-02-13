@@ -25,7 +25,7 @@ local function posav(npos, num)
 	end
 	posav = vector.divide(posav, num)
 
-  return 	posav
+  return posav
 end
 
 

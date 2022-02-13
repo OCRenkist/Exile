@@ -606,7 +606,7 @@ function animals.hq_aqua_attack_eat(self, prty, tgtobj, speed)
 			if tpos.y > pos.y + 0.5 then self.object:set_velocity({x = vel.x, y = vel.y + 0.5, z = vel.z})
 			elseif tpos.y < pos.y - 0.5 then self.object:set_velocity({x = vel.x, y = vel.y - 0.5, z = vel.z}) end
 		end
-		if mobkit.is_pos_in_box(mobkit.pos_translate2d(pos, yaw, self.attack.range), tpos, tgtbox) then	--bite
+		if mobkit.is_pos_in_box(mobkit.pos_translate2d(pos, yaw, self.attack.range), tpos, tgtbox) then --bite
 			mobkit.make_sound(self, "bite")
 			tgtobj:punch(self.object, 1, self.attack)
 			mobkit.hq_aqua_turn(self, prty, yaw - pi, speed)
@@ -632,7 +632,7 @@ local function lq_jumpattack_eat(self, height, target)
 	local func   = function(self)
 		if not mobkit.is_alive(target) then return true end
 		if self.isonground then
-			if phase == 1 then	-- collision bug workaround
+			if phase == 1 then -- collision bug workaround
 				local vel = self.object:get_velocity()
 				vel.y     = -mobkit.gravity*sqrt(height*2/-mobkit.gravity)
 				self.object:set_velocity(vel)
@@ -649,7 +649,7 @@ local function lq_jumpattack_eat(self, height, target)
 			dir.y = vy
 			self.object:set_velocity(dir)
 			phase = 3
-		elseif phase == 3 then	-- in air
+		elseif phase == 3 then -- in air
 			local tgtpos = target:get_pos()
 			local pos    = self.object:get_pos()
 			-- calculate attack spot

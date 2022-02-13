@@ -10,10 +10,10 @@ local random = math.random
 local floor = math.floor
 
 --energy
-local energy_max = 8000--secs it can survive without food
+local energy_max = 8000 --secs it can survive without food
 local energy_egg = energy_max/2 --energy that goes to egg
 local egg_timer  = 60*10
-local young_per_egg = 4		--will get this/energy_egg starting energy
+local young_per_egg = 4 --will get this/energy_egg starting energy
 
 local lifespan = energy_max * 6
 
@@ -182,7 +182,7 @@ minetest.register_entity("animals:kubwakubwa", {
 	logic = brain,
 	-- optional mobkit props
 	-- or used by built in behaviors
-	--physics = [function user defined] 		-- optional, overrides built in physics
+	--physics = [function user defined] -- optional, overrides built in physics
 	animation = {
 		walk = {range = {x = 0, y = 20}, speed = 20, loop = true},
 		fast = {range = {x = 0, y = 20}, speed = 50, loop = true},

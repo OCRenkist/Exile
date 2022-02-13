@@ -196,7 +196,7 @@ minetest.register_entity("animals:impethu", {
 	logic = brain,
 	-- optional mobkit props
 	-- or used by built in behaviors
-	--physics = [function user defined] 		-- optional, overrides built in physics
+	--physics = [function user defined] -- optional, overrides built in physics
 	animation = {
 		walk = {range = {x = 0, y = 12}, speed = 10, loop = true},
 		fast = {range = {x = 0, y = 12}, speed = 10, loop = true},

@@ -112,7 +112,7 @@ minetest.register_node("tech:wattle", {
 	use_texture_alpha = "clip",
 	tiles = {
 		"tech_wattle_top.png",
-	 	"tech_wattle_top.png",
+		"tech_wattle_top.png",
 		"tech_wattle.png",
 		"tech_wattle.png",
 		"tech_wattle.png",

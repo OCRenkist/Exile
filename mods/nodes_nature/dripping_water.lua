@@ -55,7 +55,7 @@ minetest.register_entity("nodes_nature:drop_water", {
 			end
 
 			meta:set_int("thirst", thirst)
-			minetest.sound_play("nodes_nature_slurp", 	{pos = pos, max_hear_distance = 3, gain = 0.1})
+			minetest.sound_play("nodes_nature_slurp", {pos = pos, max_hear_distance = 3, gain = 0.1})
 			self.object:remove()
 
 			--food poisoning

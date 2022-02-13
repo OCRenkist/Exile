@@ -47,7 +47,7 @@ bell.ring_bell = function()
 	local sekunde = tonumber( os.date( "%S"));
 	local minute  = tonumber( os.date( "%M"));
 	local stunde  = tonumber( os.date( "%I")); -- in 12h-format (a bell that rings 24x at once would not survive long...)
-	local delay	  = RING_INTERVAL;
+	local delay   = RING_INTERVAL;
 	--print("[bells]It is now H:"..tostring( stunde ).." M:"..tostring(minute).." S:"..tostring( sekunde ));
 	--local datum = os.date( "Stunde:%l Minute:%M Sekunde:%S");
 	--print("[bells] ringing bells at "..tostring( datum ))

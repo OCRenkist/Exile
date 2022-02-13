@@ -230,7 +230,7 @@ minetest.register_globalstep(function(dtime)
 							else
 								node_above_is_air = false
 							end
-							if	((node_below_is_liquid) and not(node_above_is_air)) or
+							if ((node_below_is_liquid) and not(node_above_is_air)) or
 								(not(node_below_is_liquid) and node_above_is_liquid) then
 								on_water = true
 							else

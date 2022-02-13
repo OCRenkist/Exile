@@ -12,7 +12,7 @@ local floor  = math.floor
 local energy_max = 14000--secs it can survive without food
 local energy_egg = energy_max/8 --energy that goes to egg
 local egg_timer  = 60*45
-local young_per_egg = 2		--will get this/energy_egg starting energy
+local young_per_egg = 2 --will get this/energy_egg starting energy
 
 local lifespan   = energy_max * 8
 
@@ -169,7 +169,7 @@ minetest.register_entity("animals:sarkamos", {
 	logic          = brain,
 	-- optional mobkit props
 	-- or used by built in behaviors
-	--physics = [function user defined] 		-- optional, overrides built in physics
+	--physics = [function user defined] -- optional, overrides built in physics
 	animation = {
 		def   = {range = {x = 1, y = 59}, speed = 40, loop = true},
 		fast  = {range = {x = 1, y = 59}, speed = 80, loop = true},

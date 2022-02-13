@@ -40,12 +40,12 @@ mymod.speed_monoid = player_monoids.make_monoid({
 	end,
 	fold = function(tab)
 		local res = 1
-	     	for _, speed in pairs(tab) do
+			for _, speed in pairs(tab) do
 			res = res * speed
-	     	end
+			end
 	end,
 	identity = 1,
-	apply = function(speed, player)
+	apply    = function(speed, player)
 		local override = player:get_physics_override()
 		override.speed = speed
 		player:set_physics_override(override)
@@ -108,12 +108,12 @@ newmod.speed_boosts = player_monoids.make_monoid({
 	end,
 	fold = function(tab)
 		local res = 1
-	     	for _, speed in pairs(tab) do
-			res = math.max(res, speed)
-	     	end
+			for _, speed in pairs(tab) do
+				res = math.max(res, speed)
+			end
 	end,
-	identity = 1,
-	apply = ???
+	identity  = 1,
+	apply     = ???
 	on_change = function() return end,
 })
 ```

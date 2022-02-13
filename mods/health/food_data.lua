@@ -17,7 +17,7 @@
 	]]--
 
 food_table = {
-	--name	                               hp  th  hu   en  temp, replacewithitem (not implemented yet)
+	--name                                 hp  th  hu   en  temp, replacewithitem (not implemented yet)
 	["tech:maraka_bread_cooked"]        = { 0,  0,  24, 14,  0 },
 	["tech:maraka_bread_burned"]        = { 0,  0,  12,  7,  0 },
 	["tech:peeled_anperla_cooked"]      = { 0,  4,  24, 14,  0 },

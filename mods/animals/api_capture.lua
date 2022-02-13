@@ -74,7 +74,7 @@ animals.register_egg = function(name, desc, inv_img, stack, energy)
 	})
 end
 animals.capture = function(self, clicker)
-	local new_stack  = ItemStack(self.name) 	-- add special mob egg with all mob information
+	local new_stack  = ItemStack(self.name) -- add special mob egg with all mob information
 	local stack_meta = new_stack:get_meta()
 	--local sett = "---TABLE---: "
 	--local sett = ""

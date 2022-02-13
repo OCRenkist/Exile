@@ -325,7 +325,7 @@ end
 
 --For air_temp. Heat based movement. returns if moved or not
 local move_air_nodes = function(pos, meta, temp_m)
-	--heat rises 	-cold sink
+	--heat rises -- cold sink
 	local pos_new
 	if temp_m > 0 then
 		pos_new = {x = pos.x, y = pos.y +1, z = pos.z}
@@ -426,7 +426,7 @@ function climate.heat_transfer(pos, nodename, replace)
 	local pos_min = {x = pos.x -1, y = pos.y -1, z = pos.z -1}
 	local air, cn = minetest.find_nodes_in_area(pos_min, pos_max,
 		{"air", "group:water", "climate:air_temp",
-			"climate:air_temp_visible"	})
+			"climate:air_temp_visible"})
 	--including group:temp_pass causes problems for doing pottery etc in groups (cools down bc of neighbors).
 	--taking them out of temp_pass would allow exploits (e.g. furnaces built from pots)
 	-- it seems good to let air_temp self cool. Any other temp_pass nodes that ought to be here

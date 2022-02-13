@@ -186,6 +186,6 @@ lightning.strike = function(pos)
 	--elseif minetest.get_item_group(n.name, "sand") > 0 then
 		--minetest.set_node(pos2, { name = "default:glass"})
 	--elseif minetest.get_item_group(n.name, "soil") > 0 then
-	--	minetest.set_node(pos2, { name = "default:gravel"})
+	--minetest.set_node(pos2, { name = "default:gravel"})
 	end
 end

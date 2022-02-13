@@ -1353,7 +1353,7 @@ function HEALTH.remove_new_effect(player, name)
 			--elseif name[1] == "Meta-Stim" then
 			--note, this wont remove flying effects. Not needed at this point,
 			-- but will need something better if want to have an item that removes meta-stim
-			--	default_timer_regress(player, "Meta-Stim", 12, 24, meta, effects_list, effect[2], name[2], {"Neurotoxicity", meta:get_int("max_metastim") or 1})
+			-- default_timer_regress(player, "Meta-Stim", 12, 24, meta, effects_list, effect[2], name[2], {"Neurotoxicity", meta:get_int("max_metastim") or 1})
 
 			end
 

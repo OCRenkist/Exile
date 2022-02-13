@@ -271,7 +271,7 @@ for i in ipairs(sed_list) do
 	local hardness = sed_list[i][3]
 	local type = sed_list[i][4]
 
- 	local s, sw, g, g2, g3 = property_by_type(type, hardness)
+	local s, sw, g, g2, g3 = property_by_type(type, hardness)
 
 
 	--register raw
@@ -447,11 +447,11 @@ end
 
 
 for i in ipairs(agri_soil_list) do
-	local name = agri_soil_list[i][1]
-	local desc = agri_soil_list[i][2]
+	local name     = agri_soil_list[i][1]
+	local desc     = agri_soil_list[i][2]
 	local hardness = agri_soil_list[i][3]
-	local source = agri_soil_list[i][4]		--derived from this type of sediment
-	local type   = agri_soil_list[i][5]
+	local source   = agri_soil_list[i][4] --derived from this type of sediment
+	local type     = agri_soil_list[i][5]
 
 
 	local s, sw, g, g2, g3, g4 = property_by_type(type, hardness, "agricultural")
