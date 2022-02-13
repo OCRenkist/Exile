@@ -917,7 +917,7 @@ minetest.override_item("nodes_nature:hakimi", {
 	on_use = function(itemstack, user, pointed_thing)
 
 		--only cure mild
-		if random()<0.75 then
+		if random() < 0.75 then
 			HEALTH.remove_new_effect(user, {"Food Poisoning", 1})
 			HEALTH.remove_new_effect(user, {"Fungal Infection", 1})
 			HEALTH.remove_new_effect(user, {"Dust Fever", 1})
@@ -932,7 +932,7 @@ minetest.override_item("nodes_nature:hakimi", {
 minetest.override_item("nodes_nature:merki", {
 	on_use = function(itemstack, user, pointed_thing)
 
-		if random()<0.15 then
+		if random() < 0.15 then
 			HEALTH.remove_new_effect(user, {"Intestinal Parasites"})
 		end
 

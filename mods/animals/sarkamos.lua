@@ -81,11 +81,11 @@ local function brain(self)
 			local light = minetest.get_node_light(pos, 0.5) or 0
 
 			if random() < 0.01
-			and not rival
-			and light < 10
-			and self.hp >= self.max_hp
-			and energy >= energy_max then
-				energy = animals.place_egg(pos, "animals:sarkamos_eggs", energy, energy_egg, "nodes_nature:salt_water_source")
+				and not rival
+				and light < 10
+				and self.hp >= self.max_hp
+				and energy >= energy_max then
+					energy = animals.place_egg(pos, "animals:sarkamos_eggs", energy, energy_egg, "nodes_nature:salt_water_source")
 			end
 
 		end

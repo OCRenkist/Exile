@@ -112,7 +112,7 @@ minetest.register_node("tech:green_glass_mix",
 	paramtype = "light",
 	groups = {crumbly = 3, falling_node = 1, heatable = 20},
 	sounds = nodes_nature.node_sound_sand_defaults(),
-  	on_construct = function(pos)
+	on_construct = function(pos)
 		--length(i.e. difficulty of firing), interval for checks (speed)
 		set_roast(pos, 40, 10)
 	end,
@@ -128,7 +128,7 @@ minetest.register_node("tech:green_glass_ingot", {
 	description = "Green Glass Ingot",
 	tiles = {"tech_green_glass.png"},
 	inventory_image = "tech_glass_ingot_green_icon.png",
-  	drawtype = "nodebox",
+	drawtype = "nodebox",
 	node_box = {
 		type  = "fixed",
 		fixed = {-0.3, -0.5, -0.3, 0.3, -0.1, 0.3},
@@ -191,55 +191,55 @@ local post_alpha = 140
 
 -- Potash solution (More like lye in this case)
 minetest.register_node("tech:potash_source", {
-  	description = "Potash Solution Source",
-  	drawtype = "liquid",
-  	tiles = {"tech_potash.png"},
-	--	use_texture_alpha = "blend",
-  	paramtype = "light",
-  	walkable = false,
-  	pointable = false,
-  	diggable = false,
-  	buildable_to = true,
-  	is_ground_content = false,
-  	drop = "",
-  	drowning = 1,
-  	liquidtype = "source",
-  	liquid_alternative_flowing = "tech:potash_flowing",
-  	liquid_alternative_source = "tech:potash_source",
-  	liquid_viscosity = 1,
+	description = "Potash Solution Source",
+	drawtype = "liquid",
+	tiles = {"tech_potash.png"},
+	-- use_texture_alpha = "blend",
+	paramtype = "light",
+	walkable = false,
+	pointable = false,
+	diggable = false,
+	buildable_to = true,
+	is_ground_content = false,
+	drop = "",
+	drowning = 1,
+	liquidtype = "source",
+	liquid_alternative_flowing = "tech:potash_flowing",
+	liquid_alternative_source = "tech:potash_source",
+	liquid_viscosity = 1,
 	liquid_range = 2,
 	liquid_renewable = false,
 	post_effect_color = {a = post_alpha, r = 30, g = 60, b = 90},
-  	groups = {water = 2, cools_lava = 1, puts_out_fire = 1},
-  	sounds = nodes_nature.node_sound_water_defaults(),
-  })
+	groups = {water = 2, cools_lava = 1, puts_out_fire = 1},
+	sounds = nodes_nature.node_sound_water_defaults(),
+})
 
 
   minetest.register_node("tech:potash_flowing", {
-  	description = "Flowing Potash Solution",
-  	drawtype = "flowingliquid",
-  	tiles = {"tech_potash.png"},
-  	special_tiles = {"tech_potash.png"},
+	description = "Flowing Potash Solution",
+	drawtype = "flowingliquid",
+	tiles = {"tech_potash.png"},
+	special_tiles = {"tech_potash.png"},
 	use_texture_alpha = "blend",
-  	paramtype = "light",
-  	paramtype2 = "flowingliquid",
-  	walkable = false,
-  	pointable = false,
-  	diggable = false,
-  	buildable_to = true,
-  	is_ground_content = false,
-  	drop = "",
-  	drowning = 1,
-  	liquidtype = "flowing",
+	paramtype = "light",
+	paramtype2 = "flowingliquid",
+	walkable = false,
+	pointable = false,
+	diggable = false,
+	buildable_to = true,
+	is_ground_content = false,
+	drop = "",
+	drowning = 1,
+	liquidtype = "flowing",
 		liquid_range = 2,
-  	liquid_alternative_flowing = "tech:potash_flowing",
-  	liquid_alternative_source = "tech:potash_source",
-  	liquid_viscosity = 1,
+	liquid_alternative_flowing = "tech:potash_flowing",
+	liquid_alternative_source = "tech:potash_source",
+	liquid_viscosity = 1,
 		liquid_renewable = false,
-  	post_effect_color = {a = post_alpha, r = 30, g = 60, b = 90},
-  	groups = {water = 2, not_in_creative_inventory = 1, puts_out_fire = 1, cools_lava = 1},
-  	sounds = nodes_nature.node_sound_water_defaults(),
-  })
+	post_effect_color = {a = post_alpha, r = 30, g = 60, b = 90},
+	groups = {water = 2, not_in_creative_inventory = 1, puts_out_fire = 1, cools_lava = 1},
+	sounds = nodes_nature.node_sound_water_defaults(),
+})
 
 -- Solution in pot
 liquid_store.register_stored_liquid(
@@ -281,9 +281,9 @@ local function potash_soak_check(pos, node)
 			minetest.set_node(pos, {name = "tech:potash_source"})
 				minetest.set_node(p_water, {name = "air"})
 				minetest.sound_play("tech_boil", {pos = pos, max_hear_distance = 8, gain = 1})
-  		elseif water_type == 2 then
-  			return false
-  		end
+		elseif water_type == 2 then
+			return false
+		end
 	end
 end
 
@@ -529,18 +529,18 @@ minetest.register_node("tech:pane_green",
 minetest.register_node("tech:pane_clear",
 {
 	description = "Clear Glass Pane",
-	tiles = {"tech_clear_glass.png"},
+	tiles       = {"tech_clear_glass.png"},
 	inventory_image = "tech_clear_pane_icon.png",
 	drawtype = "nodebox",
 	node_box = 
 	{
-		type = "fixed",
-		fixed = {{-1 / 2 + 1 / 10, -1 / 2, -1 / 32, 1 / 2 - 1 / 10, 1 / 2 - 2 / 10, 1 / 32}}, -- Modified from xpanes	
+		type  = "fixed",
+		fixed = {{-1 / 2 + 1 / 10, -1 / 2, -1 / 32, 1 / 2 - 1 / 10, 1 / 2 - 2 / 10, 1 / 32}}, -- Modified from xpanes
 	},
-	stack_max = minimal.stack_max_medium * 2,
+	stack_max  = minimal.stack_max_medium * 2,
 	paramtype2 = "facedir",
-	groups = {cracky = 3, oddly_breakable_by_hand = 3},
-	use_texture_alpha = "blend",
+	groups     = {cracky = 3, oddly_breakable_by_hand = 3},
+	use_texture_alpha   = "blend",
 	sunlight_propagates = true,
 	sounds = nodes_nature.node_sound_glass_defaults(),
 })

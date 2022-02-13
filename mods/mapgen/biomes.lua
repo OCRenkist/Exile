@@ -62,38 +62,38 @@
 		local stair_gr  = "stairs:stair_granite_block"
 		local stair_ls  = "stairs:stair_limestone_block"
 --[[ Biome Descriptions ]]--[[
-	01.	Grassland: clay, open, yellow
-	02.	Upland Grassland
-	03.	Marshland: silt, dense reeds, red
-	04.	Highland: gravel, dense grasses, purple
-	05.	Duneland: sand, barren, orange
-	06.	Woodland: loam, trees, green
-	07.	Mountain Snowcaps: frozen places up high
-	08.	Coasts and Oceans: Silty Beach
-	09.	Lower Silty Beach
-	10.	Sandy Beach
-	11.	Lower Sandy Beach
-	12.	Gravel Beach
-	13.	Lower Gravel Beach
-	14.	Shallow Ocean
-	15.	Deep Ocean
-	16.	Underground
-	17.	Deep Underground
-	18.	Dry Grassland: clay, open, yellow, drier version of standard grassland
-	19.	Wet Grassland: Wet version of standard grassland
-	20.	Barren Grassland: pale colours
-	21.	Upland Dry Grassland
-	22.	Upland Barren Grassland
-	23.	Barrenland: gravel, lifeless
-	24.	Lavaland: cooled basalt and lava flows, totally lifeless
-	25.	Hardpan Marshland: thin silt, dense reeds, red, clay layer underneath
-	26.	Wet Woodland: loam, trees, green, over a layer of wet clay
-	27.	Dry Woodland: arid forest
+	01. Grassland: clay, open, yellow
+	02. Upland Grassland
+	03. Marshland: silt, dense reeds, red
+	04. Highland: gravel, dense grasses, purple
+	05. Duneland: sand, barren, orange
+	06. Woodland: loam, trees, green
+	07. Mountain Snowcaps: frozen places up high
+	08. Coasts and Oceans: Silty Beach
+	09. Lower Silty Beach
+	10. Sandy Beach
+	11. Lower Sandy Beach
+	12. Gravel Beach
+	13. Lower Gravel Beach
+	14. Shallow Ocean
+	15. Deep Ocean
+	16. Underground
+	17. Deep Underground
+	18. Dry Grassland: clay, open, yellow, drier version of standard grassland
+	19. Wet Grassland: Wet version of standard grassland
+	20. Barren Grassland: pale colours
+	21. Upland Dry Grassland
+	22. Upland Barren Grassland
+	23. Barrenland: gravel, lifeless
+	24. Lavaland: cooled basalt and lava flows, totally lifeless
+	25. Hardpan Marshland: thin silt, dense reeds, red, clay layer underneath
+	26. Wet Woodland: loam, trees, green, over a layer of wet clay
+	27. Dry Woodland: arid forest
 	28. Upland Woodland Dry
-	29.	Highland Scree: gravel, unstable loose gravel fields
+	29. Highland Scree: gravel, unstable loose gravel fields
 	30. Wet Highland Scree
-	31.	Dry Highland: no snow version
-	32.	Dry Nountain: bare rock, no snow
+	31. Dry Highland: no snow version
+	32. Dry Nountain: bare rock, no snow
   ]]
 -- 16. `underground` biome used to have basalt dungeon
 -- 22. `upland_grassland_barren` remains disabled

@@ -25,100 +25,100 @@ for i in ipairs(list) do
 
 
 
-  minetest.register_node("nodes_nature:"..name.."_source", {
-  	description = desc.." Source",
-  	drawtype = "liquid",
-  	tiles = {
-  		{
-  			name = "nodes_nature_"..name.."_source_animated.png",
-  			backface_culling = false,
-  			animation = {
-  				type = "vertical_frames",
-  				aspect_w = 16,
-  				aspect_h = 16,
-  				length = 2.0,
-  			},
-  		},
-  		{
-  			name = "nodes_nature_"..name.."_source_animated.png",
-  			backface_culling = true,
-  			animation = {
-  				type = "vertical_frames",
-  				aspect_w = 16,
-  				aspect_h = 16,
-  				length = 2.0,
-  			},
-  		},
-  	},
+minetest.register_node("nodes_nature:"..name.."_source", {
+	description = desc.." Source",
+	drawtype = "liquid",
+	tiles = {
+		{
+			name = "nodes_nature_"..name.."_source_animated.png",
+			backface_culling = false,
+			animation = {
+				type = "vertical_frames",
+				aspect_w = 16,
+				aspect_h = 16,
+				length = 2.0,
+			},
+		},
+		{
+			name = "nodes_nature_"..name.."_source_animated.png",
+			backface_culling = true,
+			animation = {
+				type = "vertical_frames",
+				aspect_w = 16,
+				aspect_h = 16,
+				length = 2.0,
+			},
+		},
+	},
 	use_texture_alpha = alpha,
-  	paramtype = "light",
-  	walkable = false,
-  	pointable = false,
-  	diggable = false,
-  	buildable_to = true,
-  	is_ground_content = false,
-  	drop = "",
-  	drowning = 1,
-  	liquidtype = "source",
-  	liquid_alternative_flowing = "nodes_nature:"..name.."_flowing",
-  	liquid_alternative_source = "nodes_nature:"..name.."_source",
-  	liquid_viscosity = 1,
+	paramtype = "light",
+	walkable  = false,
+	pointable = false,
+	diggable  = false,
+	buildable_to = true,
+	is_ground_content = false,
+	drop = "",
+	drowning   = 1,
+	liquidtype = "source",
+	liquid_alternative_flowing = "nodes_nature:"..name.."_flowing",
+	liquid_alternative_source  = "nodes_nature:"..name.."_source",
+	liquid_viscosity = 1,
 		liquid_range = 2,
 		liquid_renewable = renew,
-  	post_effect_color = {a = post_alpha, r = 30, g = 60, b = 90},
-  	groups = {water = water_g, cools_lava = 1, puts_out_fire = 1},
-  	sounds = nodes_nature.node_sound_water_defaults(),
-  })
+	post_effect_color = {a = post_alpha, r = 30, g = 60, b = 90},
+	groups = {water = water_g, cools_lava = 1, puts_out_fire = 1},
+	sounds = nodes_nature.node_sound_water_defaults(),
+})
 
 
-  minetest.register_node("nodes_nature:"..name.."_flowing", {
-  	description = desc.." Flowing",
-  	drawtype = "flowingliquid",
-  	tiles = {"nodes_nature_"..name..".png"},
-  	special_tiles = {
-  		{
-  			name = "nodes_nature_"..name.."_flowing_animated.png",
-  			backface_culling = false,
-  			animation = {
-  				type = "vertical_frames",
-  				aspect_w = 16,
-  				aspect_h = 16,
-  				length = 0.8,
-  			},
-  		},
-  		{
-  			name = "nodes_nature_"..name.."_flowing_animated.png",
-  			backface_culling = true,
-  			animation = {
-  				type = "vertical_frames",
-  				aspect_w = 16,
-  				aspect_h = 16,
-  				length = 0.8,
-  			},
-  		},
-  	},
+minetest.register_node("nodes_nature:"..name.."_flowing", {
+	description = desc.." Flowing",
+	drawtype    = "flowingliquid",
+	tiles       = {"nodes_nature_"..name..".png"},
+	special_tiles = {
+		{
+			name = "nodes_nature_"..name.."_flowing_animated.png",
+			backface_culling = false,
+			animation = {
+				type     = "vertical_frames",
+				aspect_w = 16,
+				aspect_h = 16,
+				length   = 0.8,
+			},
+		},
+		{
+			name = "nodes_nature_"..name.."_flowing_animated.png",
+			backface_culling = true,
+			animation = {
+				type  = "vertical_frames",
+				aspect_w = 16,
+				aspect_h = 16,
+				length   = 0.8,
+			},
+		},
+	},
 	use_texture_alpha = alpha,
-  	paramtype = "light",
-  	paramtype2 = "flowingliquid",
-  	walkable = false,
-  	pointable = false,
-  	diggable = false,
-  	buildable_to = true,
-  	is_ground_content = false,
+	paramtype    = "light",
+	paramtype2   = "flowingliquid",
+	walkable     = false,
+	pointable    = false,
+	diggable     = false,
+	buildable_to = true,
+	is_ground_content   = false,
 	liquid_move_physics = false,
 	move_resistance = 0,
-  	drop = "",
-  	drowning = 1,
-  	liquidtype = "flowing",
+	drop = "",
+	drowning = 1,
+	liquidtype = "flowing",
 	liquid_range = 2,
-  	liquid_alternative_flowing = "nodes_nature:"..name.."_flowing",
-  	liquid_alternative_source = "nodes_nature:"..name.."_source",
-  	liquid_viscosity = 1,
+	liquid_alternative_flowing = "nodes_nature:"..name.."_flowing",
+	liquid_alternative_source = "nodes_nature:"..name.."_source",
+	liquid_viscosity = 1,
 		liquid_renewable = renew,
-  	post_effect_color = {a = post_alpha, r = 30, g = 60, b = 90},
-  	groups = {water = water_g, not_in_creative_inventory = 1, puts_out_fire = 1, cools_lava = 1},
-  	sounds = nodes_nature.node_sound_water_defaults(),
-  })
+	post_effect_color = {a = post_alpha, r = 30, g = 60, b = 90},
+	groups = {water = water_g, not_in_creative_inventory = 1, puts_out_fire = 1, cools_lava = 1},
+	sounds = nodes_nature.node_sound_water_defaults(),
+})
 
 end
 
@@ -451,17 +451,17 @@ local lava_melt = function(pos, node)
 		if aname == "air" or aname == "climate:air_temp" then
 			local c = ran()
 			--cool vs erupt
-			if c<0.5 then
+			if c < 0.5 then
 				minetest.set_node(pos, {name = "nodes_nature:basalt"})
 				minetest.sound_play("nodes_nature_cool_lava",
 					{pos = pos, max_hear_distance = 16, gain = 0.25})
 				return
-			elseif c<0.75 then
+			elseif c < 0.75 then
 				erupt(pos, aname)
 				--spread instability
 				local spos = minetest.find_node_near(pos, 3, 'nodes_nature:lava_source')
 				if spos then
-					local pa = 	{x = pos.x, y = pos.y+1, z = pos.z}
+					local pa = {x = pos.x, y = pos.y+1, z = pos.z}
 					local an = minetest.get_node(pa).name
 					if an == 'air' or an == 'climate:air_temp' then
 						minetest.after(5, function()
