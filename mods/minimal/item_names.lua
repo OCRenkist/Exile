@@ -52,7 +52,7 @@ minetest.register_globalstep(function(dtime)
 		if data.hud and data.dtime < dlimit then
 			data.dtime = data.dtime + dtime
 			if data.dtime > dlimit then
-				player:hud_change(data.hud, 'text', "")
+				player:hud_change(data.hud, "text", "")
 			end
 		end
 
@@ -69,7 +69,7 @@ minetest.register_globalstep(function(dtime)
 				local def = minetest.registered_items[itemname]
 				desc = def and def.description or ""
 			end
-			player:hud_change(data.hud, 'text', desc)
+			player:hud_change(data.hud, "text", desc)
 		end
 	end
 end)

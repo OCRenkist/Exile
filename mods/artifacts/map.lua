@@ -30,7 +30,7 @@ local function update_hud_flags(player)
 end
 
 
--- Set HUD flags 'on joinplayer'
+-- Set HUD flags "on joinplayer"
 
 minetest.register_on_joinplayer(function(player)
 	update_hud_flags(player)
@@ -52,7 +52,7 @@ minetest.after(5.3, cyclic_update)
 -- Mapping kit item
 
 minetest.register_craftitem("artifacts:mapping_kit", {
-	description = "Geosurveyor".. "\n" .. "Use with 'Minimap' key",
+	description = "Geosurveyor".. "\n" .. "Use with `Minimap` key",
 	inventory_image = "artifacts_mapping_kit.png",
 	stack_max = 1,
 	--groups = {flammable = 1},

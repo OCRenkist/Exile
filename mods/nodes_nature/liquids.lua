@@ -142,7 +142,7 @@ minetest.override_item("nodes_nature:freshwater_source", {
 			end
 
 			meta:set_int("thirst", thirst)
-			--remove so don't get infinity water supply
+			--remove so don’t get infinity water supply
 			minetest.set_node(pos, {name = "air"})
 			minetest.sound_play("nodes_nature_slurp",
 				{pos = pos, max_hear_distance = 3, gain = 0.25})
@@ -186,7 +186,7 @@ minetest.override_item("nodes_nature:salt_water_flowing", {
 })
 
 ----------------------------------------------------------
---SNOW AND ICE (yes I know this isn't a liquid...in this state)
+--SNOW AND ICE (yes I know this isn’t a liquid...in this state)
 
 --Snow
 
@@ -436,7 +436,7 @@ local lava_melt = function(pos, node)
 	--add hot air
 	climate.air_temp_source(pos, lava_temp_effect, lava_heater, 0.5, 15)
 
-	--lava works it's way up through rocks and more, melting them as it goes
+	--lava works it’s way up through rocks and more, melting them as it goes
 	--being on top of a magma chamber is now very dangerous
 	local posa  = {x = pos.x, y = pos.y+1, z = pos.z}
 	local aname = minetest.get_node(posa).name
@@ -459,11 +459,11 @@ local lava_melt = function(pos, node)
 			elseif c < 0.75 then
 				erupt(pos, aname)
 				--spread instability
-				local spos = minetest.find_node_near(pos, 3, 'nodes_nature:lava_source')
+				local spos = minetest.find_node_near(pos, 3, "nodes_nature:lava_source")
 				if spos then
 					local pa = {x = pos.x, y = pos.y+1, z = pos.z}
 					local an = minetest.get_node(pa).name
-					if an == 'air' or an == 'climate:air_temp' then
+					if an == "air" or an == "climate:air_temp" then
 						minetest.after(5, function()
 		          erupt(spos, an)
 		        end)
@@ -514,7 +514,7 @@ end
 minetest.register_abm({
 	label = "Lava melt",
 	nodenames = {"nodes_nature:lava_source", "nodes_nature:lava_flowing"},
-	neighbors = {"group:stone", "group:soft_stone", 'air', 'climate:air_temp'},
+	neighbors = {"group:stone", "group:soft_stone", "air", "climate:air_temp"},
 	interval = 26,
 	chance = 13,
 	catch_up = false,

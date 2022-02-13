@@ -54,15 +54,15 @@ end)
 minetest.register_allow_player_inventory_action(function(player, action, inventory, inventory_info)
 	local stack, from_inv, to_index
 	if action == "move" and inventory_info.to_list == "cloths" then
-		if inventory_info.from_list == inventory_info.to_list then --for moving inside the 'cloths' inventory
+		if inventory_info.from_list == inventory_info.to_list then --for moving inside the "cloths" inventory
 			return 1
 		end
-		--for moving items from player inventory list 'main' to 'cloths'
+		--for moving items from player inventory list "main" to "cloths"
 		from_inv = "main"
 		to_index = inventory_info.to_index
 		stack = inventory:get_stack(inventory_info.from_list, inventory_info.from_index)
 	elseif action == "put" and inventory_info.listname == "cloths" then
-		--for moving from node inventory 'closet' to player inventory 'cloths'
+		--for moving from node inventory "closet" to player inventory "cloths"
 		from_inv = "closet"
 		to_index = inventory_info.index
 		stack = inventory_info.stack

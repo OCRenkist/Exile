@@ -1,5 +1,5 @@
-package.path = '../../?.lua;' .. -- tests root
-			   '../?.lua;' .. -- mod root
+package.path = "../../?.lua;" .. -- tests root
+			   "../?.lua;" .. -- mod root
 			   package.path
 
 require("crafting/tests/dummy")

@@ -22,7 +22,7 @@ minetest.register_node("tech:stick", {
 	connect_back  = {{-0.0625, -0.0625,  0.0625,  0.0625, 0.0625,  0.5000}},
 	connect_right = {{ 0.0625, -0.0625, -0.0625,  0.5000, 0.0625,  0.0625}},
 	},
-	connects_to = {'tech:stick'},
+	connects_to = {"tech:stick"},
 	]]
 
 	tiles = {"tech_stick.png"},
@@ -100,8 +100,8 @@ local node_a = minetest.get_node({x = pos.x, y = pos.y + 1, z = pos.z})
 end
 --bitter maraka flour
 -- unusable flour. Requires water treatment.
-minetest.register_node('tech:maraka_flour_bitter', {
-	description = 'Bitter Maraka Flour',
+minetest.register_node("tech:maraka_flour_bitter", {
+	description = "Bitter Maraka Flour",
 	tiles     = {"tech_flour_bitter.png"},
 	stack_max = minimal.stack_max_bulky * 4,
 	paramtype = "light",
@@ -118,8 +118,8 @@ minetest.register_node('tech:maraka_flour_bitter', {
 })
 -- maraka flour
 --usable flour.
-minetest.register_node('tech:maraka_flour', {
-	description = 'Maraka Flour',
+minetest.register_node("tech:maraka_flour", {
+	description = "Maraka Flour",
 	tiles     = {"tech_flour.png"},
 	stack_max = minimal.stack_max_bulky * 4,
 	paramtype = "light",
@@ -346,7 +346,7 @@ crafting.register_recipe({
 crafting.register_recipe({
 	type   = "mortar_and_pestle",
 	output = "tech:maraka_flour_bitter",
-	items  = {'nodes_nature:maraka_nut 12'},
+	items  = {"nodes_nature:maraka_nut 12"},
 	level  = 1,
 	always_known = true,
 })
@@ -354,7 +354,7 @@ crafting.register_recipe({
 crafting.register_recipe({
 	type   = "mortar_and_pestle",
 	output = "tech:maraka_flour_bitter 4",
-	items  = {'nodes_nature:maraka_nut 48'},
+	items  = {"nodes_nature:maraka_nut 48"},
 	level  = 1,
 	always_known = true,
 })
@@ -362,7 +362,7 @@ crafting.register_recipe({
 crafting.register_recipe({
 	type   = "mortar_and_pestle",
 	output = "tech:maraka_bread 6",
-	items  = {'tech:maraka_flour'},
+	items  = {"tech:maraka_flour"},
 	level  = 1,
 	always_known = true,
 })
@@ -370,7 +370,7 @@ crafting.register_recipe({
 crafting.register_recipe({
 	type   = "mortar_and_pestle",
 	output = "tech:maraka_bread 24",
-	items  = {'tech:maraka_flour 4'},
+	items  = {"tech:maraka_flour 4"},
 	level  = 1,
 	always_known = true,
 })
@@ -378,7 +378,7 @@ crafting.register_recipe({
 crafting.register_recipe({
 	type   = "mortar_and_pestle",
 	output = "tech:vegetable_oil",
-	items = {'nodes_nature:vansano_seed 12'},
+	items = {"nodes_nature:vansano_seed 12"},
 	level = 1,
 	always_known = true,
 })
@@ -386,7 +386,7 @@ crafting.register_recipe({
 crafting.register_recipe({
 	type   = "mortar_and_pestle",
 	output = "tech:vegetable_oil 6",
-	items = {'nodes_nature:vansano_seed 72'},
+	items = {"nodes_nature:vansano_seed 72"},
 	level = 1,
 	always_known = true,
 })

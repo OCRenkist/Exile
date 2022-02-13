@@ -93,7 +93,7 @@ local function update_sound(player)
 end
 
 
--- Update sound 'on joinplayer'
+-- Update sound "on joinplayer"
 
 minetest.register_on_joinplayer(function(player)
 	update_sound(player)

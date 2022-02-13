@@ -166,8 +166,8 @@ minetest.register_chatcommand("/help", {
 			end
 			table.sort(cmds)
 			return true, "Available commands: " .. table.concat(cmds, " ") .. "\n"
-					.. "Use '//help <cmd>' to get more information,"
-					.. " or '//help all' to list everything."
+					.. "Use `//help <cmd>` to get more information,"
+					.. " or `//help all` to list everything."
 		elseif param == "all" then
 			local cmds = {}
 			for cmd, def in pairs(minetest.chatcommands) do

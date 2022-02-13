@@ -587,7 +587,7 @@ function doors.register_trapdoor(name, def)
 	}
 	def_closed.tiles = {
 		def.tile_front,
-		def.tile_front .. '^[transformFY',
+		def.tile_front .. "^[transformFY",
 		def.tile_side,
 		def.tile_side,
 		def.tile_side,
@@ -604,11 +604,11 @@ function doors.register_trapdoor(name, def)
 	}
 	def_opened.tiles = {
 		def.tile_side,
-		def.tile_side .. '^[transform2',
-		def.tile_side .. '^[transform3',
-		def.tile_side .. '^[transform1',
-		def.tile_front .. '^[transform46',
-		def.tile_front .. '^[transform6'
+		def.tile_side  .. "^[transform2",
+		def.tile_side  .. "^[transform3",
+		def.tile_side  .. "^[transform1",
+		def.tile_front .. "^[transform46",
+		def.tile_front .. "^[transform6"
 	}
 
 	def_opened.drop = name_closed

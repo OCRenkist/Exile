@@ -85,8 +85,8 @@ end
 
 
 --Requires retting ie soak and semi-rot
-minetest.register_node('tech:unretted_cana_bundle', {
-	description = 'Unretted Cana Bundle',
+minetest.register_node("tech:unretted_cana_bundle", {
+	description = "Unretted Cana Bundle",
 	tiles       = {"tech_unretted_cana_bundle.png"},
 	stack_max   = minimal.stack_max_bulky * 2,
 	groups      = {snappy = 3, flammable = 1},
@@ -105,14 +105,14 @@ minetest.register_node('tech:unretted_cana_bundle', {
 	end,
 	on_timer = function(pos, elapsed)
 		--finished product, length
-		return retting(pos, 'tech:retted_cana_bundle', 60)
+		return retting(pos, "tech:retted_cana_bundle", 60)
 	end,
 })
 
 
 --Retted, ie. has removed unwanted plant matter
-minetest.register_node('tech:retted_cana_bundle', {
-	description = 'Retted Cana Bundle',
+minetest.register_node("tech:retted_cana_bundle", {
+	description = "Retted Cana Bundle",
 	tiles = {"tech_retted_cana_bundle.png"},
 	stack_max = minimal.stack_max_bulky * 2,
 	groups = {snappy = 3, flammable = 1},
@@ -173,7 +173,7 @@ minetest.register_craftitem("tech:fine_fabric", {
 crafting.register_recipe({
 	type = "spinning_wheel",
 	output = "tech:unretted_cana_bundle",
-	items = {'nodes_nature:cana 24'},
+	items = {"nodes_nature:cana 24"},
 	level = 1,
 	always_known = true,
 })
@@ -183,7 +183,7 @@ crafting.register_recipe({
 crafting.register_recipe({
 	type = "spinning_wheel",
 	output = "tech:coarse_fibre 12",
-	items = {'tech:retted_cana_bundle'},
+	items = {"tech:retted_cana_bundle"},
 	level = 1,
 	always_known = true,
 })
@@ -193,7 +193,7 @@ crafting.register_recipe({
 crafting.register_recipe({
 	type = "spinning_wheel",
 	output = "tech:fine_fibre 3",
-	items = {'tech:retted_cana_bundle'},
+	items = {"tech:retted_cana_bundle"},
 	level = 1,
 	always_known = true,
 })
@@ -202,7 +202,7 @@ crafting.register_recipe({
 crafting.register_recipe({
 	type = "loom",
 	output = "tech:coarse_fabric",
-	items = {'tech:coarse_fibre 6'},
+	items = {"tech:coarse_fibre 6"},
 	level = 1,
 	always_known = true,
 })
@@ -212,7 +212,7 @@ crafting.register_recipe({
 crafting.register_recipe({
 	type = "loom",
 	output = "tech:fine_fabric",
-	items = {'tech:fine_fibre 6'},
+	items = {"tech:fine_fibre 6"},
 	level = 1,
 	always_known = true,
 })

@@ -7,7 +7,7 @@
 
 	Bricks:
 	clay + sand -> unfired loose brick (using brick mold etc)
-	Fire @ > 600 (more like 1000?. Depends on the clay. We'll do within range of our wood fire)
+	Fire @ > 600 (more like 1000?. Depends on the clay. We’ll do within range of our wood fire)
 	-> fired loose brick
 	Plus mortar -> bricks and mortar
 
@@ -119,7 +119,7 @@ minetest.register_node("tech:quicklime", {
 			end
 		end
 	end
-	--it's still here...
+	--it’s still here...
 	return true
 	end,
 })
@@ -149,13 +149,13 @@ minetest.register_node("tech:slaked_lime", {
 		return false
 	end
 	end
-	--it's still here...
+	--it’s still here...
 	return true
 	end,
 })
 --ruined slaked lime
---same as above, but got mixed with salt water, I suspect that's bad...
---but can't find what would happen
+--same as above, but got mixed with salt water, I suspect that’s bad...
+--but can’t find what would happen
 --turns back into lime when exposed to air
 minetest.register_node("tech:slaked_lime_ruined", {
 	description = "Slaked Lime (ruined)",
@@ -181,7 +181,7 @@ minetest.register_node("tech:slaked_lime_ruined", {
 			return false
 		end
 	end
-	--it's still here...
+	--it’s still here...
 	return true
 	end,
 })
@@ -213,7 +213,7 @@ minetest.register_node("tech:lime_mortar", {
 					return false
 				end
 			end
-			--it's still here...
+			-- it’s still here...
 			return true
 		end,
 	]]
@@ -223,7 +223,7 @@ minetest.register_node("tech:lime_mortar", {
 crafting.register_recipe({
 	type   = "hammering_block",
 	output = "tech:crushed_lime",
-	items  = {'nodes_nature:limestone_boulder'},
+	items  = {"nodes_nature:limestone_boulder"},
 	level  = 1,
 	always_known = true,
 })
@@ -236,7 +236,7 @@ crafting.register_recipe({
 	always_known = true,
 })
 ----BRICKS----
---step one bricks, it's same deal as pottery
+--step one bricks, it’s same deal as pottery
 --Pottery firing functions
 local function set_firing(pos, length, interval)
 	-- and firing count
@@ -250,7 +250,7 @@ local function fire_pottery(pos, selfname, name, length)
 	local firing = meta:get_int("firing")
 	--check if wet, falls to bits and thats it for your pot
 	if climate.get_rain(pos) or minetest.find_node_near(pos, 1, {"group:water"}) then
-		minetest.set_node(pos, {name = 'nodes_nature:clay'})
+		minetest.set_node(pos, {name = "nodes_nature:clay"})
 		return false
 	end
 	--exchange accumulated heat
@@ -278,8 +278,8 @@ local function fire_pottery(pos, selfname, name, length)
 		return true
 	end
 end
-minetest.register_node('tech:loose_brick_unfired', {
-	description  = 'Loose Bricks (unfired)',
+minetest.register_node("tech:loose_brick_unfired", {
+	description  = "Loose Bricks (unfired)",
 	tiles        = {"nodes_nature_clay.png"},
 	stack_max    = minimal.stack_max_bulky *2,
 	drawtype     = "nodebox",
@@ -320,11 +320,11 @@ minetest.register_node('tech:loose_brick_unfired', {
 		set_firing(pos, 40, 10)
 	end,
 	on_timer     = function(pos, elapsed)
-		return fire_pottery(pos, 'tech:loose_brick_unfired', 'tech:loose_brick', 40)
+		return fire_pottery(pos, "tech:loose_brick_unfired", "tech:loose_brick", 40)
 	end,
 })
-minetest.register_node('tech:loose_brick', {
-	description = 'Loose Bricks',
+minetest.register_node("tech:loose_brick", {
+	description = "Loose Bricks",
 	tiles       = {"tech_roof_tiles.png"},
 	stack_max   = minimal.stack_max_bulky *3,
 	drawtype    = "nodebox",
@@ -390,7 +390,7 @@ stairs.register_stair_and_slab(
 crafting.register_recipe({
 	type   = "brick_makers_bench",
 	output = "tech:loose_brick_unfired 6",
-	items  = {'nodes_nature:clay_wet 3', 'nodes_nature:sand_wet'},
+	items  = {"nodes_nature:clay_wet 3", "nodes_nature:sand_wet"},
 	level  = 1,
 	always_known = true,
 })
@@ -471,7 +471,7 @@ minetest.register_node("tech:roof_tile_loose_unfired", {
 		set_firing(pos, 40, 10)
 	end,
 	on_timer = function(pos, elapsed)
-		return fire_pottery(pos, 'tech:roof_tile_loose_unfired', 'tech:roof_tile_loose', 40)
+		return fire_pottery(pos, "tech:roof_tile_loose_unfired", "tech:roof_tile_loose", 40)
 	end,
 })
 minetest.register_node("tech:roof_tile_loose", {
@@ -635,7 +635,7 @@ minetest.register_node("tech:roof_tile_ic", {
 crafting.register_recipe({
 	type   = "brick_makers_bench",
 	output = "tech:roof_tile_loose_unfired",
-	items  = {'nodes_nature:clay_wet 6'},
+	items  = {"nodes_nature:clay_wet 6"},
 	level  = 1,
 	always_known = true,
 })
@@ -643,7 +643,7 @@ crafting.register_recipe({
 crafting.register_recipe({
 	type   = "brick_makers_bench",
 	output = "tech:roof_tile 6",
-	items  = {'tech:roof_tile_loose'},
+	items  = {"tech:roof_tile_loose"},
 	level  = 1,
 	always_known = true,
 })

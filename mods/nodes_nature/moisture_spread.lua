@@ -27,7 +27,7 @@ local function water_evap(pos, node)
 
 	--evaporation
 	if climate.can_evaporate(pos) then
-		--lose it's own water to the atmosphere
+		--lose it’s own water to the atmosphere
 		minetest.remove_node(pos)
 		return
 	end
@@ -156,7 +156,7 @@ local function snow_accumulate(pos, node)
 
 	--not on stairs, meshes etc
 	local draw = nodedef.drawtype
-	if draw ~= 'normal' then
+	if draw ~= "normal" then
 		return
 	end
 
@@ -230,7 +230,7 @@ local function moisture_spread(pos, node)
 
 	--evaporation
 	if climate.can_evaporate(pos) then
-		--lose it's own water to the atmosphere
+		--lose it’s own water to the atmosphere
 		minetest.swap_node(pos, {name = dry_name})
 		return
 	end
@@ -251,7 +251,7 @@ local function moisture_spread(pos, node)
 		--is it dry?
 		local name2 = minetest.get_node(pos2).name
 		if minetest.get_item_group(name2, "wet_sediment") == 0 then
-			--lose it's own water, and move it
+			--lose it’s own water, and move it
 			minetest.swap_node(pos, {name = dry_name})
 			--set wet version of what draining into
 			local nodedef2 = minetest.registered_nodes[name2]
@@ -264,7 +264,7 @@ local function moisture_spread(pos, node)
 				--can it absorb salt or is it "destroyed" e.g. surface, ag
 				local salt = nodedef2._wet_salty_name
 				if not salt then
-					--set it to it's salted parent material
+					--set it to it’s salted parent material
 					minetest.swap_node(pos2, {name = nodedef2.drop})
 				else
 					minetest.swap_node(pos2, {name = nodedef2._wet_salty_name})
@@ -284,7 +284,7 @@ local function moisture_spread(pos, node)
 	if #pos_air > 0 then
 		--select a random one
 		local pos2 = pos_air[math.random(#pos_air)]
-		--lose it's own water, and move it
+		--lose it’s own water, and move it
 		minetest.swap_node(pos, {name = dry_name})
 		--source or flowing?
 		if puddle_detect(pos2) then

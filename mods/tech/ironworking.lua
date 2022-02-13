@@ -12,10 +12,10 @@
 --because that is annoying to code e.g. quenching and hammering hot metal
 
 --1: Get ore
---2: crush ore into 'tech:crushed_iron_ore'
---3: roast 'tech:crushed_iron_ore' at wood fire heat into 'tech:roasted_iron_ore'
---4. powder into 'tech:roasted_iron_ore_powder'
---5. mix with x charcoal for 'tech:iron_smelting_mix'
+--2: crush ore into "tech:crushed_iron_ore"
+--3: roast "tech:crushed_iron_ore" at wood fire heat into "tech:roasted_iron_ore"
+--4. powder into "tech:roasted_iron_ore_powder"
+--5. mix with x charcoal for "tech:iron_smelting_mix"
 --6. heat to smelt temp to create iron_slag_mix
 --7. keep hot enough for X minutes (and a drainage space), for molten slag to run off.
 --8. leaves behind small iron bloom (plus cooling slag nearby)
@@ -57,7 +57,7 @@ local function roast(pos, selfname, name, length, heat, smelt)
 	if roast <= 0 then
 		--finished firing
 		--need to transfer heat to smelt
-		--for others doesn't matter
+		--for others doesn’t matter
 		if name == "tech:iron_and_slag" then
 			local temp = meta:get_float("temp")
 			minetest.set_node(pos, {name = name})
@@ -91,11 +91,11 @@ local function roast(pos, selfname, name, length, heat, smelt)
 			for _, p in pairs(posb) do
 				local n = minetest.get_node(p).name
 				--must drain into air or other slag mix
-				if n == 'air' or n == 'climate:air_temp' or n == 'tech:iron_and_slag' then
+				if n == "air" or n == "climate:air_temp" or n == "tech:iron_and_slag" then
 					minetest.sound_play("nodes_nature_cool_lava",
 						{pos = pos, max_hear_distance = 8, gain = 0.1})
-					if n ~= 'tech:iron_and_slag' then
-						minetest.set_node(p, {name = 'tech:molten_slag_flowing'})
+					if n ~= "tech:iron_and_slag" then
+						minetest.set_node(p, {name = "tech:molten_slag_flowing"})
 						--only drain to one place (i.e. so they all drain the same amount)
 						cn = cn + 1
 						break
@@ -103,7 +103,7 @@ local function roast(pos, selfname, name, length, heat, smelt)
 						--undo progress of the one it is draining into.
 						local meta_under = minetest.get_meta(p)
 						local roast_under = meta_under:get_int("roast")
-						--only if still has room (i.e. can't infinitely fill it)
+						--only if still has room (i.e. can’t infinitely fill it)
 						if roast_under < 100 then
 							meta_under:set_int("roast", roast_under + 1)
 							--only drain to one place (i.e. so they all drain the same amount)
@@ -162,7 +162,7 @@ minetest.register_node("tech:crushed_iron_ore", {
 crafting.register_recipe({
 	type = "hammering_block",
 	output = "tech:crushed_iron_ore",
-	items = {'nodes_nature:ironstone_boulder 2'},
+	items = {"nodes_nature:ironstone_boulder 2"},
 	level = 1,
 	always_known = true,
 })
@@ -194,7 +194,7 @@ minetest.register_node("tech:roasted_iron_ore_powder", {
 crafting.register_recipe({
 	type = "hammering_block",
 	output = "tech:roasted_iron_ore_powder",
-	items = {'tech:roasted_iron_ore 2'},
+	items = {"tech:roasted_iron_ore 2"},
 	level = 1,
 	always_known = true,
 })
@@ -223,7 +223,7 @@ minetest.register_node("tech:iron_smelting_mix", {
 crafting.register_recipe({
 	type = "hammering_block",
 	output = "tech:iron_smelting_mix",
-	items = {'tech:roasted_iron_ore_powder', 'tech:charcoal_block 4'},
+	items = {"tech:roasted_iron_ore_powder", "tech:charcoal_block 4"},
 	level = 1,
 	always_known = true,
 })
@@ -329,7 +329,7 @@ minetest.register_node("tech:iron_ingot", {
 crafting.register_recipe({
 	type = "hammering_block",
 	output = "tech:iron_ingot",
-	items = {'tech:iron_bloom 2'},
+	items = {"tech:iron_bloom 2"},
 	level = 1,
 	always_known = true,
 })
@@ -337,7 +337,7 @@ crafting.register_recipe({
 crafting.register_recipe({
 	type = "anvil",
 	output = "tech:iron_ingot",
-	items = {'tech:iron_bloom 2'},
+	items = {"tech:iron_bloom 2"},
 	level = 1,
 	always_known = true,
 })
@@ -411,7 +411,7 @@ minetest.register_node("tech:molten_slag_source", {
 		if math.random() > 0.87 then
 			minetest.sound_play("nodes_nature_cool_lava",
 				{pos = pos, max_hear_distance = 8, gain = 0.1})
-			minetest.set_node(pos, {name = 'tech:slag'})
+			minetest.set_node(pos, {name = "tech:slag"})
 			minetest.check_for_falling(pos)
 			return false
 		else
@@ -475,7 +475,7 @@ minetest.register_node("tech:molten_slag_flowing", {
 		if math.random() > 0.95 then
 			minetest.sound_play("nodes_nature_cool_lava",
 				{pos = pos, max_hear_distance = 8, gain = 0.1})
-			minetest.set_node(pos, {name = 'tech:slag'})
+			minetest.set_node(pos, {name = "tech:slag"})
 			minetest.check_for_falling(pos)
 			return false
 		else
@@ -500,7 +500,7 @@ minetest.register_craftitem("tech:iron_fittings", {
 crafting.register_recipe({
 	type = "anvil",
 	output = "tech:iron_fittings 8",
-	items = {'tech:iron_ingot'},
+	items = {"tech:iron_ingot"},
 	level = 1,
 	always_known = true,
 })

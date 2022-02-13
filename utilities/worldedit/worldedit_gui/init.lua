@@ -149,7 +149,7 @@ elseif minetest.global_exists("smart_inventory") then -- smart_inventory install
 		local codebox = state:element("code", { name = "code", code = "" })
 		function codebox:set_we_formspec(we_page)
 			local new_formspec = get_formspec(state.location.rootState.location.player, we_page)
-			new_formspec = new_formspec:gsub('button_exit', 'button') --no inventory closing
+			new_formspec = new_formspec:gsub("button_exit", "button") --no inventory closing
 			self.data.code = "container[1 , 1]".. new_formspec .. "container_end[]"
 		end
 		codebox:set_we_formspec("worldedit_gui")

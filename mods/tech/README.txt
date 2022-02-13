@@ -9,7 +9,7 @@ Authors of source code
 ----------------------
 Dokimi (GPLv3)
 
-The torch code was derived by sofar from the 'torches' mod by
+The torch code was derived by sofar from the `torches` mod by
 BlockMen (LGPLv2.1+)
 
 Lever adapted from minetest game mod Screwdriver by RealBadAngel, Maciej Kasatkin, various Minetest developers and contributors (LGPLv2.1+)

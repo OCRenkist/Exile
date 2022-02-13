@@ -146,7 +146,7 @@ local function register_rope_block(multiple, max_multiple, name_prefix, node_pre
 		end,
 		after_destruct = function(pos)
 			local pos_below = {x = pos.x, y = pos.y - 1, z = pos.z}
-			ropes.destroy_rope(pos_below, {'ropes:rope', 'ropes:rope_bottom'})
+			ropes.destroy_rope(pos_below, {"ropes:rope", "ropes:rope_bottom"})
 		end
 	}
 	-- If this number is higher than permitted, we still want to register the block (in case
@@ -167,7 +167,7 @@ local function register_rope_block(multiple, max_multiple, name_prefix, node_pre
 	end
 	minetest.register_node(node_name, rope_block_def)
 	if (multiple ~= 1) then
-		-- Only register a recipe to craft this if it's within the permitted multiple range
+		-- Only register a recipe to craft this if it’s within the permitted multiple range
 		if multiple <= max_multiple then
 			for i = 1, multiple - 1 do
 				local rec = {string.format("ropes:%s%irope_block", node_prefix, i)}

@@ -321,21 +321,21 @@ crafting.register_recipe({
 crafting.register_recipe({
 	type         = "grinding_stone",
 	output       = "tech:adze_granite",
-	items        = {'nodes_nature:granite_boulder', 'tech:stick', 'group:fibrous_plant 4'},
+	items        = {"nodes_nature:granite_boulder", "tech:stick", "group:fibrous_plant 4"},
 	level        = 1,
 	always_known = true,
 })
 crafting.register_recipe({
 	type         = "grinding_stone",
 	output       = "tech:adze_jade",
-	items        = {'nodes_nature:jade_boulder', 'tech:stick', 'group:fibrous_plant 4'},
+	items        = {"nodes_nature:jade_boulder", "tech:stick", "group:fibrous_plant 4"},
 	level        = 1,
 	always_known = true,
 })
 crafting.register_recipe({
 	type         = "grinding_stone",
 	output       = "tech:adze_basalt",
-	items        = {'nodes_nature:basalt_boulder', 'tech:stick', 'group:fibrous_plant 4'},
+	items        = {"nodes_nature:basalt_boulder", "tech:stick", "group:fibrous_plant 4"},
 	level        = 1,
 	always_known = true,
 })
@@ -343,7 +343,7 @@ crafting.register_recipe({
 crafting.register_recipe({
 	type         = "grinding_stone",
 	output       = "tech:stone_club",
-	items        = {'nodes_nature:granite_boulder'},
+	items        = {"nodes_nature:granite_boulder"},
 	level        = 1,
 	always_known = true,
 })
@@ -352,7 +352,7 @@ crafting.register_recipe({
 crafting.register_recipe({
 	type         = "anvil",
 	output       = "tech:axe_iron",
-	items        = {'tech:iron_ingot', 'tech:stick'},
+	items        = {"tech:iron_ingot", "tech:stick"},
 	level        = 1,
 	always_known = true,
 })
@@ -360,7 +360,7 @@ crafting.register_recipe({
 crafting.register_recipe({
 	type         = "anvil",
 	output       = "tech:shovel_iron",
-	items        = {'tech:iron_ingot', 'tech:stick'},
+	items        = {"tech:iron_ingot", "tech:stick"},
 	level        = 1,
 	always_known = true,
 })
@@ -368,7 +368,7 @@ crafting.register_recipe({
 crafting.register_recipe({
 	type         = "anvil",
 	output       = "tech:mace_iron",
-	items        = {'tech:iron_ingot 2'},
+	items        = {"tech:iron_ingot 2"},
 	level        = 1,
 	always_known = true,
 })
@@ -376,7 +376,7 @@ crafting.register_recipe({
 crafting.register_recipe({
 	type         = "anvil",
 	output       = "tech:pickaxe_iron",
-	items        = {'tech:iron_ingot 2', 'tech:stick'},
+	items        = {"tech:iron_ingot 2", "tech:stick"},
 	level        = 1,
 	always_known = true,
 })
@@ -387,7 +387,7 @@ crafting.register_recipe({
 crafting.register_recipe({
 	type         = "anvil",
 	output       = "tech:iron_ingot",
-	items        = {'group:iron 2'},
+	items        = {"group:iron 2"},
 	level        = 1,
 	always_known = true,
 })

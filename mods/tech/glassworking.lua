@@ -14,7 +14,7 @@ Calcium - stabilizing (potentially in the sand)
 Two types of glass - green and clear
 
 Green - made from ash and sand. Ash contains potash/soda ash and lime, but also iron impurities that color the glass green.
-	Good for things where clarity doesn't matter, like bottler
+	Good for things where clarity doesn’t matter, like bottler
 Clear - made from refined potash (pearl ash), lime and sand. More expensive, as have to work to refine potash. Good for windows.
 
 Potash - in this case get from wood ash. 
@@ -156,7 +156,7 @@ minetest.register_node("tech:green_glass_ingot", {
 crafting.register_recipe({
 	type   = "hammering_block",
 	output = "tech:green_glass_mix 2",
-	items  = {'tech:wood_ash_block 1', 'nodes_nature:sand 1'},
+	items  = {"tech:wood_ash_block 1", "nodes_nature:sand 1"},
 	level  = 1,
 	always_known = true,
 })
@@ -275,7 +275,7 @@ local function potash_soak_check(pos, node)
 	local p_water = minetest.find_node_near(pos, 1, {"nodes_nature:freshwater_source"})
 	if p_water then
 		local p_name = minetest.get_node(p_water).name
-		--check water type. Salt wouldn't work probably
+		--check water type. Salt wouldn’t work probably
 		local water_type = minetest.get_item_group(p_name, "water")
 		if water_type == 1 then
 			minetest.set_node(pos, {name = "tech:potash_source"})
@@ -409,7 +409,7 @@ minetest.register_node("tech:clear_glass_ingot", {
 crafting.register_recipe({
 	type = "hammering_block",
 	output = "tech:clear_glass_mix 8",
-	items = {'tech:potash 1', 'tech:quicklime 1', 'nodes_nature:sand 6'},
+	items = {"tech:potash 1", "tech:quicklime 1", "nodes_nature:sand 6"},
 	level = 1,
 	always_known = true,
 })
@@ -499,7 +499,7 @@ minetest.register_node("tech:pane_tray_clear",
 crafting.register_recipe({
 	type = "anvil",
 	output = "tech:pane_tray",
-	items = {'tech:iron_ingot 2'},
+	items = {"tech:iron_ingot 2"},
 	level = 1,
 	always_known = true,
 })
@@ -589,14 +589,14 @@ minetest.register_node("tech:window_clear",
 crafting.register_recipe({
 	type = "carpentry_bench",
 	output = "tech:window_green 4",
-	items = {'group:log', 'tech:vegetable_oil', 'tech:pane_green 4'},
+	items = {"group:log", "tech:vegetable_oil", "tech:pane_green 4"},
 	level = 1,
 	always_known = true,
 })
 crafting.register_recipe({
 	type = "carpentry_bench",
 	output = "tech:window_clear 4",
-	items = {'group:log', 'tech:vegetable_oil', 'tech:pane_clear 4'},
+	items = {"group:log", "tech:vegetable_oil", "tech:pane_clear 4"},
 	level = 1,
 	always_known = true,
 })
@@ -803,7 +803,7 @@ minetest.override_item("tech:glass_bottle_green_freshwater",
 		--only drink if thirsty
 		if thirst < 100 then
 
-			local water = 100 --you're skulling a whole bucket
+			local water = 100 --you’re skulling a whole bucket
 			thirst = thirst + water
 			if thirst > 100 then
 				thirst = 100
@@ -867,7 +867,7 @@ minetest.override_item("tech:glass_bottle_clear_freshwater",
 		--only drink if thirsty
 		if thirst < 100 then
 
-			local water = 100 --you're skulling a whole bucket
+			local water = 100 --you’re skulling a whole bucket
 			thirst = thirst + water
 			if thirst > 100 then
 				thirst = 100

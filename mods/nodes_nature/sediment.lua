@@ -262,8 +262,8 @@ end
 
 
 
-local doslopes = minetest.settings:get_bool('exile_enableslopes')
-local slopechance = minetest.settings:get('exile_slopechance') or 20
+local doslopes = minetest.settings:get_bool("exile_enableslopes")
+local slopechance = minetest.settings:get("exile_slopechance") or 20
 
 for i in ipairs(sed_list) do
 	local name = sed_list[i][1]
@@ -421,8 +421,8 @@ local function erode_deplete_ag_soil(pos, depleted_name)
 			return false
 		end
 
-	elseif minetest.get_node({x = pos.x, y=(pos.y+1), z = pos.z}) == 'air' then
-	    -- ^ don't deplete a planted node; already handled in life.lua
+	elseif minetest.get_node({x = pos.x, y=(pos.y+1), z = pos.z}) == "air" then
+	    -- ^ don’t deplete a planted node; already handled in life.lua
 		-- and a 1-2% chance to be depleted via neglect
 		minetest.set_node(pos, {name = depleted_name})
 		return false

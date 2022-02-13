@@ -38,9 +38,9 @@ dofile(minetest.get_modpath("creative") .. "/inventory.lua")
 
 if creative_mode_cache then
 	-- Dig time is modified according to difference (leveldiff) between tool
-	-- 'maxlevel' and node 'level'. Digtime is divided by the larger of
+	-- "maxlevel" and node "level". Digtime is divided by the larger of
 	-- leveldiff and 1.
-	-- To speed up digging in creative, hand 'maxlevel' and 'digtime' have been
+	-- To speed up digging in creative, hand "maxlevel" and "digtime" have been
 	-- increased such that nodes of differing levels have an insignificant
 	-- effect on digtime.
 	local digtime = 42

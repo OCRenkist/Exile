@@ -1,11 +1,11 @@
 -- Megamorph geomorph.lua
 
 local mod = megamorph
-local mod_name = 'megamorph'
+local mod_name = "megamorph"
 
 
 local ladder_transform = { [0] = 4, 2, 5, 3 }
-local n_air = mod.node['air']
+local n_air = mod.node["air"]
 local null_vector = {x = 1, y = 1, z = 1}
 
 
@@ -20,11 +20,11 @@ local action_names = {
 
 
 function vector.max(v1, v2)
-	if type(v1) == 'number' then
+	if type(v1) == "number" then
 		v1 = vector.new(v1, v1, v1)
 	end
 
-	if type(v2) == 'number' then
+	if type(v2) == "number" then
 		v2 = vector.new(v2, v2, v2)
 	end
 
@@ -37,11 +37,11 @@ end
 
 
 function vector.min(v1, v2)
-	if type(v1) == 'number' then
+	if type(v1) == "number" then
 		v1 = vector.new(v1, v1, v1)
 	end
 
-	if type(v2) == 'number' then
+	if type(v2) == "number" then
 		v2 = vector.new(v2, v2, v2)
 	end
 
@@ -142,17 +142,17 @@ function Geomorph:create_shape(t)
 	local param2 = t.p2 or t.param2
 
 	local intersect = t.intersect
-	if type(intersect) == 'string' then
+	if type(intersect) == "string" then
 		intersect = { intersect }
 	end
 
-	if type(intersect) == 'table' then
+	if type(intersect) == "table" then
 		local t2 = {}
 		local con
 		for _, v in pairs(intersect) do
-			if type(v) == 'string' then
-				if v:find('^group:') then
-					local g = v:gsub('^group:', '')
+			if type(v) == "string" then
+				if v:find("^group:") then
+					local g = v:gsub("^group:", "")
 					for nm, n in pairs(minetest.registered_nodes) do
 						if n.groups and n.groups[g] then
 							t2[minetest.get_content_id(nm)] = true
@@ -170,17 +170,17 @@ function Geomorph:create_shape(t)
 	end
 
 	if not action then
-		minetest.log(mod_name .. ': missing action')
+		minetest.log(mod_name .. ": missing action")
 		return
 	end
 
 	if action_names[action] then
-		if not (location and t.size and (action == 'puzzle' or t.node)) then
-			minetest.log(mod_name .. ': missing location/size')
+		if not (location and t.size and (action == "puzzle" or t.node)) then
+			minetest.log(mod_name .. ": missing location/size")
 			return
 		end
 	else
-		minetest.log(mod_name .. ': can\'t create a ' .. action)
+		minetest.log(mod_name .. ": can\'t create a " .. action)
 		return
 	end
 
@@ -226,7 +226,7 @@ end
 
 function Geomorph:write_to_map(rot, replace, loc)
 	if not self.gpr then
-		minetest.log(mod_name .. ': missing gpr')
+		minetest.log(mod_name .. ": missing gpr")
 		return
 	end
 
@@ -234,8 +234,8 @@ function Geomorph:write_to_map(rot, replace, loc)
 		rot = self.gpr:next(0, 3)
 	end
 
-	if replace and type(replace) ~= 'table' then
-		minetest.log(mod_name .. ': bad replace')
+	if replace and type(replace) ~= "table" then
+		minetest.log(mod_name .. ": bad replace")
 		return
 	end
 
@@ -257,10 +257,10 @@ function Geomorph:write_to_map(rot, replace, loc)
 
 		if shape.floor
 		and (
-			shape.action == 'cube'
+			shape.action == "cube"
 			or (
-				shape.action == 'cylinder'
-				and (shape.axis == 'y' or shape.axis == 'Y')
+				shape.action == "cylinder"
+				and (shape.axis == "y" or shape.axis == "Y")
 			)
 		) then
 			copy = table.copy(shape)
@@ -287,24 +287,24 @@ end
 
 
 function Geomorph:write_shape(shape, rot, loc)
-	if not rot or type(rot) ~= 'number' then
-		minetest.log(mod_name .. ': can\'t write without rotation.')
+	if not rot or type(rot) ~= "number" then
+		minetest.log(mod_name .. ": can\'t write without rotation.")
 	end
 
-	if shape.action == 'cube' then
+	if shape.action == "cube" then
 		self:write_cube(shape, rot, loc)
-	elseif shape.action == 'cylinder' then
+	elseif shape.action == "cylinder" then
 		self:write_cylinder(shape, rot, loc)
-	elseif shape.action == 'ladder' then
+	elseif shape.action == "ladder" then
 		self:write_ladder(shape, rot, loc)
-	elseif shape.action == 'sphere' then
+	elseif shape.action == "sphere" then
 		self:write_sphere(shape, rot, loc)
-	elseif shape.action == 'stair' then
+	elseif shape.action == "stair" then
 		self:write_stair(shape, rot, loc)
-	elseif shape.action == 'puzzle' then
+	elseif shape.action == "puzzle" then
 		self:write_puzzle(shape, rot, loc)
 	else
-		minetest.log(mod_name .. ': can\'t create a ' .. shape.action)
+		minetest.log(mod_name .. ": can\"t create a " .. shape.action)
 	end
 end
 
@@ -368,7 +368,7 @@ end
 function Geomorph:write_cube(shape, rot, loc)
 	local min, max = rotate_coords(shape, rot, self.csize)
 	if not min then
-		minetest.log(mod_name .. ': missing min')
+		minetest.log(mod_name .. ": missing min")
 		return
 	end
 
@@ -450,7 +450,7 @@ function Geomorph:write_cube(shape, rot, loc)
 				and (not random or gpr:next(1, math.max(1, random)) == 1)
 				and (
 					not intersect
-					or (type(intersect) == 'table' and intersect[data[ivm]])
+					or (type(intersect) == "table" and intersect[data[ivm]])
 					or (intersect == true and data[ivm] ~= n_air)
 				)
 				and y < 80 and y >= 0 and underground_ok then
@@ -470,7 +470,7 @@ function Geomorph:write_cube(shape, rot, loc)
 	end
 
 	if shape.treasure and self.params.share
-	and type(shape.treasure) == 'number'
+	and type(shape.treasure) == "number"
 	and self.gpr:next(1, shape.treasure) == 1 then
 		if not self.params.share.treasure_chests then
 			self.params.share.treasure_chests = {}
@@ -484,7 +484,7 @@ function Geomorph:write_cube(shape, rot, loc)
 		local ivm = self.area:indexp(acpos)
 		if data[ivm] == n_air then
 			--!!
-			data[ivm] = self.node['artifacts:antiquorium_chest']
+			data[ivm] = self.node["artifacts:antiquorium_chest"]
 			table.insert(self.params.share.treasure_chests, acpos)
 		end
 	end
@@ -553,7 +553,7 @@ function Geomorph:write_sphere(shape, rot, loc)
 				and (not h_radius or dist > h_radius_s)
 				and (
 					not intersect
-					or (type(intersect) == 'table' and intersect[data[ivm]])
+					or (type(intersect) == "table" and intersect[data[ivm]])
 					or (intersect == true and data[ivm] ~= n_air)
 				)
 				and y < 80 and y >= 0 and underground_ok then
@@ -571,7 +571,7 @@ end
 
 function Geomorph:write_cylinder(shape, rot, loc)
 	if not shape.axis then
-		minetest.log(mod_name .. ': can\'t create a cylinder without an axis')
+		minetest.log(mod_name .. ": can\'t create a cylinder without an axis")
 		return
 	end
 
@@ -600,17 +600,17 @@ function Geomorph:write_cylinder(shape, rot, loc)
 	local ystride = self.area.ystride
 
 	if rot == 1 or rot == 3 then
-		if axis == 'x' or axis == 'X' then
-			axis = 'z'
-		elseif axis == 'z' or axis == 'Z' then
-			axis = 'x'
+		if axis == "x" or axis == "X" then
+			axis = "z"
+		elseif axis == "z" or axis == "Z" then
+			axis = "x"
 		end
 	end
 
 	local do_radius = {
-		x=(axis ~= 'x' and axis ~= 'X'),
-		y=(axis ~= 'y' and axis ~= 'Y'),
-		z=(axis ~= 'z' and axis ~= 'Z'),
+		x=(axis ~= "x" and axis ~= "X"),
+		y=(axis ~= "y" and axis ~= "Y"),
+		z=(axis ~= "z" and axis ~= "Z"),
 	}
 
 	local radius = math.max(shape.size.x, shape.size.y, shape.size.z) / 2
@@ -678,7 +678,7 @@ function Geomorph:write_cylinder(shape, rot, loc)
 				if radius_good and hollow_good and y < 80 and y >= 0
 				and (
 					not intersect
-					or (type(intersect) == 'table' and intersect[data[ivm]])
+					or (type(intersect) == "table" and intersect[data[ivm]])
 					or (intersect == true and data[ivm] ~= n_air)
 				)
 				and (not pattern or mod.pattern_match(pattern, x, y, z)) then
@@ -696,7 +696,7 @@ end
 
 function Geomorph:write_stair(shape, rot, loc)
 	if not shape.param2 then
-		minetest.log(mod_name .. ': can\'t make a stair with no p2')
+		minetest.log(mod_name .. ": can\'t make a stair with no p2")
 		return
 	end
 
@@ -723,7 +723,7 @@ function Geomorph:write_stair(shape, rot, loc)
 	--local underground = shape.underground
 	local ystride = self.area.ystride
 	--!!!
-	local n_stone = self.node['nodes_nature:granite'] --self.node['default:stone']
+	local n_stone = self.node["nodes_nature:granite"] --self.node["default:stone"]
 	local n_depth = depth_fill and self.node[depth_fill] or n_stone
 
 	for z = min.z, max.z do
@@ -851,9 +851,9 @@ end
 
 function Geomorph:write_chest(location, rot, loc)
 	local s = {
-		action = 'cube',
+		action = "cube",
 		location = location,
-		node = 'artifacts:antiquorium_chest',
+		node = "artifacts:antiquorium_chest",
 		size = vector.new(1, 1, 1)
 	}
 	self:write_cube(s, rot, loc)
@@ -869,17 +869,17 @@ function Geomorph:write_match_three(shape, rot, loc)
 	p.location.y = p.location.y + 2
 	p.size = vector.add(p.size, 4)
 	p.size.y = p.size.y - 6 + (shape.clear_up or 0)
-	p.node = 'air'
+	p.node = "air"
 	self:write_cube(p, rot, loc)
 
 	p = table.copy(shape)
-	p.node = 'match_three:top'
+	p.node = "match_three:top"
 	p.location.y = p.location.y + shape.size.y - 2
 	p.size.y = 1
 	self:write_cube(p, rot, loc)
 
 	p1 = table.copy(p)
-	p1.node = 'match_three:clear_scrith'
+	p1.node = "match_three:clear_scrith"
 	p1.location.y = shape.location.y - 1
 	self:write_cube(p1, rot, loc)
 
@@ -888,7 +888,7 @@ function Geomorph:write_match_three(shape, rot, loc)
 	p.location.z = p.location.z + 1
 	p.size.x = p.size.x - 2
 	p.size.z = p.size.z - 2
-	p.node = 'match_three:clear_scrith'
+	p.node = "match_three:clear_scrith"
 	self:write_cube(p, rot, loc)
 end
 
@@ -896,7 +896,7 @@ end
 mod.registered_geomorphs = {}
 function mod.register_geomorph(def)
 	if not def.name then
-		minetest.log(mod_name .. ': cannot register a nameless geomorph')
+		minetest.log(mod_name .. ": cannot register a nameless geomorph")
 		return
 	end
 

@@ -42,7 +42,7 @@ minetest.register_entity("nodes_nature:drop_water", {
 	on_punch = function(self, puncher, time_from_last_punch, tool_capabilities, dir)
 		--drink
 		local meta = puncher:get_meta()
-		if not meta then return end --mobs can punch, but can't drink
+		if not meta then return end --mobs can punch, but can’t drink
 		local pos = puncher:get_pos()
 		local thirst = meta:get_int("thirst")
 		--only drink if thirsty
@@ -86,7 +86,7 @@ minetest.register_abm({
 			local nb = minetest.get_node({x = pos.x, y = pos.y-1, z = pos.z}).name
 			if nb  == 'air' then
 				local nb2 = minetest.get_node({x = pos.x, y = pos.y-2, z = pos.z}).name
-				if nb2  == 'air' then
+				if nb2  == "air" then
 					local i = math.random(-35, 35) / 100
 					minetest.add_entity({x = pos.x + i, y = pos.y-0.501, z = pos.z + i}, "nodes_nature:drop_water")
 				end

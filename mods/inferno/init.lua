@@ -6,7 +6,7 @@
 inferno = {}
 
 
--- 'Enable fire' setting
+-- "Enable fire" setting
 
 local fire_enabled = minetest.settings:get_bool("enable_fire")
 if fire_enabled == nil then
@@ -28,7 +28,7 @@ end
 -- Flood flame function
 
 local function flood_flame(pos, oldnode, newnode)
-	-- Play flame extinguish sound if liquid is not an 'igniter'
+	-- Play flame extinguish sound if liquid is not an "igniter"
 	local nodedef = minetest.registered_items[newnode.name]
 	if not (nodedef and nodedef.groups and
 			nodedef.groups.igniter and nodedef.groups.igniter > 0) then

@@ -32,18 +32,18 @@ Behaviors run for considerable amount of time, this means the functions are bein
 Therefore a need for preserving state between calls, this is why they are implemented as closures, see defining conventions for details.
 
 Behavior functions are active until they finish the job, are removed from the queue or superseded by a higher priority behavior.
-They signal finished state by returning true, therefore it's very important to carefully design the completion conditions
+They signal finished state by returning true, therefore it’s very important to carefully design the completion conditions
 
 For a behavior to begin executing it has to be put on a queue. There are two separate queues, one for low and one for high level behaviors.
 Queuing is covered by behavour defining conventions
 
-!!! In simplest scenarios there's no need to code behaviors, much can be achieved using only built-in stuff !!!
-!!! To start using the api it's enough to learn defining mobs and writing brain functions !!!
+!!! In simplest scenarios there’s no need to code behaviors, much can be achieved using only built-in stuff !!!
+!!! To start using the api it’s enough to learn defining mobs and writing brain functions !!!
 
 
 1.1.1 Low level behavior functions
 
-These are physical actions and interactions: steps, jumps, turns etc. here you'll set velocity, yaw, kick off animations and sounds.
+These are physical actions and interactions: steps, jumps, turns etc. here you’ll set velocity, yaw, kick off animations and sounds.
 
 Low level behavior definition:
 
@@ -104,7 +104,7 @@ Particular prioritization scheme is to be designed by the user according to spec
 ------------------
 Every mob must have one.
 Its job is managing high level behavior queue in response to events which are not intercepted by callbacks.
-Contrary to what the name suggests, these functions needn't necessarily be too complex thanks to their limited responsibilities.
+Contrary to what the name suggests, these functions needn’t necessarily be too complex thanks to their limited responsibilities.
 
 Typical flow might look like this:
 
@@ -194,7 +194,7 @@ minetest.register_entity("mod:name", {
 	on_step = mobkit.stepfunc,
 	on_activate = mobkit.actfunc,
 	get_staticdata = mobkit.statfunc,
-	logic = [function user defined],		-- older 'brainfunc' name works as well.
+	logic = [function user defined],		-- older "brainfunc" name works as well.
 
 				-- optional mobkit props
 				-- or used by built in behaviors
@@ -211,7 +211,7 @@ minetest.register_entity("mod:name", {
 		}
 	sounds = {
 		[name] = [string filename],				--single, simple,
-		[name] = {								--single, more powerful. All fields but 'name' are optional
+		[name] = {								--single, more powerful. All fields but "name" are optional
 			name  = [string filename],
 			gain  = [num or range],				--range is a table of the format {left_bound, right_bound}
 			fade  = [num or range],
@@ -237,7 +237,7 @@ minetest.register_entity("mod:name", {
 	max_speed   = [num], -- m/s
 	jump_height = [num], -- nodes/meters
 	view_range  = [num], -- nodes/meters
-	attack      = {range = [num], -- range is distance between attacker's collision box center
+	attack      = {range = [num], -- range is distance between attacker’s collision box center
 		damage_groups = {fleshy = [num]}},	-- and the tip of the murder weapon in nodes/meters
 	armor_groups = {fleshy = [num]}
 })
@@ -249,7 +249,7 @@ Some frequently used entity fields to be accessed directly for convenience
 	self.dtime      -- max(dtime as passed to on_step, 0.5) - limit of 0.05 to prevent jerkines on long steps.
 	self.hp         -- hitpoints
 	self.isonground -- true if pos.y remains unchanged for 2 consecutive steps
-	self.isinliquid -- true if the node at foot level is drawtype =  = 'liquid'
+	self.isinliquid -- true if the node at foot level is drawtype =  = "liquid"
 
 ------------
 2. Reference
@@ -277,12 +277,12 @@ function mobkit.turn2yaw(self, tyaw, rate)
 
 function mobkit.timer(self, s)
 	-- returns true approx every s seconds
-	-- used to reduce execution of code that needn't necessarily be done on every engine step
+	-- used to reduce execution of code that needn’t necessarily be done on every engine step
 
 function mobkit.pos_shift(pos, vec)
 	-- convenience function
 	-- returns pos shifted by vec
-	-- vec needn't have all three components given, absent components are assumed zero.
+	-- vec needn’t have all three components given, absent components are assumed zero.
 	-- e.g pos_shift(pos,{y = 1}) is valid
 
 function mobkit.pos_translate2d(pos, yaw, dist)
@@ -294,7 +294,7 @@ function mobkit.get_stand_pos(thing)
 
 function mobkit.nodeatpos(pos)
 	-- convenience function
-	-- returns nodedef or nil if it's an ignore node
+	-- returns nodedef or nil if it’s an ignore node
 
 function mobkit.get_node_pos(pos)
 	-- returns center of the node that pos is inside
@@ -365,7 +365,7 @@ function mobkit.make_sound(self, sound)
 	--returns sound handle
 
 function mobkit.go_forward_horizontal(self, speed)
-	-- sets an entity's horizontal velocity in yaw direction. Vertical velocity unaffected.
+	-- sets an entity’s horizontal velocity in yaw direction. Vertical velocity unaffected.
 
 function mobkit.drive_to_pos(self, tpos, speed, turn_rate, dist)
 	-- moves in facing direction while gradually turning towards tpos, returns true if in dist distance from tpos
@@ -421,7 +421,7 @@ function mobkit.get_closest_entity(self, name)
 
 -- Misc
 
-Neighbors structure represents a node's horizontal neighbors
+Neighbors structure represents a node’s horizontal neighbors
 Not essential, used by some built in behaviors
 Custom behaviors may not need it.
 
@@ -465,7 +465,7 @@ function mobkit.hq_hunt(self, prty, tgtobj)
 	-- returns when tgtobj too far
 
 function mobkit.hq_warn(self, prty, tgtobj)
-	-- when a tgtobj close by, turn towards them and make the 'warn' sound
+	-- when a tgtobj close by, turn towards them and make the "warn" sound
 	-- kick off hq_hunt if tgtobj too close or timer expired
 	-- returns when tgtobj moves away
 
@@ -510,16 +510,16 @@ function mobkit.lq_turn2pos(self, tpos)
 
 function mobkit.lq_idle(self, duration)
 	-- do nothing for duration seconds
-	-- set 'stand' animation
+	-- set "stand" animation
 
 function mobkit.lq_dumbwalk(self, dest, speed_factor)
 	-- simply move towards dest
-	-- set 'walk' animation
+	-- set "walk" animation
 
 function mobkit.lq_dumbjump(self, height)
 	-- if standing on the ground, jump in the facing direction
 	-- height is relative to feet level
-	-- set 'stand' animation
+	-- set "stand" animation
 
 function mobkit.lq_freejump(self)
 	-- unconditional jump in the facing direction

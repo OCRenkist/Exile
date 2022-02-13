@@ -345,7 +345,7 @@ minetest.register_node("tech:clay_oil_lamp_unlit", {
 		local meta = minetest.get_meta(pos)
 		local fuel = meta:get_int("fuel")
 		if fuel and fuel > 0 then
-			minetest.swap_node(pos, {name = 'tech:clay_oil_lamp'})
+			minetest.swap_node(pos, {name = "tech:clay_oil_lamp"})
 			minetest.registered_nodes["tech:clay_oil_lamp"].on_construct(pos)
 			meta:set_int("fuel", fuel)
 			meta:set_string("infotext", fuel_string(fuel))
@@ -443,7 +443,7 @@ minetest.register_node("tech:clay_oil_lamp", {
 		local ist_name = itemstack:get_name()
 		local meta = minetest.get_meta(pos)
 		local fuel = meta:get_int("fuel")
-		minetest.swap_node(pos, {name = 'tech:clay_oil_lamp_unlit'})
+		minetest.swap_node(pos, {name = "tech:clay_oil_lamp_unlit"})
 		if fuel then
 		   meta:set_int("fuel", fuel)
 		   meta:set_string("infotext", fuel_string(fuel))
@@ -588,7 +588,7 @@ minetest.override_item("tech:clay_water_pot_freshwater", {
 		--only drink if thirsty
 		if thirst < 100 then
 
-			local water = 100 --you're skulling a whole bucket
+			local water = 100 --you’re skulling a whole bucket
 			thirst = thirst + water
 			if thirst > 100 then
 				thirst = 100

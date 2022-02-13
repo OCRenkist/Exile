@@ -7,7 +7,7 @@
 local duststorm = {}
 
 
-duststorm.name = 'duststorm'
+duststorm.name = "duststorm"
 
 
 duststorm.sky_data = {
@@ -63,7 +63,7 @@ duststorm.star_data = {
 
 
 
-duststorm.sound_loop = 'duststorm_loop'
+duststorm.sound_loop = "duststorm_loop"
 
 duststorm.damage = true
 
@@ -71,7 +71,7 @@ duststorm.damage = true
 --probabilities in each temp class
 duststorm.chain = {
 	--name, p_froz, p_cold, p_mid , p_hot
-	{'haze', 1, 1, 0.97, 0.35}
+	{"haze", 1, 1, 0.97, 0.35}
 
 }
 

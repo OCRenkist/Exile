@@ -10,7 +10,7 @@ function liquid_store.register_liquid(source, flowing, force_renew)
 	}
 end
 function liquid_store.contents(nodename)
-	--To be called when you need to know if something's a valid liquid
+	--To be called when you need to know if something’s a valid liquid
 	--Stores will return their source name; regular nodes will pass through
 	local liquiddef = liquid_store.stored_liquids[nodename]
 	if liquiddef ~= nil then
@@ -75,7 +75,7 @@ function liquid_store.on_use_empty_bucket(itemstack, user, pointed_thing)
 		pointed_thing.ref:punch(user, 1.0, { full_punch_interval = 1.0 }, nil)
 		return user:get_wielded_item()
 	elseif pointed_thing.type ~= "node" then
-		-- do nothing if it's neither object nor node
+		-- do nothing if it’s neither object nor node
 		return
 	end
 	-- Check if pointing to a liquid source
@@ -138,7 +138,7 @@ end
 --    desc = text description of the bucket item
 --    groups = (optional) groups of the bucket item, for example {water_bucket = 1}
 --    force_renew = (optional) bool. Force the liquid source to renew if it has a
---                  source neighbour, even if defined as 'liquid_renewable = false'.
+--                  source neighbour, even if defined as "liquid_renewable = false".
 --                  Needed to avoid creating holes in sloping rivers.
 -- This function can be called from any mod (that depends on liquid_store).
 -- Also need to register the liquid itself seperately
@@ -215,4 +215,4 @@ liquid_store.register_liquid(
 	"nodes_nature:freshwater_source",
 	"nodes_nature:freshwater_flowing",
 	false)
-	--don't force renew or allows an infinite water supply exploit
+	--don’t force renew or allows an infinite water supply exploit
