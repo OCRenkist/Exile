@@ -4,6 +4,7 @@ local random = math.random
 -- a, e, i, o, u
 --"B", "C", "D", "F", "G", "H", "J",
 local syl_start = {
+	-- Starting with Vowels
 	"A"  , "Aa" , "Ab" , "Ac" , "Ad"  , "Ae" , "Af" , "Ag" , "Ah" , "Ai" , "Aj" ,
 	"Ak" , "Al" , "Am" , "An" , "Ao"  , "Ap" , "Aqu", "Ar" , "As" , "At" , "Au" , "Av", "Aw",
 	"Ax" , "Ay" , "Az" ,
@@ -19,7 +20,7 @@ local syl_start = {
 	"U"  , "Ua" , "Ub" , "Uc" , "Ud"  , "Ue" , "Uf" , "Ug" , "Uh" , "Ui" , "Uj" ,
 	"Uk" , "Ul" , "Um" , "Un" , "Uo"  , "Up" , "Uqu", "Ur" , "Us" , "Ut" , "Uu" , "Uv", "Uw",
 	"Ux" , "Uy" , "Uz" ,
-	--
+	-- Starting with Consonants
 	"Ba" , "Ca" , "Da" , "Fa" , "Ga"  , "Ha" , "Ja" , "Ka" , "La" , "Ma" , "Na" , "Pa", "Qua", "Ra", "Sa", "Ta",
 	"Va" , "Wa" , "Xa" , "Ya" , "Za"  ,
 	"Cha", "Zha", "Tha",
@@ -45,7 +46,7 @@ local syl_start = {
 	"Chu", "Zhu", "Thu",
 	"Ngu", "Blu", "Kru", "Cru", "Klu" , "Clu", "Fru", "Dru", "Bru", "Gru", "Pru",
 	"Smu", "Snu", "Spu", "Shu", "Schu", "Stu", "Swu", "Syu",
-	--
+	-- Vowels Followed by Diphthongs
 	"Ach", "Azh", "Ath",
 	"Ang", "Alb", "Ark", "Arc", "Alk" , "Alc", "Arf", "Ard", "Arb", "Arg", "Arp",
 	"Asm", "Asn", "Asp", "Ash", "Asch", "Ast",
@@ -61,7 +62,7 @@ local syl_start = {
 	"Uch", "Uzh", "Uth",
 	"Ung", "Ulb", "Urk", "Urc", "Ulk" , "Ulc", "Urf", "Urd", "Urb", "Urg", "Urp",
 	"Usm", "Usn", "Usp", "Ush", "Usch", "Ust",
-	--Various Full
+	-- Various Full Syllables
 	"Ari"  , "Abne", "Abi" , "Ane",
 	"Bern" , "Bio" ,
 	"Call" , "Calu", "Cale",
@@ -79,6 +80,7 @@ local syl_start = {
 	"Yesh" ,
 	}
 local syl_mid = {
+	-- Starting with Vowels
 	"a"  , "ab" , "ac" , "ad" , "ae"  , "af" , "ag" , "ah" , "ai" , "aj" ,
 	"ak" , "al" , "am" , "an" , "ao"  , "ap" , "aqu", "ar" , "as" , "at" , "au" , "av", "aw",
 	"ax" , "ay" , "az" ,
@@ -94,7 +96,7 @@ local syl_mid = {
 	"u"  , "ua" , "ub" , "uc" , "ud"  , "ue" , "uf" , "ug" , "uh" , "ui" , "uj" ,
 	"uk" , "ul" , "um" , "un" , "uo"  , "up" , "uqu", "ur" , "us" , "ut" , "uv" , "uw",
 	"ux" , "uy" , "uz" ,
-	--
+	-- Starting with Consonants
 	"ba" , "ca" , "da" , "fa" , "ga"  , "ha" , "ja" , "ka" , "la" , "ma" , "na" , "pa", "qua", "ra", "sa", "ta",
 	"va" , "wa" , "xa" , "ya" , "za"  ,
 	"cha", "zha", "tha",
@@ -120,7 +122,7 @@ local syl_mid = {
 	"chu", "zhu", "thu",
 	"ngu", "blu", "kru", "cru", "klu" , "clu", "fru", "dru", "bru", "gru", "pru",
 	"smu", "snu", "spu", "shu", "schu", "stu", "swu", "syu",
-	--
+	-- Vowels Followed by Diphthongs
 	"ach", "azh", "ath",
 	"ang", "alb", "ark", "arc", "alk" , "alc", "arf", "ard", "arb", "arg", "arp",
 	"asm", "asn", "asp", "ash", "asch", "ast",
@@ -136,7 +138,7 @@ local syl_mid = {
 	"uch", "uzh", "uth",
 	"ung", "ulb", "urk", "urc", "ulk" , "ulc", "urf", "urd", "urb", "urg", "urp",
 	"usm", "usn", "usp", "ush", "usch", "ust",
-	--Various Full
+	-- Various Full Syllables
 	"uckle" ,
 	"cifer" ,
 	"grippa",
@@ -152,6 +154,7 @@ local syl_mid = {
 	"'"     ,
 }
 local syl_end = {
+	-- Starting with Vowels
 	"a"  , "ab" , "ac" , "ad" , "ae"  , "af" , "ag" , "ah", "ai"  , "aj" ,
 	"ak" , "al" , "am" , "an" , "ao"  , "ap" , "aqu", "ar", "as"  , "at" , "au" , "av", "aw",
 	"ax" , "ay" , "az" ,
@@ -167,7 +170,7 @@ local syl_end = {
 	"u"  , "ua" , "ub" , "uc" , "ud"  , "ue" , "uf" , "ug" , "uh" , "ui" , "uj" ,
 	"uk" , "ul" , "um" , "un" , "uo"  , "up" , "uqu", "ur" , "us" , "ut" , "uv" , "uw",
 	"ux" , "uy" , "uz" ,
-	--
+	-- Starting with Consonants
 	"ba" , "ca" , "da" , "fa" , "ga"  , "ha" , "ja" , "ka" , "la" , "ma" , "na" , "pa", "qua", "ra", "sa", "ta",
 	"va" , "wa" , "xa" , "ya" , "za"  ,
 	"cha", "zha", "tha",
@@ -193,13 +196,13 @@ local syl_end = {
 	"chu", "zhu", "thu",
 	"ngu", "blu", "kru", "cru", "klu" , "clu", "fru", "dru", "bru", "gru", "pru",
 	"smu", "snu", "spu", "shu", "schu", "stu", "swu", "syu",
-	--
+	-- Purely Consonants, whether Singletons, Diphthongs, or Triphthongs
 	"b"  , "c"  , "d"  , "f"  , "g"   , "h"  , "j"  , "k"  , "l"  , "m"  , "n"  , "p" , "q" , "r" , "s" , "t" ,
 	"v"  , "w"  , "x"  , "y"  , "z"   ,
 	"ch" , "zh" , "th" ,
 	"ng" , "lb" , "rk" , "rc" , "lk"  , "lc" , "rf" , "rd" , "rb" , "rgr", "rp" ,
 	"sm" , "sn" , "sp" , "sh" , "sch" , "st" ,
-	--
+	-- Vowels Followed by Diphthongs, and Triphthongs
 	"ach", "azh", "ath",
 	"ang", "alb", "ark", "arc", "alk" , "alc", "arf", "ard", "arb", "arg", "arp",
 	"asm", "asn", "asp", "ash", "asch", "ast",
@@ -215,7 +218,7 @@ local syl_end = {
 	"uch", "uzh", "uth",
 	"ung", "ulb", "urk", "urc", "ulk" , "ulc", "urf", "urd", "urb", "urg", "urp",
 	"usm", "usn", "usp", "ush", "usch", "ust",
-	--Various Full
+	-- Various Full Syllables
 	"sea" ,
 	"ghu" ,
 	"tius", "lius",
@@ -235,6 +238,7 @@ local syl_end = {
 	"ion" ,
 	"ium" ,
 }
+-- Function to build names from the above syllable lists:
 lore.generate_name = function(max_length)
 	local length = random(1, max_length)
 	local first  = ""
