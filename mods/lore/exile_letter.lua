@@ -1,4 +1,3 @@
-
 ----------------------------------------------------------
 --EXILE LETTER
 --[[
@@ -8,13 +7,8 @@
 
 	Sets the scene for the game.
 	Explains why you are there, and where "there" is.
-
-
 ]]
-
-
 local random = math.random
-
 ----------------------------------------------------------
 local judger = {
 	--monarchs, etc.
@@ -131,7 +125,6 @@ local judger = {
 	"Viridian Magister",
 	"Thousand-tongued All-speaker"
 }
-
 --exile worthy crime
 local crime1 = {
 	"treason",
@@ -154,7 +147,6 @@ local crime1 = {
 	"treachery",
 	"sedition"
 }
-
 --flavour crime
 local crime2 = {
 	"leading the youth astray",
@@ -250,7 +242,6 @@ local crime2 = {
 	"claiming that the world is not round",
 	"promoting belief in gravity"
 }
-
 --woe upon ye
 local woe = {
 	"May their name be forgotten.",
@@ -289,7 +280,6 @@ local woe = {
 	"Even the dogs despise them.",
 	"We break no bread with traitors."
 }
-
 --Various corruptions of "Ozymandias"
 local exile = {
 	"Ochymadion",
@@ -309,7 +299,6 @@ local exile = {
 	"Otzakantas",
 	"Archanatus"
 }
-
 --what happened here? Lost to memory
 local mythic_terror = {
 	"Great Calamity",
@@ -342,12 +331,11 @@ local mythic_terror = {
 	"Great Confusion",
 	"Lost"
 }
-
 local generate_text = function(player)
 	local letter_text = ""
-
+	--
 	local meta        = player:get_meta()
-
+	--
 	local judge       = judger[random(#judger)]
 	local your_name   = meta:get_string("char_name")
 	local origin_name = lore.generate_name(4)
@@ -357,7 +345,6 @@ local generate_text = function(player)
 	local your_woe    = woe[random(#woe)]
 	local exile_land  = exile[random(#exile)]
 	local terror      = mythic_terror[random(#mythic_terror)]
-
 	letter_text =
 		"By decree of the "..judge..
 		" of "..polity_name..": "..
@@ -377,23 +364,17 @@ local generate_text = function(player)
 		"\nThe land of the "..terror.."."..
 		"\n  \n \n"..
 		"\n"..your_woe
-
 	return letter_text
 end
-
 --------------------------------------------
 local function get_formspec(meta, letter_text)
-
 	local formspec = {
 		"size[9,11]",
 		"textarea[1.5,1.5;8.6,10.6;;" .. minetest.formspec_escape(letter_text) .. ";]",
 		"button_exit[8.2,10.6;0.8,0.5;exit_form;X]",
 		"background[0,0;18,11;lore_exile_letter_bg.png;true]"}
-
 	return table.concat(formspec, "")
 end
-
-
 -----------------------------------------------
 local after_place = function(pos, placer, itemstack, pointed_thing)
 	local meta        = minetest.get_meta(pos)
@@ -402,14 +383,11 @@ local after_place = function(pos, placer, itemstack, pointed_thing)
 	if letter_text == "" then
 		letter_text = generate_text(placer)
 	end
-
 	local form = get_formspec(meta, letter_text )
 	meta:set_string("formspec", form)
 	meta:set_string("lore:letter_text", letter_text)
 
 end
-
-
 ---------------------------------------------
 --Placeable Node
 minetest.register_node("lore:exile_letter", {
@@ -435,8 +413,6 @@ minetest.register_node("lore:exile_letter", {
 		stack_meta:set_string("lore:letter_text", letter_text)
 	end,
 })
-
-
 --------------------------------------
 minetest.register_on_newplayer(function(player)
 	local inv        = player:get_inventory()
@@ -445,7 +421,6 @@ minetest.register_on_newplayer(function(player)
 	stack_meta:set_string("lore:letter_text", generate_text(player))
 	inv:add_item("main", letter)
 end)
-
 minetest.register_on_respawnplayer(function(player)
 	local inv        = player:get_inventory()
 	local letter     = ItemStack("lore:exile_letter")
