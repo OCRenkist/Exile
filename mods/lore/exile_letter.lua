@@ -7,7 +7,7 @@ Unique, randomly generated, for each "life".
  i.e. Respawn means starting as someone new
 
  Sets the scene for the game.
- Explains why you are there, where "there" is.
+ Explains why you are there, and where "there" is.
 
 
 ]]
@@ -17,7 +17,7 @@ local random = math.random
 
 ----------------------------------------------------------
 local judger = {
-  --monarchs ec
+  --monarchs, etc.
   "King",
   "Queen",
   "Emperor",
@@ -54,7 +54,7 @@ local judger = {
   "High Priest",
   "High Priestess",
   "Great Prophet",
-  "Annoited One",
+  "Anointed One",
   "God King",
   "Philosopher King",
   "Seers",
@@ -63,7 +63,7 @@ local judger = {
   "Monks",
   "Priests",
   "Priestesses",
-  "Englightened Ones",
+  "Enlightened Ones",
   "Great Sage",
   "Shaman",
   --tribal
@@ -162,7 +162,7 @@ local crime2 = {
   "vagabondage",
   "banditry",
   "unauthorized piracy",
-  "drunkness",
+  "drunkenness",
   "sinful living",
   "rabble rousing",
   "inciting violence",
@@ -236,7 +236,7 @@ local crime2 = {
   "rejecting common sense",
   "failing to appear for military service",
   "hoarding food during famine",
-  "fouling the good reputation of our people",
+  "befouling the good reputation of our people",
   "sowing discord among the populace",
   "sleeping with unclean creatures",
   "violating the chastity of the priesthood",
@@ -255,7 +255,7 @@ local crime2 = {
 local woe = {
   "May their name be forgotten.",
   "They are outlaw.",
-  "Never suffer to return.",
+  "Never suffer them to return.",
   "May the gods have mercy upon them.",
   "Let none come to their aid.",
   "May their weeping never cease.",
@@ -272,7 +272,7 @@ local woe = {
   "Thus we declare.",
   "For we are merciful.",
   "Let this be our kindness to them.",
-  "Begone evildoer.",
+  "Begone, evildoer.",
   "Thus do we cleanse ourselves.",
   "We wash our hands of them.",
   "Fortune shall be their final judge.",
@@ -290,7 +290,7 @@ local woe = {
   "We break no bread with traitors."
 }
 
---Various curruptions of "Ozymandias"
+--Various corruptions of "Ozymandias"
 local exile = {
   "Ochymadion",
   "Aseymedius",
