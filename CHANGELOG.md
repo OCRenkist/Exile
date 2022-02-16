@@ -5,12 +5,12 @@
   - Foods can now burn if left cooking too long.
   - Mobs should no longer `stun`-lock when hit repeatedly.
   - Nerf: Increased fall damage.
-  - You can use a stick to bar a door, to prevent entry.
-  - New animations thanks to `MisterE`.
+  - You can use a `Stick` to bar a door, to prevent entry.
+  - New animations, thanks to ***MisterE***.
   - Track how many incarnations you’ve had in the `Character` tab.
-  - Glow worms in caves.
+  - `Glow Worm`s in caves.
   - Nerf: `Stick`s don’t connect with right-angle corners anymore.
-  - Nerf: Mudbrick turns to clay when broken, like bricks lose mortar
+  - Nerf: `Mudbrick` turns to clay when broken, in the same manner as bricks loose mortar.
   - Mapgen: `carpathian` is now supported, for a harder game world.
   - No more beach spiders.
   - New food system infrastructure.
@@ -19,8 +19,8 @@
    
 ## [2021-11-01][2021-11-01__0.3.4] — 0.3.4 and 0.2.7
   - New player API: Head tracking, multiplayer skins, male and female characters.
-  - Added an introduction screen for new players, and a chat display of the day/season/year.
-  - Place snow/ice/water on top of a clay water pot, and melting will fill it.
+  - Added an introduction screen for new players, and a chat display of the day/season/year with in-universe style.
+  - Place snow/ice/water on top of a clay `Water Pot`, and melting will fill it.
   - Buff: Food value of meat.
   - Improved `Torch` stacking by rounding-off burn times.
   - New chat commands: `/set_tempscale`, `/date`.
@@ -35,21 +35,21 @@
 
 ## [2021-09-12][2021-09-12__0.3.2] — 0.3.2 and 0.2.5
   - Glassworking! Make windows, and make glass bottles that can hold water, and which stack.
-  - Agricultural soil erodes down to a soil slab instead of vanishing.
+  - Agricultural soils erode down to a soil slab instead of vanishing.
   - Fixed a baking crash.
 
 ## [2021-07-18][2021-07-18__0.3.1] — 0.3.1 and 0.2.4
-  - Oil lamps can be switched off with right click, and lit with fire sticks.
-  - Oil lamps can hold more oil and last longer.
-  - Bug-fixes.
+  - `Oil Lamp`s can be switched off with right-click, and lit with `Fire Stick`s.
+  - `Oil Lamp`s can hold more oil and now burn oil slower.
+  - Various bug-fixes.
 
 ## [2021-06-12][2021-06-12__0.3.0] — 0.3.0 and 0.2.3
   - Initial release for `Minetest 5.4.0`, use Exile 0.2 series for 5.3.0 version.
-  - New dependency: `naturalslopeslib`.
-  - Ability to throw torches for light.
+  - New dependency: `naturalslopeslib` provides better hillsides.
+  - Ability to throw `Torch`es for light.
   - Settings for `breaktaker`.
-  - Ability to display temperature in Celsius, Fahrenheit, or Kelvin. (Use global settings.)
-  - Food burns instead of vanishing, thanks to `ts`.
+  - Ability to display temperature in Celsius, Fahrenheit, or Kelvin. (Using global settings.)
+  - Food burns instead of vanishing, thanks to ***ts***.
   - Farming improvements.
   - Fixes for fire and rain.
   - Many fixes for crashes and bugs.
@@ -61,29 +61,29 @@
   - Character tab.
   - Health effects.
   - Drugs: `Tiku`, `Tang`, `Metastim`.
-  - `megamorph` surface air-shafts.
-  - Fix clothing infinite tolerance bug.
-  - `Iron Fittings` for carpentry crafting.
+  - Added `megamorph` surface air-shafts.
+  - Fixed clothing infinite tolerance bug.
+  - Added `Iron Fittings` for carpentry crafting.
   - Young vs. old `Tangkal` trees.
-  - `Tiken` woody cane.
+  - Added `Tiken` woody cane.
   - Cave sediments and mushrooms.
   - Defined `puts_out_fire` group (e.g. mud now puts out fire), and `masonry` group.
-  - Walkthrough document.
-  - Loose wattle.
-  - `Mashed Anperla`.
+  - Created a walkthrough document for players who want one.
+  - Added `Loose Wattle`.
+  - Added `Mashed Anperla`.
   - Miscellaneous minor fixes and balancing.
 
 ## [2020-09-25][2020-09-25__0.2.1] — 0.2.1
   - Fixed exile-letter crash.
   - Fixed saltwater surface sediment crash.
   - Fixed multiplayer health-tab crash.
-  - Balanced and bug-fixed: animals.
+  - Animals balanced and bug-fixed.
   - Adjusted ice freezing and thawing.
 
 ## [2020-08-02][2020-08-02__0.2.0] — 0.2.0
   - Clothing (plus multi-skin model, new player API), `Weaving Frame`, and temperature tolerance via clothing.
   - Lore: exile letter.
-  - Sleeping spot.
+  - Added `Sleeping Spot`.
   - New mobs: `Darkasthaan`, `Impethu`, `Pegasun`, `Sneachan`.
   - Cookable animal carcasses.
   - Graffiti: glow paint.
@@ -91,16 +91,16 @@
   - Fixed dungeon loot.
   - Added more artifacts. (`Airboat`, art, transporter, `Wayfinder`, 
   ….)
-  - Added three artifact species of mushrooms for sustaining fibre, food/water, and sticks.
-  - Split geomoria into realms (highways, and city structures).
+  - Added three artifact species of mushrooms for sustaining fibre, food/water, and sticks, absent sunlight.
+  - Split Geomoria mod's biomes into realms (highways, and city structures).
   - Added more `geomorphs`.
-  - Gneiss and jade for deep-underground biome.
-  - Better-looking `bones`.
-  - Newly-formatted colored skies.
-  - Climate chat commands.
+  - `Gneiss` and `Jade` for deep-underground biome.
+  - Better-looking `Bones`.
+  - Newly-formatted colouring for skies.
+  - Chat commands for controlling climate variables.
   - `Design Guide`.
-  - Updated backgrounds.
-  - Updated version of crafting.
+  - Updated menu-screen backgrounds.
+  - Updated version of crafting mod.
   - Various minor fixes.
   - Various minor balance changes.
   - Various minor additions.
