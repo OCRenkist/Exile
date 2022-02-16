@@ -346,17 +346,17 @@ local mythic_terror = {
 local generate_text = function(player)
   local letter_text = ""
 
-  local meta = player:get_meta()
+  local meta        = player:get_meta()
 
-  local judge = judger[random(#judger)]
-  local your_name = meta:get_string("char_name")
+  local judge       = judger[random(#judger)]
+  local your_name   = meta:get_string("char_name")
   local origin_name = lore.generate_name(4)
   local polity_name = lore.generate_name(5)
-  local cr1 = crime1[random(#crime1)]
-  local cr2 = crime2[random(#crime2)]
-  local your_woe = woe[random(#woe)]
-  local exile_land = exile[random(#exile)]
-  local terror = mythic_terror[random(#mythic_terror)]
+  local cr1         = crime1[random(#crime1)]
+  local cr2         = crime2[random(#crime2)]
+  local your_woe    = woe[random(#woe)]
+  local exile_land  = exile[random(#exile)]
+  local terror      = mythic_terror[random(#mythic_terror)]
 
   letter_text =
     "By decree of the "..judge..
@@ -396,8 +396,8 @@ end
 
 -----------------------------------------------
 local after_place = function(pos, placer, itemstack, pointed_thing)
-  local meta = minetest.get_meta(pos)
-  local stack_meta = itemstack:get_meta()
+  local meta        = minetest.get_meta(pos)
+  local stack_meta  = itemstack:get_meta()
   local letter_text = stack_meta:get_string("lore:letter_text")
   if letter_text == "" then
     letter_text = generate_text(placer)
@@ -414,24 +414,24 @@ end
 --Placeable Node
 minetest.register_node("lore:exile_letter", {
 	description = "Sentence of Exile",
-	tiles = {"lore_exile_letter.png"},
+	tiles       = {"lore_exile_letter.png"},
   --inventory_image = {"lore_exile_letter_inv.png"},
-	stack_max = 1,
-  paramtype = "light",
+	stack_max  = 1,
+  paramtype  = "light",
   paramtype2 = "wallmounted",
   sunlight_propagates = true,
-  walkable = false,
-  drawtype = "nodebox",
-  node_box = {
-     type = "fixed",
+  walkable   = false,
+  drawtype   = "nodebox",
+  node_box   = {
+     type  = "fixed",
      fixed = {-0.35, -0.5, -0.4, 0.35, -0.45, 0.4},
   },
   groups = {dig_immediate = 3, temp_pass = 1, flammable = 1},
   sounds = nodes_nature.node_sound_leaves_defaults(),
-  after_place_node = after_place,
+  after_place_node  = after_place,
   preserve_metadata = function(pos, oldnode, oldmeta, drops)
      local letter_text = oldmeta["lore:letter_text"]
-     local stack_meta = drops[1]:get_meta()
+     local stack_meta  = drops[1]:get_meta()
      stack_meta:set_string("lore:letter_text", letter_text)
   end,
 })
@@ -439,16 +439,16 @@ minetest.register_node("lore:exile_letter", {
 
 --------------------------------------
 minetest.register_on_newplayer(function(player)
-  local inv = player:get_inventory()
-  local letter = ItemStack("lore:exile_letter")
+  local inv        = player:get_inventory()
+  local letter     = ItemStack("lore:exile_letter")
   local stack_meta = letter:get_meta()
   stack_meta:set_string("lore:letter_text", generate_text(player))
   inv:add_item("main", letter)
 end)
 
 minetest.register_on_respawnplayer(function(player)
-  local inv = player:get_inventory()
-  local letter = ItemStack("lore:exile_letter")
+  local inv        = player:get_inventory()
+  local letter     = ItemStack("lore:exile_letter")
   local stack_meta = letter:get_meta()
   stack_meta:set_string("lore:letter_text", generate_text(player))
   inv:add_item("main", letter)
