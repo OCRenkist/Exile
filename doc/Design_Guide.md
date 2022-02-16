@@ -1,4 +1,4 @@
-A message from _Exile_ founder Dokimi, first published 2020-08-02.
+A message from _Exile_ founder Dokimi, first published 2020-08-02.  
 Edited and updated by the community.
 
 # Design Guide
