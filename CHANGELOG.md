@@ -3,19 +3,19 @@
 ## 2022-01-21 — 0.3.5 and 0.2.8
   - Blankets to keep warm.
   - Foods can now burn if left cooking too long.
-  - Mobs should no longer stunlock when hit repeatedly
+  - Mobs should no longer `stun`-lock when hit repeatedly.
   - Nerf: Increased fall damage.
   - You can use a stick to bar a door, to prevent entry.
   - New animations thanks to `MisterE`.
   - Track how many incarnations you’ve had in the `Character` tab.
-  - Glow worms in caves
+  - Glow worms in caves.
   - Nerf: `Stick`s don’t connect with right-angle corners anymore.
   - Nerf: Mudbrick turns to clay when broken, like bricks lose mortar
   - Mapgen: `carpathian` is now supported, for a harder game world.
   - No more beach spiders.
-  - New food system infrastructure
-  - Experimental biomes, enable under settings to test
-  - Misc. bug-fixes and quality of life improvements.
+  - New food system infrastructure.
+  - Experimental biomes, enable under settings to test.
+  - Miscellaneous bug-fixes and quality of life improvements.
    
 ## 2021-11-01 — 0.3.4 and 0.2.7
   - New player API: Head tracking, multiplayer skins, male and female characters.
@@ -67,17 +67,17 @@
   - Young vs. old `Tangkal` trees.
   - `Tiken` woody cane.
   - Cave sediments and mushrooms.
-  - `puts_out_fire` group (e.g. mud now puts out fire), `masonry` group.
+  - Defined `puts_out_fire` group (e.g. mud now puts out fire), and `masonry` group.
   - Walkthrough document.
   - Loose wattle.
   - `Mashed Anperla`.
-  - Misc. minor fixes and balancing.
+  - Miscellaneous minor fixes and balancing.
 
 ## 2020-09-25 — 0.2.1
   - Fixed exile-letter crash.
-  - Fixed salt-water surface sediment crash.
+  - Fixed saltwater surface sediment crash.
   - Fixed multiplayer health-tab crash.
-  - Balanced and bug-fix: animals.
+  - Balanced and bug-fixed: animals.
   - Adjusted ice freezing and thawing.
 
 ## 2020-08-02 — 0.2.0
@@ -86,10 +86,11 @@
   - Sleeping spot.
   - New mobs: `Darkasthaan`, `Impethu`, `Pegasun`, `Sneachan`.
   - Cookable animal carcasses.
-  - Graffitti: glow paint.
+  - Graffiti: glow paint.
   - New building materials: `Rammed Earth`, bricks and mortar, roof tiles, wooden doors/floors/stair, mortared masonry.
   - Fixed dungeon loot.
-  - Added more artifacts (`Airboat`, art, transporter, `Wayfinder`, ....)
+  - Added more artifacts. (`Airboat`, art, transporter, `Wayfinder`, 
+  ….)
   - Added three artifact species of mushrooms for sustaining fibre, food/water, and sticks.
   - Split geomoria into realms (highways, and city structures).
   - Added more `geomorphs`.
