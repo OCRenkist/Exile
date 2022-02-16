@@ -122,7 +122,7 @@ Urgent Fixes needed:
 
 - MOBS
   - More mobs: land predator, and more of everything in general.
-  - Catch chance based on weild item (can catch with hand).
+  - Catch chance based on wield item (can catch with hand).
   - Seasonal behavior.
   - Rimworld-style colonists.
 
