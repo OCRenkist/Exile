@@ -172,43 +172,43 @@ local virtue = {
 -- State of former life:
 -- (Ought to contrast with the world of Exile.)
 local life = {
-	--good
+	-- Favorable
 		"a good",
 		"a happy",
 		"a pleasant",
 		"an enjoyable",
-	--dull
+	-- Drab
 		"a boring",
 		"an uneventful",
 		"a mediocre",
 		"a dull",
 		"a humdrum",
-	--easy
+	-- Easy
 		"a comfortable",
 		"a satisfied",
 		"a soft",
 		"an easy",
-	--normal
+	-- Nominal
 		"a normal",
 		"an average",
 		"an unremarkable",
-	--small
+	-- Diminutive
 		"a restricted",
 		"a narrow-horizoned",
 		"a homely",
 		"a constricted",
-	--not good
+	-- Grievous
 		"a frustrated",
 		"an empty",
 		"an unfulfilling",
 		"a sorrowful",
 		"a mournful",
 		"a long-suffering",
-  	--work
+  	-- Toiling
 	"an overburdened",
 	"a hardworking",
 	"a slave-like",
-  	--social
+  	-- Social
 	"a family centred",
 	"a communal",
 	"a self-centred",
@@ -216,18 +216,18 @@ local life = {
 	"a solitary",
 	"a low-born",
 	"an aristocratic",
-  	--moral
+  	-- Moral
 		"a well respected",
 		"an upstanding",
 		"a patriotic",
 		"an honorable",
-  	--wasted
+  	-- Wasted
 		"a dissipated",
 		"a dissolute",
 		"a slothful",
 		"an indulgent",
 		"a misspent",
-  	--weird
+  	-- Aberrant
 	"an eccentric",
 	"an oddball",
 	"a strange"
