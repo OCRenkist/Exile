@@ -13,7 +13,7 @@
   - Nerf: `Mudbrick` turns to clay when broken, in the same manner as bricks lose mortar.
   - Mapgen: `carpathian` is now supported, for a harder game world.
   - No more beach spiders.
-  - New food system infrastructure.
+  - New food-system infrastructure.
   - Experimental biomes, enable under settings to test.
   - Miscellaneous bug-fixes and quality of life improvements.
    
@@ -21,17 +21,17 @@
   - New player API: Head tracking, multiplayer skins, male and female characters.
   - Added an introduction screen for new players, and a chat display of the day/season/year with in-universe style.
   - Place snow/ice/water on top of a clay `Water Pot`, and melting will fill it.
-  - Buff: Food value of meat.
+  - Buff: Food-value of meat.
   - Improved `Torch` stacking by rounding-off burn times.
   - New chat commands: `/set_tempscale`, `/date`.
-  - Better indoors check on `Minetest 5.4.x`.
+  - Better indoors-check on `Minetest 5.4.x`.
 
 ## [2021-09-25][2021-09-25__0.3.3] — 0.3.3 and 0.2.6
   - Plants now grow even when players are away from the area.
   - Fireproof: `Iron Doors` and `Iron Trapdoors`.
   - Ability to mix `Wet Loam` and agricultural soil.
   - Renamed `Stone Chopper` to `Stone Knife` for clarity.
-  - More bug fixes and improvements.
+  - More bug-fixes and improvements.
 
 ## [2021-09-12][2021-09-12__0.3.2] — 0.3.2 and 0.2.5
   - Glassworking! Make windows, and make glass bottles that can hold water, and which stack.
@@ -44,7 +44,7 @@
   - Various bug-fixes.
 
 ## [2021-06-12][2021-06-12__0.3.0] — 0.3.0 and 0.2.3
-  - Initial release for `Minetest 5.4.0`, use Exile 0.2 series for 5.3.0 version.
+  - Initial release for `Minetest 5.4.0`; use Exile 0.2 series for 5.3.0 version.
   - New dependency: `naturalslopeslib` provides better hillsides.
   - Ability to throw `Torch`es for light.
   - Settings for `breaktaker`.
@@ -75,7 +75,7 @@
 
 ## [2020-09-25][2020-09-25__0.2.1] — 0.2.1
   - Fixed exile-letter crash.
-  - Fixed saltwater surface sediment crash.
+  - Fixed saltwater-surface sediment crash.
   - Fixed multiplayer health-tab crash.
   - Animals balanced and bug-fixed.
   - Adjusted ice freezing and thawing.
@@ -92,7 +92,7 @@
   - Added more artifacts. (`Airboat`, art, transporter, `Wayfinder`, 
   ….)
   - Added three artifact species of mushrooms for sustaining fibre, food/water, and sticks, absent sunlight.
-  - Split Geomoria mod's biomes into realms (highways, and city structures).
+  - Split Geomoria mod’s biomes into realms (highways, and city structures).
   - Added more `geomorphs`.
   - `Gneiss` and `Jade` for deep-underground biome.
   - Better-looking `Bones`.
