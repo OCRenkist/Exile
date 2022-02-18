@@ -11,8 +11,10 @@
 local random = math.random
 ----------------------------------------------------------
 local judger = {
-	--monarchs, etc.
+	-- Monarchies
 		"King",
+		"Queen",
+		"Emperor",
 		"Empress",
 		"Exalted Ruler",
 		"Majestic Leader",
@@ -31,7 +33,7 @@ local judger = {
 		"Princess",
 		"Regent",
 		"Dictator",
-	--officials
+	-- Officials
 		"High Judge",
 		"Tribunal",
 		"Council",
@@ -40,7 +42,7 @@ local judger = {
 		"Law Giver's",
 		"King's Justice",
 		"Sheriff",
-	--cults
+	-- Cultists
 		"Brotherhood",
 		"Sisterhood",
 		"High Priest",
@@ -58,7 +60,7 @@ local judger = {
 		"Enlightened Ones",
 		"Great Sage",
 		"Shaman",
-	--tribal
+	-- Tribals
 		"Elders",
 		"Wise Ones",
 		"Clan Council",
@@ -67,7 +69,7 @@ local judger = {
 		"United Clans",
 		"Wise Man",
 		"Wise Woman",
-	--republic
+	-- Republicans
 		"Citizenry",
 		"People",
 		"Senate",
@@ -75,7 +77,7 @@ local judger = {
 		"Senators",
 		"Assembly",
 		"Chief Minister",
-	--Geographic/polity
+	-- Geographic Polities
 		"City State",
 		"Empire",
 		"Kingdom",
@@ -94,7 +96,7 @@ local judger = {
 		"Monastic Order",
 		"Merchant Republic",
 		"Theocracy",
-	--Military
+	-- Military
 		"Generals",
 		"Champion",
 		"Mighty Warriors",
@@ -103,14 +105,14 @@ local judger = {
 		"Commander",
 		"Commandant",
 		"Warlord",
-	--rogues
+	-- Rogues
 		"Pirates",
 		"Bandits",
 		"Company",
 		"Horde",
 		"Liberators",
 		"Destroyers",
-	--freaky
+	-- Fantastical
 		"All Seeing Eye",
 		"Old Children",
 		"Spectre",
