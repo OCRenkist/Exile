@@ -10,7 +10,7 @@
   - Track how many incarnations you’ve had in the `Character` tab.
   - `Glow Worm`s in caves.
   - Nerf: `Stick`s don’t connect with right-angle corners anymore.
-  - Nerf: `Mudbrick` turns to clay when broken, in the same manner as bricks loose mortar.
+  - Nerf: `Mudbrick` turns to clay when broken, in the same manner as bricks lose mortar.
   - Mapgen: `carpathian` is now supported, for a harder game world.
   - No more beach spiders.
   - New food system infrastructure.
