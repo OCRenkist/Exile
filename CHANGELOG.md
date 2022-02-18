@@ -183,4 +183,4 @@
  <!-- 2020-03-11 00:10:03      UTC+0000 -->
  <!-- This was the first commit on GitHub. 
 	Presumably the code was developed for more than at least one day.
-	The date Dokimi began working on the code does not appear to have been publicized. -->
+	The date Dokimi began working on the code does not appear to have been publicised. -->
