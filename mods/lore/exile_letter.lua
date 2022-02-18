@@ -25,7 +25,7 @@ local judger = {
 		"Duke",
 		"Duchess",
 		"Lord",
-		"Most Highly Exalted Supreme Ruler",
+		"Most Highly-Exalted Supreme Ruler",
 		"Great Leader",
 		"Golden King",
 		"Jade Queen",
@@ -49,7 +49,7 @@ local judger = {
 		"High Priestess",
 		"Great Prophet",
 		"Anointed One",
-		"God King",
+		"God-King",
 		"Philosopher King",
 		"Seers",
 		"Sanctum",
@@ -113,7 +113,7 @@ local judger = {
 		"Liberators",
 		"Destroyers",
 	-- Fantastical
-		"All Seeing Eye",
+		"All-Seeing Eye",
 		"Old Children",
 		"Spectre",
 		"Dragon King",
@@ -125,7 +125,7 @@ local judger = {
 		"Viridian Magister",
 		"Thousand-tongued All-speaker"
 }
---exile worthy crime
+-- exile-worthy crime
 local crime1 = {
 	"treason",
 	"betrayal",
@@ -147,7 +147,7 @@ local crime1 = {
 	"treachery",
 	"sedition"
 }
---flavour crime
+-- flavour-text crime
 local crime2 = {
 	--[[01.]] "leading the youth astray",
 	--[[02.]] "smuggling contraband",
