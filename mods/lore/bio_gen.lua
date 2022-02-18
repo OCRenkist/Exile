@@ -204,30 +204,30 @@ local life = {
 		"a sorrowful",
 		"a mournful",
 		"a long-suffering",
-  	-- Toiling
-	"an overburdened",
-	"a hardworking",
-	"a slave-like",
-  	-- Social
-	"a family centred",
-	"a communal",
-	"a self-centred",
-	"a selfless",
-	"a solitary",
-	"a low-born",
-	"an aristocratic",
-  	-- Moral
+	-- Toiling
+		"an overburdened",
+		"a hardworking",
+		"a slave-like",
+	-- Social
+		"a family centred",
+		"a communal",
+		"a self-centred",
+		"a selfless",
+		"a solitary",
+		"a low-born",
+		"an aristocratic",
+	-- Moral
 		"a well respected",
 		"an upstanding",
 		"a patriotic",
 		"an honorable",
-  	-- Wasted
+	-- Wasted
 		"a dissipated",
 		"a dissolute",
 		"a slothful",
 		"an indulgent",
 		"a misspent",
-  	-- Aberrant
+	-- Aberrant
 	"an eccentric",
 	"an oddball",
 	"a strange"
@@ -255,7 +255,7 @@ local woe = {
 		"felt like the world didn't care",
 		"was disgusted by life",
 		"became obsessed",
-  	--fight the power
+	--fight the power
 		"stood up for the truth",
 		"spoke truth to power",
 		"took a stand",
@@ -270,38 +270,38 @@ local woe = {
 		"refused to hide anymore",
 		"chose to live differently",
 		"saw things others did not see",
-  	--life change
+	--life change
 		"decided not live that way anymore",
 		"thought life needed shaking up",
 		"made a few minor changes",
 		"had an epiphany",
 		"took up a new hobby",
-  	--crime
+	--crime
 		"got in too deep",
 		"chose the wrong path",
 		"thought no one would notice",
 		"got caught",
 		"got snitched on",
 		"screwed up a sure thing",
-  	--poverty
+	--poverty
 		"fell on hard times",
 		"done what needed to be done",
 		"did what it took to feed the family",
-  	--politics
+	--politics
 		"picked the wrong side",
 		"took a chance to grab power",
 		"ended up on the losing side of history",
 		"offended a powerful man",
 		"offended a powerful woman",
 		"provoked the jealousy a rival",
-  	--random acts
+	--random acts
 		"was just passing by when",
 		"had an accident",
 		"was mistaken for someone else",
 		"was imprisoned on false charges",
 		"got caught up in someone else's mess",
 		"witnessed what was supposed to be a secret",
-  	--one stupid mistake
+	--one stupid mistake
 		"made one bad decision",
 		"said one wrong thing",
 		"gave into temptation",
@@ -314,7 +314,7 @@ local woe = {
 		"committed a simple indiscretion",
 		"had a great idea",
 		"misjudged the situation entirely",
-  	--romance/family
+	--romance/family
 		"fell in love",
 		"had an affair",
 		"gave everything for love",
@@ -322,7 +322,7 @@ local woe = {
 		"had a daughter",
 		"discovered a long lost relative",
 		"got mixed up in a love triangle",
-  	--weird
+	--weird
 		"got involved with a travelling magician",
 		"met a man with two heads",
 		"found a bird that could predict the future",
