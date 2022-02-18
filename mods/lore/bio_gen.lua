@@ -50,7 +50,7 @@ local personality = {
   "Precise",
   "Slapdash",
 
-  --extraversion
+  --extroversion
   "Shy",
   "Gregarious",
   "Quiet",
@@ -60,7 +60,7 @@ local personality = {
   "Reserved",
   "Expressive",
 
-  --agreableness
+  --agreeableness
   "Pleasant",
   "Argumentative",
   "Good-natured",
@@ -88,7 +88,7 @@ local virtue = {
   "temperate",
   "charitable",
   "extravagant",
-  "magnaminous",
+  "magnanimous",
   "patient",
   "honest",
   "witty",
@@ -104,7 +104,7 @@ local virtue = {
   "cautious",
   "fastidious",
   "committed",
-  "compasionate",
+  "compassionate",
   "confident",
   "considerate",
   "contented",
@@ -246,7 +246,7 @@ local life = {
   "an honorable",
 
   --wasted
-  "a dissapated",
+  "a dissipated",
   "a dissolute",
   "a slothful",
   "an indulgent",
@@ -371,7 +371,7 @@ local woe = {
   "was given a secret map",
   "discovered a secret chamber",
   "saw a ghost",
-  "recieved a vision from the other side",
+  "received a vision from the other side",
   "had a dream that explained everything",
   "built a perpetual motion machine",
   "learned the meaning of life"
