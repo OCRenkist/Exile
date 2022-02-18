@@ -16,7 +16,7 @@
   - New food-system infrastructure.
   - Experimental biomes — enable under global settings to test them.
   - Miscellaneous bug-fixes and quality of life improvements.
-   
+
 ## [2021-11-01][2021-11-01__0.3.4] — 0.3.4 and 0.2.7
   - New player API: Head tracking, multiplayer skins, male and female characters.
   - Added an introduction screen for new players, and a chat display of the day/season/year with in-universe style.
