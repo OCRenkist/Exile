@@ -44,7 +44,7 @@ local personality = {
 		--[[16]] "Slapdash",
 	-- extroversion
 		--[[17]] "Shy",
-		--[[18]1] "Gregarious",
+		--[[18]] "Gregarious",
 		--[[19]] "Quiet",
 		--[[20]] "Outgoing",
 		--[[21]] "Withdrawn",
