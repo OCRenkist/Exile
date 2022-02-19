@@ -228,9 +228,9 @@ local life = {
 		"an indulgent",
 		"a misspent",
 	-- Aberrant
-	"an eccentric",
-	"an oddball",
-	"a strange"
+		"an eccentric",
+		"an oddball",
+		"a strange"
 }
 -- What went wrong:
 local woe = {
@@ -339,11 +339,11 @@ lore.generate_bio = function(player)
 	local meta = player:get_meta()
 	local gend = player_api.get_gender(player)
 	
-	local persona = personality[random(#personality)]
-	local virt = virtue[random(#virtue)]
+	local persona   = personality[random(#personality)]
+	local virt      = virtue[random(#virtue)]
 	local your_name = meta:get_string("char_name")
-	local lif = life[random(#life)]
-	local your_woe = woe[random(#woe)]
+	local lif       = life[random(#life)]
+	local your_woe  = woe[random(#woe)]
 	
 	
 	text =
