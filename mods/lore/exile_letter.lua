@@ -244,41 +244,41 @@ local crime2 = {
 }
 --woe upon ye
 local woe = {
-	"May their name be forgotten.",
-	"They are proscribed.",
-	"Never suffer them to return.",
-	"May the gods have mercy upon them.",
-	"Let none come to their aid.",
-	"May their weeping never cease.",
-	"Their life is forfeit.",
-	"It shall be as if they were never born.",
-	"May their end be swift.",
-	"May fortune forgive them.",
-	"They shall live so long as they deserve.",
-	"Let the beasts do with them as they wish.",
-	"This is justice.",
-	"Let none dispute it.",
-	"May they wander fruitlessly.",
-	"May their bones bleach in the sun.",
-	"Thus we declare.",
-	"For we are merciful.",
-	"Let this be our kindness to them.",
-	"Begone, evildoer.",
-	"Thus do we cleanse ourselves.",
-	"We wash our hands of them.", -- Perhaps a reference to Pontius Pilate
-	"Fortune shall be their final judge.",
-	"They are disowned.",
-	"We never knew them.",
-	"They are cut off.",
-	"Let them live with the beasts.",
-	"Let the barbarians and wild folk have them.",
-	"They are not fit for civilized lands.",
-	"Thus we ensure our security.", -- Perhaps a reference to Sheev Palpatine
-	"Only the righteous belong among us.",
-	"May they toil in vain.",
-	"So it is written. So it is done.", -- Now a reference to Cecil B. DeMille
-	"Even the dogs despise them.",
-	"We break no bread with traitors."
+	--[[01]] "May their name be forgotten.",
+	--[[02]] "They are proscribed.",
+	--[[03]] "Never suffer them to return.",
+	--[[04]] "May the gods have mercy upon them.",
+	--[[05]] "Let none come to their aid.",
+	--[[06]] "May their weeping never cease.",
+	--[[07]] "Their life is forfeit.",
+	--[[08]] "It shall be as if they were never born.",
+	--[[09]] "May their end be swift.",
+	--[[10]] "May fortune forgive them.",
+	--[[11]] "They shall live so long as they deserve.",
+	--[[12]] "Let the beasts do with them as they wish.",
+	--[[13]] "This is justice.",
+	--[[14]] "Let none dispute it.",
+	--[[15]] "May they wander fruitlessly.",
+	--[[16]] "May their bones bleach in the sun.",
+	--[[17]] "Thus we declare.",
+	--[[18]] "For we are merciful.",
+	--[[19]] "Let this be our kindness to them.",
+	--[[20]] "Begone, evildoer.",
+	--[[21]] "Thus do we cleanse ourselves.",
+	--[[22]] "We wash our hands of them.", -- Perhaps a reference to Pontius Pilate
+	--[[23]] "Fortune shall be their final judge.",
+	--[[24]] "They are disowned.",
+	--[[25]] "We never knew them.",
+	--[[26]] "They are cut off.",
+	--[[27]] "Let them live with the beasts.",
+	--[[28]] "Let the barbarians and wild folk have them.",
+	--[[29]] "They are not fit for civilized lands.",
+	--[[30]] "Thus we ensure our security.", -- Perhaps a reference to Sheev Palpatine
+	--[[31]] "Only the righteous belong among us.",
+	--[[32]] "May they toil in vain.",
+	--[[33]] "So it is written. So it is done.", -- Now a reference to Cecil B. DeMille
+	--[[34]] "Even the dogs despise them.",
+	--[[35]] "We break no bread with traitors."
 }
 --Various corruptions of "Ozymandias"
 local exile = {
