@@ -265,7 +265,7 @@ local woe = {
 	"Let this be our kindness to them.",
 	"Begone, evildoer.",
 	"Thus do we cleanse ourselves.",
-	"We wash our hands of them.",
+	"We wash our hands of them.", -- Perhaps a reference to Pontius Pilate
 	"Fortune shall be their final judge.",
 	"They are disowned.",
 	"We never knew them.",
@@ -273,10 +273,10 @@ local woe = {
 	"Let them live with the beasts.",
 	"Let the barbarians and wild folk have them.",
 	"They are not fit for civilized lands.",
-	"Thus we ensure our security.",
+	"Thus we ensure our security.", -- Perhaps a reference to Sheev Palpatine
 	"Only the righteous belong among us.",
 	"May they toil in vain.",
-	"So it is written. So it is done.",
+	"So it is written. So it is done.", -- Now a reference to Cecil B. DeMille
 	"Even the dogs despise them.",
 	"We break no bread with traitors."
 }
