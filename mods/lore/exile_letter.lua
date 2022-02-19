@@ -242,7 +242,7 @@ local crime2 = {
 	--[[91]] "claiming that the world is not round",
 	--[[92]] "promoting belief in gravity"
 }
---woe upon ye
+-- woe upon ye
 local woe = {
 	--[[01]] "May their name be forgotten.",
 	--[[02]] "They are proscribed.",
@@ -280,7 +280,7 @@ local woe = {
 	--[[34]] "Even the dogs despise them.",
 	--[[35]] "We break no bread with traitors."
 }
---Various corruptions of "Ozymandias"
+-- Various corruptions of "Ozymandias"
 local exile = {
 	--[[01]] "Ochymadion",
 	--[[02]] "Aseymedius",
@@ -299,7 +299,7 @@ local exile = {
 	--[[15]] "Otzakantas",
 	--[[16]] "Archanatus"
 }
---what happened here? Lost to memory
+-- What happened here? Lost to memory.
 local mythic_terror = {
 	"Great Calamity",
 	"Unending Curse",
@@ -386,7 +386,6 @@ local after_place = function(pos, placer, itemstack, pointed_thing)
 	local form = get_formspec(meta, letter_text )
 	meta:set_string("formspec", form)
 	meta:set_string("lore:letter_text", letter_text)
-
 end
 ---------------------------------------------
 --Placeable Node
