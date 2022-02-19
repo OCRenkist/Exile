@@ -282,22 +282,22 @@ local woe = {
 }
 --Various corruptions of "Ozymandias"
 local exile = {
-	"Ochymadion",
-	"Aseymedius",
-	"Eshenadios",
-	"Uzymandeos",
-	"Isemendion",
-	"Zymenios",
-	"Hocheemundis",
-	"Otemanediate",
-	"Oisemondas",
-	"Wazymdis",
-	"Wazhmindas",
-	"Okaemanadia",
-	"Caemandior",
-	"Oshaemediash",
-	"Otzakantas",
-	"Archanatus"
+	--[[01]] "Ochymadion",
+	--[[02]] "Aseymedius",
+	--[[03]] "Eshenadios",
+	--[[04]] "Uzymandeos",
+	--[[05]] "Isemendion",
+	--[[06]] "Zymenios",
+	--[[07]] "Hocheemundis",
+	--[[08]] "Otemanediate",
+	--[[09]] "Oisemondas",
+	--[[10]] "Wazymdis",
+	--[[11]] "Wazhmindas",
+	--[[12]] "Okaemanadia",
+	--[[13]] "Caemandior",
+	--[[14]] "Oshaemediash",
+	--[[15]] "Otzakantas",
+	--[[16]] "Archanatus"
 }
 --what happened here? Lost to memory
 local mythic_terror = {
