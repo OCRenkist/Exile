@@ -234,7 +234,7 @@ local life = {
 }
 -- What went wrong:
 local woe = {
-	-- bad business
+	-- Bad Business
 		--[[01]] "made a bad bargain",
 		--[[02]] "made a deal with the wrong people",
 		--[[03]] "sold out and got swindled",
@@ -242,7 +242,7 @@ local woe = {
 		--[[05]] "saw a fantastic opportunity",
 		--[[06]] "took a gamble",
 		--[[07]] "found a new way to make a living",
-	-- emotion
+	-- Emotion
 		--[[08]] "lost all hope",
 		--[[09]] "fell into despair",
 		--[[10]] "discovered a great passion",
@@ -255,7 +255,7 @@ local woe = {
 		--[[17]] "felt like the world didn't care",
 		--[[18]] "was disgusted by life",
 		--[[19]] "became obsessed",
-	-- fight the power
+	-- Fight the Power
 		--[[20]] "stood up for the truth",
 		--[[21]] "spoke truth to power",
 		--[[22]] "took a stand",
@@ -264,44 +264,44 @@ local woe = {
 		--[[25]] "fought for justice",
 		--[[26]] "put everything toward the cause",
 		--[[27]] "rose up against the oppressor",
-	-- wrong type of person/corruption
+	-- Wrong Type of Person/Corruption
 		--[[28]] "was persecuted by the intolerant",
 		--[[29]] "refused to conform",
 		--[[30]] "refused to hide anymore",
 		--[[31]] "chose to live differently",
 		--[[32]] "saw things others did not see",
-	-- life change
+	-- Life Change
 		--[[33]] "decided not live that way anymore",
 		--[[34]] "thought life needed shaking up",
 		--[[35]] "made a few minor changes",
 		--[[36]] "had an epiphany",
 		--[[37]] "took up a new hobby",
-	-- crime
+	-- Crime
 		--[[38]] "got in too deep",
 		--[[39]] "chose the wrong path",
 		--[[41]] "thought no one would notice",
 		--[[42]] "got caught",
 		--[[43]] "got snitched on",
 		--[[44]] "bungled a sure thing",
-	-- poverty
+	-- Poverty
 		--[[45]] "fell on hard times",
 		--[[46]] "did what needed to be done",
 		--[[47]] "did what it took to feed the family",
-	-- politics
+	-- Politics
 		--[[48]] "picked the losing side",
 		--[[49]] "took a chance to grab power",
 		--[[50]] "ended up on the wrong side of history",
 		--[[51]] "offended a powerful man",
 		--[[52]] "offended a powerful woman",
 		--[[53]] "provoked the jealousy a rival",
-	-- random acts
+	-- Random Acts
 		--[[54]] "was just passing by, when",
 		--[[55]] "had an accident",
 		--[[56]] "was mistaken for someone else",
 		--[[57]] "was imprisoned on false charges",
 		--[[58]] "got caught up in someone else's mess",
 		--[[59]] "witnessed what was supposed to be a secret",
-	-- one stupid mistake
+	-- One Stupid Mistake
 		--[[60]] "made one bad decision",
 		--[[61]] "said one wrong thing",
 		--[[62]] "gave in to temptation",
@@ -314,7 +314,7 @@ local woe = {
 		--[[69]] "committed a simple indiscretion",
 		--[[70]] "had a great idea",
 		--[[71]] "misjudged the situation entirely",
-	-- romance/family
+	-- Romance/Family
 		--[[72]] "fell in love",
 		--[[73]] "had an affair",
 		--[[74]] "gave up everything for love",
@@ -322,7 +322,7 @@ local woe = {
 		--[[76]] "had a daughter",
 		--[[77]] "discovered a long-lost relative",
 		--[[78]] "got mixed up in a love triangle",
-	-- weird
+	-- Weird
 		--[[79]] "got involved with a travelling magician",
 		--[[80]] "met a man with two heads",
 		--[[81]] "found a bird that could predict the future",
