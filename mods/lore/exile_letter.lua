@@ -127,25 +127,25 @@ local judger = {
 }
 -- exile-worthy crime
 local crime1 = {
-	"treason",
-	"betrayal",
-	"murder",
-	"heresy",
-	"blasphemy",
-	"betrayal",
-	"regicide",
-	"conspiracy",
-	"kidnapping",
-	"corruption",
-	"abduction",
-	"subversion",
-	"mutiny",
-	"rebellion",
-	"usurpation",
-	"espionage",
-	"sabotage",
-	"treachery",
-	"sedition"
+	--[[01]] "treason",
+	--[[02]] "betrayal",
+	--[[03]] "murder",
+	--[[04]] "heresy",
+	--[[05]] "blasphemy",
+	--[[06]] "betrayal",
+	--[[07]] "regicide",
+	--[[08]] "conspiracy",
+	--[[09]] "kidnapping",
+	--[[10]] "corruption",
+	--[[11]] "abduction",
+	--[[12]] "subversion",
+	--[[13]] "mutiny",
+	--[[14]] "rebellion",
+	--[[15]] "usurpation",
+	--[[16]] "espionage",
+	--[[17]] "sabotage",
+	--[[18]] "treachery",
+	--[[19]] "sedition"
 }
 -- flavour-text crime
 local crime2 = {
