@@ -24,7 +24,7 @@ local gender = {
 -- Big Five
 -- (Try to make sure these are different from virtues!)
 local personality = {
-	--openness
+	-- openness
 		--[[01]] "Conventional",
 		--[[02]] "Unconventional",
 		--[[03]] "Practical",
@@ -33,7 +33,7 @@ local personality = {
 		--[[06]] "Adventurous",
 		--[[07]] "Traditional",
 		--[[08]] "Rebellious",
-	--conscientiousness
+	-- conscientiousness
 		--[[09]] "Organized",
 		--[[10]] "Disorganized",
 		--[[11]] "Goal-driven",
@@ -42,7 +42,7 @@ local personality = {
 		--[[14]] "Careless",
 		--[[15]] "Precise",
 		--[[16]] "Slapdash",
-	--extroversion
+	-- extroversion
 		--[[17]] "Shy",
 		--[[18]1] "Gregarious",
 		--[[19]] "Quiet",
@@ -51,7 +51,7 @@ local personality = {
 		--[[22]] "Sociable",
 		--[[23]] "Reserved",
 		--[[24]] "Expressive",
-	--agreeableness
+	-- agreeableness
 		--[[25]] "Pleasant",
 		--[[26]] "Argumentative",
 		--[[27]] "Good-natured",
@@ -60,7 +60,7 @@ local personality = {
 		--[[30]] "Suspicious",
 		--[[31]] "Gullible",
 		--[[32]] "Cynical",
-	--neuroticism
+	-- neuroticism
 		--[[33]] "Calm",
 		--[[34]] "Neurotic",
 		--[[35]] "Steady",
