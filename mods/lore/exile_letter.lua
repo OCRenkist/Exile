@@ -114,14 +114,14 @@ local judger = {
 		--[[093]] "Liberators",
 		--[[094]] "Destroyers",
 	-- Fantastical
-		--[[095]] "All-Seeing Eye",
+		--[[095]] "All-Seeing Eye", -- Perhaps a reference to The Lord of the Rings?
 		--[[096]] "Old Children",
 		--[[097]] "Spectre",
 		--[[098]] "Dragon King",
 		--[[099]] "Seven Hands",
 		--[[100]] "Imperial Phlogistonist",
-		--[[101]] "Sacred Snake-god",
-		--[[102]] "Eternal Pyramid",
+		--[[101]] "Sacred Snake-god", -- Perhaps a reference to the age of Conan?
+		--[[102]] "Eternal Pyramid", -- Perhaps a reference to Timespinner?
 		--[[103]] "Towering Tree",
 		--[[104]] "Viridian Magister",
 		--[[105]] "Thousand-tongued All-speaker"
@@ -361,6 +361,7 @@ local generate_text = function(player)
 	local exile_land  = exile[random(#exile)]
 	local terror      = mythic_terror[random(#mythic_terror)]
 	local gend        = player_api.get_gender(player)
+	--
 	letter_text =
 		"By decree of the "..judge..
 		" of "..polity_name..": "..
