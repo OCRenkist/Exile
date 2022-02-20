@@ -238,7 +238,7 @@ local crime2 = {
 	--[[86 - perfidy  ]] "gardening without a permit", -- clearly a reference to Terry Pratchett or Douglas Adams
 	--[[87 - property ]] "stealing priceless art",
 	--[[88 - purity   ]] "aiding an adulterous princess",
-	--[[89 - perfidy  ]] "leading an unauthorized military campaign",
+	--[[89 - perfidy  ]] "leading an unauthorised military campaign",
 	--[[90 - piety    ]] "claiming that the world is round",
 	--[[91 - piety    ]] "claiming that the world is not round",
 	--[[92 - piety    ]] "promoting belief in gravity"
@@ -284,7 +284,7 @@ local populate_woe = function(player)
 		--[[26]] genderSU[gend].." is cut off.",
 		--[[27]] "Let "..genderOL[gend].." live with the beasts.",
 		--[[28]] "Let the barbarians and wild folk have "..genderOL[gend]..".",
-		--[[29]] genderSU[gend].." is not fit for civilized lands.",
+		--[[29]] genderSU[gend].." is not fit for civilised lands.",
 		--[[30]] "Thus we ensure our security.", -- Perhaps a reference to Sheev Palpatine
 		--[[31]] "Only the righteous belong among us.",
 		--[[32]] "May "..genderSL[gend].." toil in vain.",
