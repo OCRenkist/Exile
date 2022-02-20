@@ -191,7 +191,7 @@ local crime2 = {
 	--[[39 - perfidy  ]] "deception of those who must be obeyed",
 	--[[40 - property ]] "fraud",
 	--[[41 - property ]] "fakery",
-	--[[42 - purity   ]] "consorting with disreputables",
+	--[[42 - purity   ]] "consorting with disreputables", -- "Zounds, consort!" ---Mercutio, to Tybalt Capulet
 	--[[43 - perfidy  ]] "trespassing upon the tall tower",
 	--[[44 - perfidy  ]] "poaching on royal lands",
 	--[[45 - perfidy  ]] "impersonation of an official",
@@ -225,17 +225,17 @@ local crime2 = {
 	--[[73 - piety    ]] "breaking the faith",
 	--[[74 - piety    ]] "touching the forbidden",
 	--[[75 - piety    ]] "seeking banned knowledge",
-	--[[76 - property ]] "slander",
+	--[[76 - property ]] "slander", -- a type of stealing reputation
 	--[[77 - paucity  ]] "rejecting common sense",
 	--[[78 - perfidy  ]] "failing to appear for military service",
 	--[[79 - perfidy  ]] "hoarding food during famine",
 	--[[80 - piety    ]] "befouling the good reputation of our people",
 	--[[81 - piety    ]] "sowing discord among the populace",
 	--[[82 - purity   ]] "sleeping with unclean creatures",
-	--[[83 - piety    ]] "violating the chastity of the priesthood", 
+	--[[83 - piety    ]] "violating the chastity of the priesthood", -- originally it was about land bequests
 	--[[84 - purity   ]] "marrying outside their caste",
 	--[[85 - property ]] "cheating at dice",
-	--[[86 - perfidy  ]] "gardening without a permit", 
+	--[[86 - perfidy  ]] "gardening without a permit", -- clearly a reference to Terry Pratchett or Douglas Adams
 	--[[87 - property ]] "stealing priceless art",
 	--[[88 - purity   ]] "aiding an adulterous princess",
 	--[[89 - perfidy  ]] "leading an unauthorized military campaign",
