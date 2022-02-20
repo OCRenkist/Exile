@@ -150,7 +150,7 @@ local crime1 = {
 }
 -- flavour-text crime
 local crime2 = {
-	--[[01 - piety    ]] "leading the youth astray",
+	--[[01 - piety    ]] "leading the youth astray", -- clearly a reference to Socrates
 	--[[02 - perfidy  ]] "smuggling contraband",
 	--[[03 - paucity  ]] "vagabondage",
 	--[[04 - property ]] "banditry",
