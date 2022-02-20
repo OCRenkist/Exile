@@ -348,13 +348,10 @@ lore.generate_bio = function(player)
 	local lif       = life[random(#life)]
 	local your_woe  = woe[random(#woe)]
 	
-	
 	text =
 		"\n "..persona.." and "..virt..","..
 		"\n "..your_name.." had lived "..lif.." life,"..
 		"\n until one day "..gender[gend].." "..your_woe.."...."
-	
 		meta:set_string("bio", text)
-		
 	return text
 end
