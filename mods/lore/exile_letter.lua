@@ -252,7 +252,7 @@ local woe = {
 	--[[05]] "Let none come to their aid.",
 	--[[06]] "May their weeping never cease.",
 	--[[07]] "Their life is forfeit.",
-	--[[08]] "It shall be as if they were never born.",
+	--[[08]] "It shall be as though they were never born.",
 	--[[09]] "May their end be swift.",
 	--[[10]] "May fortune forgive them.",
 	--[[11]] "They shall live so long as they deserve.",
