@@ -42,6 +42,7 @@ local judger = {
 		--[[027]] "Law Giver's",
 		--[[028]] "King's Justice",
 		--[[029]] "Sheriff",
+		"Crown Steward and Bailiff of the Three Chiltern Hundreds",
 	-- Cultists
 		--[[030]] "Brotherhood",
 		--[[031]] "Sisterhood",
