@@ -244,43 +244,56 @@ local crime2 = {
 	--[[92 - piety    ]] "promoting belief in gravity"
 }
 -- woe upon ye
-local woe = {
-	--[[01]] "May their name be forgotten.",
-	--[[02]] "They are proscribed.",
-	--[[03]] "Never suffer them to return.",
-	--[[04]] "May the gods have mercy upon them.",
-	--[[05]] "Let none come to their aid.",
-	--[[06]] "May their weeping never cease.",
-	--[[07]] "Their life is forfeit.",
-	--[[08]] "It shall be as though they were never born.",
-	--[[09]] "May their end be swift.",
-	--[[10]] "May fortune forgive them.",
-	--[[11]] "They shall live so long as they deserve.",
-	--[[12]] "Let the beasts do with them as they wish.",
-	--[[13]] "This is justice.",
-	--[[14]] "Let none dispute it.",
-	--[[15]] "May they wander fruitlessly.",
-	--[[16]] "May their bones bleach in the sun.",
-	--[[17]] "Thus we declare.",
-	--[[18]] "For we are merciful.",
-	--[[19]] "Let this be our kindness to them.",
-	--[[20]] "Begone, evildoer.",
-	--[[21]] "Thus do we cleanse ourselves.",
-	--[[22]] "We wash our hands of them.", -- Perhaps a reference to Pontius Pilate
-	--[[23]] "Fortune shall be their final judge.",
-	--[[24]] "They are disowned.",
-	--[[25]] "We never knew them.",
-	--[[26]] "They are cut off.",
-	--[[27]] "Let them live with the beasts.",
-	--[[28]] "Let the barbarians and wild folk have them.",
-	--[[29]] "They are not fit for civilized lands.",
-	--[[30]] "Thus we ensure our security.", -- Perhaps a reference to Sheev Palpatine
-	--[[31]] "Only the righteous belong among us.",
-	--[[32]] "May they toil in vain.",
-	--[[33]] "So it is written. So it is done.", -- Now a reference to Cecil B. DeMille
-	--[[34]] "Even the dogs despise them.",
-	--[[35]] "We break no bread with traitors."
-}
+local woe = {}
+local genderSU = {male = "He",  female = "She"} -- subjective + uppercase
+local genderSL = {male = "he",  female = "she"} -- subjective + lowercase
+local genderOU = {male = "Him", female = "Her"} -- objective  + uppercase
+local genderOL = {male = "him", female = "her"} -- objective  + lowercase
+local genderPU = {male = "His", female = "Her"} -- possessive + uppercase
+local genderPL = {male = "his", female = "her"} -- possessive + lowercase
+local genderRU = {male = "Himself", female = "Herself"} -- reflexive + uppercase
+local genderRL = {male = "himself", female = "herself"} -- reflexive + lowercase
+local populate_woe = function(player)
+	local gend = player_api.get_gender(player)
+	return {
+		--[[01]] "May "..genderPL[gend].." name be forgotten.",
+		--[[02]] genderSU[gend].."is proscribed.",
+		--[[03]] "Never suffer"..genderOL[gend].." to return.",
+		--[[04]] "May the gods have mercy upon "..genderOL[gend]..".",
+		--[[05]] "Let none come to "..genderPL[gend].." aid.",
+		--[[06]] "May "..genderPL[gend].." weeping never cease.",
+		--[[07]] genderPU[gend].." life is forfeit.",
+		--[[08]] "It shall be as if "..genderSL[gend].." were never born.",
+		--[[09]] "May "..genderPL[gend].." end be swift.",
+		--[[10]] "May fortune forgive "..genderOL[gend]..".",
+		--[[11]] genderSU[gend].." shall live so long as "..genderSL[gend].." deserve.",
+		--[[12]] "Let the beasts do with "..genderOL[gend].." as "..genderSL[gend].." wish.",
+		--[[13]] "This is justice.",
+		--[[14]] "Let none dispute it.",
+		--[[15]] "May "..genderSL[gend].." wander fruitlessly.",
+		--[[16]] "May "..genderPL[gend].." bones bleach in the sun.",
+		--[[17]] "Thus we declare.",
+		--[[18]] "For we are merciful.",
+		--[[19]] "Let this be our kindness to "..genderOL[gend]..".",
+		--[[20]] "Begone, evildoer.",
+		--[[21]] "Thus do we cleanse ourselves.",
+		--[[22]] "We wash our hands of "..genderOL[gend]..".", -- Perhaps a reference to Pontius Pilate
+		--[[23]] "Fortune shall be "..genderPL[gend].." final judge.",
+		--[[24]] genderSU[gend].." is disowned.",
+		--[[25]] "We never knew "..genderOL[gend]..".",
+		--[[26]] genderSU[gend].." is cut off.",
+		--[[27]] "Let "..genderOL[gend].." live with the beasts.",
+		--[[28]] "Let the barbarians and wild folk have "..genderOL[gend]..".",
+		--[[29]] genderSU[gend].." is not fit for civilized lands.",
+		--[[30]] "Thus we ensure our security.", -- Perhaps a reference to Sheev Palpatine
+		--[[31]] "Only the righteous belong among us.",
+		--[[32]] "May "..genderSL[gend].." toil in vain.",
+		--[[33]] "So it is written. So it is done.", -- Now a reference to Cecil B. DeMille
+		--[[34]] "Even the dogs despise "..genderOL[gend]..".",
+		--[[35]] "We break no bread with traitors.",
+		--[[36 - new]] "Let this be "..genderPL[gend].." journey to cleanse "..genderRL[gend].."."
+	}
+end
 -- Various corruptions of "Ozymandias"
 local exile = {
 	--[[01]] "Ochymadion",
@@ -343,9 +356,11 @@ local generate_text = function(player)
 	local polity_name = lore.generate_name(5)
 	local cr1         = crime1[random(#crime1)]
 	local cr2         = crime2[random(#crime2)]
+	woe               = populate_woe(player)
 	local your_woe    = woe[random(#woe)]
 	local exile_land  = exile[random(#exile)]
 	local terror      = mythic_terror[random(#mythic_terror)]
+	local gend        = player_api.get_gender(player)
 	letter_text =
 		"By decree of the "..judge..
 		" of "..polity_name..": "..
@@ -360,7 +375,7 @@ local generate_text = function(player)
 		"\n  "..
 		"\n"..cr2.."."..
 		"\n \n \n"..
-		"\nThey are banished to the land of "..exile_land.."."..
+		"\n"..genderSU[gend].." is banished to the land of "..exile_land.."."..
 		"\n  "..
 		"\nThe land of the "..terror.."."..
 		"\n  \n \n"..
