@@ -245,14 +245,14 @@ local crime2 = {
 }
 -- woe upon ye
 local woe = {}
-local genderSU = {male = "He",  female = "She"} -- subjective + uppercase
-local genderSL = {male = "he",  female = "she"} -- subjective + lowercase
-local genderOU = {male = "Him", female = "Her"} -- objective  + uppercase
-local genderOL = {male = "him", female = "her"} -- objective  + lowercase
-local genderPU = {male = "His", female = "Her"} -- possessive + uppercase
-local genderPL = {male = "his", female = "her"} -- possessive + lowercase
-local genderRU = {male = "Himself", female = "Herself"} -- reflexive + uppercase
-local genderRL = {male = "himself", female = "herself"} -- reflexive + lowercase
+local genderSU = {male = "He"     , female = "She"    } -- subjective + uppercase
+local genderSL = {male = "he"     , female = "she"    } -- subjective + lowercase
+local genderOU = {male = "Him"    , female = "Her"    } -- objective  + uppercase
+local genderOL = {male = "him"    , female = "her"    } -- objective  + lowercase
+local genderPU = {male = "His"    , female = "Her"    } -- possessive + uppercase
+local genderPL = {male = "his"    , female = "her"    } -- possessive + lowercase
+local genderRU = {male = "Himself", female = "Herself"} -- reflexive  + uppercase
+local genderRL = {male = "himself", female = "herself"} -- reflexive  + lowercase
 local populate_woe = function(player)
 	local gend = player_api.get_gender(player)
 	return {
@@ -365,12 +365,12 @@ local generate_text = function(player)
 		"By decree of the "..judge..
 		" of "..polity_name..": "..
 		"\n \n "..
-		"\n "..your_name.." of "..origin_name..
+		"\n  "..your_name.." of "..origin_name..
 		"\n \n "..
 		"\nis hereby sentenced to exile for the crimes of "..
 		"\n  "..
 		"\n"..cr1..
-		"\n  "..
+		"\n    "..
 		"\nand "..
 		"\n  "..
 		"\n"..cr2.."."..
