@@ -106,7 +106,7 @@ local function pot_receive_fields(pos, formname, fields, sender)
    end
    for i = 1, #inv do
       local fname = inv[i]:get_name()
-      if food_table[fname] then
+      if food_table[fname] or food_table[fname.."_cooked"] then
 	 local result = food_table[fname.."_cooked"]
 	 if result == nil then -- prefer the cooked version, use raw if none
 	    result = food_table[fname]
@@ -134,7 +134,7 @@ end
 local function divide_portions(total)
    local result = total
    for i = 1, #total do
-      result[i] = math.floor(total[i])
+      result[i] = math.floor(total[i] / portions)
    end
    return result
 end
@@ -222,6 +222,10 @@ minetest.register_node("tech:cooking_pot", {
 	      return 0
 	   end
 	   local meta = minetest.get_meta(pos)
+	   if meta:get_string("type") == "finished" then
+		--prevent adding items after cooking is complete
+		return 0
+	   end
 	   local inv = meta:get_inventory():get_list(listname)
 	   local count = stack:get_count()
 	   for i = 1, #inv do
@@ -247,7 +251,7 @@ minetest.register_node("tech:cooking_pot", {
 })
 
 minetest.register_node("tech:cooking_pot_unfired", {
-	description = "Cooking Pot",
+	description = "Cooking Pot (unfired)",
 	tiles = {"nodes_nature_clay.png",
 		 "nodes_nature_clay.png",
 		 "nodes_nature_clay.png",

@@ -8,7 +8,7 @@
   - You can use a `Stick` to bar a door, to prevent entry.
   - New animations, thanks to ***MisterE***.
   - Track how many incarnations you’ve had in the `Character` tab.
-  - `Glow Worm`s in caves.
+  - `Glow Worm`s in caves.02 
   - Nerf: `Stick`s don’t connect with right-angle corners anymore.
   - Nerf: `Mudbrick` becomes clay when broken, in the same manner as bricks lose their mortar.
   - Mapgen: `carpathian` is now supported, for a harder game world.
@@ -44,7 +44,7 @@
   - Various bug-fixes.
 
 ## [2021-06-12][2021-06-12__0.3.0] — 0.3.0 and 0.2.3
-  - Initial release of `Minetest 5.4.0`; use Exile 0.2 branch for the `5.3.0` series.
+  - Initial release for `Minetest 5.4.0`, use Exile 0.2 series for the 5.3.0 version.
   - New dependency: `naturalslopeslib` provides better hillsides.
   - Ability to throw `Torch`es for light.
   - Settings for `breaktaker`.
