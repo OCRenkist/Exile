@@ -1,5 +1,6 @@
---login.lua
---A welcome screen for showing to new players
+-- Filename: login.lua
+-- Purpose: A welcome screen for showing to new players.
+-- Only displayed when a new account on the server is created.
 
 local logintext = ( 
 	"\n  You can scarcely hear the sound of them\n"..
@@ -12,7 +13,8 @@ local logintext = (
 	"are pushed through a gateway to die in the\n"..
 	"cursed land of the Ancients, as an.." )
 
-local loginspec = (-- "formspec_version 4"..
+local loginspec = (
+	-- "formspec_version 4"..
 	"size[6,6.5]"..
 	"label[0.5,0;"..logintext.."]"..
 	"image[1.5,5;6,2;logo.png]" )
@@ -48,7 +50,8 @@ minetest.register_on_newplayer(safepoint_and_rspawn)
 minetest.register_on_respawnplayer(safepoint_and_rspawn)
 
 minetest.register_on_player_receive_fields(function(player, formname, fields)
-	--maybe unnecessary, but guarantee they won't be penalized for reading
+	-- Perhaps unnecessary, but resetting guarantees 
+	-- that the new player won't be penalized for reading the exile letter.
 	if formname == "lore:login" then
 		reset_attributes(player)
 	end
